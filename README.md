@@ -22,6 +22,7 @@ Each plugin has a **workflow orchestrator** (runs all phases end-to-end with che
 
 | Skill | What it does |
 |-------|-------------|
+| `/init` | Initialize a new project — creates the standard folder structure, placeholder files, and a `CLAUDE.md` that auto-saves skill outputs across sessions |
 | `/pm` | End-to-end PM workflow orchestrator — 7 phases from problem framing to rollout package |
 | `/brief` | One-page feature brief — lightweight alternative to a full PRD for smaller features |
 | `/prd` | Full Product Requirements Document with goals, requirements, success metrics, and risks |
@@ -138,6 +139,14 @@ claude plugin install dev-workflow-kit
 ---
 
 ## Usage
+
+### Start a new project
+
+```
+/init notification-preferences
+```
+
+This creates `notification-preferences/` with a `CLAUDE.md` and placeholder files for every deliverable. Open that folder in Claude Code and all subsequent skill outputs will be saved to their corresponding files automatically.
 
 ### Run a full workflow end-to-end
 
