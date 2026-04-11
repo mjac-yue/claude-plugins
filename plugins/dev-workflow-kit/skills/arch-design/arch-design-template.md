@@ -46,9 +46,12 @@
 
 *Where this system or feature sits in the broader landscape.*
 
-```
-[External User] → [This System] → [Downstream System A]
-[External System] ↗              ↘ [Downstream System B]
+```mermaid
+flowchart LR
+    EU([External User]) --> S([This System])
+    ES([External System]) --> S
+    S --> DSA([Downstream System A])
+    S --> DSB([Downstream System B])
 ```
 
 **External actors**: [Users, external systems, or services that interact with this system]

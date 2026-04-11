@@ -37,21 +37,21 @@
 
 *What must be complete before each subsequent phase can start.*
 
-```
-[PRD approved]
-    └── [Design can start]
-            └── [Design handoff accepted by dev]
-                    └── [Dev can start]
-                            ├── [Infrastructure provisioned]
-                            │       └── [Foundation layer can start]
-                            │               ├── [Data models + auth complete]
-                            │               │       └── [Core feature layer (P0) can start]
-                            │               │               └── [P0 features complete]
-                            │               │                       └── [P1/P2 layer can start]
-                            │               │                               └── [QA can start]
-                            │               │                                       └── [Launch]
-                            └── [External dependencies resolved]
-                                    (third-party APIs, design assets, stakeholder decisions)
+```mermaid
+flowchart TD
+    A([PRD approved]) --> B([Design can start])
+    B --> C([Design handoff accepted by dev])
+    C --> D([Dev can start])
+    D --> E([Infrastructure provisioned])
+    D --> F([External dependencies resolved\nthird-party APIs, design assets, decisions])
+    E --> G([Foundation layer can start])
+    G --> H([Data models + auth complete])
+    H --> I([Core feature layer P0 can start])
+    I --> J([P0 features complete])
+    J --> K([P1/P2 layer can start])
+    K --> L([QA can start])
+    L --> M([🚀 Launch])
+    F --> G
 ```
 
 ### Unresolved Dependencies

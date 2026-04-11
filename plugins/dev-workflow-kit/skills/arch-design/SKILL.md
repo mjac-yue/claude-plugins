@@ -6,6 +6,8 @@ disable-model-invocation: true
 
 Produce an architectural design for: $ARGUMENTS
 
+**Output standard — diagrams**: All documents are read in Obsidian. Use Mermaid syntax (` ```mermaid ` blocks) for all diagrams — `flowchart LR` for system context and component relationships, `sequenceDiagram` for integration flows, `erDiagram` for data ownership maps.
+
 Use the template in [arch-design-template.md](arch-design-template.md) as the structure.
 
 Follow this process:

@@ -6,6 +6,8 @@ disable-model-invocation: true
 
 Run the full Development workflow for: $ARGUMENTS
 
+**Output standard — diagrams**: All documents are read in Obsidian. Use Mermaid syntax (` ```mermaid ` blocks) for every diagram — Obsidian renders these natively. Never use ASCII art for diagrams. Relevant types: `flowchart` (system context, component diagrams, data flows), `erDiagram` (data models), `sequenceDiagram` (API request flows), `classDiagram` (code structure), `graph` (dependency graphs).
+
 Work through each phase below sequentially. After completing each phase, present the output and ask the user: "Ready to continue to Phase [N+1], or would you like to revise anything?"
 
 ---

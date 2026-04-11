@@ -6,6 +6,8 @@ disable-model-invocation: true
 
 Generate a technical specification for: $ARGUMENTS
 
+**Output standard — diagrams**: All documents are read in Obsidian. Use Mermaid syntax (` ```mermaid ` blocks) for all diagrams — `flowchart LR` for system context and component diagrams, `erDiagram` for data models, `sequenceDiagram` for API request flows.
+
 Use the template in [tech-spec-template.md](tech-spec-template.md) as the structure.
 
 Follow this process:

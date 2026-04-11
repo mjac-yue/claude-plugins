@@ -128,9 +128,12 @@
 
 ### System Context
 
-```
-[External User] → [This System] → [Downstream System A]
-[External System] ↗              ↘ [Downstream System B]
+```mermaid
+flowchart LR
+    EU([External User]) --> S([This System])
+    ES([External System]) --> S
+    S --> DSA([Downstream System A])
+    S --> DSB([Downstream System B])
 ```
 
 ### Component Design
@@ -160,9 +163,13 @@
 ### System Diagram
 *Describe or ASCII-draw the components involved and how data flows between them.*
 
-```
-[Client] → [API Gateway] → [Service A] → [Database]
-                        ↘ [Service B] → [Cache]
+```mermaid
+flowchart LR
+    Client --> GW([API Gateway])
+    GW --> SA([Service A])
+    GW --> SB([Service B])
+    SA --> DB([Database])
+    SB --> Cache([Cache])
 ```
 
 ### Data Flow
