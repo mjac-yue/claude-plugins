@@ -39,6 +39,134 @@ Follow this process:
 
 5. **Flag what to avoid** — specific technologies or patterns that would add complexity a PM-builder shouldn't take on without dedicated engineering support
 
-6. **Suggest a starter setup** — the first 3 commands or steps to get a skeleton running locally
+6. **Present the recommendation** and ask:
+   > "Does this stack work for you? Reply **'approve'** to scaffold the project, or share any changes before proceeding."
 
-Ask clarifying questions if the product type or constraints are unclear. Do not recommend a stack without understanding what's being built.
+7. **Scaffold the code structure** — once the stack is approved:
+
+   **Step 7a — Detect project context**
+
+   Check if a `CLAUDE.md` exists in the current directory. If yes, this is an initialised project — scaffold code at the current directory root. If no, ask where to scaffold (default: current directory).
+
+   **Step 7b — Run the framework scaffold command**
+
+   Use the Bash tool to run the appropriate scaffold command for the approved stack. Use `--yes` or equivalent flags to avoid interactive prompts. Common commands:
+
+   | Stack | Scaffold command |
+   |-------|----------------|
+   | Next.js (TypeScript) | `npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias "@/*" --yes` |
+   | Next.js (JavaScript) | `npx create-next-app@latest . --javascript --tailwind --eslint --app --src-dir --yes` |
+   | Vite + React (TypeScript) | `npm create vite@latest . -- --template react-ts && npm install` |
+   | Vite + React (JavaScript) | `npm create vite@latest . -- --template react && npm install` |
+   | Express + Node | Create manually — see Step 7c |
+   | FastAPI (Python) | Create manually — see Step 7c |
+   | SvelteKit | `npx sv create . --template minimal --types ts --yes && npm install` |
+
+   If the stack doesn't have a standard CLI scaffold, proceed to Step 7c manually.
+
+   **Step 7c — Create standard additional directories**
+
+   After the framework scaffold, use Bash to create any additional standard directories the project will need. Adapt to the framework — examples:
+
+   For Next.js (`src/` layout):
+   ```bash
+   mkdir -p src/components src/lib src/hooks src/types src/styles
+   ```
+
+   For Express/Node:
+   ```bash
+   mkdir -p src/routes src/controllers src/middleware src/models src/lib src/types
+   touch src/index.js src/routes/index.js
+   ```
+
+   For FastAPI (Python):
+   ```bash
+   mkdir -p app/routers app/models app/schemas app/services app/core
+   touch app/main.py app/routers/__init__.py app/models/__init__.py
+   ```
+
+   **Step 7d — Create a `.gitignore`**
+
+   If the scaffold didn't create one, use the Write tool to create a `.gitignore` appropriate for the stack. Always include:
+   ```
+   # Environment
+   .env
+   .env.local
+   .env.*.local
+
+   # Dependencies
+   node_modules/
+
+   # Build output
+   .next/
+   dist/
+   build/
+   out/
+
+   # OS
+   .DS_Store
+
+   # IDE
+   .vscode/
+   .idea/
+   ```
+
+   **Step 7e — Update the project CLAUDE.md**
+
+   If a `CLAUDE.md` exists in the current directory, append the following section to it using the Edit tool:
+
+   ```markdown
+   ## Code structure
+
+   Application code lives at the project root alongside the doc folders.
+
+   | What | Path |
+   |------|------|
+   | Application source | `src/` |
+   | Components | `src/components/` |
+   | Utilities / helpers | `src/lib/` |
+   | Custom hooks | `src/hooks/` |
+   | Type definitions | `src/types/` |
+   | API routes | `src/app/api/` |
+   | Configuration files | `/` (root) |
+
+   *Adapt these paths if the framework uses a different convention.*
+
+   ### Agent code paths
+
+   When agents need to read or review code, look here:
+
+   | Agent | Code paths |
+   |-------|-----------|
+   | `code-reviewer` | `src/` |
+   | `security-reviewer` | `src/`, `src/app/api/` |
+   | `arch-reviewer` | `src/`, root config files |
+   | `solution-analyst` | `src/`, `package.json` (or equivalent) |
+   | `test-case-generator` | `src/` |
+   ```
+
+   **Step 7f — Confirm and summarise**
+
+   After scaffolding, output:
+
+   ```
+   ## Code scaffold complete
+
+   Stack: [Framework + Language]
+
+   📁 [project-name]/
+   ├── CLAUDE.md           ← updated with code paths
+   ├── pm/                 ← PM docs
+   ├── design/             ← design docs
+   ├── dev/                ← dev docs
+   ├── src/                ← application code
+   │   ├── app/            ← pages and API routes
+   │   ├── components/     ← reusable UI components
+   │   ├── lib/            ← utilities and helpers
+   │   ├── hooks/          ← custom React hooks
+   │   └── types/          ← TypeScript type definitions
+   ├── package.json
+   └── .gitignore
+
+   **Next step**: Save the tech stack document to dev/tech-stack.md, then run `/arch-design` or `/tech-spec` to begin the technical design.
+   ```
