@@ -9,6 +9,7 @@ A set of Claude Code plugins covering the full product development lifecycle —
 | Plugin | Orchestrator | Purpose |
 |--------|-------------|---------|
 | `pm-claude-kit` | `/pm` | Full PM workflow — discovery, PRD, user stories, prioritization, roadmap, rollout |
+| `exec-kit` | `/release` `/run` | Full execution workflow — release planning, cycle execution, standups, retrospectives, status reports, risk management |
 | `design-ux-kit` | `/design` | Full design workflow — UX brief, wireframes, design review, usability testing, handoff |
 | `dev-workflow-kit` | `/dev` | Full dev workflow — architecture, tech spec, API spec, dev plan, QA, code/perf/security review, deployment |
 

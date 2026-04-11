@@ -23,6 +23,12 @@
       "description": "Skills and agents for Development workflows: technical specs, API specs, development plans, QA test plans, and bug reports.",
       "category": "productivity",
       "source": "./plugins/dev-workflow-kit"
+    },
+    {
+      "name": "exec-kit",
+      "description": "Skills and agents for project execution: release planning with foundation-first dependency tracking, cycle planning, standups, retrospectives, status reports, and risk management. Designed for 1–2 person PM-led teams.",
+      "category": "productivity",
+      "source": "./plugins/exec-kit"
     }
   ]
 }

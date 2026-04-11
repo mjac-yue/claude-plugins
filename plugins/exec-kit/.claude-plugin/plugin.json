@@ -1,0 +1,6 @@
+{
+  "name": "exec-kit",
+  "description": "Skills and agents for project execution: release planning with dependency tracking, cycle planning, standups, retrospectives, status reports, and risk management. Designed for 1-2 person PM-led teams.",
+  "version": "1.0.0",
+  "author": "Martin Yue"
+}
