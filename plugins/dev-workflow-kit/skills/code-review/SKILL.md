@@ -45,7 +45,7 @@ Follow this process:
    - When a specific approach was chosen over an obvious alternative, is that choice noted?
    - Are all TODOs marked with `// TODO:` and a description?
    - Flag missing comments as **Non-blocking** issues — they don't break behavior but impede learning and future maintenance.
-8. **Patterns & consistency**:
+9. **Patterns & consistency**:
    - Does the code follow the established patterns in this codebase?
    - Are there better abstractions already available that should be used?
    - Does the change introduce unnecessary coupling or complexity?

@@ -32,7 +32,7 @@ Produce:
 
 ---
 
-**CHECKPOINT 1 / 6 — Problem Framing**
+**CHECKPOINT 1 / 7 — Problem Framing**
 
 Present the problem framing output, then ask:
 
@@ -62,7 +62,7 @@ First, ask the user:
 
 ---
 
-**CHECKPOINT 2 / 6 — Competitive Landscape**
+**CHECKPOINT 2 / 7 — Competitive Landscape**
 
 Present the competitive landscape output, then ask:
 
@@ -74,7 +74,7 @@ Present the competitive landscape output, then ask:
 
 With the problem and context confirmed, write the PRD.
 
-Use the structure from the PRD template in the pm-claude-kit:
+Use the structure from [prd-template.md](../prd/prd-template.md) — the same structure the `/prd` skill produces:
 - TL;DR
 - Problem Statement (refined from Phase 1)
 - Goals & Success Metrics (with leading and lagging indicators)
@@ -91,7 +91,7 @@ Write it fully — no placeholder text. Make explicit any assumptions embedded i
 
 ---
 
-**CHECKPOINT 3 / 6 — PRD Draft**
+**CHECKPOINT 3 / 7 — PRD Draft**
 
 Present the full PRD, then ask:
 
@@ -114,7 +114,7 @@ Group stories by persona or feature area. Aim for completeness — these should 
 
 ---
 
-**CHECKPOINT 4 / 6 — User Stories**
+**CHECKPOINT 4 / 7 — User Stories**
 
 Present the user stories, then ask:
 
@@ -135,7 +135,7 @@ Produce:
 
 ---
 
-**CHECKPOINT 5 / 6 — Prioritization**
+**CHECKPOINT 5 / 7 — Prioritization**
 
 Present the prioritization output, then ask:
 

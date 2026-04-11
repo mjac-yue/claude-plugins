@@ -12,7 +12,7 @@ Work through each phase below sequentially. After completing each phase, present
 
 ## Phase 1 — UX Brief
 
-Produce a UX brief by running the `/ux-brief` skill.
+Produce a UX brief following the process and template of the `/ux-brief` skill — apply the ux-brief-template.md structure and steps.
 
 - Define the design scope, target users, goals, constraints, and success criteria
 - Surface any assumptions that need validation before design begins
@@ -26,7 +26,7 @@ After presenting the brief, offer: *"Want me to run the `user-research-planner` 
 
 ## Phase 2 — Information Architecture & Flow
 
-Produce a wireframe specification by running the `/wireframe-spec` skill, based on the approved UX brief.
+Produce a wireframe specification following the process and template of the `/wireframe-spec` skill, based on the approved UX brief — apply the wireframe-template.md structure and steps.
 
 - Map the key screens, user flows, and navigation structure
 - Define component inventory and interaction states for each screen
@@ -38,7 +38,7 @@ Produce a wireframe specification by running the `/wireframe-spec` skill, based 
 
 ## Phase 3 — Design Review
 
-Run a heuristic design review by running the `/design-review` skill against the wireframe spec.
+Conduct a heuristic design review following the process and template of the `/design-review` skill, applied to the wireframe spec — use the design-review-template.md structure.
 
 - Evaluate against Nielsen's 10 usability heuristics
 - Flag accessibility concerns (WCAG 2.1 AA)
@@ -54,7 +54,7 @@ After presenting the review, offer two options:
 
 ## Phase 4 — Usability Test Plan
 
-Produce a usability test plan by running the `/usability-test` skill.
+Produce a usability test plan following the process and template of the `/usability-test` skill — apply the usability-test-template.md structure and steps.
 
 - Define test objectives, participant criteria, and task scenarios
 - Specify success metrics and how results will be analyzed
@@ -66,7 +66,7 @@ Produce a usability test plan by running the `/usability-test` skill.
 
 ## Phase 5 — Design Handoff
 
-Produce a design handoff spec by running the `/design-handoff` skill.
+Produce a design handoff spec following the process and template of the `/design-handoff` skill — apply the design-handoff-template.md structure and steps.
 
 - Document every screen with component inventory, states, and interaction specs
 - Define acceptance criteria engineering can verify

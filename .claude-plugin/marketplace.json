@@ -1,7 +1,7 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
-  "name": "pm-marketplace",
-  "description": "Product Manager tools for Claude Code",
+  "name": "product-suite-marketplace",
+  "description": "PM, Design & UX, and Development workflow tools for Claude Code",
   "owner": {
     "name": "Martin Yue"
   },

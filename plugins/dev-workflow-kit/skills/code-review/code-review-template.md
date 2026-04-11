@@ -63,6 +63,12 @@
 |----------|----------|---------|---------------|
 | | | | |
 
+### Comment Quality
+
+| Severity | Location | Finding | Recommendation |
+|----------|----------|---------|---------------|
+| | | | |
+
 ### Patterns & Consistency
 
 | Severity | Location | Finding | Recommendation |
@@ -97,3 +103,7 @@
 - [ ] Code is readable and consistent with codebase patterns
 - [ ] No dead code, debug logs, or unresolved TODOs
 - [ ] Documentation updated (if public API or behavior changed)
+- [ ] File-level comments present on all new/modified files
+- [ ] All functions/methods have plain-English comments
+- [ ] Non-obvious logic explained with inline comments
+- [ ] All TODOs marked with `// TODO:` and a description

@@ -50,7 +50,7 @@ If the user proceeds with solution analysis, run the `solution-analyst` agent to
 - Research 2–4 distinct technical approaches with real-world evidence
 - Produce a structured options comparison and a clear recommendation
 
-Once an approach is agreed, produce an architectural design by running the `/arch-design` skill:
+Once an approach is agreed, produce an architectural design following the process and template of the `/arch-design` skill:
 - Define NFRs that every downstream decision must satisfy
 - Select and justify the architectural style
 - Define component boundaries, integration patterns, and cross-cutting concerns
@@ -58,7 +58,7 @@ Once an approach is agreed, produce an architectural design by running the `/arc
 
 After presenting the architectural design, offer: *"Want me to run the `arch-reviewer` agent to audit the architecture against quality attributes (performance, scalability, availability, security, maintainability, testability, evolvability)?"*
 
-Incorporate the approved architectural design into the technical specification by running the `/tech-spec` skill:
+Incorporate the approved architectural design into the technical specification following the process and template of the `/tech-spec` skill:
 - Carry the chosen option from the solution analysis into the Solution Options section
 - Define data models, system components, and key dependencies
 - Identify technical risks and constraints upfront
@@ -79,7 +79,7 @@ If this is a solo PM-led build, always offer `pm-tech-reviewer` — it is the pr
 
 ## Phase 2 — API Specification (if applicable)
 
-If the feature involves APIs, produce an API spec by running the `/api-spec` skill.
+If the feature involves APIs, produce an API spec following the process and template of the `/api-spec` skill.
 
 - Define endpoints, request/response schemas, auth model, and error handling
 - Specify versioning strategy and backwards-compatibility constraints
@@ -93,7 +93,7 @@ If no APIs are involved, skip this phase and note that it was skipped.
 
 ## Phase 3 — Development Plan
 
-Produce a development plan by running the `/dev-plan` skill, based on the approved tech spec.
+Produce a development plan following the process and template of the `/dev-plan` skill, based on the approved tech spec.
 
 - Break the implementation into tasks with estimates and dependencies
 - Propose sprint allocation and sequencing
@@ -105,7 +105,7 @@ Produce a development plan by running the `/dev-plan` skill, based on the approv
 
 ## Phase 4 — QA & Test Plan
 
-Produce a QA test plan by running the `/test-plan` skill.
+Produce a QA test plan following the process and template of the `/test-plan` skill.
 
 - Define test types (unit, integration, e2e, manual) and coverage targets
 - Generate key test cases covering happy path, edge cases, and error states
@@ -119,7 +119,7 @@ After presenting the test plan, offer: *"Want me to run the `test-case-generator
 
 ## Phase 5 — Code Review
 
-Conduct a structured code review by running the `/code-review` skill.
+Conduct a structured code review following the process and template of the `/code-review` skill.
 
 - Review correctness, test coverage, error handling, readability, and pattern consistency
 - Flag blocking issues that must be resolved before merge
@@ -133,7 +133,7 @@ After presenting findings, offer: *"Want me to run the `code-reviewer` agent to 
 
 ## Phase 6 — Performance Review
 
-Conduct a performance review by running the `/perf-review` skill.
+Conduct a performance review following the process and template of the `/perf-review` skill.
 
 - Validate against defined latency and throughput targets
 - Identify bottlenecks on the critical path (DB queries, external calls, caching gaps)
@@ -145,7 +145,7 @@ Conduct a performance review by running the `/perf-review` skill.
 
 ## Phase 7 — Security Review
 
-Conduct a security review by running the `/security-review` skill, aligned to OWASP Top 10.
+Conduct a security review following the process and template of the `/security-review` skill, aligned to OWASP Top 10.
 
 - Audit authentication, authorization, input validation, data exposure, and dependency risks
 - Assign severity to each finding (Critical / High / Medium / Low)
@@ -159,7 +159,7 @@ After presenting findings, offer: *"Want me to run the `security-reviewer` agent
 
 ## Phase 8 — Deployment
 
-With development complete and all reviews signed off, produce a deployment guide by running the `/deployment` skill.
+With development complete and all reviews signed off, produce a deployment guide following the process and template of the `/deployment` skill.
 
 - Recommend a hosting platform appropriate for the tech stack and build context
 - Build the pre-deployment checklist: environment variables, secrets, database provisioning, third-party service setup

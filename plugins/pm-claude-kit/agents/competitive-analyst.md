@@ -24,7 +24,7 @@ For ALL competitors simultaneously in a single response, fire parallel WebSearch
 For each competitor, search in parallel:
 - "[Competitor] product features [focus area]"
 - "[Competitor] pricing"
-- "[Competitor] [focus area] review 2025"
+- "[Competitor] [focus area] review [current year]"
 - "[Competitor] vs [our product or category]"
 ```
 

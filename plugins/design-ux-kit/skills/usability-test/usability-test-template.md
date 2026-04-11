@@ -91,9 +91,9 @@
 
 | Metric | Target | Trigger redesign if |
 |--------|--------|-------------------|
-| Task 1 completion rate | ≥ % | < % |
-| Task 2 completion rate | ≥ % | < % |
-| Average SEQ score | ≥ /7 | < /7 |
+| Task 1 completion rate | ≥ 80% | < 60% |
+| Task 2 completion rate | ≥ 80% | < 60% |
+| Average SEQ score | ≥ 5/7 | < 4/7 |
 | Critical errors | 0 | Any P0 blocker found |
 
 ---

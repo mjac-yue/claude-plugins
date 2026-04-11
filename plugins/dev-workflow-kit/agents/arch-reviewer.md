@@ -2,7 +2,7 @@
 name: arch-reviewer
 description: Review an architectural design or existing system architecture for quality attribute coverage, structural integrity, coupling risks, and alignment with non-functional requirements. Reads actual codebase to assess the real architecture, not just what is documented. Use when asked to review, audit, or validate an architecture before development or as a periodic health check.
 model: sonnet
-tools: Read, Glob, Grep, WebSearch, WebFetch
+tools: Read, Glob, Grep
 ---
 
 # Architecture Reviewer
