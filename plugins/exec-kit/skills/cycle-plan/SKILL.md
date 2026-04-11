@@ -14,9 +14,12 @@ Ask if not already provided:
 1. *"Which cycle number is this, and what are the start and end dates?"*
 2. *"Which phase and build layer of the release plan are we in?"*
 3. *"What's the available capacity this cycle?"* — days per person, noting any absences or commitments
-4. *"Are you working in sprints or flow?"*
-   - For sprints: the cycle is time-boxed and the plan is locked at the start
-   - For flow: the cycle is a planning horizon; items can be added if capacity opens
+4. *"How many people are contributing to this project?"* — use the answer to confirm or recommend methodology:
+   - **1–2 people**: default to **Kanban** — treat the cycle as a weekly planning horizon, items can be added as capacity opens, no locked backlog. If the team is using sprints instead, note: *"For a 1–2 person team, Kanban typically works better — consider switching if sprint overhead feels heavy."*
+   - **3–5 people**: recommend **Scrum with 1-week sprints** — cycle is time-boxed, backlog locked at the start
+   - **5+ people**: **Scrum with 2-week sprints** — time-boxed, locked backlog, structured planning
+
+   If methodology is already established from the release plan, skip this question and apply it consistently.
 
 ## Step 2: Check the layer gate
 

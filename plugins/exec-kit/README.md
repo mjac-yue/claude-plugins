@@ -115,13 +115,22 @@ The `/release-plan` skill is designed to receive its inputs from pm-claude-kit o
 
 ## Methodology
 
-At the start of `/release` and `/cycle-plan`, you choose:
+The plugin recommends a methodology based on your team size — asked automatically at the start of `/release` and `/cycle-plan`.
 
-**Sprints** — fixed time-box (1–2 weeks), backlog locked at cycle start, cadence-driven retrospectives.
+| Team size | Default recommendation | Reason |
+|-----------|----------------------|--------|
+| **1–2 people** | **Kanban** | No sprint ceremony overhead; absorbs interruptions; WIP limits prevent context-switching; ship when done, not when sprint ends |
+| **3–5 people** | **Scrum (1-week sprints)** | Structured cadence helps coordinate; short sprint keeps planning overhead low |
+| **5+ people** | **Scrum (2-week sprints)** | Coordination cost at this size benefits from sprint rhythm and ceremonies |
 
-**Flow (Kanban)** — continuous pull, weekly planning horizon, work items added as capacity opens.
+You can override the recommendation — the plugin explains the trade-offs and confirms your choice before proceeding.
 
-For a 1–2 person PM-led team, **flow is recommended** — the plugin will suggest it and explain why, but the choice is yours.
+**Kanban specifics for 1–2 person teams:**
+- Cycle = weekly planning horizon (not a locked sprint)
+- Items can be pulled in during the week if capacity opens
+- WIP limit: max 2 items in progress at once per person
+- Retrospective: end of each week or every 2 weeks — your call
+- No sprint reviews — demo when features ship, not on a calendar
 
 ---
 
