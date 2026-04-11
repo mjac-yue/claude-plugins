@@ -113,17 +113,32 @@ The `/release-plan` skill is designed to receive its inputs from pm-claude-kit o
 
 ---
 
-## Methodology
+## Project Tiers — Process scales to project size
 
-The plugin recommends a methodology based on your team size — asked automatically at the start of `/release` and `/cycle-plan`.
+The plugin asks two questions before producing anything: team size and project scope. Together these determine the **project tier**, which controls how much process is applied. Simple projects get simple plans — no unnecessary overhead.
+
+| Tier | Scope | Timeline | What gets produced |
+|------|-------|----------|--------------------|
+| **1 — Micro** | Single small change, clear scope | Days – 2 weeks | Ordered task list + brief launch checklist. No formal documents. |
+| **2 — Small** | 1–3 features, few unknowns | 2–6 weeks | Lightweight release plan (phases + build sequence), one-paragraph kickoff, cycle plans. No risk register, no dependency map, no critical path analysis. |
+| **3 — Medium** | Multi-feature, some unknowns | 6–16 weeks | Full release plan, full kickoff doc, focused risk register (top 5 risks). All sections, but concise. |
+| **4 — Large** | Full product, high complexity | 16+ weeks | Everything — full docs, all sections, exhaustive risk register, go/no-go criteria, risk checkpoints. |
+
+You can override the suggested tier — the plugin explains what it's skipping and why, and confirms before proceeding.
+
+---
+
+## Methodology — Recommended by team size
+
+Within the confirmed tier, methodology is recommended based on team size:
 
 | Team size | Default recommendation | Reason |
 |-----------|----------------------|--------|
 | **1–2 people** | **Kanban** | No sprint ceremony overhead; absorbs interruptions; WIP limits prevent context-switching; ship when done, not when sprint ends |
 | **3–5 people** | **Scrum (1-week sprints)** | Structured cadence helps coordinate; short sprint keeps planning overhead low |
-| **5+ people** | **Scrum (2-week sprints)** | Coordination cost at this size benefits from sprint rhythm and ceremonies |
+| **5+ people** | **Scrum (2-week sprints)** | Coordination cost at this size benefits from full sprint rhythm |
 
-You can override the recommendation — the plugin explains the trade-offs and confirms your choice before proceeding.
+You can override the recommendation — the plugin explains the trade-offs and confirms your choice.
 
 **Kanban specifics for 1–2 person teams:**
 - Cycle = weekly planning horizon (not a locked sprint)

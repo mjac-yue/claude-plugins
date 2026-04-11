@@ -1,12 +1,21 @@
 ---
 name: cycle-plan
-description: Plan a single work cycle (sprint or Kanban flow) from the backlog, scoped against the active release plan. Verifies the team is working from the correct build layer, checks dependencies, assesses capacity for a 1–2 person team, and identifies parallel workstreams. Use at the start of each sprint or at the weekly review to plan the next block of work.
+description: Plan a single work cycle (sprint or Kanban flow) from the backlog, scoped against the active release plan. Adapts depth to project tier — a simple task list for micro projects, full structured planning for medium/large ones. Verifies the team is working from the correct build layer, checks dependencies, and assesses capacity. Use at the start of each sprint or at the weekly review to plan the next block of work.
 disable-model-invocation: true
 ---
 
 Plan a work cycle for: $ARGUMENTS
 
-You are helping a small team (1–2 PMs) plan a focused, achievable work cycle. Every item selected must come from the correct layer in the release plan — do not pull work ahead of unresolved dependencies.
+You are helping a small team plan a focused, achievable work cycle. Every item selected must come from the correct layer in the release plan — do not pull work ahead of unresolved dependencies.
+
+## Step 0: Confirm project tier
+
+If not already known, ask: *"What tier is this project — Micro (days–2 weeks), Small (2–6 weeks), Medium (6–16 weeks), or Large (16+ weeks)?"*
+
+Then apply the appropriate depth below:
+- **Tier 1 (Micro)**: Produce a simple ordered task list with a one-sentence goal. Skip all formal steps below.
+- **Tier 2 (Small)**: Run Steps 1–4 and 7–8 only. Skip Steps 5 and 6.
+- **Tier 3–4 (Medium/Large)**: Run all steps.
 
 ## Step 1: Establish context
 
@@ -52,7 +61,7 @@ For each selected item:
 - Does it depend on something not yet complete from a previous cycle? Flag as blocked — do not include until the blocker is resolved.
 - Does it require an external input (design asset, third-party API, stakeholder decision)? Name the dependency and who owns it.
 
-## Step 6: Assign work (2-person team)
+## Step 6: Assign work (2-person team) [Tier 3–4 only]
 
 Split work between the two people based on:
 - Natural parallel workstreams (e.g., one on backend, one on design review or documentation)
@@ -60,6 +69,8 @@ Split work between the two people based on:
 - Identifying a sync point where their work must merge or hand off
 
 For a solo build: note which items must be done sequentially and flag any that represent a single-person bottleneck on the critical path.
+
+**Tier 2**: Only call out parallel work if it's genuinely non-obvious. Skip the table.
 
 ## Step 7: Set the cycle goal
 

@@ -6,22 +6,43 @@ disable-model-invocation: true
 
 Generate a release plan for: $ARGUMENTS
 
-You are a project manager creating a release plan for a small team (1–2 people, both product managers). The plan must sequence work foundation-first — infrastructure before foundation, foundation before features — so the team is never blocked by missing dependencies mid-execution.
+You are a project manager creating a release plan for a small team. The plan must sequence work foundation-first — infrastructure before foundation, foundation before features — so the team is never blocked by missing dependencies mid-execution.
+
+## Step 0: Determine the project tier
+
+If not already established (e.g., via the `/release` orchestrator), ask two questions before proceeding:
+
+1. *"How many people are contributing to this project?"*
+2. *"How would you describe the project size?"*
+   - **(A) Micro** — single small change, days to ~2 weeks, clear scope
+   - **(B) Small** — 1–3 features, 2–6 weeks, few unknowns
+   - **(C) Medium** — multi-feature, 6–16 weeks, some unknowns
+   - **(D) Large** — full product, 16+ weeks, significant complexity
+
+Then declare the tier before proceeding:
+
+| Tier | Scope | Plan depth |
+|------|-------|-----------|
+| **Tier 1 — Micro** | (A) | Ordered task list + brief launch checklist. Use this skill's output informally, not the full template. |
+| **Tier 2 — Small** | (B) with 1–2 people | Phases + build sequence only. Skip dependency map, critical path, parallel workstreams, go/no-go table, risk checkpoints. |
+| **Tier 3 — Medium** | (C) any size, or (D) small team | Full plan — all sections. |
+| **Tier 4 — Large** | (D) with complexity, multiple phases, or stakeholder risk | Full plan — all sections, extra rigour on risks and go/no-go criteria. |
+
+Apply only the steps below that correspond to the confirmed tier. Steps marked **[Tier 3–4 only]** or **[Tier 2+]** can be skipped for smaller projects.
 
 ## Step 1: Gather context
 
 If not already clear from the input, ask:
 1. *"What are we building?"* — reference the PRD or brief if one exists; if not, ask for a one-line description
-2. *"Who is on the team and what are their roles?"* (1–2 people)
+2. *"Who is on the team and what are their roles?"*
 3. *"Is there a target launch date, or should we estimate one based on scope?"*
-4. *"How do you prefer to work — sprints (fixed time-box, typically 1–2 weeks) or continuous flow (Kanban-style, pull work as capacity opens)?"*
-   - If unsure, recommend flow: *"For a 1–2 person team, continuous flow is usually a better fit — no fixed sprint commitments, easier to manage interruptions. I'd suggest starting there."*
+4. *"What methodology are you using?"* — Kanban (default for 1–2 people) or Scrum (sprints)
 
 ## Step 2: Define phases and milestones
 
 Map the full lifecycle from discovery to launch. For each phase:
 - Name the milestone — the specific, observable output that marks the phase complete
-- Assign a target date (estimate if none provided, based on scope and 1–2 person capacity)
+- Assign a target date (estimate if none provided, based on scope and capacity)
 - Define the gate criteria — the minimum conditions that must be true before the next phase starts
 
 Standard phases for a PM-led build:
@@ -34,9 +55,11 @@ Standard phases for a PM-led build:
 7. **QA & hardening** — test plan complete, no P0/P1 bugs open
 8. **Launch** — shipped to production, smoke tests passing, monitoring live
 
-Adapt these phases to the project. Not every project requires all 8 — note any that don't apply.
+**Tier 2**: Use only the phases that apply. A small feature may only need Infrastructure → Foundation → Core build → Launch. Remove phases that genuinely don't apply — don't pad the plan.
 
-## Step 3: Build the dependency map
+**Tier 3–4**: Adapt but don't remove phases without noting why.
+
+## Step 3: Build the dependency map [Tier 3–4 only]
 
 Identify what must be complete before each phase can start. Express as a chain:
 - What must be done before design can start?
@@ -45,6 +68,8 @@ Identify what must be complete before each phase can start. Express as a chain:
 - What external dependencies exist (third-party APIs, design assets, stakeholder approvals)?
 
 For each unresolved dependency: name it, note who owns resolving it, and flag the risk if it isn't resolved in time.
+
+**Tier 2**: Instead of a full dependency map, note in plain prose any dependency that is genuinely at risk — e.g., *"Third-party payment API access must be confirmed before Layer 3 can start."* Skip the rest.
 
 ## Step 4: Sequence the build — foundation first
 
@@ -66,32 +91,48 @@ For each layer:
 - List the specific work items drawn from the PRD or tech spec
 - Define what "layer complete" means as an observable condition (not just "done")
 
-## Step 5: Identify the critical path
+## Step 5: Identify the critical path [Tier 3–4 only]
 
 Identify the sequence of tasks where any single delay pushes the launch date. Mark the current highest-risk item on the critical path and explain why.
 
-## Step 6: Map parallel workstreams
+**Tier 2**: Skip the formal critical path. Instead, note in one sentence the single item most likely to slip the launch date and why.
+
+## Step 6: Map parallel workstreams [Tier 3–4 only]
 
 For a 2-person team: identify where Person A and Person B can work simultaneously without blocking each other. Look for natural splits such as backend vs frontend, or infrastructure vs discovery/design.
 
 For a solo build: identify where sequential dependencies mean one thing must fully complete before the next starts — and flag these as schedule risks.
 
-## Step 7: Define go/no-go criteria
+**Tier 2**: Skip the parallel workstream table. Only note if there is an obvious split worth calling out.
+
+## Step 7: Define go/no-go criteria [Tier 3–4 only]
 
 For each phase gate, state the minimum observable conditions required to proceed. Be specific:
 - Not: "design complete"
 - Yes: "all screens in the design handoff have acceptance criteria that the dev has reviewed and accepted"
 
-## Step 8: Set risk checkpoints
+**Tier 2**: Replace the full criteria table with a single go/no-go statement per phase: *"Start [Phase N] when: [one condition]."*
+
+## Step 8: Set risk checkpoints [Tier 3–4 only]
 
 Identify 4–5 points in the timeline where the team stops, compares progress to plan, and decides whether to adjust scope, timeline, or resources. Place checkpoints at natural inflection points: end of discovery, end of design, mid-build, pre-QA, and launch minus one week.
 
+**Tier 2**: Set one mid-project check-in and a launch-minus-3-days check. That's enough for a small project.
+
 ## Step 9: Build the launch readiness checklist
 
-List everything that must be true on launch day. Cover: P0 acceptance criteria met, monitoring live, rollback plan tested, communications prepared, analytics instrumented.
+**All tiers** — but scale the length to the project:
+
+- **Tier 1**: 5–8 items (smoke test passes, no open P0 bugs, basic monitoring on)
+- **Tier 2**: 8–12 items (add: error tracking, rollback known, key stakeholder notified)
+- **Tier 3–4**: Full checklist — product, infrastructure, communications, analytics
+
+Cover only what genuinely applies to this project. Don't include items that are meaningless at the project's scale.
 
 ---
 
-Use the structure from [release-plan-template.md](release-plan-template.md).
+**For Tier 2**: Use the release-plan-template.md structure but skip sections marked [Tier 3–4 only] — Dependency Map diagram, Critical Path, Parallel Workstreams table, Go/No-Go Criteria table, and Risk Checkpoints table. Replace each with a one-liner where relevant.
 
-Output the complete release plan. Do not use placeholder text — fill in every section based on the project context provided. Where specific details aren't known, make a reasonable estimate and flag it with *[TBC]* so the team knows what to confirm.
+**For Tier 3–4**: Use the full structure from [release-plan-template.md](release-plan-template.md).
+
+Output the complete plan. Do not use placeholder text — fill in every section based on the project context provided. Where specific details aren't known, make a reasonable estimate and flag it with *[TBC]* so the team knows what to confirm.
