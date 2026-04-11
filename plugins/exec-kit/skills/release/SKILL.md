@@ -64,6 +64,51 @@ Present the determined tier and methodology recommendation, then confirm:
 - **3–5 people → Scrum, 1-week sprints**: structured cadence, shared commitment, low ceremony overhead
 - **5+ people → Scrum, 2-week sprints**: coordination cost justifies full sprint rhythm
 
+Once confirmed, output a **Project Profile Card** — a compact reference the PM can pass to any other plugin orchestrator (`/pm`, `/design`, `/dev`) to ensure they apply the same level of process:
+
+```
+## Project Profile
+
+**Project**: [Name]
+**Tier**: [N — Micro / Small / Medium / Large]
+**Team**: [N people]
+**Methodology**: [Kanban / Scrum (cadence)]
+
+### Cross-plugin skill map
+
+| Plugin | Use | Skip |
+|--------|-----|------|
+| pm-claude-kit | [skills to use] | [skills to skip] |
+| design-ux-kit | [skills to use] | [skills to skip] |
+| dev-workflow-kit | [skills to use] | [skills to skip] |
+| exec-kit | [skills to use] | [skills to skip] |
+```
+
+Fill in the skill map based on the tier:
+
+**Tier 1**:
+- pm-claude-kit: one-sentence brief only | skip everything else
+- design-ux-kit: skip unless UI changes — if UI: describe change informally | skip all skills
+- dev-workflow-kit: write code directly, inline task list | skip all planning docs
+- exec-kit: task list + brief launch checklist | skip all other skills
+
+**Tier 2**:
+- pm-claude-kit: `/brief`, `/user-story` (2–3 key flows) | skip `/prd`, `/competitive-analysis`, `/prioritization`, `/roadmap`, `/rollout`
+- design-ux-kit: `/ux-brief` (abbreviated), `/wireframe-spec` (key screens only — wireframe serves as handoff) | skip `/design-review`, `/usability-test`, `/design-handoff`
+- dev-workflow-kit: `/dev-plan`, `/security-review` (only if auth or user data involved) | skip `/arch-design`, `/tech-spec`, `/api-spec` (unless API-first), `/perf-review`
+- exec-kit: `/release-plan` (lightweight), `/cycle-plan`, `/standup`, `/retro` | skip risk register unless specific concern exists
+
+**Tier 3**:
+- pm-claude-kit: `/prd`, `/user-story`, `/competitive-analysis` (quick scan), `/prioritization` | skip `/roadmap` (optional), `/rollout` (abbreviated inline)
+- design-ux-kit: `/ux-brief`, `/wireframe-spec`, `/design-review`, `/design-handoff` | skip `/usability-test` unless UX unknowns exist
+- dev-workflow-kit: `/tech-spec`, `/dev-plan`, `/test-plan`, `/code-review`, `/security-review` | skip `/arch-design` (unless novel architecture), `/perf-review` (unless performance SLOs defined)
+- exec-kit: full `/release-plan`, `/cycle-plan`, `/standup`, `/retro`, `/status`, risk register (top 5 risks) | nothing skipped
+
+**Tier 4**:
+- All plugins: full workflow — nothing skipped
+
+*Note: Pass the Project Profile Card as context when running `/pm`, `/design`, or `/dev` so each orchestrator applies the right tier automatically.*
+
 **Checkpoint 0**: Confirm project tier and methodology before proceeding.
 
 ---

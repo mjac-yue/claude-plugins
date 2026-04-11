@@ -10,11 +10,28 @@ Work through each phase below sequentially. After completing each phase, present
 
 ---
 
-## Phase 0 — Solo Builder Complexity Check
+## Phase 0 — Project Profile & Builder Context
 
-Before any technical design begins, assess whether the scope is appropriate for the build context.
+Before any technical design begins, establish two things: project tier and build context.
 
-Ask the user:
+**Step A — Project tier**
+
+If a Project Profile Card was already produced by exec-kit's `/release` skill, accept it and skip this step.
+
+Otherwise ask: *"How would you describe the size of this project — Micro (days–2w), Small (2–6w), Medium (6–16w), or Large (16w+)?"*
+
+Apply phase gating based on the tier:
+
+| Tier | Phases to run |
+|------|--------------|
+| **Tier 1 (Micro)** | Skip all planning docs. Produce an ordered task list with build sequence (infrastructure first) and a 5-item launch checklist. Write code with the commenting standard below. |
+| **Tier 2 (Small)** | Phase 3 (dev plan only — abbreviated task list). Phase 5 (abbreviated code review checklist). Phase 7 (security review only if auth or user data involved). Phase 8 (abbreviated deployment guide). Skip Phases 1, 2, 4, 6. |
+| **Tier 3 (Medium)** | Phases 1 (tech spec, skip arch design unless novel architecture), 3, 4, 5, 7, 8. Phase 6 (perf review) only if performance SLOs are defined. Skip Phase 2 (API spec) unless the feature is API-first. |
+| **Tier 4 (Large)** | All phases. |
+
+**Step B — Builder context**
+
+Ask:
 > *"Who will be building this — a solo PM-led build with AI assistance, a small team, or a larger engineering team?"*
 
 **If solo PM-led build**: Apply the following constraints throughout all phases:
@@ -41,7 +58,11 @@ These comments exist to help the builder understand the codebase as it grows, no
 
 ---
 
-## Phase 1 — Solution Analysis & Technical Specification
+## Phase 1 — Solution Analysis & Technical Specification — *Tier 3–4 only*
+
+**Tier 1**: Skip entirely. Write code directly using the build-order task list from Phase 0.
+**Tier 2**: Skip. If there is a meaningful architectural decision (e.g., choosing between two approaches), note it in one paragraph with the rationale before moving to Phase 3. No formal tech spec or arch design doc needed.
+**Tier 3**: Run tech spec only — skip arch design unless the feature introduces a novel architectural pattern. Abbreviate solution options to two alternatives maximum.
 
 Start by offering: *"Would you like me to run the `solution-analyst` agent first? It reads your codebase and researches options before committing to a design — recommended when the right technical approach is not yet clear."*
 
@@ -77,7 +98,10 @@ If this is a solo PM-led build, always offer `pm-tech-reviewer` — it is the pr
 
 ---
 
-## Phase 2 — API Specification (if applicable)
+## Phase 2 — API Specification — *Tier 3–4, or Tier 2 if API-first*
+
+**Tier 1**: Skip.
+**Tier 2**: Run only if the entire feature is an API (no UI). If the API is incidental to a UI feature, document endpoint signatures inline in the dev plan instead.
 
 If the feature involves APIs, produce an API spec following the process and template of the `/api-spec` skill.
 
@@ -91,7 +115,11 @@ If no APIs are involved, skip this phase and note that it was skipped.
 
 ---
 
-## Phase 3 — Development Plan
+## Phase 3 — Development Plan — *Tier 2–4*
+
+**Tier 1**: Skip — the task list from Phase 0 is sufficient.
+**Tier 2**: Abbreviated — produce an ordered task list with S/M/L sizing and build-layer grouping. No sprint allocation table, no blocker analysis section.
+**Tier 3–4**: Full dev plan below.
 
 Produce a development plan following the process and template of the `/dev-plan` skill, based on the approved tech spec.
 
@@ -103,7 +131,10 @@ Produce a development plan following the process and template of the `/dev-plan`
 
 ---
 
-## Phase 4 — QA & Test Plan
+## Phase 4 — QA & Test Plan — *Tier 3–4 only*
+
+**Tier 1**: Skip. Note the two or three things to manually verify before shipping, inline.
+**Tier 2**: Skip the formal test plan. Instead, list 4–6 specific things to verify before launch — happy path, the most likely error state, and one edge case. Inline, not a separate document.
 
 Produce a QA test plan following the process and template of the `/test-plan` skill.
 
@@ -117,7 +148,11 @@ After presenting the test plan, offer: *"Want me to run the `test-case-generator
 
 ---
 
-## Phase 5 — Code Review
+## Phase 5 — Code Review — *Tier 2–4*
+
+**Tier 1**: Skip formal review. Apply the commenting standard from Phase 0 as you write — that's the quality check.
+**Tier 2**: Abbreviated checklist only — correctness, error handling, security (if auth/data), no dead code. One pass, no formal findings document.
+**Tier 3–4**: Full code review below.
 
 Conduct a structured code review following the process and template of the `/code-review` skill.
 
@@ -131,7 +166,10 @@ After presenting findings, offer: *"Want me to run the `code-reviewer` agent to 
 
 ---
 
-## Phase 6 — Performance Review
+## Phase 6 — Performance Review — *Tier 3–4, only if performance SLOs are defined*
+
+**Tier 1–2**: Skip.
+**Tier 3**: Run only if performance SLOs are explicitly defined in the tech spec (e.g., p95 latency < 200ms). If no SLOs exist: note any obvious performance risks inline (e.g., unbounded queries, missing indexes) and skip the formal review.
 
 Conduct a performance review following the process and template of the `/perf-review` skill.
 
@@ -143,7 +181,11 @@ Conduct a performance review following the process and template of the `/perf-re
 
 ---
 
-## Phase 7 — Security Review
+## Phase 7 — Security Review — *Tier 2–4, conditional on risk*
+
+**Tier 1**: Skip unless the change touches authentication, authorisation, or user data — if it does, run the abbreviated Tier 2 check below.
+**Tier 2**: Abbreviated — check four things only: (1) is user input validated? (2) are auth checks in place? (3) is sensitive data not logged or exposed? (4) are dependencies up to date? Flag any issue, skip the formal findings document.
+**Tier 3–4**: Full security review below.
 
 Conduct a security review following the process and template of the `/security-review` skill, aligned to OWASP Top 10.
 
@@ -157,7 +199,11 @@ After presenting findings, offer: *"Want me to run the `security-reviewer` agent
 
 ---
 
-## Phase 8 — Deployment
+## Phase 8 — Deployment — *All tiers, depth scales*
+
+**Tier 1**: 5-step deploy checklist only — the specific commands to run, one smoke test, done.
+**Tier 2**: Abbreviated deployment guide — platform-specific steps, environment variables to set, smoke test checklist (5–8 items), rollback in one sentence.
+**Tier 3–4**: Full deployment guide below.
 
 With development complete and all reviews signed off, produce a deployment guide following the process and template of the `/deployment` skill.
 
@@ -175,28 +221,20 @@ With development complete and all reviews signed off, produce a deployment guide
 
 ## Final Deliverable Summary
 
-Output a clean summary:
+Output a clean summary scaled to the tier:
 
 ```
 ## [Feature Name] — Dev Package
 
 **Status**: Ready to deploy
+**Tier**: [N — Micro / Small / Medium / Large]
 **Completed**: [Date]
 
 ### Documents Produced
-- Solution Analysis (if run)
-- Architectural Design
-- Technical Specification
-- API Specification (if applicable)
-- Development Plan
-- QA Test Plan
-- Code Review findings
-- Performance Review findings
-- Security Review findings
-- Deployment Guide
+[List only what was actually produced for this tier]
 
 ### Open Items Before Launch
-1. [Any unresolved findings from reviews]
-2. [Any TBDs from the tech spec]
-3. [Any smoke test items that need manual verification]
+1. [Any unresolved findings or TBDs]
+2.
+3.
 ```

@@ -8,18 +8,43 @@ Run the full PM workflow for: $ARGUMENTS
 
 You are a senior product manager executing a structured discovery-to-spec process. Work through each phase below in sequence. **After each phase, stop and present a checkpoint** — do not proceed to the next phase until the user confirms or provides feedback.
 
-**Before starting Phase 1**, ask two quick setup questions if the answers aren't already clear from the input:
+---
+
+## Phase 0 — Project Profile
+
+Before producing anything, establish the project tier. If a Project Profile Card was already produced by exec-kit's `/release` skill, accept it and skip this phase.
+
+Otherwise ask:
 
 1. *"Is this a new product or a feature addition to an existing product?"*
    - If new product: offer to run `/tech-stack` first — *"Before we frame the problem, do you want to choose your tech stack? It affects design and development decisions downstream. Run `/tech-stack` separately, or continue here and decide later."*
 
-2. *"How large is this feature? A full PRD or a one-page brief?"*
-   - If small/experimental: suggest `/brief` instead — *"This sounds like it might be a good fit for a quick feature brief (`/brief`) rather than the full workflow. A brief is faster and feeds directly into design or dev. Want to use that instead?"*
-   - If yes to full workflow: continue below.
+2. *"How would you describe the size of this project?"*
+   - **(A) Micro** — single small change, days to ~2 weeks, clear scope
+   - **(B) Small** — 1–3 features, 2–6 weeks, few unknowns
+   - **(C) Medium** — multi-feature, 6–16 weeks, some unknowns
+   - **(D) Large** — full product, 16+ weeks, significant complexity
+
+Derive the tier and declare it, then apply the phase gating below:
+
+| Tier | Phases to run |
+|------|--------------|
+| **Tier 1 (Micro)** | Problem framing only (one paragraph). Skip all other phases. Produce a one-paragraph brief with scope, goal, and first action. |
+| **Tier 2 (Small)** | Phase 1 (abbreviated), Phase 4 (2–3 stories only). Run `/brief` instead of PRD. Skip Phases 2, 3, 5, 6. Abbreviated Phase 7. |
+| **Tier 3 (Medium)** | Phases 1–5, 7. Phase 6 (roadmap) optional — skip unless explicitly needed. Abbreviated Phase 7. |
+| **Tier 4 (Large)** | All phases. |
+
+**Checkpoint 0**: Confirm tier before proceeding.
 
 ---
 
-## Phase 1: Problem Framing
+---
+
+## Phase 1: Problem Framing — *All tiers*
+
+**Tier 1**: One paragraph only — problem in one sentence, who it affects, and the proposed direction. No structure required. Then stop and output the brief directly.
+**Tier 2**: Abbreviated — problem statement + assumptions only. Skip anti-problems and scale analysis.
+**Tier 3–4**: Full output below.
 
 Before writing anything, frame the problem properly.
 
@@ -40,7 +65,9 @@ Present the problem framing output, then ask:
 
 ---
 
-## Phase 2: Competitive Landscape
+## Phase 2: Competitive Landscape — *Tier 3–4 only*
+
+**Tier 1–2**: Skip entirely. If competitive context is relevant for a Tier 2 project, note 1–2 alternatives in one line as part of the brief.
 
 With the problem framing confirmed, assess the competitive context.
 
@@ -70,7 +97,10 @@ Present the competitive landscape output, then ask:
 
 ---
 
-## Phase 3: PRD Draft
+## Phase 3: PRD Draft — *Tier 3–4 only*
+
+**Tier 1**: Skip. Problem framing from Phase 1 is sufficient.
+**Tier 2**: Skip. Use `/brief` instead — produce a one-page feature brief covering: what, why, who, success criteria, scope boundaries, and first three build steps. No full PRD needed.
 
 With the problem and context confirmed, write the PRD.
 
@@ -99,7 +129,11 @@ Present the full PRD, then ask:
 
 ---
 
-## Phase 4: User Stories
+## Phase 4: User Stories — *Tier 2–4*
+
+**Tier 1**: Skip.
+**Tier 2**: Write 2–3 stories for the primary user flow only. One acceptance criterion each (Given/When/Then). No edge cases, no complexity sizing beyond S/M/L.
+**Tier 3–4**: Full output below.
 
 With the PRD confirmed, generate user stories.
 
@@ -122,7 +156,9 @@ Present the user stories, then ask:
 
 ---
 
-## Phase 5: Prioritization
+## Phase 5: Prioritization — *Tier 3–4 only*
+
+**Tier 1–2**: Skip. Scope is small enough that prioritization is implicit — just note what's P0 vs. deferred in the brief or user stories.
 
 With the stories confirmed, score and rank the work.
 
@@ -143,7 +179,10 @@ Present the prioritization output, then ask:
 
 ---
 
-## Phase 6: Roadmap Placement
+## Phase 6: Roadmap Placement — *Tier 3–4, or Tier 3 only if explicitly requested*
+
+**Tier 1–2**: Skip. Work is scoped and ready to execute — roadmap placement adds no value at this size.
+**Tier 3**: Run only if the team needs to communicate placement to stakeholders or integrate with an existing roadmap. Otherwise skip and note: *"Roadmap placement skipped — add to your roadmap at [Now/Next/Later] based on the prioritization output."*
 
 With prioritization confirmed, recommend where this fits on the roadmap.
 
@@ -164,7 +203,12 @@ Present the roadmap placement recommendation, then ask:
 
 ---
 
-## Phase 7: Rollout Package
+## Phase 7: Rollout Package — *Tier 3–4 full; Tier 2 abbreviated*
+
+**Tier 1**: Skip.
+**Tier 2**: Produce a one-paragraph launch note — what shipped, who it affects, and one key thing users need to know. No training materials, no full audience breakdown.
+**Tier 3**: Produce internal announcement + support briefing only. Skip customer-facing announcement and training materials unless the change is user-facing.
+**Tier 4**: Full output below.
 
 With the spec complete and roadmap placement confirmed, produce the launch enablement materials.
 
