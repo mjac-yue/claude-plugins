@@ -6,6 +6,8 @@ disable-model-invocation: true
 
 Write a Product Requirements Document (PRD) for: $ARGUMENTS
 
+**Output standard — diagrams**: All documents are read in Obsidian. Use Mermaid syntax (` ```mermaid ` blocks) for all diagrams — Obsidian renders these natively. Never use ASCII art or plain-text flow descriptions where a diagram would be clearer.
+
 Use the template in [prd-template.md](prd-template.md) as the structure.
 
 Follow this process:
@@ -14,5 +16,10 @@ Follow this process:
 3. For the "Out of Scope" section, think carefully about what related things this feature does NOT include.
 4. For success metrics, always propose at least one leading indicator and one lagging indicator.
 5. Flag any open questions or assumptions made in a final "Open Questions" section.
+
+**Diagram instructions**:
+
+- **User Journey / Flow**: Always produce a real Mermaid `flowchart TD` using the actual steps for this feature. If the journey has decision points or branching paths (e.g. new vs returning user, success vs error), show them as diamond nodes. If the journey is a back-and-forth interaction between user and system, use a `sequenceDiagram` instead.
+- **Dependencies**: Always produce a real Mermaid `flowchart LR` showing actual teams, systems, and prerequisite work. Arrows point in the direction of dependency. Only include nodes that genuinely apply — don't pad with empty placeholders.
 
 Output the completed PRD as a markdown document ready to share or save.

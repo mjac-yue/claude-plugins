@@ -51,11 +51,19 @@
 *High-level description of the solution. What will users be able to do?*
 
 ### User Journey / Flow
-*Step-by-step walkthrough of the experience.*
+*Step-by-step walkthrough of the primary experience. Use a flowchart for linear or branching flows; use a sequenceDiagram if the interaction between user and system needs to be explicit.*
 
-1. 
-2. 
-3. 
+```mermaid
+flowchart TD
+    A([User starts]) --> B[Step 1]
+    B --> C{Decision point?}
+    C -- Yes --> D[Step 2a]
+    C -- No --> E[Step 2b]
+    D --> F([Goal achieved])
+    E --> F
+```
+
+*Replace the diagram above with the actual user journey for this feature. Add or remove steps and branches as needed. For simpler linear flows, remove the decision node.*
 
 ---
 
@@ -100,9 +108,18 @@
 
 ## Dependencies
 
-- **Teams**: [Who needs to be involved?]
-- **Systems**: [External services, APIs, or data sources]
-- **Timeline dependencies**: [What must happen first?]
+```mermaid
+flowchart LR
+    A([This feature]) --> B([Team / System dependency])
+    C([Prerequisite work]) --> A
+    D([External API / service]) --> A
+```
+
+*Replace with actual dependencies. Arrows point in the direction of dependency — prerequisites point toward this feature, this feature points toward things that depend on it downstream.*
+
+| Dependency | Type | Owner | Status |
+|-----------|------|-------|--------|
+| | Team / System / Timeline | | Confirmed / TBC |
 
 ---
 
