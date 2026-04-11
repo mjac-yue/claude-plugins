@@ -29,12 +29,12 @@ Otherwise ask:
 
 Derive the tier and declare it, then apply the phase gating below:
 
-| Tier | Phases to run |
-|------|--------------|
-| **Tier 1 (Micro)** | Problem framing only (one paragraph). Skip all other phases. Produce a one-paragraph brief with scope, goal, and first action. |
-| **Tier 2 (Small)** | Phase 1 (abbreviated), Phase 4 (2–3 stories only). Run `/brief` instead of PRD. Skip Phases 2, 3, 5, 6. Abbreviated Phase 7. |
-| **Tier 3 (Medium)** | Phases 1–5, 7. Phase 6 (roadmap) optional — skip unless explicitly needed. Abbreviated Phase 7. |
-| **Tier 4 (Large)** | All phases. |
+| Tier | Default phases | Not default — add back if needed |
+|------|---------------|----------------------------------|
+| **Tier 1 (Micro)** | Problem framing only (one paragraph). Produce a one-paragraph brief with scope, goal, and first action. | Phases 2–7 |
+| **Tier 2 (Small)** | Phase 1 (abbreviated), Phase 4 (2–3 stories only). Run `/brief` instead of PRD. Abbreviated Phase 7. | Phases 2, 3, 5, 6 |
+| **Tier 3 (Medium)** | Phases 1–5, 7. Phase 6 (roadmap) if needed for stakeholder communication. | Phase 6 (roadmap) |
+| **Tier 4 (Large)** | All phases. | — |
 
 **Checkpoint 0**: Confirm tier before proceeding.
 
@@ -69,7 +69,7 @@ Present the problem framing output, then ask:
 
 ## Phase 2: Competitive Landscape — *Tier 3–4 only*
 
-**Tier 1–2**: Skip entirely. If competitive context is relevant for a Tier 2 project, note 1–2 alternatives in one line as part of the brief.
+**Tier 1–2**: Not included by default. If competitive context is relevant for a Tier 2 project, note 1–2 alternatives in one line as part of the brief. Add back if needed.
 
 With the problem framing confirmed, assess the competitive context.
 
@@ -101,8 +101,8 @@ Present the competitive landscape output, then ask:
 
 ## Phase 3: PRD Draft — *Tier 3–4 only*
 
-**Tier 1**: Skip. Problem framing from Phase 1 is sufficient.
-**Tier 2**: Skip. Use `/brief` instead — produce a one-page feature brief covering: what, why, who, success criteria, scope boundaries, and first three build steps. No full PRD needed.
+**Tier 1**: Not included by default — problem framing from Phase 1 is sufficient. Add back if needed.
+**Tier 2**: Not included by default. Use `/brief` instead — produce a one-page feature brief covering: what, why, who, success criteria, scope boundaries, and first three build steps. Add back a full PRD if needed.
 
 With the problem and context confirmed, write the PRD.
 
@@ -133,7 +133,7 @@ Present the full PRD, then ask:
 
 ## Phase 4: User Stories — *Tier 2–4*
 
-**Tier 1**: Skip.
+**Tier 1**: Not included by default. Add back if needed.
 **Tier 2**: Write 2–3 stories for the primary user flow only. One acceptance criterion each (Given/When/Then). No edge cases, no complexity sizing beyond S/M/L.
 **Tier 3–4**: Full output below.
 
@@ -160,7 +160,7 @@ Present the user stories, then ask:
 
 ## Phase 5: Prioritization — *Tier 3–4 only*
 
-**Tier 1–2**: Skip. Scope is small enough that prioritization is implicit — just note what's P0 vs. deferred in the brief or user stories.
+**Tier 1–2**: Not included by default — scope is small enough that prioritization is implicit. Just note what's P0 vs. deferred in the brief or user stories. Add back if needed.
 
 With the stories confirmed, score and rank the work.
 
@@ -183,7 +183,7 @@ Present the prioritization output, then ask:
 
 ## Phase 6: Roadmap Placement — *Tier 3–4, or Tier 3 only if explicitly requested*
 
-**Tier 1–2**: Skip. Work is scoped and ready to execute — roadmap placement adds no value at this size.
+**Tier 1–2**: Not included by default — work is scoped and ready to execute. Add back if stakeholder communication requires roadmap placement.
 **Tier 3**: Run only if the team needs to communicate placement to stakeholders or integrate with an existing roadmap. Otherwise skip and note: *"Roadmap placement skipped — add to your roadmap at [Now/Next/Later] based on the prioritization output."*
 
 With prioritization confirmed, recommend where this fits on the roadmap.
@@ -207,7 +207,7 @@ Present the roadmap placement recommendation, then ask:
 
 ## Phase 7: Rollout Package — *Tier 3–4 full; Tier 2 abbreviated*
 
-**Tier 1**: Skip.
+**Tier 1**: Not included by default. Add back if needed.
 **Tier 2**: Produce a one-paragraph launch note — what shipped, who it affects, and one key thing users need to know. No training materials, no full audience breakdown.
 **Tier 3**: Produce internal announcement + support briefing only. Skip customer-facing announcement and training materials unless the change is user-facing.
 **Tier 4**: Full output below.

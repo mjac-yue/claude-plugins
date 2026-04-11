@@ -20,12 +20,12 @@ Otherwise ask: *"How would you describe the size of this project — Micro (days
 
 Then apply the phase gating below:
 
-| Tier | Phases to run |
-|------|--------------|
-| **Tier 1 (Micro)** | Skip all phases if there is no UI change. If there is a UI change: describe it in plain prose (2–3 sentences). No formal design output needed. |
-| **Tier 2 (Small)** | Phase 1 (abbreviated UX brief), Phase 2 (key screens only). The wireframe spec serves as the handoff — skip Phases 3, 4, 5. |
-| **Tier 3 (Medium)** | Phases 1, 2, 3, 5. Skip Phase 4 (usability test) unless there are genuine UX unknowns that need validating. |
-| **Tier 4 (Large)** | All phases. |
+| Tier | Default phases | Not default — add back if needed |
+|------|---------------|----------------------------------|
+| **Tier 1 (Micro)** | If there is a UI change: describe it in plain prose (2–3 sentences). No formal design output needed by default. | All phases |
+| **Tier 2 (Small)** | Phase 1 (abbreviated UX brief), Phase 2 (key screens only). The wireframe spec serves as the handoff. | Phases 3, 4, 5 |
+| **Tier 3 (Medium)** | Phases 1, 2, 3, 5. Phase 4 (usability test) if genuine UX unknowns exist. | Phase 4 (usability test) |
+| **Tier 4 (Large)** | All phases. | — |
 
 **Checkpoint 0**: Confirm tier before proceeding.
 
@@ -65,7 +65,7 @@ Produce a wireframe specification following the process and template of the `/wi
 
 ## Phase 3 — Design Review — *Tier 3–4 only*
 
-**Tier 1–2**: Skip. Design is simple enough that a brief self-check is sufficient — note any obvious usability concerns inline when presenting Phase 2.
+**Tier 1–2**: Not included by default — design is simple enough that a brief self-check is sufficient. Note any obvious usability concerns inline when presenting Phase 2. Add back if needed.
 
 Conduct a heuristic design review following the process and template of the `/design-review` skill, applied to the wireframe spec — use the design-review-template.md structure.
 
@@ -83,8 +83,8 @@ After presenting the review, offer two options:
 
 ## Phase 4 — Usability Test Plan — *Tier 4, or Tier 3 if UX unknowns exist*
 
-**Tier 1–2**: Skip.
-**Tier 3**: Run only if there are genuine UX unknowns — novel interaction patterns, unclear user mental models, or significant deviation from existing conventions. Otherwise skip and note: *"Usability test skipped — consider running one before v2 if user adoption is lower than expected."*
+**Tier 1–2**: Not included by default. Add back if needed.
+**Tier 3**: Run only if there are genuine UX unknowns — novel interaction patterns, unclear user mental models, or significant deviation from existing conventions. Otherwise not included by default — note: *"Usability test not run — add back before v2 if user adoption is lower than expected."*
 
 Produce a usability test plan following the process and template of the `/usability-test` skill — apply the usability-test-template.md structure and steps.
 
@@ -98,7 +98,7 @@ Produce a usability test plan following the process and template of the `/usabil
 
 ## Phase 5 — Design Handoff — *Tier 3–4 only*
 
-**Tier 1–2**: Skip. The wireframe from Phase 2 serves as the handoff for Tier 2. Tier 1 needs no handoff doc.
+**Tier 1–2**: Not included by default — the wireframe from Phase 2 serves as the handoff for Tier 2. Tier 1 needs no handoff doc. Add back if needed.
 
 Produce a design handoff spec following the process and template of the `/design-handoff` skill — apply the design-handoff-template.md structure and steps.
 

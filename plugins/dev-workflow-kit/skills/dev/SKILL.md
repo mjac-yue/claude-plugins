@@ -26,10 +26,10 @@ Apply phase gating based on the tier:
 
 | Tier | Phases to run |
 |------|--------------|
-| **Tier 1 (Micro)** | Skip all planning docs. Produce an ordered task list with build sequence (infrastructure first) and a 5-item launch checklist. Write code with the commenting standard below. |
-| **Tier 2 (Small)** | Phase 3 (dev plan only — abbreviated task list). Phase 5 (abbreviated code review checklist). Phase 7 (security review only if auth or user data involved). Phase 8 (abbreviated deployment guide). Skip Phases 1, 2, 4, 6. |
-| **Tier 3 (Medium)** | Phases 1 (tech spec, skip arch design unless novel architecture), 3, 4, 5, 7, 8. Phase 6 (perf review) only if performance SLOs are defined. Skip Phase 2 (API spec) unless the feature is API-first. |
-| **Tier 4 (Large)** | All phases. |
+| **Tier 1 (Micro)** | Produce an ordered task list with build sequence (infrastructure first) and a 5-item launch checklist. Write code with the commenting standard below. | All planning docs — Phases 1–8 |
+| **Tier 2 (Small)** | Phase 3 (dev plan — abbreviated task list), Phase 5 (abbreviated code review checklist), Phase 7 (security review if auth or user data involved), Phase 8 (abbreviated deployment guide). | Phases 1, 2, 4, 6 |
+| **Tier 3 (Medium)** | Phases 1 (tech spec; arch design if novel architecture), 3, 4, 5, 7, 8. Phase 6 (perf review) if performance SLOs are defined. | Phase 2 (API spec) unless API-first; Phase 6 if no SLOs |
+| **Tier 4 (Large)** | All phases. | — |
 
 **Step B — Builder context**
 
@@ -62,8 +62,8 @@ These comments exist to help the builder understand the codebase as it grows, no
 
 ## Phase 1 — Solution Analysis & Technical Specification — *Tier 3–4 only*
 
-**Tier 1**: Skip entirely. Write code directly using the build-order task list from Phase 0.
-**Tier 2**: Skip. If there is a meaningful architectural decision (e.g., choosing between two approaches), note it in one paragraph with the rationale before moving to Phase 3. No formal tech spec or arch design doc needed.
+**Tier 1**: Not included by default — write code directly using the build-order task list from Phase 0. Add back if needed.
+**Tier 2**: Not included by default. If there is a meaningful architectural decision (e.g., choosing between two approaches), note it in one paragraph with the rationale before moving to Phase 3. No formal tech spec or arch design doc needed by default. Add back if needed.
 **Tier 3**: Run tech spec only — skip arch design unless the feature introduces a novel architectural pattern. Abbreviate solution options to two alternatives maximum.
 
 Start by offering: *"Would you like me to run the `solution-analyst` agent first? It reads your codebase and researches options before committing to a design — recommended when the right technical approach is not yet clear."*
@@ -102,7 +102,7 @@ If this is a solo PM-led build, always offer `pm-tech-reviewer` — it is the pr
 
 ## Phase 2 — API Specification — *Tier 3–4, or Tier 2 if API-first*
 
-**Tier 1**: Skip.
+**Tier 1**: Not included by default. Add back if needed.
 **Tier 2**: Run only if the entire feature is an API (no UI). If the API is incidental to a UI feature, document endpoint signatures inline in the dev plan instead.
 
 If the feature involves APIs, produce an API spec following the process and template of the `/api-spec` skill.
@@ -119,7 +119,7 @@ If no APIs are involved, skip this phase and note that it was skipped.
 
 ## Phase 3 — Development Plan — *Tier 2–4*
 
-**Tier 1**: Skip — the task list from Phase 0 is sufficient.
+**Tier 1**: Not included by default — the task list from Phase 0 is sufficient. Add back if needed.
 **Tier 2**: Abbreviated — produce an ordered task list with S/M/L sizing and build-layer grouping. No sprint allocation table, no blocker analysis section.
 **Tier 3–4**: Full dev plan below.
 
@@ -135,8 +135,8 @@ Produce a development plan following the process and template of the `/dev-plan`
 
 ## Phase 4 — QA & Test Plan — *Tier 3–4 only*
 
-**Tier 1**: Skip. Note the two or three things to manually verify before shipping, inline.
-**Tier 2**: Skip the formal test plan. Instead, list 4–6 specific things to verify before launch — happy path, the most likely error state, and one edge case. Inline, not a separate document.
+**Tier 1**: Not included by default. Note the two or three things to manually verify before shipping, inline. Add back if needed.
+**Tier 2**: Formal test plan not included by default. Instead, list 4–6 specific things to verify before launch — happy path, the most likely error state, and one edge case. Inline, not a separate document. Add back the full plan if needed.
 
 Produce a QA test plan following the process and template of the `/test-plan` skill.
 
@@ -152,7 +152,7 @@ After presenting the test plan, offer: *"Want me to run the `test-case-generator
 
 ## Phase 5 — Code Review — *Tier 2–4*
 
-**Tier 1**: Skip formal review. Apply the commenting standard from Phase 0 as you write — that's the quality check.
+**Tier 1**: Formal review not included by default. Apply the commenting standard from Phase 0 as you write — that's the quality check. Add back if needed.
 **Tier 2**: Abbreviated checklist only — correctness, error handling, security (if auth/data), no dead code. One pass, no formal findings document.
 **Tier 3–4**: Full code review below.
 
@@ -170,7 +170,7 @@ After presenting findings, offer: *"Want me to run the `code-reviewer` agent to 
 
 ## Phase 6 — Performance Review — *Tier 3–4, only if performance SLOs are defined*
 
-**Tier 1–2**: Skip.
+**Tier 1–2**: Not included by default. Add back if needed.
 **Tier 3**: Run only if performance SLOs are explicitly defined in the tech spec (e.g., p95 latency < 200ms). If no SLOs exist: note any obvious performance risks inline (e.g., unbounded queries, missing indexes) and skip the formal review.
 
 Conduct a performance review following the process and template of the `/perf-review` skill.
@@ -185,7 +185,7 @@ Conduct a performance review following the process and template of the `/perf-re
 
 ## Phase 7 — Security Review — *Tier 2–4, conditional on risk*
 
-**Tier 1**: Skip unless the change touches authentication, authorisation, or user data — if it does, run the abbreviated Tier 2 check below.
+**Tier 1**: Not included by default unless the change touches authentication, authorisation, or user data — if it does, run the abbreviated Tier 2 check below. Add back for any change involving auth or sensitive data.
 **Tier 2**: Abbreviated — check four things only: (1) is user input validated? (2) are auth checks in place? (3) is sensitive data not logged or exposed? (4) are dependencies up to date? Flag any issue, skip the formal findings document.
 **Tier 3–4**: Full security review below.
 

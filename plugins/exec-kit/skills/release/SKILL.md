@@ -35,29 +35,29 @@ Before producing anything, establish the project profile. Ask two questions:
 
 ### Deriving the Project Tier
 
-Based on team size and scope, determine the project tier and declare it before proceeding:
+Based on team size and scope, suggest a starting tier. The tier is a **recommendation, not a constraint** — the user can add back any step or document at any point.
 
 **Tier 1 — Micro**
 *Signals*: Scope (A), or scope (B) solo with clear requirements and no unknowns.
-*What this means*: No formal documentation needed. Produce a simple task list with build order and a brief launch checklist. Skip kickoff doc, release plan, and risk register.
+*Default*: Simple task list with build order and a brief launch checklist. Formal docs not included by default.
 
 **Tier 2 — Small**
 *Signals*: Scope (B), 1–2 people. Or scope (C) with very clear requirements and no technical unknowns.
-*What this means*: Lightweight release plan (phases + build sequence only — no dependency map, no critical path analysis, no parallel workstream table). No formal risk register unless a specific concern exists. Kickoff is a one-paragraph summary, not a full doc.
+*Default*: Lightweight release plan (phases + build sequence), one-paragraph kickoff summary. Dependency map, critical path, risk register not included by default.
 
 **Tier 3 — Medium**
 *Signals*: Scope (C), any team size. Or scope (D) with a small team and well-understood requirements.
-*What this means*: Full release plan with all sections, but risk register covers only the top 3–5 risks rather than being exhaustive. Kickoff doc is full but can skip sections that don't apply.
+*Default*: Full release plan, full kickoff, focused risk register (top 3–5 risks).
 
 **Tier 4 — Large**
-*Signals*: Scope (D), or any project with multiple teams, major unknowns, significant external dependencies, or a launch with real user or business risk.
-*What this means*: Full process — all documents, all sections, all checkpoints.
+*Signals*: Scope (D), or any project with multiple teams, major unknowns, significant external dependencies, or real user or business risk.
+*Default*: Full process — all documents, all sections, all checkpoints.
 
-Present the determined tier and methodology recommendation, then confirm:
+Present the suggested tier and methodology, then confirm with an explicit opt-in/opt-out:
 
-> *"Based on what you've described, this looks like a **[Tier N — name]** project. I'll produce [describe what's included and what's skipped]. For a team of [N], I'd recommend **[Kanban / Scrum]** [brief reason].*
+> *"Based on what you've described, this looks like a **[Tier N — name]** project. My suggested default is [describe what's included]. For a team of [N], I'd recommend **[Kanban / Scrum]** [brief reason].*
 >
-> *Does that match your sense of the project, or should we adjust the tier?"*
+> *The tier is just a starting point — you can add back any step or document at any time. Does this look right, or would you like to adjust the scope of what we produce?"*
 
 ---
 
@@ -66,7 +66,7 @@ Present the determined tier and methodology recommendation, then confirm:
 - **3–5 people → Scrum, 1-week sprints**: structured cadence, shared commitment, low ceremony overhead
 - **5+ people → Scrum, 2-week sprints**: coordination cost justifies full sprint rhythm
 
-Once confirmed, output a **Project Profile Card** — a compact reference the PM can pass to any other plugin orchestrator (`/pm`, `/design`, `/dev`) to ensure they apply the same level of process:
+Once confirmed, output a **Project Profile Card** — a compact reference the PM can pass to any other plugin orchestrator (`/pm`, `/design`, `/dev`) to set the default process level. Any step listed as "not default" can be added back at any time.
 
 ```
 ## Project Profile
@@ -76,40 +76,40 @@ Once confirmed, output a **Project Profile Card** — a compact reference the PM
 **Team**: [N people]
 **Methodology**: [Kanban / Scrum (cadence)]
 
-### Cross-plugin skill map
+### Cross-plugin defaults
 
-| Plugin | Use | Skip |
-|--------|-----|------|
-| pm-claude-kit | [skills to use] | [skills to skip] |
-| design-ux-kit | [skills to use] | [skills to skip] |
-| dev-workflow-kit | [skills to use] | [skills to skip] |
-| exec-kit | [skills to use] | [skills to skip] |
+| Plugin | Default | Not default — add back if needed |
+|--------|---------|----------------------------------|
+| pm-claude-kit | [skills included by default] | [skills not included by default] |
+| design-ux-kit | [skills included by default] | [skills not included by default] |
+| dev-workflow-kit | [skills included by default] | [skills not included by default] |
+| exec-kit | [skills included by default] | [skills not included by default] |
 ```
 
-Fill in the skill map based on the tier:
+Fill in the defaults based on the tier:
 
 **Tier 1**:
-- pm-claude-kit: one-sentence brief only | skip everything else
-- design-ux-kit: skip unless UI changes — if UI: describe change informally | skip all skills
-- dev-workflow-kit: write code directly, inline task list | skip all planning docs
-- exec-kit: task list + brief launch checklist | skip all other skills
+- pm-claude-kit: one-sentence brief | `/prd`, `/competitive-analysis`, `/user-story`, `/prioritization`, `/roadmap`, `/rollout`
+- design-ux-kit: informal description if UI changes | all skills
+- dev-workflow-kit: inline task list + code | all planning and review docs
+- exec-kit: task list + brief launch checklist | all other skills
 
 **Tier 2**:
-- pm-claude-kit: `/brief`, `/user-story` (2–3 key flows) | skip `/prd`, `/competitive-analysis`, `/prioritization`, `/roadmap`, `/rollout`
-- design-ux-kit: `/ux-brief` (abbreviated), `/wireframe-spec` (key screens only — wireframe serves as handoff) | skip `/design-review`, `/usability-test`, `/design-handoff`
-- dev-workflow-kit: `/dev-plan`, `/security-review` (only if auth or user data involved) | skip `/arch-design`, `/tech-spec`, `/api-spec` (unless API-first), `/perf-review`
-- exec-kit: `/release-plan` (lightweight), `/cycle-plan`, `/standup`, `/retro` | skip risk register unless specific concern exists
+- pm-claude-kit: `/brief`, `/user-story` (2–3 key flows) | `/prd`, `/competitive-analysis`, `/prioritization`, `/roadmap`, `/rollout`
+- design-ux-kit: `/ux-brief` (abbreviated), `/wireframe-spec` (key screens — doubles as handoff) | `/design-review`, `/usability-test`, `/design-handoff`
+- dev-workflow-kit: `/dev-plan`, `/security-review` (if auth/data) | `/arch-design`, `/tech-spec`, `/api-spec`, `/perf-review`
+- exec-kit: `/release-plan` (lightweight), `/cycle-plan`, `/standup`, `/retro` | risk register, `/status`, `/kickoff`
 
 **Tier 3**:
-- pm-claude-kit: `/prd`, `/user-story`, `/competitive-analysis` (quick scan), `/prioritization` | skip `/roadmap` (optional), `/rollout` (abbreviated inline)
-- design-ux-kit: `/ux-brief`, `/wireframe-spec`, `/design-review`, `/design-handoff` | skip `/usability-test` unless UX unknowns exist
-- dev-workflow-kit: `/tech-spec`, `/dev-plan`, `/test-plan`, `/code-review`, `/security-review` | skip `/arch-design` (unless novel architecture), `/perf-review` (unless performance SLOs defined)
-- exec-kit: full `/release-plan`, `/cycle-plan`, `/standup`, `/retro`, `/status`, risk register (top 5 risks) | nothing skipped
+- pm-claude-kit: `/prd`, `/user-story`, `/competitive-analysis`, `/prioritization` | `/roadmap`, `/rollout`
+- design-ux-kit: `/ux-brief`, `/wireframe-spec`, `/design-review`, `/design-handoff` | `/usability-test`
+- dev-workflow-kit: `/tech-spec`, `/dev-plan`, `/test-plan`, `/code-review`, `/security-review` | `/arch-design`, `/api-spec`, `/perf-review`
+- exec-kit: `/release-plan` (full), `/cycle-plan`, `/standup`, `/retro`, `/status`, `/risk` (top 5) | nothing
 
 **Tier 4**:
-- All plugins: full workflow — nothing skipped
+- All plugins: full workflow — everything included by default
 
-*Note: Pass the Project Profile Card as context when running `/pm`, `/design`, or `/dev` so each orchestrator applies the right tier automatically.*
+*Pass the Project Profile Card as context when running `/pm`, `/design`, or `/dev`. Each orchestrator will use it as the starting point and will confirm before skipping anything — you can always ask to add a step back in.*
 
 **Checkpoint 0**: Confirm project tier and methodology before proceeding.
 
