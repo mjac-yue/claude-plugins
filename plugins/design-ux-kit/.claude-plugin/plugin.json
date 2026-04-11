@@ -1,0 +1,8 @@
+{
+  "name": "design-ux-kit",
+  "description": "A Claude Code plugin for Design & UX workflows. Provides skills for UX briefs, wireframe specs, design reviews, usability test plans, and design handoffs — plus specialized UX review agents.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Martin Yue"
+  }
+}

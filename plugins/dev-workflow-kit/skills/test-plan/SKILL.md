@@ -1,0 +1,34 @@
+---
+name: test-plan
+description: Create a QA test plan covering test types, key test cases, coverage targets, and acceptance criteria. Use before development begins or during QA handoff to define what "done" looks like.
+disable-model-invocation: true
+---
+
+Create a QA test plan for: $ARGUMENTS
+
+Use the template in [test-plan-template.md](test-plan-template.md) as the structure.
+
+Follow this process:
+1. **Scope and objectives** — what is being tested? What is explicitly out of scope? What quality risks are we most concerned about?
+2. **Test types and coverage targets**:
+   - **Unit tests**: which modules/functions need unit coverage? Target coverage %?
+   - **Integration tests**: which service boundaries or data flows need integration coverage?
+   - **End-to-end tests**: which critical user journeys must have e2e coverage?
+   - **Manual / exploratory**: which areas require human judgment (edge cases, visual correctness, UX feel)?
+   - **Performance tests**: any latency, load, or throughput requirements to verify?
+   - **Security tests**: any auth, input validation, or data exposure vectors to test?
+3. **Key test cases**. For each test case:
+   - Test case name
+   - Preconditions / test data setup
+   - Steps to execute
+   - Expected result
+   - Pass/fail criteria
+   - Test type (unit / integration / e2e / manual)
+   
+   Cover: happy path, edge cases, error states, boundary conditions, and concurrent/race scenarios.
+4. **Test environment requirements** — what environments, data fixtures, mocks, or feature flags are needed?
+5. **Acceptance criteria** — the specific, verifiable conditions that define QA sign-off. These should map directly to the PRD requirements.
+6. **Regression considerations** — what existing functionality could this change break? Which regression tests must be re-run?
+7. **Sign-off process** — who approves QA completion? What is the escalation path for blocking bugs?
+
+Output a test plan engineering and QA can execute without additional clarification.

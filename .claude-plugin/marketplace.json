@@ -1,0 +1,28 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "pm-marketplace",
+  "description": "Product Manager tools for Claude Code",
+  "owner": {
+    "name": "Martin Yue"
+  },
+  "plugins": [
+    {
+      "name": "pm-claude-kit",
+      "description": "Skills and agents for Product Managers: PRDs, user stories, meeting notes, competitive analysis, OKRs, and prioritization.",
+      "category": "productivity",
+      "source": "./plugins/pm-claude-kit"
+    },
+    {
+      "name": "design-ux-kit",
+      "description": "Skills and agents for Design & UX workflows: UX briefs, wireframe specs, design reviews, usability test plans, and design handoffs.",
+      "category": "productivity",
+      "source": "./plugins/design-ux-kit"
+    },
+    {
+      "name": "dev-workflow-kit",
+      "description": "Skills and agents for Development workflows: technical specs, API specs, development plans, QA test plans, and bug reports.",
+      "category": "productivity",
+      "source": "./plugins/dev-workflow-kit"
+    }
+  ]
+}

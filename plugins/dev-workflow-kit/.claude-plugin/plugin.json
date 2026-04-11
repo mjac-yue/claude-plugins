@@ -1,0 +1,8 @@
+{
+  "name": "dev-workflow-kit",
+  "description": "A Claude Code plugin for Development workflows. Covers technical design, API specs, development planning, and QA test plans — bridging product requirements to shipped code.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Martin Yue"
+  }
+}
