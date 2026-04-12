@@ -8,6 +8,8 @@ Write a Product Requirements Document (PRD) for: $ARGUMENTS
 
 **Output standard — diagrams**: All documents are read in Obsidian. Use Mermaid syntax (` ```mermaid ` blocks) for all diagrams — Obsidian renders these natively. Never use ASCII art or plain-text flow descriptions where a diagram would be clearer.
 
+**Output standard — tables**: Always include a blank line before any Markdown table. Obsidian requires this to render `|` syntax as a table rather than plain text.
+
 Use the template in [prd-template.md](prd-template.md) as the structure.
 
 Follow this process:

@@ -8,6 +8,8 @@ Run the full release setup for: $ARGUMENTS
 
 **Output standard — diagrams**: All documents are read in Obsidian. Use Mermaid syntax (` ```mermaid ` blocks) for every diagram — Obsidian renders these natively. Never use ASCII art for diagrams. Supported diagram types: `flowchart` (dependency maps, workflows), `gantt` (timelines), `erDiagram` (data models), `sequenceDiagram` (flows), `graph` (component relationships).
 
+**Output standard — tables**: Always include a blank line before any Markdown table. Obsidian requires this to render `|` syntax as a table rather than plain text.
+
 Work through each phase below sequentially. After completing each phase, present the output and ask: "Ready to continue to the next step, or would you like to revise anything?"
 
 ---

@@ -6,6 +6,8 @@ disable-model-invocation: true
 
 Write a feature brief for: $ARGUMENTS
 
+**Output standard — tables**: All documents are read in Obsidian. Always include a blank line before any Markdown table — Obsidian requires this to render `|` syntax as a table rather than plain text.
+
 Use the template in [brief-template.md](brief-template.md) as the structure.
 
 Follow this process:

@@ -8,6 +8,8 @@ Generate a release plan for: $ARGUMENTS
 
 **Output standard — diagrams**: All documents are read in Obsidian. Use Mermaid syntax (` ```mermaid ` blocks) for all diagrams. Use `flowchart TD` for dependency maps and build sequences, `gantt` for timelines if phase dates are known.
 
+**Output standard — tables**: Always include a blank line before any Markdown table. Obsidian requires this to render `|` syntax as a table rather than plain text.
+
 You are a project manager creating a release plan for a small team. The plan must sequence work foundation-first — infrastructure before foundation, foundation before features — so the team is never blocked by missing dependencies mid-execution.
 
 ## Step 0: Determine the project tier

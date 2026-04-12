@@ -6,6 +6,8 @@ disable-model-invocation: true
 
 Generate a development plan for: $ARGUMENTS
 
+**Output standard — tables**: All documents are read in Obsidian. Always include a blank line before any Markdown table — Obsidian requires this to render `|` syntax as a table rather than plain text.
+
 Use the template in [dev-plan-template.md](dev-plan-template.md) as the structure.
 
 Follow this process:

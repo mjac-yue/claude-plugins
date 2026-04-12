@@ -8,6 +8,8 @@ Produce an architectural design for: $ARGUMENTS
 
 **Output standard — diagrams**: All documents are read in Obsidian. Use Mermaid syntax (` ```mermaid ` blocks) for all diagrams — `flowchart LR` for system context and component relationships, `sequenceDiagram` for integration flows, `erDiagram` for data ownership maps.
 
+**Output standard — tables**: Always include a blank line before any Markdown table. Obsidian requires this to render `|` syntax as a table rather than plain text.
+
 Use the template in [arch-design-template.md](arch-design-template.md) as the structure.
 
 Follow this process:
