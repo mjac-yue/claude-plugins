@@ -1,0 +1,224 @@
+{
+  "main": {
+    "id": "c1e03b4c714d34d6",
+    "type": "split",
+    "children": [
+      {
+        "id": "c6f81e1ee12a89f1",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "da6e6ae0b54f2d33",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "plugins/design-ux-kit/agents/user-research-planner.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "user-research-planner"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "f77f133db64720ba",
+    "type": "split",
+    "children": [
+      {
+        "id": "54d8f0a17550a1b1",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "3c37dd934366e874",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "5f3d903738671f4a",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "b3c79c5f02661ca5",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "b1b3817399da452c",
+    "type": "split",
+    "children": [
+      {
+        "id": "f786d4413ca1b1a4",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b31bb8d6d54493ca",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "plugins/design-ux-kit/agents/user-research-planner.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for user-research-planner"
+            }
+          },
+          {
+            "id": "25819b0ddea78263",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "plugins/design-ux-kit/agents/user-research-planner.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from user-research-planner"
+            }
+          },
+          {
+            "id": "74ce78f3516fa501",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "98cda00aa48159b2",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "c4fced1902564a63",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "plugins/design-ux-kit/agents/user-research-planner.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of user-research-planner"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "da6e6ae0b54f2d33",
+  "lastOpenFiles": [
+    "plugins/exec-kit/README.md",
+    "plugins/exec-kit/agents/blocker-coach.md",
+    "plugins/exec-kit/agents/plan-reviewer.md",
+    "plugins/exec-kit/agents",
+    "plugins/exec-kit/skills/run/SKILL.md",
+    "plugins/exec-kit/skills/run",
+    "plugins/exec-kit/skills/release/SKILL.md",
+    "plugins/exec-kit/skills/release",
+    "plugins/exec-kit/skills/kickoff/SKILL.md",
+    "plugins/exec-kit/skills/risk/SKILL.md",
+    "plugins/exec-kit/skills/status/SKILL.md",
+    "plugins/exec-kit/skills/retro/SKILL.md",
+    "plugins/exec-kit/skills/standup/SKILL.md",
+    "plugins/exec-kit/skills/cycle-plan/SKILL.md",
+    "plugins/exec-kit/skills/release-plan/SKILL.md",
+    "plugins/exec-kit/skills/kickoff/kickoff-template.md",
+    "plugins/exec-kit/skills/kickoff",
+    "plugins/exec-kit/skills/risk/risk-template.md",
+    "plugins/exec-kit/skills/risk",
+    "plugins/exec-kit/skills/status/status-template.md",
+    "plugins/exec-kit/skills/status",
+    "plugins/exec-kit/skills/retro/retro-template.md",
+    "plugins/exec-kit/skills/retro",
+    "plugins/exec-kit/skills/standup/standup-template.md",
+    "plugins/exec-kit/skills/standup",
+    "plugins/exec-kit/skills/cycle-plan/cycle-plan-template.md",
+    "plugins/exec-kit/skills/cycle-plan",
+    "plugins/exec-kit/skills/release-plan/release-plan-template.md",
+    "plugins/exec-kit/skills/release-plan",
+    "plugins/dev-workflow-kit/README.md",
+    "plugins/design-ux-kit/README.md",
+    "Untitled.canvas",
+    "plugins/design-ux-kit/agents/user-research-planner.md",
+    "plugins/design-ux-kit/agents/pm-design-reviewer.md",
+    "README.md"
+  ]
+}
