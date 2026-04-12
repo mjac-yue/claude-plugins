@@ -33,3 +33,12 @@ Follow this process:
 7. **Define thresholds** — what results would trigger a redesign before launch?
 
 Output a test plan ready to hand to a UX researcher or run a moderated session from.
+
+## Save output
+
+After presenting the usability test plan to the user:
+1. Check if a project `CLAUDE.md` exists in the current working directory or any parent directory
+2. If it contains an **Output paths** table, find the row for `/usability-test` and save the output to that file path
+3. Update the **Status** field to **Done** and **Last updated** to today's date at the top of the file
+4. Confirm the file was written to the user
+5. If no project `CLAUDE.md` exists, present the output for manual copying

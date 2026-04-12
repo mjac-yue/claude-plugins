@@ -21,3 +21,12 @@ Follow this process:
 5. Produce a ranked table with scores and a brief recommendation section explaining the top priorities and any notable trade-offs.
 
 Ask the user which framework they prefer if not specified. Output a table suitable for sharing in a planning doc.
+
+## Save output
+
+After presenting the prioritization output to the user:
+1. Check if a project `CLAUDE.md` exists in the current working directory or any parent directory
+2. If it contains an **Output paths** table, find the row for `/prioritization` and save the output to that file path
+3. Update the **Status** field to **Done** and **Last updated** to today's date at the top of the file
+4. Confirm the file was written to the user
+5. If no project `CLAUDE.md` exists, present the output for manual copying

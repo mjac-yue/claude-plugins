@@ -81,3 +81,12 @@ Produce practical, task-oriented training content. Structure it around what user
 Produce the full rollout package as a structured markdown document. Use clear section headers so each piece can be extracted and used independently (e.g., copy the customer announcement into an email, paste the FAQ into a help article).
 
 Note any sections where real screenshots, links, or specific product details need to be filled in before publishing.
+
+## Save output
+
+After presenting the rollout package to the user:
+1. Check if a project `CLAUDE.md` exists in the current working directory or any parent directory
+2. If it contains an **Output paths** table, find the row for `/rollout` and save the output to that file path
+3. Update the **Status** field to **Done** and **Last updated** to today's date at the top of the file
+4. Confirm the file was written to the user
+5. If no project `CLAUDE.md` exists, present the output for manual copying

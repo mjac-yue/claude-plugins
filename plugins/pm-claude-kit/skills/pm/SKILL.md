@@ -65,6 +65,8 @@ Present the problem framing output, then ask:
 
 > Does this capture the problem accurately? Reply **"continue"** to move to competitive analysis, or share feedback to revise before proceeding.
 
+*After user approves: Problem framing is incorporated into the brief (Phase 3) or PRD — no separate file save at this checkpoint.*
+
 ---
 
 ## Phase 2: Competitive Landscape — *Tier 3–4 only*
@@ -96,6 +98,8 @@ First, ask the user:
 Present the competitive landscape output, then ask:
 
 > Does this match your understanding of the competitive space? Reply **"continue"** to move to PRD drafting, or share feedback to adjust.
+
+*After user approves: Check for a project `CLAUDE.md` in the current or parent directory. If it contains an **Output paths** table, save the competitive landscape output to the file listed for `/competitive-analysis`. Update **Status** to **Done** and **Last updated** to today's date. Confirm the file was written.*
 
 ---
 
@@ -129,6 +133,8 @@ Present the full PRD, then ask:
 
 > Review the PRD above. Reply **"continue"** to generate user stories, or share specific sections to revise. You can also ask to run the `prd-reviewer` agent for a structured critique before proceeding.
 
+*After user approves: Check for a project `CLAUDE.md` in the current or parent directory. If it contains an **Output paths** table, save the output to the file listed for `/prd` (Tier 3–4) or `/brief` (Tier 2). Update **Status** to **Done** and **Last updated** to today's date. Confirm the file was written.*
+
 ---
 
 ## Phase 4: User Stories — *Tier 2–4*
@@ -156,6 +162,8 @@ Present the user stories, then ask:
 
 > Review the user stories above. Reply **"continue"** to move to prioritization, or identify stories to add, remove, or revise. You can also ask to run the `requirements-gap-finder` agent to check for edge cases.
 
+*After user approves: Check for a project `CLAUDE.md` in the current or parent directory. If it contains an **Output paths** table, save the user stories to the file listed for `/user-story`. Update **Status** to **Done** and **Last updated** to today's date. Confirm the file was written.*
+
 ---
 
 ## Phase 5: Prioritization — *Tier 3–4 only*
@@ -178,6 +186,8 @@ Produce:
 Present the prioritization output, then ask:
 
 > Does this prioritization reflect your team's current constraints and goals? Reply **"continue"** to get roadmap placement, or adjust scores/scope before proceeding.
+
+*After user approves: Check for a project `CLAUDE.md` in the current or parent directory. If it contains an **Output paths** table, save the prioritization output to the file listed for `/prioritization`. Update **Status** to **Done** and **Last updated** to today's date. Confirm the file was written.*
 
 ---
 
@@ -202,6 +212,8 @@ Produce:
 Present the roadmap placement recommendation, then ask:
 
 > Does this placement make sense given your current planning cycle? Reply **"continue"** to generate the rollout package, or adjust before proceeding.
+
+*After user approves: Check for a project `CLAUDE.md` in the current or parent directory. If it contains an **Output paths** table, save the roadmap output to the file listed for `/roadmap`. Update **Status** to **Done** and **Last updated** to today's date. Confirm the file was written.*
 
 ---
 
@@ -234,7 +246,11 @@ Note any placeholders (screenshots, links, product-specific details) that need t
 
 **CHECKPOINT 7 / 7 — Rollout Package**
 
-Present the rollout package, then deliver the final summary:
+Present the rollout package, then:
+
+*Check for a project `CLAUDE.md` in the current or parent directory. If it contains an **Output paths** table, save the rollout output to the file listed for `/rollout`. Update **Status** to **Done** and **Last updated** to today's date. Confirm the file was written.*
+
+Then deliver the final summary:
 
 ---
 

@@ -96,6 +96,8 @@ If this is a solo PM-led build, always offer `pm-tech-reviewer` — it is the pr
 
 **Solo builder complexity check**: Before checkpoint, confirm the proposed architecture satisfies the Phase 0 constraints. If any component is flagged — microservices, self-hosted infrastructure, XL complexity estimates — explicitly note this and present a simpler alternative side-by-side before asking for approval.
 
+*After user approves: Check for a project `CLAUDE.md` in the current or parent directory. If it contains an **Output paths** table, save the arch design to the file listed for `/arch-design` and the tech spec to the file listed for `/tech-spec`. Update **Status** to **Done** and **Last updated** to today's date for each. Confirm the files were written.*
+
 **Checkpoint 1**: Get approval before moving to Phase 2.
 
 ---
@@ -113,6 +115,8 @@ If the feature involves APIs, produce an API spec following the process and temp
 
 If no APIs are involved, skip this phase and note that it was skipped.
 
+*After user approves: Check for a project `CLAUDE.md` in the current or parent directory. If it contains an **Output paths** table, save the API spec to the file listed for `/api-spec`. Update **Status** to **Done** and **Last updated** to today's date. Confirm the file was written.*
+
 **Checkpoint 2**: Get approval before moving to Phase 3.
 
 ---
@@ -128,6 +132,8 @@ Produce a development plan following the process and template of the `/dev-plan`
 - Break the implementation into tasks with estimates and dependencies
 - Propose sprint allocation and sequencing
 - Surface any blockers that must be resolved before development can start
+
+*After user approves: Check for a project `CLAUDE.md` in the current or parent directory. If it contains an **Output paths** table, save the dev plan to the file listed for `/dev-plan`. Update **Status** to **Done** and **Last updated** to today's date. Confirm the file was written.*
 
 **Checkpoint 3**: Get approval before moving to Phase 4.
 
@@ -145,6 +151,8 @@ Produce a QA test plan following the process and template of the `/test-plan` sk
 - Define acceptance criteria and sign-off conditions
 
 After presenting the test plan, offer: *"Want me to run the `test-case-generator` agent to expand test cases from your user stories?"*
+
+*After user approves: Check for a project `CLAUDE.md` in the current or parent directory. If it contains an **Output paths** table, save the test plan to the file listed for `/test-plan`. Update **Status** to **Done** and **Last updated** to today's date. Confirm the file was written.*
 
 **Checkpoint 4**: Get approval before moving to Phase 5.
 
@@ -216,6 +224,8 @@ With development complete and all reviews signed off, produce a deployment guide
 - Cover domain and DNS setup if a custom domain is needed
 - Define the rollback plan
 - Set up minimum viable monitoring: error tracking and uptime alerts
+
+*After presenting: Check for a project `CLAUDE.md` in the current or parent directory. If it contains an **Output paths** table, save the deployment guide to the file listed for `/deployment`. Update **Status** to **Done** and **Last updated** to today's date. Confirm the file was written.*
 
 **Checkpoint 8**: Present the complete deployment guide. Confirm the full dev workflow is complete.
 

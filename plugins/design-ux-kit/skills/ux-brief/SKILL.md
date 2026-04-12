@@ -18,3 +18,12 @@ Follow this process:
 7. **Identify research gaps** — flag what we don't know that could materially affect design direction. Recommend whether user research is needed before proceeding.
 
 Ask clarifying questions if the scope is unclear. Output a brief ready to share with design, product, and engineering stakeholders.
+
+## Save output
+
+After presenting the UX brief to the user:
+1. Check if a project `CLAUDE.md` exists in the current working directory or any parent directory
+2. If it contains an **Output paths** table, find the row for `/ux-brief` and save the output to that file path
+3. Update the **Status** field to **Done** and **Last updated** to today's date at the top of the file
+4. Confirm the file was written to the user
+5. If no project `CLAUDE.md` exists, present the output for manual copying

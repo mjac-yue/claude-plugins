@@ -66,3 +66,12 @@ Follow this process:
    - Alternatives considered and why they were rejected
 
 Output an architectural design ready to be incorporated into the Architecture section of a technical specification.
+
+## Save output
+
+After presenting the architectural design to the user:
+1. Check if a project `CLAUDE.md` exists in the current working directory or any parent directory
+2. If it contains an **Output paths** table, find the row for `/arch-design` and save the output to that file path
+3. Update the **Status** field to **Done** and **Last updated** to today's date at the top of the file
+4. Confirm the file was written to the user
+5. If no project `CLAUDE.md` exists, present the output for manual copying

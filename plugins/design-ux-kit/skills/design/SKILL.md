@@ -44,6 +44,8 @@ Produce a UX brief following the process and template of the `/ux-brief` skill �
 
 After presenting the brief, offer: *"Want me to run the `user-research-planner` agent? It will assess whether formal user research is feasible or produce a faster assumption validation plan if it isn't — recommended before committing to a design direction."*
 
+*After user approves: Check for a project `CLAUDE.md` in the current or parent directory. If it contains an **Output paths** table, save the UX brief to the file listed for `/ux-brief`. Update **Status** to **Done** and **Last updated** to today's date. Confirm the file was written.*
+
 **Checkpoint 1**: Get approval before moving to Phase 2.
 
 ---
@@ -58,6 +60,8 @@ Produce a wireframe specification following the process and template of the `/wi
 - Map the key screens, user flows, and navigation structure
 - Define component inventory and interaction states for each screen
 - Note any branching paths, error states, or edge cases
+
+*After user approves: Check for a project `CLAUDE.md` in the current or parent directory. If it contains an **Output paths** table, save the wireframe spec to the file listed for `/wireframe-spec`. Update **Status** to **Done** and **Last updated** to today's date. Confirm the file was written.*
 
 **Checkpoint 2**: Get approval before moving to Phase 3.
 
@@ -77,6 +81,8 @@ After presenting the review, offer two options:
 - *"Want me to run the `ux-reviewer` agent for a deeper structured audit? (Designer perspective — heuristics, accessibility, missing states)"*
 - *"Want me to run the `pm-design-reviewer` agent to check coverage against your PRD or brief? (PM perspective — requirements coverage, user flow completeness, handoff readiness)"*
 
+*After user approves: Check for a project `CLAUDE.md` in the current or parent directory. If it contains an **Output paths** table, save the design review to the file listed for `/design-review`. Update **Status** to **Done** and **Last updated** to today's date. Confirm the file was written.*
+
 **Checkpoint 3**: Get approval (and incorporate any revisions) before moving to Phase 4.
 
 ---
@@ -91,6 +97,8 @@ Produce a usability test plan following the process and template of the `/usabil
 - Define test objectives, participant criteria, and task scenarios
 - Specify success metrics and how results will be analyzed
 - Include a discussion guide outline
+
+*After user approves: Check for a project `CLAUDE.md` in the current or parent directory. If it contains an **Output paths** table, save the usability test plan to the file listed for `/usability-test`. Update **Status** to **Done** and **Last updated** to today's date. Confirm the file was written.*
 
 **Checkpoint 4**: Get approval before moving to Phase 5.
 
@@ -107,5 +115,7 @@ Produce a design handoff spec following the process and template of the `/design
 - List open questions and decisions deferred to implementation
 
 After presenting the handoff spec, offer: *"Want me to run the `pm-design-reviewer` agent one final time against the complete handoff? It checks that every requirement is covered and the spec is specific enough for a developer to build without a sync meeting."*
+
+*After presenting: Check for a project `CLAUDE.md` in the current or parent directory. If it contains an **Output paths** table, save the design handoff to the file listed for `/design-handoff`. Update **Status** to **Done** and **Last updated** to today's date. Confirm the file was written.*
 
 **Checkpoint 5**: Present the complete handoff package. Confirm the design workflow is complete.
