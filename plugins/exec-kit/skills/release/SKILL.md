@@ -66,50 +66,44 @@ Present the suggested tier and methodology, then confirm with an explicit opt-in
 - **3–5 people → Scrum, 1-week sprints**: structured cadence, shared commitment, low ceremony overhead
 - **5+ people → Scrum, 2-week sprints**: coordination cost justifies full sprint rhythm
 
-Once confirmed, output a **Project Profile Card** — a compact reference the PM can pass to any other plugin orchestrator (`/pm`, `/design`, `/dev`) to set the default process level. Any step listed as "not default" can be added back at any time.
+Once confirmed, output a **Project Profile Card** — a compact reference that establishes the scope of work for each phase exec will manage. Any step listed as "not default" can be added back at any time.
 
 ```
 ## Project Profile
 
 **Project**: [Name]
 **Tier**: [N — Micro / Small / Medium / Large]
-**Team**: [N people]
+**Team**: [N people — note PM, Designer, Eng roles]
 **Methodology**: [Kanban / Scrum (cadence)]
 
-### Cross-plugin defaults
+### Phase defaults
 
-| Plugin | Default | Not default — add back if needed |
-|--------|---------|----------------------------------|
-| pm-claude-kit | [skills included by default] | [skills not included by default] |
-| design-ux-kit | [skills included by default] | [skills not included by default] |
-| dev-workflow-kit | [skills included by default] | [skills not included by default] |
-| exec-kit | [skills included by default] | [skills not included by default] |
+| Phase | Default work | Not default — add back if needed |
+|-------|-------------|----------------------------------|
+| A — PM + Design alignment | [PM deliverables and design deliverables included by default] | [what's skipped for this tier] |
+| B — Tech design | [tech design depth for this tier] | [what's skipped] |
+| C — Dev build | [dev layers and process included] | [what's skipped] |
 ```
 
 Fill in the defaults based on the tier:
 
 **Tier 1**:
-- pm-claude-kit: one-sentence brief | `/prd`, `/competitive-analysis`, `/user-story`, `/prioritization`, `/roadmap`, `/rollout`
-- design-ux-kit: informal description if UI changes | all skills
-- dev-workflow-kit: inline task list + code | all planning and review docs
-- exec-kit: task list + brief launch checklist | all other skills
+- Phase A: one-sentence brief + informal UI description if needed | PRD, competitive analysis, user stories, UX brief, wireframes
+- Phase B: single async review session — Eng flags blockers | no formal tech spec
+- Phase C: ordered task list + brief launch checklist | all formal dev docs
 
 **Tier 2**:
-- pm-claude-kit: `/brief`, `/user-story` (2–3 key flows) | `/prd`, `/competitive-analysis`, `/prioritization`, `/roadmap`, `/rollout`
-- design-ux-kit: `/ux-brief` (abbreviated), `/wireframe-spec` (key screens — doubles as handoff) | `/design-review`, `/usability-test`, `/design-handoff`
-- dev-workflow-kit: `/dev-plan`, `/security-review` (if auth/data) | `/arch-design`, `/tech-spec`, `/api-spec`, `/perf-review`
-- exec-kit: `/release-plan` (lightweight), `/cycle-plan`, `/standup`, `/retro` | risk register, `/status`, `/kickoff`
+- Phase A: abbreviated PRD, 2–3 key user stories, UX brief, wireframes for key screens | competitive analysis, full prioritization, usability testing
+- Phase B: one review round — Eng flags constraints, PM/Design resolve | no formal tech spec
+- Phase C: lightweight release plan, cycle plans, standups, retros | risk register, status reports, kickoff doc
 
 **Tier 3**:
-- pm-claude-kit: `/prd`, `/user-story`, `/competitive-analysis`, `/prioritization` | `/roadmap`, `/rollout`
-- design-ux-kit: `/ux-brief`, `/wireframe-spec`, `/design-review`, `/design-handoff` | `/usability-test`
-- dev-workflow-kit: `/tech-spec`, `/dev-plan`, `/test-plan`, `/code-review`, `/security-review` | `/arch-design`, `/api-spec`, `/perf-review`
-- exec-kit: `/release-plan` (full), `/cycle-plan`, `/standup`, `/retro`, `/status`, `/risk` (top 5) | nothing
+- Phase A: full PRD, user stories, competitive analysis, RICE prioritization, UX brief, wireframe spec, design review, design handoff | usability testing, rollout plan
+- Phase B: full tech design rounds until all three aligned | formal tech spec (include if complexity warrants)
+- Phase C: full release plan, cycle plans, standups, retros, status reports, risk register (top 5) | nothing
 
 **Tier 4**:
-- All plugins: full workflow — everything included by default
-
-*Pass the Project Profile Card as context when running `/pm`, `/design`, or `/dev`. Each orchestrator will use it as the starting point and will confirm before skipping anything — you can always ask to add a step back in.*
+- All phases: full workflow — everything included by default
 
 **Checkpoint 0**: Confirm project tier and methodology before proceeding.
 
@@ -176,17 +170,39 @@ After presenting (Tier 3–4 only), offer: *"Want me to run the `plan-reviewer` 
 
 ---
 
-## Phase 4 — First Cycle Plan
+## Phase 4 — First Round Plan
 
-**All tiers**: Produce a cycle plan appropriate to the tier and methodology:
+The first work unit is always a **PM round** — the starting point for Phase A (PM + Design alignment). This is not a dev cycle plan.
 
-**Tier 1**: A simple ordered task list for the week with one goal sentence. No capacity table, no formal template.
+**All tiers**: Produce a first round plan for Phase A:
 
-**Tier 2**: Abbreviated cycle plan — goal, items in priority order, estimated size, one dependency check. Skip capacity table and parallel workstream section if solo.
+**Tier 1**: A simple ordered task list — what the PM will write and what (if any) design work will happen. One goal sentence. No capacity table.
 
-**Tier 3–4**: Full cycle plan following the process and template of the `/cycle-plan` skill — layer gate check, capacity, dependency validation, parallel workstreams, cycle goal.
+**Tier 2**: Abbreviated round plan — which PRD sections to draft, which screens to sketch, key questions to resolve. Estimate time for PM and Designer. Note the sync point.
+
+**Tier 3–4**: Full round plan following Phase A1 of the `/run` skill — confirm what's open, set round scope for PM and Designer, identify the key question this round resolves, set the sync point. Offer to run the `requirements-gap-finder` agent before Design starts.
+
+After presenting, note:
+> *"When PM + Design sign off on Phase A, run `/run` to move into Tech Design (Phase B). When all three are aligned, run `/run` to kick off the dev build (Phase C)."*
 
 **Checkpoint 4**: Present the complete setup package.
+
+---
+
+## State File — Create Initial State
+
+After presenting the final deliverable summary, create `[project-name]-state.md` in the project folder. This is the resume point for all future sessions using `/run`, `/retro`, `/cycle-plan`, and `/standup`.
+
+Populate it using the format defined in `/run`. Initial values:
+- **Current Position**: Phase A, Round 1
+- **Phase A status**: Round 1 in progress — PRD: initial draft (or "not yet started"), Design: not started
+- **Phase B status**: Not started
+- **Phase C status**: Not started
+- **Artifacts**: Populate with the file paths of documents produced during this setup (kickoff doc, release plan, risk register)
+- **Key Decisions**: Record any significant scope or tier decisions made during setup
+
+Then note to the user:
+> *"State file created at `[project-name]-state.md`. Start every future session by opening this file or telling Claude to read it — this is how work resumes across days and sessions."*
 
 ---
 

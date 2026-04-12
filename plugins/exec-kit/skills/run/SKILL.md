@@ -1,16 +1,336 @@
 ---
 name: run
-description: Cycle execution orchestrator — runs the full cadence for a single work cycle: planning, daily standups, retrospective, and status report, with the next cycle plan at the end. Use to manage the day-to-day and end-of-cycle rhythm once a release plan is in place.
+description: Full lifecycle execution orchestrator — manages work across all three project phases (PM+Design alignment, Tech Design, Dev build). Each phase has its own work unit and cadence. PM+Design runs iteration rounds until mutual sign-off. Tech Design runs constraint-resolution rounds until all three roles align. Dev runs sprint or Kanban cycles with daily standups, retrospectives, and status reports. Use to manage the day-to-day rhythm once a release plan is in place.
 disable-model-invocation: true
 ---
 
-Run the cycle execution workflow for: $ARGUMENTS
+Run the lifecycle execution workflow for: $ARGUMENTS
 
-Work through the cycle phases below. Standup processing can be run multiple times within a cycle — just provide the day's updates. The retrospective and status report run at the end of the cycle.
+Work through the phases below. First determine which project phase is active, then apply the appropriate execution model. The work unit, standup format, and retro format all differ by phase.
 
 ---
 
-## Phase 1 — Cycle Planning
+## State File — Session Continuity
+
+This skill writes and reads a persistent state file named `[project-name]-state.md` in the project folder. This file is the resume point for every new session.
+
+**At the start of every session**: Before asking any questions, check whether `[project-name]-state.md` exists. If it does, read it and present a brief resume summary:
+
+> *"Resuming [Project]. Currently in Phase [A/B/C], Round/Cycle [N]. [One sentence on what's open or in progress]. Ready to continue?"*
+
+Confirm with the user before proceeding. If no state file exists, proceed with Phase 0 as normal.
+
+**After every checkpoint**: Write or update `[project-name]-state.md` using the format below. Never skip this — it is what makes the next session possible.
+
+### State file format
+
+```markdown
+# [Project Name] — Execution State
+> Last updated: [Date] — [Checkpoint name, e.g. "Phase A Round 2 sign-off"]
+
+## Current Position
+**Phase**: A — PM+Design alignment | B — Tech design | C — Dev build
+**Round / Cycle**: [N]
+**Tier**: [N — name] | **Methodology**: [Kanban / Scrum]
+
+---
+
+## Phase A — PM + Design Alignment
+**Status**: Not started | Round [N] in progress | ✓ Complete [Date]
+**PM sign-off**: Pending | ✓ [Date]
+**Designer sign-off**: Pending | ✓ [Date]
+
+**Open questions** (carrying into next round):
+- [Question] — Owner: [PM / Designer]
+
+**PRD**: [file path or "not yet created"] — [initial draft / round N in progress / final]
+**Design**: [file path or "not yet created"] — [not started / round N in progress / handoff ready]
+
+---
+
+## Phase B — Tech Design
+**Status**: Not started | Round [N] in progress | ✓ Complete [Date]
+**PM sign-off**: Pending | ✓ [Date]
+**Designer sign-off**: Pending | ✓ [Date]
+**Eng sign-off**: Pending | ✓ [Date]
+
+**Open constraints**:
+- [Constraint] — Owner: [PM / Designer / Eng]
+
+---
+
+## Phase C — Dev Build
+**Status**: Not started | Cycle [N] in progress | ✓ Complete [Date]
+**Current cycle**: [N] | **Current layer**: Layer [N] — [name]
+
+**In progress**:
+- [Item] — [Owner]
+
+**Carried over**:
+- [Item] — [Reason]
+
+**Next cycle focus**: Layer [N] — [goal]
+
+---
+
+## Key Decisions
+| Date | Phase | Decision |
+|------|-------|----------|
+| | | |
+
+## Artifacts
+| Artifact | File | Status |
+|----------|------|--------|
+| Release plan | | Draft / Active |
+| PRD | | Draft / Final |
+| Design handoff | | In progress / Ready |
+| Tech spec | | Draft / Final |
+```
+
+---
+
+## Phase 0 — Determine Current Project Phase
+
+Ask if not already clear from the input:
+
+*"Which phase is the project currently in?"*
+
+> - **(A) PM + Design alignment** — PM and Design are iterating toward sign-off. No Eng resources engaged yet.
+> - **(B) Tech design** — Eng is reviewing PM + Design outputs, identifying constraints. All three roles engaged.
+> - **(C) Dev build** — PM + Design are signed off, Eng is building. Standups are daily, cycles are sprint or Kanban.
+
+If the user provides standup updates or cycle context that makes the phase obvious, infer it rather than asking.
+
+Once confirmed, jump to the relevant section below.
+
+---
+
+## Phase A — PM + Design Alignment
+
+*Work unit: iteration round. Rounds continue until PM and Designer mutually sign off.*
+*Roles: PM + Designer only. No Eng resources required.*
+
+---
+
+### A1 — Round Planning
+
+At the start of each round, produce a round plan:
+
+- Confirm which round number this is
+- Review what's open from the previous round (open questions, unresolved PRD sections, screens that need work)
+- Define the goal for this round: which PRD sections the PM will work on, which screens the Designer will work on
+- Identify the key question or decision this round needs to resolve
+- Set the sync point: when PM and Designer will compare outputs
+
+After presenting the plan, offer: *"Want me to run the `requirements-gap-finder` agent to stress-test the current PRD before Design starts this round?"*
+
+**Checkpoint A1**: Confirm round scope before work begins.
+**Write state**: Update `[project]-state.md` — current phase (A), round number, round scope (PRD sections / screens in scope), open questions carried from previous round.
+
+---
+
+### A2 — Iteration Update (run each round, can run mid-round)
+
+Process updates from PM and Designer. Accept free-text or bullet-point input.
+
+Structure into:
+
+**PRD changes this round**
+- What sections changed
+- What decisions were made
+- What is still open or flagged [TBC]
+
+**Design changes this round**
+- What screens were created or revised
+- What design decisions were made
+- What screens are still open or need another pass
+
+**Cross-discipline open questions**
+- Questions from Design that require PM input
+- Questions from PM that require Design input
+- Decisions that need to be made before the next round can proceed
+
+**Round health**
+- Are PM and Design converging toward sign-off, or are new questions opening up?
+- Is scope creeping? Flag if new requirements are being introduced mid-round.
+- Suggest whether this round can close or needs to continue.
+
+This phase can be run multiple times within a round. Each run processes one update cycle.
+
+---
+
+### A3 — Round Review and Sign-off Check
+
+Run at the end of each round before deciding whether to start another:
+
+- Review all open questions from this round — are any still unresolved?
+- Assess PRD completeness: are all P0 requirements defined with acceptance criteria?
+- Assess design completeness: are all P0 screens covered?
+- Check for scope drift: did the round introduce new requirements that need to be scoped?
+
+**Sign-off decision**:
+- If no open questions remain and both PM and Designer are satisfied → record sign-off and move to Phase B
+- If open questions remain → plan the next round; note what specifically needs to be resolved
+
+Offer: *"Want me to run the `prd-reviewer` agent to check the PRD before you sign off?"*
+
+**Checkpoint A3**: Record sign-off or confirm next round scope.
+**Write state**: Update `[project]-state.md` — remaining open questions, PM and Designer sign-off status. If Phase A is complete, mark status ✓ and set Current Position to Phase B.
+
+---
+
+### A4 — Phase A Status
+
+Summarise overall Phase A progress for stakeholders or the release plan:
+
+```
+## PM + Design Alignment — Status Update
+
+**Project**: [Name]
+**Round**: [N] of [estimated total]
+**Status**: On track / Converging / Expanding (new questions opening)
+
+### PRD status
+- Sections complete: [N of N]
+- Open items: [list]
+- Last significant change: [what changed and why]
+
+### Design status
+- Screens complete: [N of N P0 screens]
+- Open items: [list]
+- Last significant change: [what changed and why]
+
+### Open questions requiring resolution
+[List — owner and target round]
+
+### Sign-off status
+PM: Signed off / Pending — [what's blocking]
+Designer: Signed off / Pending — [what's blocking]
+
+### Estimated rounds to completion
+[N more rounds, or "ready for sign-off"]
+```
+
+---
+
+### A5 — Next Round Planning
+
+After sign-off or if continuing: roll into the next round plan following A1. Carry forward all unresolved questions with updated context.
+
+---
+
+## Phase B — Tech Design + Constraint Resolution
+
+*Work unit: review round. Rounds continue until all three roles (PM, Designer, Eng) sign off.*
+*Roles: All three engaged. Eng leads review; PM + Design respond to constraints.*
+
+---
+
+### B1 — Review Round Planning
+
+At the start of each review round:
+
+- Confirm which round number this is
+- For Round 1: establish what Eng is reviewing (full PRD + design handoff, or specific components)
+- For subsequent rounds: review which constraints from the previous round are still open
+- Define the goal for this round: which components Eng will review, which constraints PM/Design will respond to
+- Set the sync point: when all three will review Eng's findings and PM/Design responses
+
+**Checkpoint B1**: Confirm round scope before work begins.
+**Write state**: Update `[project]-state.md` — current phase (B), round number, components under review this round, open constraints carried from previous round.
+
+---
+
+### B2 — Constraint Update (run each round)
+
+Process updates from all three roles. Accept free-text or bullet-point input.
+
+Structure into:
+
+**Constraints identified by Eng**
+- Technical constraint: [what the constraint is]
+- Affected PRD section or design screen: [reference]
+- Proposed resolution options: [what Eng suggests]
+- Impact if unresolved: [what breaks or becomes infeasible]
+
+**PM responses**
+- PRD sections updated in response to constraints
+- Scope decisions made (accept constraint / adjust requirement / defer feature)
+- New requirements introduced by constraint resolution (flag these — they may need design work)
+
+**Design responses**
+- Screens updated in response to constraints
+- Design decisions made to accommodate technical constraints
+- Any new screens or flows introduced
+
+**Cross-discipline open questions**
+- Questions from Eng that need PM decisions
+- Questions from Eng that need Design decisions
+- Unresolved constraints requiring further investigation
+
+**Round health**
+- Are constraints being resolved, or are new ones being uncovered?
+- Are PM/Design updates introducing scope that needs another Eng review?
+- Suggest whether this round can close or needs to continue.
+
+---
+
+### B3 — Constraint Resolution Review and Sign-off Check
+
+Run at the end of each review round:
+
+- Review all open constraints — are any still unresolved?
+- Check that all PRD and design updates are internally consistent
+- Confirm Eng has reviewed and accepted the latest design handoff
+- Check for scope changes: did constraint resolution add new requirements that aren't in the release plan?
+
+**Sign-off decision**:
+- If all constraints resolved and all three parties are satisfied → record sign-off and move to Phase C
+- If constraints remain → plan the next review round; note what specifically needs resolution
+
+**Checkpoint B3**: Record three-way sign-off or confirm next round scope.
+**Write state**: Update `[project]-state.md` — remaining open constraints, PM/Designer/Eng sign-off status. If Phase B is complete, mark status ✓ and set Current Position to Phase C.
+
+---
+
+### B4 — Phase B Status
+
+```
+## Tech Design — Status Update
+
+**Project**: [Name]
+**Round**: [N]
+**Status**: Resolving / Converging / Blocked on [item]
+
+### Constraints
+- Total identified: [N]
+- Resolved: [N]
+- Open: [N — list below]
+
+### Open constraints
+| Constraint | Owner | Proposed resolution | Status |
+|-----------|-------|--------------------|----|
+| | PM / Designer / Eng | | Pending / In progress |
+
+### Sign-off status
+PM: Signed off / Pending
+Designer: Signed off / Pending
+Eng: Signed off / Pending
+
+### Estimated rounds to completion
+[N more rounds, or "ready for sign-off"]
+```
+
+---
+
+## Phase C — Dev Build
+
+*Work unit: sprint or Kanban cycle. Standups are daily. Retros are end of cycle.*
+*Roles: Eng-led. PM + Design available for questions, not actively producing.*
+
+---
+
+### C1 — Cycle Planning
 
 At the start of each new cycle, produce a cycle plan following the process and template of the `/cycle-plan` skill:
 - Confirm which build layer this cycle draws from and that all layer prerequisites are met
@@ -22,11 +342,12 @@ At the start of each new cycle, produce a cycle plan following the process and t
 
 After presenting the plan, offer: *"Want me to run the `plan-reviewer` agent to check this cycle plan for over-commitment or dependency issues before you start?"*
 
-**Checkpoint 1**: Get approval before the cycle begins.
+**Checkpoint C1**: Get approval before the cycle begins.
+**Write state**: Update `[project]-state.md` — current phase (C), cycle number, current build layer, selected work items and owners, cycle goal.
 
 ---
 
-## Phase 2 — Daily Standup (run each day)
+### C2 — Daily Standup (run each day)
 
 Process standup updates following the process and template of the `/standup` skill:
 - Accept free-text or bullet-point updates from each person
@@ -40,7 +361,7 @@ This phase can be run multiple times. Each run processes one day's updates.
 
 ---
 
-## Phase 3 — Retrospective (end of cycle)
+### C3 — Retrospective (end of cycle)
 
 Run a retrospective following the process and template of the `/retro` skill:
 - Assess what was completed vs planned
@@ -49,11 +370,12 @@ Run a retrospective following the process and template of the `/retro` skill:
 - Define one process change to try next cycle
 - Check whether the release plan is still on track
 
-**Checkpoint 3**: Get approval before generating the status report.
+**Checkpoint C3**: Get approval before generating the status report.
+**Write state**: Update `[project]-state.md` — completed items, carried-over items with reasons, next cycle focus.
 
 ---
 
-## Phase 4 — Status Report (end of cycle)
+### C4 — Status Report (end of cycle)
 
 Generate a stakeholder status report following the process and template of the `/status` skill:
 - Set RAG status for schedule, scope, quality, and team
@@ -61,11 +383,12 @@ Generate a stakeholder status report following the process and template of the `
 - Summarise what shipped this cycle and what's planned next
 - Surface any open risks and decisions needed from stakeholders
 
-**Checkpoint 4**: Present the end-of-cycle package.
+**Checkpoint C4**: Present the end-of-cycle package.
+**Write state**: Update `[project]-state.md` — RAG status, release plan health, and any Key Decisions made this cycle.
 
 ---
 
-## Phase 5 — Next Cycle Planning
+### C5 — Next Cycle Planning
 
 Immediately roll into the next cycle plan following the process and template of the `/cycle-plan` skill:
 - Carry over any incomplete items from this cycle with updated sizing
@@ -74,10 +397,50 @@ Immediately roll into the next cycle plan following the process and template of 
 
 ---
 
-## End-of-Cycle Summary
+## End-of-Phase or End-of-Cycle Summary
 
-Output a clean handoff summary:
+Output a clean handoff summary scaled to the phase:
 
+**For Phase A completion:**
+```
+## [Project Name] — PM + Design Alignment Complete
+
+**Completed**: [Date]
+**Rounds taken**: [N]
+**PRD status**: Final — [N sections, N P0 requirements]
+**Design status**: Final — [N P0 screens, handoff doc ready]
+**Sign-off**: PM ✓ | Designer ✓
+
+### Key decisions made during alignment
+- [Decision and rationale]
+
+### What goes to Tech Design
+- PRD: [file/location]
+- Design handoff: [file/location]
+- Open assumptions to watch: [list]
+```
+
+**For Phase B completion:**
+```
+## [Project Name] — Tech Design Complete
+
+**Completed**: [Date]
+**Rounds taken**: [N]
+**Constraints resolved**: [N of N]
+**Sign-off**: PM ✓ | Designer ✓ | Eng ✓
+
+### Key constraint resolutions
+- [Constraint → how it was resolved]
+
+### Scope changes from tech design
+- [Any requirements added, removed, or adjusted]
+
+### Dev ready
+- Tech spec: [file/location or "not required for this tier"]
+- First cycle: [what Layer 1 work looks like]
+```
+
+**For Phase C cycle completion:**
 ```
 ## [Project Name] — Cycle [N] Complete
 
@@ -86,7 +449,6 @@ Output a clean handoff summary:
 **Outcome**: Achieved / Partially achieved / Not achieved
 
 ### Completed
-- [Item]
 - [Item]
 
 ### Carried to Cycle [N+1]

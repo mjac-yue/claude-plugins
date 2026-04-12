@@ -1,11 +1,12 @@
-# Cycle Plan: Cycle [N] — [Start date] to [End date]
+# Cycle Plan: [Round / Cycle] [N] — [Start date] to [End date]
 
 **Project**: [Project name]
-**Cycle type**: Sprint ([N]-day) | Flow (weekly review)
-**Team**: [Names]
-**Release plan phase**: Phase [N] — [Phase name]
-**Build layer**: Layer [N] — [Layer name]
-**Cycle goal**: [One sentence — what does done look like at the end of this cycle?]
+**Project phase**: Phase A — PM + Design alignment | Phase B — Tech design | Phase C — Dev build
+**Work unit type**: Iteration round (Phase A) | Review round (Phase B) | Sprint / Flow cycle (Phase C)
+**Team**: [Names and roles]
+**Release plan phase**: [Phase name]
+**Build layer**: [Layer name — Phase C only; N/A for Phases A and B]
+**Round / Cycle goal**: [One sentence — what does done look like at the end of this round or cycle?]
 
 ---
 

@@ -48,18 +48,27 @@ Map the full lifecycle from discovery to launch. For each phase:
 - Define the gate criteria — the minimum conditions that must be true before the next phase starts
 
 Standard phases for a PM-led build:
-1. **Discovery** — PRD + design brief approved, key assumptions documented
-2. **Design** — design handoff complete and accepted by dev
-3. **Infrastructure** — hosting, database, auth, CI/CD pipeline all live
-4. **Foundation** — core data models and base APIs complete and stable
-5. **Core build** — all P0 features complete and tested
-6. **Feature build** — P1/P2 features complete (can be deferred if needed)
-7. **QA & hardening** — test plan complete, no P0/P1 bugs open
-8. **Launch** — shipped to production, smoke tests passing, monitoring live
 
-**Tier 2**: Use only the phases that apply. A small feature may only need Infrastructure → Foundation → Core build → Launch. Remove phases that genuinely don't apply — don't pad the plan.
+**Phase A — PM + Design alignment** *(iterative, no Eng)*
+- PM drafts initial PRD → Design explores → Design feedback refines PRD → PRD update refines design → repeat
+- This is not a linear handoff — it is a feedback loop. Rounds continue until PM and Designer mutually sign off.
+- Gate: PM and Designer both sign off; PRD finalized; all P0 screens covered with acceptance criteria; no open questions.
 
-**Tier 3–4**: Adapt but don't remove phases without noting why.
+**Phase B — Tech design + constraint resolution** *(iterative, all three roles)*
+- Eng reviews PM + Design outputs → identifies technical constraints → PM updates PRD, Design updates specs → Eng confirms resolution → repeat if needed
+- Gate: all three parties sign off; Eng accepts design handoff; tech spec complete (if required by tier).
+
+**Dev phases** *(sequential, Eng-led; PM + Design available for questions)*
+1. **Infrastructure** — hosting, database, auth, CI/CD pipeline all live
+2. **Foundation** — core data models and base APIs complete and stable
+3. **Core build** — all P0 features complete and tested
+4. **Feature build** — P1/P2 features complete (can be deferred if needed)
+5. **QA & hardening** — test plan complete, no P0/P1 bugs open
+6. **Launch** — shipped to production, smoke tests passing, monitoring live
+
+**Tier 2**: Phase A still applies but may be a single round with light design (UX brief + key screens). Phase B may be a single review session rather than multiple rounds. Dev phases: use only Infrastructure → Foundation → Core build → Launch if that's all that applies.
+
+**Tier 3–4**: Model the full iterative nature of Phases A and B. Track rounds explicitly. Do not skip without noting why.
 
 ## Step 3: Build the dependency map [Tier 3–4 only]
 
@@ -75,7 +84,13 @@ For each unresolved dependency: name it, note who owns resolving it, and flag th
 
 ## Step 4: Sequence the build — foundation first
 
-This is the most critical output for a PM-led build. Define the build layers explicitly so the team always has a foundation before building on top of it.
+Define the build layers explicitly so the team always has a foundation before building on top of it. The full sequence includes pre-dev layers for PM and design work.
+
+**PM Layer — Discovery & requirements**: Problem framing, competitive landscape, PRD draft, user stories, prioritization. PM-led, no Eng or Design resources required. Complete when the initial PRD is ready for Design to start exploring.
+
+**Design Layer — Exploration & alignment** *(iterative with PM)*: UX brief, wireframes, design review, handoff doc. Runs in rounds with PM until mutual sign-off. Complete when PM and Designer both sign off with no open questions.
+
+**Tech Design Layer — Constraint resolution** *(iterative with all three)*: Eng reviews and identifies constraints, PM + Design respond, all three align. Complete when Eng accepts handoff and all constraints are resolved.
 
 **Layer 1 — Infrastructure**: Everything that must exist before writing feature code (hosting, database, auth, CI/CD, environment config, domain setup).
 
@@ -92,6 +107,7 @@ This is the most critical output for a PM-led build. Define the build layers exp
 For each layer:
 - List the specific work items drawn from the PRD or tech spec
 - Define what "layer complete" means as an observable condition (not just "done")
+- For PM and Design layers: track iteration rounds separately in the Alignment Rounds and Tech Design Rounds sections
 
 ## Step 5: Identify the critical path [Tier 3–4 only]
 

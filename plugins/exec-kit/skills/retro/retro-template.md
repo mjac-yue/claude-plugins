@@ -1,8 +1,9 @@
-# Retrospective: Cycle [N] — [Date]
+# Retrospective: [Round / Cycle] [N] — [Date]
 
 **Project**: [Project name]
-**Cycle dates**: [Start] to [End]
-**Attendees**: [Names]
+**Project phase**: Phase A — PM + Design alignment | Phase B — Tech design | Phase C — Dev build
+**Round / Cycle dates**: [Start] to [End]
+**Attendees**: [Names and roles]
 **Facilitator**: [Name] | Rotating
 
 ---
@@ -71,5 +72,9 @@
 
 **If at risk**: [What needs to change — scope, timeline, or resources]
 
-**Layer status**: Layer [N] — [Complete / [N] items remaining]
-**Next cycle focus**: Layer [N] continued | Layer [N+1] — [Layer name]
+**Phase status**:
+- Phase A: Round [N] — [Complete with sign-off / Continuing — [N] open questions] *(Phase A only)*
+- Phase B: Round [N] — [Complete with three-way sign-off / Continuing — [N] open constraints] *(Phase B only)*
+- Layer [N] — [Complete / [N] items remaining] *(Phase C only)*
+
+**Next focus**: [Next round scope (Phase A/B) | Layer [N] continued / Layer [N+1] — [Layer name] (Phase C)]
