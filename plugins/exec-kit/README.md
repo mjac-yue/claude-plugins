@@ -71,7 +71,7 @@ Exec Kit writes a persistent state file (`[project-name]-state.md`) to the proje
 ### Install from GitHub
 
 ```bash
-claude plugin marketplace add github:mjac-yue/claude-plugins
+claude plugin marketplace add mjac-yue/claude-plugins
 claude plugin install exec-kit
 ```
 

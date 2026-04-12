@@ -72,7 +72,7 @@
 
 **If at risk**: [What needs to change — scope, timeline, or resources]
 
-**Phase status**:
+**Phase status** *(include only the row for the current phase)*:
 - Phase A: Round [N] — [Complete with sign-off / Continuing — [N] open questions] *(Phase A only)*
 - Phase B: Round [N] — [Complete with three-way sign-off / Continuing — [N] open constraints] *(Phase B only)*
 - Layer [N] — [Complete / [N] items remaining] *(Phase C only)*

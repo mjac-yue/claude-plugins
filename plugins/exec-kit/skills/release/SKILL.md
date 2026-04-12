@@ -136,7 +136,7 @@ Fill in the defaults based on the tier:
 
 **Tier 2**: Produce a lightweight release plan covering:
 - Phases and milestones with target dates
-- Build sequence (layers 1–6, with items per layer)
+- Build sequence (layers 1–6, with items per layer) — leave Layer 1 items as TBD categories; specific tech choices are made in Phase B
 - Key dependencies (prose, not a full map — only note dependencies that are genuinely at risk)
 - Launch readiness checklist (abbreviated — 8–10 items)
 - Skip: dependency map diagram, critical path analysis, parallel workstream table, go/no-go criteria table, risk checkpoints
@@ -189,23 +189,6 @@ After presenting, note:
 
 ---
 
-## State File — Create Initial State
-
-After presenting the final deliverable summary, create `[project-name]-state.md` in the project folder. This is the resume point for all future sessions using `/run`, `/retro`, `/cycle-plan`, and `/standup`.
-
-Populate it using the format defined in `/run`. Initial values:
-- **Current Position**: Phase A, Round 1
-- **Phase A status**: Round 1 in progress — PRD: initial draft (or "not yet started"), Design: not started
-- **Phase B status**: Not started
-- **Phase C status**: Not started
-- **Artifacts**: Populate with the file paths of documents produced during this setup (kickoff doc, release plan, risk register)
-- **Key Decisions**: Record any significant scope or tier decisions made during setup
-
-Then note to the user:
-> *"State file created at `[project-name]-state.md`. Start every future session by opening this file or telling Claude to read it — this is how work resumes across days and sessions."*
-
----
-
 ## Final Deliverable Summary
 
 Output a summary scaled to the tier:
@@ -231,3 +214,20 @@ Output a summary scaled to the tier:
 ### Risks to Watch
 [Top 1–2 risks if Tier 2+, or "None identified" for Tier 1]
 ```
+
+---
+
+## State File — Create Initial State
+
+After presenting the final deliverable summary above, create `[project-name]-state.md` in the project folder. This is the resume point for all future sessions using `/run`, `/retro`, `/cycle-plan`, and `/standup`.
+
+Populate it using the format defined in `/run`. Initial values:
+- **Current Position**: Phase A, Round 1
+- **Phase A status**: Round 1 in progress — PRD: initial draft (or "not yet started"), Design: not started
+- **Phase B status**: Not started
+- **Phase C status**: Not started
+- **Artifacts**: Populate with the file paths of documents produced during this setup (kickoff doc, release plan, risk register)
+- **Key Decisions**: Record any significant scope or tier decisions made during setup
+
+Then note to the user:
+> *"State file created at `[project-name]-state.md`. Start every future session by opening this file or telling Claude to read it — this is how work resumes across days and sessions."*

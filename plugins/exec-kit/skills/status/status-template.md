@@ -24,14 +24,14 @@
 
 | Phase | Target date | Status | Notes |
 |-------|-------------|--------|-------|
-| 1. Discovery | | Complete / In progress / Not started | |
-| 2. Design | | | |
-| 3. Infrastructure | | | |
-| 4. Foundation | | | |
-| 5. Core build | | | |
-| 6. Feature build | | | |
-| 7. QA & hardening | | | |
-| 8. Launch | | | |
+| A — PM + Design alignment | | Complete / In progress / Not started | |
+| B — Tech design | | | |
+| Layer 1 — Infrastructure | | | |
+| Layer 2 — Foundation | | | |
+| Layer 3 — Core build (P0) | | | |
+| Layer 4 — Feature layer (P1/P2) | | | |
+| Layer 5 — Integration & polish | | | |
+| Layer 6 — QA & Launch | | | |
 
 **Current build layer**: Layer [N] — [Layer name]
 **Layer completion**: [N of N items done]

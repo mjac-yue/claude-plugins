@@ -58,7 +58,7 @@ Define where and how the team communicates, especially:
 
 Define the folder structure where all skill outputs will be saved. The structure should map to the full product development lifecycle so outputs from pm-claude-kit, design-ux-kit, dev-workflow-kit, and exec-kit all have a home.
 
-Note: if using the `/init` skill from pm-claude-kit, this structure is created automatically.
+Note: if you have pm-claude-kit installed, `/init` will create this folder structure automatically. If not, create the folder manually or ask Claude to scaffold it.
 
 ---
 

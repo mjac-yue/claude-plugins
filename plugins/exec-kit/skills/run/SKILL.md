@@ -84,7 +84,7 @@ Confirm with the user before proceeding. If no state file exists, proceed with P
 | Release plan | | Draft / Active |
 | PRD | | Draft / Final |
 | Design handoff | | In progress / Ready |
-| Tech spec | | Draft / Final |
+| Tech spec (if produced) | | Draft / Final |
 ```
 
 ---
@@ -122,7 +122,7 @@ At the start of each round, produce a round plan:
 - Identify the key question or decision this round needs to resolve
 - Set the sync point: when PM and Designer will compare outputs
 
-After presenting the plan, offer: *"Want me to run the `requirements-gap-finder` agent to stress-test the current PRD before Design starts this round?"*
+After presenting the plan, offer: *"Want me to run the `requirements-gap-finder` agent to stress-test the current PRD before Design starts this round?"* (Requires pm-claude-kit to be installed.)
 
 **Checkpoint A1**: Confirm round scope before work begins.
 **Write state**: Update `[project]-state.md` — current phase (A), round number, round scope (PRD sections / screens in scope), open questions carried from previous round.
@@ -172,7 +172,7 @@ Run at the end of each round before deciding whether to start another:
 - If no open questions remain and both PM and Designer are satisfied → record sign-off and move to Phase B
 - If open questions remain → plan the next round; note what specifically needs to be resolved
 
-Offer: *"Want me to run the `prd-reviewer` agent to check the PRD before you sign off?"*
+Offer: *"Want me to run the `prd-reviewer` agent to check the PRD before you sign off?"* (Requires pm-claude-kit to be installed.)
 
 **Checkpoint A3**: Record sign-off or confirm next round scope.
 **Write state**: Update `[project]-state.md` — remaining open questions, PM and Designer sign-off status. If Phase A is complete, mark status ✓ and set Current Position to Phase B.
@@ -231,7 +231,7 @@ After sign-off or if continuing: roll into the next round plan following A1. Car
 At the start of each review round:
 
 - Confirm which round number this is
-- For Round 1: establish what Eng is reviewing (full PRD + design handoff, or specific components)
+- For Round 1: establish what Eng is reviewing (full PRD + design handoff, or specific components). Round 1 also includes tech stack determination — Eng proposes the hosting platform, database, auth system, CI/CD tooling, and any other foundational technical choices. These decisions unblock Layer 1 of the release plan, which was left TBD during initial planning.
 - For subsequent rounds: review which constraints from the previous round are still open
 - Define the goal for this round: which components Eng will review, which constraints PM/Design will respond to
 - Set the sync point: when all three will review Eng's findings and PM/Design responses
@@ -246,6 +246,14 @@ At the start of each review round:
 Process updates from all three roles. Accept free-text or bullet-point input.
 
 Structure into:
+
+**Tech stack decisions (Round 1 only)**
+- Proposed hosting platform: [what Eng recommends and why]
+- Proposed database: [what Eng recommends and why]
+- Proposed auth system: [what Eng recommends and why]
+- Proposed CI/CD tooling: [what Eng recommends and why]
+- Any other foundational technical choices: [e.g. language, framework, third-party services]
+- *Once agreed, update Layer 1 of the release plan with the confirmed choices.*
 
 **Constraints identified by Eng**
 - Technical constraint: [what the constraint is]
@@ -280,6 +288,8 @@ Structure into:
 Run at the end of each review round:
 
 - Review all open constraints — are any still unresolved?
+- Confirm the tech stack is decided — hosting, database, auth, CI/CD. If not yet agreed, this is a blocker for Phase B completion.
+- Prompt to update the release plan Layer 1 with the confirmed tech choices (replacing the TBD placeholders set during initial planning).
 - Check that all PRD and design updates are internally consistent
 - Confirm Eng has reviewed and accepted the latest design handoff
 - Check for scope changes: did constraint resolution add new requirements that aren't in the release plan?
@@ -436,6 +446,8 @@ Output a clean handoff summary scaled to the phase:
 - [Any requirements added, removed, or adjusted]
 
 ### Dev ready
+- Tech stack confirmed: [hosting platform, database, auth system, CI/CD tooling]
+- Release plan Layer 1 updated: [confirm TBD placeholders have been replaced with confirmed choices]
 - Tech spec: [file/location or "not required for this tier"]
 - First cycle: [what Layer 1 work looks like]
 ```

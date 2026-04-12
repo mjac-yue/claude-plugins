@@ -116,4 +116,7 @@ For anything requiring a decision before work can continue:
 
 ---
 
-Use the structure from [standup-template.md](standup-template.md).
+**Phase C only**: Use the structure from [standup-template.md](standup-template.md). The template is designed for dev build standups — it includes Cycle Health and Layer progress fields that are not applicable to Phases A or B.
+
+For Phase A: follow the structured output defined in Steps A1–A4 above (PRD changes, design changes, cross-discipline open questions, alignment health).
+For Phase B: follow the structured output defined in Steps B1–B4 above (Eng constraints, PM/Design responses, open constraints, resolution health).

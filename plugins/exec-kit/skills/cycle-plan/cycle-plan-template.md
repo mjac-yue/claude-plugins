@@ -62,6 +62,8 @@
 
 ## Parallel Workstreams This Cycle
 
+*For 2-person teams only. Skip this section for solo (Tier 1) projects.*
+
 | [Person 1] | [Person 2] | Sync point |
 |-----------|-----------|------------|
 | | | |

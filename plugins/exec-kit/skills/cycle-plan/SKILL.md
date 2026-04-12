@@ -154,4 +154,6 @@ List items considered but not included, with a brief reason. This prevents the s
 
 ---
 
-Use the structure from [cycle-plan-template.md](cycle-plan-template.md).
+**Phase C only**: Use the structure from [cycle-plan-template.md](cycle-plan-template.md). The template is designed for dev cycles — it includes Layer Check, Selected Work, and Definition of Done sections that are not applicable to Phases A or B.
+
+For Phases A and B: use the structured output defined in the Phase A and Phase B steps above. No template needed.

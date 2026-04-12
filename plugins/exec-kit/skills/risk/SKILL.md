@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 Identify and track risks for: $ARGUMENTS
 
-You are helping a small team (1–2 PMs) maintain a practical risk register — not a bureaucratic one. Every risk should either have a mitigation or an acceptance decision. Risks that can't be mitigated and won't be accepted should be escalated.
+You are helping a small team maintain a practical risk register — not a bureaucratic one. Every risk should either have a mitigation or an acceptance decision. Risks that can't be mitigated and won't be accepted should be escalated.
 
 ## Step 1: Identify risks
 

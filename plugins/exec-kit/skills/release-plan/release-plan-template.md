@@ -149,15 +149,15 @@ flowchart TD
 ---
 
 ### Layer 1 — Infrastructure
-*Must be in place before any feature code is written.*
+*Must be in place before any feature code is written. Specific tech choices — hosting platform, database, auth system, CI/CD tooling — are determined in Phase B. Fill in the bracketed items below only after Phase B is complete.*
 
-- [ ] Hosting environment provisioned ([platform])
-- [ ] Database provisioned and accessible
-- [ ] Auth service configured
-- [ ] CI/CD pipeline working (commit → test → deploy)
+- [ ] Hosting environment provisioned — *[TBD in Phase B]*
+- [ ] Database provisioned and accessible — *[TBD in Phase B]*
+- [ ] Auth system configured — *[TBD in Phase B]*
+- [ ] CI/CD pipeline working (commit → test → deploy) — *[TBD in Phase B]*
 - [ ] Environment variables and secrets configured
 - [ ] Domain and DNS set up (if applicable)
-- [ ] Error tracking configured (e.g., Sentry)
+- [ ] Error tracking configured — *[TBD in Phase B]*
 
 **Layer 1 complete when**: A commit to main deploys to production without manual steps.
 
@@ -223,7 +223,7 @@ flowchart TD
 
 *The sequence where any delay pushes the launch date.*
 
-**Path**: PM sign-off → Design sign-off → Eng alignment → [Layer 1] → [Layer 2] → [Layer 3] → Launch
+**Path**: Phase A sign-off → Phase B sign-off → [Layer 1] → [Layer 2] → [Layer 3] → Launch
 
 **Highest current risk on critical path**: [What's most likely to slip and why]
 

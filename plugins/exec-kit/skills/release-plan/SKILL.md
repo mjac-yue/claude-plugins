@@ -92,7 +92,7 @@ Define the build layers explicitly so the team always has a foundation before bu
 
 **Tech Design Layer — Constraint resolution** *(iterative with all three)*: Eng reviews and identifies constraints, PM + Design respond, all three align. Complete when Eng accepts handoff and all constraints are resolved.
 
-**Layer 1 — Infrastructure**: Everything that must exist before writing feature code (hosting, database, auth, CI/CD, environment config, domain setup).
+**Layer 1 — Infrastructure**: Everything that must exist before writing feature code — hosting, database, auth, CI/CD, environment config, domain setup. *The specific tech stack choices (hosting platform, database, auth system, CI/CD tooling) are not made here — they are determined in Phase B. In the initial release plan, list Layer 1 as a set of TBD categories. Fill in the specifics only after Phase B is complete and the tech stack is confirmed.*
 
 **Layer 2 — Foundation**: Core data models, auth flows, and base APIs that every feature depends on. Nothing in Layer 3 can be built until Layer 2 is stable.
 
@@ -105,7 +105,7 @@ Define the build layers explicitly so the team always has a foundation before bu
 **Layer 6 — QA & launch**: Test plan execution, bug fixing, smoke tests, monitoring, communications.
 
 For each layer:
-- List the specific work items drawn from the PRD or tech spec
+- List the specific work items drawn from the PRD or tech spec — except for Layer 1, which should list TBD categories until Phase B confirms the tech stack
 - Define what "layer complete" means as an observable condition (not just "done")
 - For PM and Design layers: track iteration rounds separately in the Alignment Rounds and Tech Design Rounds sections
 
