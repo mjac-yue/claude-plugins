@@ -1,6 +1,6 @@
 ---
 name: design
-description: Full Design & UX workflow orchestrator — runs all phases from discovery through handoff, pausing for approval at each checkpoint. Use when starting a new design effort end-to-end.
+description: Full Design & UX workflow orchestrator — runs all phases from UX brief through design handoff, pausing for approval at each checkpoint. Use when starting a new design effort end-to-end.
 disable-model-invocation: true
 ---
 
@@ -35,56 +35,15 @@ If no optional skills or agents apply at a given phase, omit the table and just 
 | After this phase | Recommended next step | Optional to run |
 |-----------------|----------------------|-----------------|
 | Phase 1 — UX Brief | Phase 2 — Information Architecture & Flow | `user-research-planner` agent *(design-ux-kit)* — research plan before committing to a design direction |
-| Phase 2 — Wireframe Spec *(Tier 2 final)* | **Start dev: run `/dev [feature]`** | `ux-reviewer` agent *(design-ux-kit)* — heuristics + accessibility audit; `pm-design-reviewer` agent *(design-ux-kit)* — requirements coverage check |
-| Phase 2 — Wireframe Spec *(Tier 3–4)* | Phase 3 — Design Review | `ux-reviewer` agent *(design-ux-kit)*; `pm-design-reviewer` agent *(design-ux-kit)* |
-| Phase 3 — Design Review | Phase 4 — Usability Test (if UX unknowns) or Phase 5 — Design Handoff | `ux-reviewer` agent *(design-ux-kit)* — deeper structured audit; `pm-design-reviewer` agent *(design-ux-kit)* — PM-perspective requirements check |
-| Phase 4 — Usability Test | Phase 5 — Design Handoff | `user-research-planner` agent *(design-ux-kit)* — formal study if test uncovered deep unknowns |
-| Phase 5 — Design Handoff *(final)* | **Start dev: run `/dev [feature]`** | `pm-design-reviewer` agent *(design-ux-kit)* — final requirements coverage check before dev handoff |
+| Phase 2 — Wireframe Spec | Phase 3 — HTML Mockup | `ux-reviewer` agent *(design-ux-kit)* — heuristics + accessibility audit; `pm-design-reviewer` agent *(design-ux-kit)* — requirements coverage check |
+| Phase 3 — HTML Mockup | Phase 4 — Design Review | `ux-reviewer` agent *(design-ux-kit)* — structured heuristic audit on the mockup |
+| Phase 4 — Design Review | Phase 5 — Usability Test Plan (if UX unknowns) or Phase 6 — Design Handoff | `ux-reviewer` agent *(design-ux-kit)* — deeper structured audit; `pm-design-reviewer` agent *(design-ux-kit)* — PM-perspective requirements check |
+| Phase 5 — Usability Test Plan | Phase 6 — Design Handoff | `user-research-planner` agent *(design-ux-kit)* — formal study if test uncovered deep unknowns |
+| Phase 6 — Design Handoff *(final)* | **Start dev: run `/dev [feature]`** | `pm-design-reviewer` agent *(design-ux-kit)* — final requirements coverage check before dev handoff |
 
 ---
 
-## Phase 0 — Project Profile
-
-Before producing anything, establish the project tier. If a Project Profile Card was already produced by exec-kit's `/release` skill, accept it and skip this phase.
-
-Otherwise ask: *"How would you describe the size of this project — Micro (days–2w), Small (2–6w), Medium (6–16w), or Large (16w+)?"*
-
-Then apply the phase gating below:
-
-| Tier | Default phases | Not default — add back if needed |
-|------|---------------|----------------------------------|
-| **Tier 1 (Micro)** | If there is a UI change: describe it in plain prose (2–3 sentences). No formal design output needed by default. | All phases |
-| **Tier 2 (Small)** | Phase 1 (abbreviated UX brief), Phase 2 (key screens only), Phase 3 (HTML mockup for key screens — serves as handoff). | Phases 4, 5, 6 |
-| **Tier 3 (Medium)** | Phases 1, 2, 3, 4, 6. Phase 5 (usability test) if genuine UX unknowns exist. | Phase 5 (usability test) |
-| **Tier 4 (Large)** | All phases. | — |
-
-**Step C — Skipped phase opt-in**
-
-After establishing the tier, present the phases not included by default and ask:
-
-*"Before we start — the following phases are skipped by default for your tier. Would you like to add any of them back in?"*
-
-Present only the phases skipped for the established tier, using this description for each:
-
-| Phase | What it adds | When to add it back |
-|-------|-------------|---------------------|
-| Phase 1 — UX Brief | Full brief with research recommendations, constraints, success criteria, and assumptions to validate | Complex user problem, multiple user types, or significant unknowns before design begins |
-| Phase 2 — Wireframe Spec | Full IA and flow document: all screens, user flows, component inventory, edge cases | Need a written spec alongside or instead of HTML mockups |
-| Phase 3 — HTML Mockup | Interactive HTML wireframes per screen with iteration rounds | Need a browser-viewable, shareable prototype before design review or handoff |
-| Phase 4 — Design Review | Heuristic audit against Nielsen's 10 usability heuristics + WCAG 2.1 AA | Multiple screens or complex interactions worth auditing before handoff |
-| Phase 5 — Usability Test Plan | Test script, participant criteria, task scenarios, and success metrics | Novel interactions, unclear user mental models, or high-risk flows that need validation |
-| Phase 6 — Design Handoff | Full component inventory, interaction specs, and acceptance criteria per screen | Engineering team needs a formal written spec beyond the HTML mockup |
-
-Accept any number of additions. Confirm: *"Got it — I'll include [X, Y] in addition to the defaults. Here's the updated phase list for this session: [list]."*
-
-**Checkpoint 0**: Confirm tier and phase list before proceeding.
-
----
-
-## Phase 1 — UX Brief — *Tier 2–4*
-
-**Tier 2**: Abbreviated — cover design scope, target user (one sentence), goal, and the top two constraints. Skip research recommendations and success criteria table. Output as a short paragraph, not the full template.
-**Tier 3–4**: Full output below.
+## Phase 1 — UX Brief
 
 Produce a UX brief following the process and template of the `/ux-brief` skill — apply the ux-brief-template.md structure and steps.
 
@@ -100,10 +59,7 @@ After presenting the brief, offer: *"Want me to run the `user-research-planner` 
 
 ---
 
-## Phase 2 — Information Architecture & Flow — *Tier 2–4*
-
-**Tier 2**: Key screens only — identify the 2–4 screens or states that are new or significantly changed. Describe each screen's layout, components, and interactions in plain text. This output also serves as the design handoff for Tier 2 — no separate Phase 5 needed.
-**Tier 3–4**: Full wireframe specification below.
+## Phase 2 — Information Architecture & Flow
 
 Produce a wireframe specification following the process and template of the `/wireframe-spec` skill, based on the approved UX brief — apply the wireframe-template.md structure and steps.
 
@@ -117,10 +73,7 @@ Produce a wireframe specification following the process and template of the `/wi
 
 ---
 
-## Phase 3 — HTML Mockup & Iteration — *Tier 2–4*
-
-**Tier 2**: Produce HTML for the 2–4 key screens from Phase 2. Run 1–2 iteration rounds. The approved HTML mockup serves as the design handoff for Tier 2 — no separate Phase 6 needed.
-**Tier 3–4**: Full process below.
+## Phase 3 — HTML Mockup & Iteration
 
 Produce an interactive HTML wireframe following the process of the `/wireframe-html` skill:
 
@@ -140,9 +93,7 @@ Produce an interactive HTML wireframe following the process of the `/wireframe-h
 
 ---
 
-## Phase 4 — Design Review — *Tier 3–4 only*
-
-**Tier 1–2**: Not included by default — the HTML mockup from Phase 3 is sufficient for simple projects. Add back if needed.
+## Phase 4 — Design Review
 
 Conduct a heuristic design review following the process and template of the `/design-review` skill, applied to the approved HTML mockup and wireframe spec — use the design-review-template.md structure.
 
@@ -160,10 +111,9 @@ After presenting the review, offer two options:
 
 ---
 
-## Phase 5 — Usability Test Plan — *Tier 4, or Tier 3 if UX unknowns exist*
+## Phase 5 — Usability Test Plan
 
-**Tier 1–2**: Not included by default. Add back if needed.
-**Tier 3**: Run only if there are genuine UX unknowns — novel interaction patterns, unclear user mental models, or significant deviation from existing conventions. Otherwise not included by default — note: *"Usability test not run — add back before v2 if user adoption is lower than expected."*
+*Run if there are genuine UX unknowns — novel interaction patterns, unclear user mental models, or significant deviation from existing conventions. If no UX unknowns exist, note: "Usability test not run — add back before v2 if user adoption is lower than expected." and proceed to Phase 6.*
 
 Produce a usability test plan following the process and template of the `/usability-test` skill — apply the usability-test-template.md structure and steps.
 
@@ -177,9 +127,7 @@ Produce a usability test plan following the process and template of the `/usabil
 
 ---
 
-## Phase 6 — Design Handoff — *Tier 3–4 only*
-
-**Tier 1–2**: Not included by default — the HTML mockup from Phase 3 serves as the handoff for Tier 2. Tier 1 needs no handoff doc. Add back if needed.
+## Phase 6 — Design Handoff
 
 Produce a design handoff spec following the process and template of the `/design-handoff` skill — apply the design-handoff-template.md structure and steps.
 

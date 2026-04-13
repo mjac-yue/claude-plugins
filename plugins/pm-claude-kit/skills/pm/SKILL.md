@@ -34,7 +34,7 @@ If no optional skills or agents apply at a given phase, omit the table and just 
 
 | After this phase | Recommended next step | Optional to run |
 |-----------------|----------------------|-----------------|
-| Phase 1 — Problem Framing | Phase 2 — Competitive Landscape (or Phase 3 for Tier 2) | `competitive-analyst` agent *(pm-claude-kit)* — parallel web research on competitors; `/competitive-analysis` skill *(pm-claude-kit)* — quick scan from existing knowledge |
+| Phase 1 — Problem Framing | Phase 2 — Competitive Landscape | `competitive-analyst` agent *(pm-claude-kit)* — parallel web research on competitors; `/competitive-analysis` skill *(pm-claude-kit)* — quick scan from existing knowledge |
 | Phase 2 — Competitive Landscape | Phase 3 — PRD Draft | `prd-reviewer` agent *(pm-claude-kit)* — critique competitive framing before writing the PRD |
 | Phase 3 — PRD Draft | Phase 4 — User Stories | `prd-reviewer` agent *(pm-claude-kit)* — 8-dimension structured PRD critique; `requirements-gap-finder` agent *(pm-claude-kit)* — edge cases and missing requirements |
 | Phase 4 — User Stories | Phase 5 — Prioritization | `requirements-gap-finder` agent *(pm-claude-kit)* — stress-test stories before scope is cut |
@@ -43,59 +43,18 @@ If no optional skills or agents apply at a given phase, omit the table and just 
 
 ---
 
-## Phase 0 — Project Profile
+## Opening question
 
-Before producing anything, establish the project tier. If a Project Profile Card was already produced by exec-kit's `/release` skill, accept it and skip this phase.
+Before Phase 1, ask one question:
 
-Otherwise ask:
+*"Is this a new product or a feature addition to an existing product?"*
 
-1. *"Is this a new product or a feature addition to an existing product?"*
-   - If new product: offer to run `/tech-stack` first — *"Before we frame the problem, do you want to choose your tech stack? It affects design and development decisions downstream. Run `/tech-stack` separately, or continue here and decide later."*
-
-2. *"How would you describe the size of this project?"*
-   - **(A) Micro** — single small change, days to ~2 weeks, clear scope
-   - **(B) Small** — 1–3 features, 2–6 weeks, few unknowns
-   - **(C) Medium** — multi-feature, 6–16 weeks, some unknowns
-   - **(D) Large** — full product, 16+ weeks, significant complexity
-
-Derive the tier and declare it, then apply the phase gating below:
-
-| Tier | Default phases | Not default — add back if needed |
-|------|---------------|----------------------------------|
-| **Tier 1 (Micro)** | Problem framing only (one paragraph). Produce a one-paragraph brief with scope, goal, and first action. | Phases 2–6 |
-| **Tier 2 (Small)** | Phase 1 (abbreviated), Phase 4 (2–3 stories only). Run `/brief` instead of PRD. | Phases 2, 3, 5, 6 |
-| **Tier 3 (Medium)** | Phases 1–5. Phase 6 (roadmap) if needed for stakeholder communication. | Phase 6 (roadmap) |
-| **Tier 4 (Large)** | Phases 1–6. | — |
-
-> **Note on Phase 7 — Rollout Package**: Rollout is intentionally excluded from the default `/pm` workflow. It belongs at the end of the product development cycle — after design and dev are complete and the product is ready to ship. Run `/rollout` separately at that point. Do not produce rollout materials as part of initial requirements and spec work.
-
-**Step C — Skipped phase opt-in**
-
-After establishing the tier, present the phases not included by default and ask:
-
-*"Before we start — the following phases are skipped by default for your tier. Would you like to add any of them back in?"*
-
-Present only the phases skipped for the established tier, using this description for each:
-
-| Phase | What it adds | When to add it back |
-|-------|-------------|---------------------|
-| Phase 2 — Competitive Landscape | Structured analysis of competing products, approaches, and whitespace | Entering a new market, need to differentiate, or need stakeholder context on competition |
-| Phase 3 — PRD (Full) | Full product requirements doc with goals, requirements, risks, and open questions | Need a formal spec for engineering handoff or stakeholder review instead of a brief |
-| Phase 4 — User Stories | Complete story set with Given/When/Then acceptance criteria, priority, sizing, and edge cases | Need sprint-ready tickets before design begins |
-| Phase 5 — Prioritization | RICE scores + MoSCoW classification with v1 scope recommendation and trade-offs | Have more requirements than capacity and need a defensible scope cut |
-| Phase 6 — Roadmap Placement | Where this fits: Now/Next/Later, suggested quarter, dependencies, and what it displaces | Need to communicate placement to stakeholders or align with an existing planning cycle |
-
-Accept any number of additions. Confirm: *"Got it — I'll include [X, Y] in addition to the defaults. Here's the updated phase list for this session: [list]."*
-
-**Checkpoint 0**: Confirm tier and phase list before proceeding.
+- If **new product**: offer to run `/tech-stack` first — *"Before we frame the problem, do you want to choose your tech stack? It affects design and development decisions downstream. Run `/tech-stack` separately, or continue here and decide later."*
+- If **feature addition**: proceed directly to Phase 1.
 
 ---
 
-## Phase 1: Problem Framing — *All tiers*
-
-**Tier 1**: One paragraph only — problem in one sentence, who it affects, and the proposed direction. No structure required. Then stop and output the brief directly.
-**Tier 2**: Abbreviated — problem statement + assumptions only. Skip anti-problems and scale analysis.
-**Tier 3–4**: Full output below.
+## Phase 1: Problem Framing
 
 Before writing anything, frame the problem properly.
 
@@ -103,24 +62,22 @@ Produce:
 1. **Problem Statement** — "We've observed that [user/customer] struggles to [do X] because [root cause]. This results in [impact]. We believe that [proposed direction] could address this."
 2. **Who is affected** — primary and secondary users, rough scale
 3. **Why now** — what makes this worth solving in the current cycle (data, strategic fit, urgency)
-4. **Assumptions** — list 3-5 key assumptions embedded in this framing that need validation
+4. **Assumptions** — list 3–5 key assumptions embedded in this framing that need validation
 5. **Anti-problems** — what this is NOT about (scope boundary at the problem level)
 
 ---
 
-**CHECKPOINT 1 / 7 — Problem Framing**
+**CHECKPOINT 1 / 6 — Problem Framing**
 
 Present the problem framing output, then ask:
 
 > Does this capture the problem accurately? Reply **"continue"** to move to competitive analysis, or share feedback to revise before proceeding.
 
-*After user approves: Problem framing is incorporated into the brief (Phase 3) or PRD — no separate file save at this checkpoint.*
+*After user approves: Problem framing is incorporated into the PRD — no separate file save at this checkpoint.*
 
 ---
 
-## Phase 2: Competitive Landscape — *Tier 3–4 only*
-
-**Tier 1–2**: Not included by default. If competitive context is relevant for a Tier 2 project, note 1–2 alternatives in one line as part of the brief. Add back if needed.
+## Phase 2: Competitive Landscape
 
 With the problem framing confirmed, assess the competitive context.
 
@@ -133,7 +90,7 @@ First, ask the user:
 > Which would you prefer?
 
 **If quick scan (A):** Produce inline:
-1. **Who else solves this** — 3-5 direct or adjacent competitors/alternatives
+1. **Who else solves this** — 3–5 direct or adjacent competitors/alternatives
 2. **How they solve it** — one-line approach per competitor
 3. **Gaps and whitespace** — what none of them do well
 4. **Differentiation angle** — the specific bet we're making to win
@@ -142,7 +99,7 @@ First, ask the user:
 
 ---
 
-**CHECKPOINT 2 / 7 — Competitive Landscape**
+**CHECKPOINT 2 / 6 — Competitive Landscape**
 
 Present the competitive landscape output, then ask:
 
@@ -152,10 +109,7 @@ Present the competitive landscape output, then ask:
 
 ---
 
-## Phase 3: PRD Draft — *Tier 3–4 only*
-
-**Tier 1**: Not included by default — problem framing from Phase 1 is sufficient. Add back if needed.
-**Tier 2**: Not included by default. Use `/brief` instead — produce a one-page feature brief covering: what, why, who, success criteria, scope boundaries, and first three build steps. Add back a full PRD if needed.
+## Phase 3: PRD Draft
 
 With the problem and context confirmed, write the PRD.
 
@@ -176,28 +130,24 @@ Write it fully — no placeholder text. Make explicit any assumptions embedded i
 
 ---
 
-**CHECKPOINT 3 / 7 — PRD Draft**
+**CHECKPOINT 3 / 6 — PRD Draft**
 
 Present the full PRD, then ask:
 
 > Review the PRD above. Reply **"continue"** to generate user stories, or share specific sections to revise. You can also ask to run the `prd-reviewer` agent for a structured critique before proceeding.
 
-*After user approves: Check for a project `CLAUDE.md` in the current or parent directory. If it contains an **Output paths** table, save the output to the file listed for `/prd` (Tier 3–4) or `/brief` (Tier 2). Update **Status** to **Done** and **Last updated** to today's date. Confirm the file was written.*
+*After user approves: Check for a project `CLAUDE.md` in the current or parent directory. If it contains an **Output paths** table, save the output to the file listed for `/prd`. Update **Status** to **Done** and **Last updated** to today's date. Confirm the file was written.*
 
 ---
 
-## Phase 4: User Stories — *Tier 2–4*
-
-**Tier 1**: Not included by default. Add back if needed.
-**Tier 2**: Write 2–3 stories for the primary user flow only. One acceptance criterion each (Given/When/Then). No edge cases, no complexity sizing beyond S/M/L.
-**Tier 3–4**: Full output below.
+## Phase 4: User Stories
 
 With the PRD confirmed, generate user stories.
 
 For each major requirement or user flow:
 1. Write stories in "As a [persona], I want [capability] so that [benefit]" format
 2. Include priority (P0/P1/P2) and complexity (S/M/L/XL)
-3. Write acceptance criteria in Given/When/Then format (3-5 per story)
+3. Write acceptance criteria in Given/When/Then format (3–5 per story)
 4. Note edge cases per story
 5. Flag dependencies between stories
 
@@ -205,7 +155,7 @@ Group stories by persona or feature area. Aim for completeness — these should 
 
 ---
 
-**CHECKPOINT 4 / 7 — User Stories**
+**CHECKPOINT 4 / 6 — User Stories**
 
 Present the user stories, then ask:
 
@@ -215,9 +165,7 @@ Present the user stories, then ask:
 
 ---
 
-## Phase 5: Prioritization — *Tier 3–4 only*
-
-**Tier 1–2**: Not included by default — scope is small enough that prioritization is implicit. Just note what's P0 vs. deferred in the brief or user stories. Add back if needed.
+## Phase 5: Prioritization
 
 With the stories confirmed, score and rank the work.
 
@@ -230,7 +178,7 @@ Produce:
 
 ---
 
-**CHECKPOINT 5 / 7 — Prioritization**
+**CHECKPOINT 5 / 6 — Prioritization**
 
 Present the prioritization output, then ask:
 
@@ -240,10 +188,7 @@ Present the prioritization output, then ask:
 
 ---
 
-## Phase 6: Roadmap Placement — *Tier 3–4, or Tier 3 only if explicitly requested*
-
-**Tier 1–2**: Not included by default — work is scoped and ready to execute. Add back if stakeholder communication requires roadmap placement.
-**Tier 3**: Run only if the team needs to communicate placement to stakeholders or integrate with an existing roadmap. Otherwise skip and note: *"Roadmap placement skipped — add to your roadmap at [Now/Next/Later] based on the prioritization output."*
+## Phase 6: Roadmap Placement
 
 With prioritization confirmed, recommend where this fits on the roadmap.
 
@@ -279,13 +224,12 @@ Output a clean summary package:
 **Completed**: [Date]
 
 ### Documents Produced
-[List only what was produced for this tier]
 - Problem Statement
-- Competitive Landscape (if run)
-- PRD or Feature Brief
+- Competitive Landscape
+- PRD
 - User Stories ([n] stories)
-- Prioritization (RICE + MoSCoW) (if run)
-- Roadmap Recommendation (if run)
+- Prioritization (RICE + MoSCoW)
+- Roadmap Recommendation
 
 ### Next Steps
 1. Run `/design [feature]` — UX brief, wireframes, and design handoff
@@ -299,3 +243,5 @@ Output a clean summary package:
 ```
 
 Ask the user if they'd like any section exported as a separate document.
+
+> **Note on Rollout**: Rollout belongs at the end of the product development cycle — after design and dev are complete and the product is ready to ship. Run `/rollout` separately at that point.
