@@ -16,7 +16,8 @@ Follow this process:
 1. **Understand the requirements** — restate the product goal and key user stories in engineering terms. Flag any ambiguities that must be resolved before design is final.
 2. **Identify solution options** — before committing to an approach, enumerate 2–4 distinct technical approaches that could satisfy the requirements:
    - For each option, describe the approach in 2–3 sentences
-   - Evaluate it across: implementation complexity, performance, maintainability, cost, time to deliver, and risk
+   - Evaluate it across: implementation complexity, performance, maintainability, time to deliver, and risk
+   - **Include real cost estimates** — not just "Low/Medium/High". For each option, state the actual expected monthly or annual cost at the expected usage level (e.g., "$0/month on Vercel free tier", "$25/month for Supabase Pro", "$0.002/1K tokens for Claude API"). If cost is unknown, note it as TBD and flag it as a risk.
    - Note which constraints or trade-offs each option optimises for
    - Identify the option you recommend and state why clearly
    - Record rejected options and the reason they were ruled out — this prevents relitigating decisions later
@@ -31,9 +32,10 @@ Follow this process:
    - Database schema changes (new tables, migrations, indexes)
 5. **Specify key algorithms or business logic** — any non-trivial logic that needs to be spelled out before implementation
 6. **Define APIs needed** — list endpoints or events this feature produces or consumes (detail via `/api-spec` if needed)
-7. **Identify dependencies**:
+7. **Identify dependencies and costs**:
    - Internal: teams, services, or feature flags that must be ready first
-   - External: third-party APIs, SDKs, or infrastructure
+   - External: third-party APIs, SDKs, or infrastructure — for each, state the pricing tier being assumed (free, pro, pay-as-you-go) and the estimated monthly cost at expected usage
+   - Produce a **Cost Summary table** aggregating all external dependency costs: monthly estimate at launch volume and projected cost at 10× scale. Flag any component where cost scales with usage and could become significant.
 8. **Assess technical risks**:
    - Performance: latency, throughput, or scale concerns
    - Security: auth, data exposure, input validation, rate limiting

@@ -41,7 +41,7 @@
 | Performance at scale | | |
 | Maintainability | | |
 | Time to deliver | | |
-| Cost (infra / licensing) | | |
+| Monthly cost (at launch volume) | | Actual dollar estimate — not Low/Medium/High |
 | Risk | | |
 
 ---
@@ -50,13 +50,16 @@
 
 **Approach**: [2–3 sentence description of the technical approach]
 
+**Estimated monthly cost**: $[X]/month — [pricing tier assumed, e.g. "Vercel free tier", "Supabase Pro", "pay-as-you-go at ~N req/month"]. Scales to $[Y]/month at 10× usage.
+
 | Criterion | Assessment | Notes |
 |-----------|-----------|-------|
 | Implementation complexity | Low / Medium / High | |
 | Performance at scale | Low / Medium / High | |
 | Maintainability | Low / Medium / High | |
 | Time to deliver | Low / Medium / High | |
-| Cost | Low / Medium / High | |
+| Monthly cost at launch | $[X] | [Pricing tier] |
+| Monthly cost at 10× scale | $[Y] | [What drives the increase] |
 | Risk | Low / Medium / High | |
 
 **Pros**:
@@ -73,13 +76,16 @@
 
 **Approach**:
 
+**Estimated monthly cost**: $[X]/month — [pricing tier]. Scales to $[Y]/month at 10× usage.
+
 | Criterion | Assessment | Notes |
 |-----------|-----------|-------|
 | Implementation complexity | | |
 | Performance at scale | | |
 | Maintainability | | |
 | Time to deliver | | |
-| Cost | | |
+| Monthly cost at launch | $[X] | |
+| Monthly cost at 10× scale | $[Y] | |
 | Risk | | |
 
 **Pros**:
@@ -249,9 +255,20 @@ flowchart LR
 
 ### External Dependencies
 
-| Dependency | Type | Notes |
-|-----------|------|-------|
-| | Third-party API / SDK / Infra | |
+| Dependency | Type | Pricing tier | Est. monthly cost (launch) | Est. monthly cost (10× scale) | Notes |
+|-----------|------|-------------|---------------------------|-------------------------------|-------|
+| | Third-party API / SDK / Infra | Free / Pro / Pay-as-you-go | $[X] | $[Y] | |
+
+### Cost Summary
+
+| Component | Pricing model | Monthly cost — launch | Monthly cost — 10× scale | Scales with |
+|-----------|--------------|----------------------|--------------------------|-------------|
+| [e.g. Vercel hosting] | [Free tier / Pro $20/mo] | $[X] | $[Y] | [Traffic / builds / seats] |
+| [e.g. Supabase DB] | [Free tier / Pro $25/mo] | $[X] | $[Y] | [Rows / bandwidth] |
+| [e.g. Auth provider] | [Free tier / MAU-based] | $[X] | $[Y] | [Monthly active users] |
+| **Total** | | **$[X]/month** | **$[Y]/month** | |
+
+> ⚠️ Flag any component where cost scales directly with usage and could surprise the team at growth — e.g. per-API-call pricing, per-MAU auth, or metered database reads.
 
 ---
 
