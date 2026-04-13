@@ -12,6 +12,50 @@ Work through the steps below in order. Do not skip any step.
 
 ---
 
+## Step 0 — Environment prerequisites (dev projects only)
+
+Ask: *"Will this project involve building and deploying software — a web app, API, script, or similar?"*
+
+If **yes**: present the prerequisites checklist below and ask the user to confirm each item is installed before proceeding. If anything is missing, provide the install command before moving on. Do not skip this step for dev projects — missing tools discovered mid-build cause avoidable delays.
+
+If **no** (e.g. research, strategy, or documentation project): skip this step entirely and proceed to Step 1.
+
+### Prerequisites checklist
+
+Present this as a checklist. Ask the user to run each check command and confirm the output before proceeding.
+
+| Tool | Why needed | Check command | Minimum version |
+|------|-----------|---------------|-----------------|
+| **Node.js** | React frontend, Vite build tooling, npm package management | `node --version` | 18.x or higher |
+| **Python** | Serverless calculation functions, scripts, or backend logic | `python3 --version` | 3.11 or higher |
+| **Git** | Version control; required for Vercel auto-deploy from `main` | `git --version` | Any recent version |
+| **Vercel CLI** | Runs both frontend and serverless functions together locally via `vercel dev`; deploys with one command | `vercel --version` | Latest (`npm install -g vercel`) |
+
+**Accounts required** (confirm before proceeding):
+- Vercel account (vercel.com) — hosts the app
+- GitHub account — Vercel deploys from GitHub on push to `main`
+
+**If Node.js is missing or outdated** (recommended install method on Mac):
+```bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+nvm install 20 && nvm use 20
+```
+
+**If Python is missing or below 3.11**:
+```bash
+brew install python@3.11
+```
+
+**If Vercel CLI is missing**:
+```bash
+npm install -g vercel
+```
+
+Once all checks pass, confirm:
+> *"✓ Environment ready — Node [version], Python [version], Git [version], Vercel CLI [version]. Proceeding to project setup."*
+
+---
+
 ## Step 1 — Capture project identity
 
 Ask the following questions. If $ARGUMENTS already answers any of them, skip those questions and confirm the inferred answers.

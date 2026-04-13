@@ -46,9 +46,35 @@ If no optional skills or agents apply at a given phase, omit the table and just 
 
 ---
 
-## Phase 0 — Builder Context
+## Phase 0 — Prerequisites & Builder Context
 
-Before any technical design begins, establish who is building this.
+### Prerequisites check
+
+Before any technical design or build begins, confirm the local environment is ready. Present the checklist below and ask the user to run each check command. If anything is missing, provide the install instructions before proceeding — missing tools discovered mid-build cause avoidable delays.
+
+| Tool | Why needed | Check command | Minimum version |
+|------|-----------|---------------|-----------------|
+| **Node.js** | React frontend, Vite build tooling, npm | `node --version` | 18.x or higher |
+| **Python** | Serverless functions, scripts, or backend logic | `python3 --version` | 3.11 or higher |
+| **Git** | Version control; required for auto-deploy pipelines | `git --version` | Any recent version |
+| **Vercel CLI** | Runs frontend and serverless functions together locally; one-command deployment | `vercel --version` | Latest — install: `npm install -g vercel` |
+
+**Accounts required**: Vercel (vercel.com) and GitHub — Vercel deploys from GitHub on push to `main`.
+
+If Node.js is missing or outdated, recommend **nvm** for version management:
+```bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+nvm install 20 && nvm use 20
+```
+
+If Python is below 3.11: `brew install python@3.11`
+If Vercel CLI is missing: `npm install -g vercel`
+
+Once confirmed, note the installed versions — these should be recorded in the tech spec's Local Development Setup section.
+
+*If the project already has a tech spec with a Local Development Setup section, check whether the confirmed versions match. Flag any version mismatch before proceeding.*
+
+### Builder context
 
 Ask:
 > *"Who will be building this — a solo PM-led build with AI assistance, a small team, or a larger engineering team?"*
