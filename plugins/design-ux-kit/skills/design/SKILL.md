@@ -34,8 +34,8 @@ If no optional skills or agents apply at a given phase, omit the table and just 
 
 | After this phase | Recommended next step | Optional to run |
 |-----------------|----------------------|-----------------|
-| Phase 1 — UX Brief | Phase 2 — Information Architecture & Flow | `user-research-planner` agent *(design-ux-kit)* — research plan before committing to a design direction |
-| Phase 2 — Wireframe Spec | Phase 3 — HTML Mockup | `ux-reviewer` agent *(design-ux-kit)* — heuristics + accessibility audit; `pm-design-reviewer` agent *(design-ux-kit)* — requirements coverage check |
+| Phase 1 — UX Brief | Phase 2 — Wireframe Spec | No additional agents at this point — brief pulls directly from PM inputs |
+| Phase 2 — Wireframe Spec | Phase 3 — HTML Mockup | `user-research-planner` agent *(design-ux-kit)* — validate open design questions before building mockups; `pm-design-reviewer` agent *(design-ux-kit)* — requirements coverage check on the spec |
 | Phase 3 — HTML Mockup | Phase 4 — Design Review | `ux-reviewer` agent *(design-ux-kit)* — structured heuristic audit on the mockup |
 | Phase 4 — Design Review | Phase 5 — Usability Test Plan (if UX unknowns) or Phase 6 — Design Handoff | `ux-reviewer` agent *(design-ux-kit)* — deeper structured audit; `pm-design-reviewer` agent *(design-ux-kit)* — PM-perspective requirements check |
 | Phase 5 — Usability Test Plan | Phase 6 — Design Handoff | `user-research-planner` agent *(design-ux-kit)* — formal study if test uncovered deep unknowns |
@@ -47,11 +47,16 @@ If no optional skills or agents apply at a given phase, omit the table and just 
 
 Produce a UX brief following the process and template of the `/ux-brief` skill — apply the ux-brief-template.md structure and steps.
 
-- Define the design scope, target users, goals, constraints, and success criteria
-- Surface any assumptions that need validation before design begins
-- Identify what user research (if any) is needed before proceeding
+**Before writing the brief, read the available PM inputs:**
+- Check `pm/brief.md` for scope boundary, users, success criteria, and key assumptions
+- Check `pm/user-stories.md` for P0/P1/P2 stories and acceptance criteria
+- Check `pm/prd.md` if brief or stories are not available
 
-After presenting the brief, offer: *"Want me to run the `user-research-planner` agent? It will assess whether formal user research is feasible or produce a faster assumption validation plan if it isn't — recommended before committing to a design direction."*
+Pull scope, users, and success criteria directly from these documents. Do not ask the user to re-enter what has already been decided. Map each design goal to one or more P0 user stories.
+
+- Define the design scope (from product brief), target users (from product brief), goals, constraints, and success criteria
+- Surface any new design-specific assumptions beyond those already in the product brief
+- Identify research gaps — note these for the wireframe spec phase (user research decisions are made after the wireframe spec, not before)
 
 *After user approves: Check for a project `CLAUDE.md` in the current or parent directory. If it contains an **Output paths** table, save the UX brief to the file listed for `/ux-brief`. Update **Status** to **Done** and **Last updated** to today's date. Confirm the file was written.*
 
@@ -63,9 +68,14 @@ After presenting the brief, offer: *"Want me to run the `user-research-planner` 
 
 Produce a wireframe specification following the process and template of the `/wireframe-spec` skill, based on the approved UX brief — apply the wireframe-template.md structure and steps.
 
+- Read `pm/user-stories.md` and map every P0 story to the screen(s) it requires — explicitly list this mapping so nothing is missed
 - Map the key screens, user flows, and navigation structure
 - Define component inventory and interaction states for each screen
 - Note any branching paths, error states, or edge cases
+
+After presenting the spec, offer: *"Want me to run the `user-research-planner` agent on this wireframe spec? It will assess whether any open design questions or assumptions need user validation before we build the HTML mockup. If it surfaces changes, we'll update the spec before moving to mockups."*
+
+If the user accepts and research findings require design direction changes, update the wireframe spec before proceeding.
 
 *After user approves: Check for a project `CLAUDE.md` in the current or parent directory. If it contains an **Output paths** table, save the wireframe spec to the file listed for `/wireframe-spec`. Update **Status** to **Done** and **Last updated** to today's date. Confirm the file was written.*
 

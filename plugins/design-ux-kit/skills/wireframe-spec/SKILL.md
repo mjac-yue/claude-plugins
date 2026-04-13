@@ -10,7 +10,17 @@ Generate a wireframe specification for: $ARGUMENTS
 
 Use the template in [wireframe-template.md](wireframe-template.md) as the structure.
 
-Follow this process:
+## Step 0: Read available inputs
+
+Before speccing screens, check for the following in the project directory:
+- **UX brief** (`design/ux-brief.md`) — scope, users, design goals, constraints. This is the primary input.
+- **User stories** (`pm/user-stories.md`) — P0/P1/P2 acceptance criteria. Every P0 story must map to at least one screen in this spec.
+- **Product brief** (`pm/brief.md`) — scope boundary and success criteria, if UX brief doesn't exist yet.
+
+Map each P0 user story to the screen(s) it requires. Call this out explicitly so nothing is missed.
+
+## Step 1–6: Produce the wireframe spec
+
 1. **Map the user flow** — identify the entry point, happy path, and exit points. Draw the flow as a numbered sequence of steps.
 2. **Inventory the screens** — list every distinct screen or state required to complete the flow.
 3. **Specify each screen**, including:
@@ -24,6 +34,12 @@ Follow this process:
 6. **Flag open design questions** — decisions that need stakeholder input before visual design begins
 
 Use plain-language descriptions. This spec should be detailed enough that a designer can produce visuals and an engineer can estimate effort without further clarification.
+
+## Step 7: User research option
+
+After presenting the spec, offer: *"Want me to run the `user-research-planner` agent on this wireframe spec? It will assess whether any of the open design questions or assumptions need user validation before we build the HTML mockup — and either produce a formal research plan or a fast assumption validation checklist. If it finds things to address, we can update this spec before moving to mockups."*
+
+If the user accepts and the research planner identifies issues that change the design direction, update the wireframe spec to reflect the new decisions before proceeding to HTML mockup.
 
 ## Save output
 

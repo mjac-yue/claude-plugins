@@ -34,46 +34,48 @@ If no optional skills or agents apply at a given phase, omit the table and just 
 
 | After this phase | Recommended next step | Optional to run |
 |-----------------|----------------------|-----------------|
-| Phase 1 — Problem Framing | Phase 2 — Competitive Landscape | `competitive-analyst` agent *(pm-claude-kit)* — parallel web research on competitors; `/competitive-analysis` skill *(pm-claude-kit)* — quick scan from existing knowledge |
-| Phase 2 — Competitive Landscape | Phase 3 — PRD Draft | `prd-reviewer` agent *(pm-claude-kit)* — critique competitive framing before writing the PRD |
+| Phase 1 — Product Brief | Phase 2 — Competitive Landscape (or brainstorm to refine brief) | `/brainstorm` skill *(pm-claude-kit)* — run if the solution direction is unclear or needs more exploration before committing to the PRD |
+| Phase 2 — Competitive Landscape | Phase 3 — PRD Draft | `prd-reviewer` agent *(pm-claude-kit)* — critique competitive framing before writing the PRD; `competitive-analyst` agent *(pm-claude-kit)* — run live web research if quick scan was used |
 | Phase 3 — PRD Draft | Phase 4 — User Stories | `prd-reviewer` agent *(pm-claude-kit)* — 8-dimension structured PRD critique; `requirements-gap-finder` agent *(pm-claude-kit)* — edge cases and missing requirements |
 | Phase 4 — User Stories | Phase 5 — Prioritization | `requirements-gap-finder` agent *(pm-claude-kit)* — stress-test stories before scope is cut |
-| Phase 5 — Prioritization | Phase 6 — Roadmap Placement | `/okr` skill *(pm-claude-kit)* — draft OKRs aligned to this initiative |
-| Phase 6 — Roadmap Placement *(final)* | **Start design: run `/design [feature]`** | `/meeting-notes` skill *(pm-claude-kit)* — structure key decisions from this PM session; `/okr` skill *(pm-claude-kit)* — draft OKRs before design begins |
+| Phase 5 — Prioritization | Phase 6 — Roadmap Placement | No additional agents at this point |
+| Phase 6 — Roadmap Placement *(final)* | **Start design: run `/design [feature]`** | No additional agents at this point |
 
 ---
 
-## Opening question
+## Phase 1: Product Brief
 
-Before Phase 1, ask one question:
+The brief is the foundation of the entire PM workflow. It captures the problem description, proposed solution, users, success criteria, and scope boundary — everything needed to run a focused competitive analysis and write a sharp PRD.
 
-*"Is this a new product or a feature addition to an existing product?"*
+Follow the process of the `/brief` skill:
 
-- If **new product**: offer to run `/tech-stack` first — *"Before we frame the problem, do you want to choose your tech stack? It affects design and development decisions downstream. Run `/tech-stack` separately, or continue here and decide later."*
-- If **feature addition**: proceed directly to Phase 1.
+1. **Write a sharp problem statement** — one to two sentences. What is the user struggling to do, and what is the cost of that struggle?
+2. **Describe the proposed solution** — two to three sentences on what will be built. Stay at the "what", not the "how".
+3. **Identify who benefits** — primary user and any secondary stakeholders. One line each.
+4. **Define success criteria** — two to three measurable signals that confirm the feature is working. Prefer outcome metrics over output metrics.
+5. **Draw the scope boundary** — what this brief does NOT include. Prevents scope creep from the first conversation.
+6. **List key assumptions** — two to three beliefs about users, behavior, or context this brief depends on. Flag which carries the most risk if wrong.
+7. **Surface open questions** — anything that must be answered before design or development starts.
 
----
-
-## Phase 1: Problem Framing
-
-Before writing anything, frame the problem properly.
-
-Produce:
-1. **Problem Statement** — "We've observed that [user/customer] struggles to [do X] because [root cause]. This results in [impact]. We believe that [proposed direction] could address this."
-2. **Who is affected** — primary and secondary users, rough scale
-3. **Why now** — what makes this worth solving in the current cycle (data, strategic fit, urgency)
-4. **Assumptions** — list 3–5 key assumptions embedded in this framing that need validation
-5. **Anti-problems** — what this is NOT about (scope boundary at the problem level)
+If $ARGUMENTS already answers some of these, skip those questions and confirm your understanding.
 
 ---
 
-**CHECKPOINT 1 / 6 — Problem Framing**
+**CHECKPOINT 1 / 6 — Product Brief**
 
-Present the problem framing output, then ask:
+Present the brief, then ask:
 
-> Does this capture the problem accurately? Reply **"continue"** to move to competitive analysis, or share feedback to revise before proceeding.
+> Does this capture the problem and direction accurately? Reply **"continue"** to move to competitive analysis, or share feedback to revise.
+>
+> **Optional**: Run `/brainstorm` if the solution direction is unclear — brainstorm explores ideas broadly and can update this brief before we commit to a PRD. You can iterate brief → brainstorm → brief until the direction is solid.
 
-*After user approves: Problem framing is incorporated into the PRD — no separate file save at this checkpoint.*
+*After user approves: Check for a project `CLAUDE.md` in the current or parent directory. If it contains an **Output paths** table, save the brief to the file listed for `/brief`. Update **Status** to **Done** and **Last updated** to today's date. Confirm the file was written.*
+
+**Risk gate**: Before proceeding, identify any risks surfaced in this phase:
+- Are there key assumptions that, if wrong, would change the entire direction?
+- Are there external dependencies or unknowns that could block this feature?
+
+Present any score 6+ risks (Likelihood × Impact, 1–3 scale) and ask: *"Do you want to address these risks before proceeding to competitive analysis, or continue and revisit them in the PRD?"*
 
 ---
 
@@ -107,11 +109,17 @@ Present the competitive landscape output, then ask:
 
 *After user approves: Check for a project `CLAUDE.md` in the current or parent directory. If it contains an **Output paths** table, save the competitive landscape output to the file listed for `/competitive-analysis`. Update **Status** to **Done** and **Last updated** to today's date. Confirm the file was written.*
 
+**Risk gate**: Before proceeding, identify any risks surfaced from the competitive analysis:
+- Are there competitors with a significant advantage we haven't accounted for?
+- Does the competitive landscape change the differentiation angle in the brief?
+
+Present any score 6+ risks and ask: *"Do you want to address these before writing the PRD, or continue and incorporate them?"*
+
 ---
 
 ## Phase 3: PRD Draft
 
-With the problem and context confirmed, write the PRD.
+With the brief confirmed and competitive context in hand, write the PRD. Use the approved brief as the foundation — the problem statement, users, success criteria, and scope boundary should flow directly from it.
 
 Use the structure from [prd-template.md](../prd/prd-template.md) — the same structure the `/prd` skill produces:
 - TL;DR
@@ -138,6 +146,13 @@ Present the full PRD, then ask:
 
 *After user approves: Check for a project `CLAUDE.md` in the current or parent directory. If it contains an **Output paths** table, save the output to the file listed for `/prd`. Update **Status** to **Done** and **Last updated** to today's date. Confirm the file was written.*
 
+**Risk gate**: Before proceeding, identify any risks surfaced in writing the PRD:
+- Are there P0 requirements with unclear acceptance criteria or high implementation uncertainty?
+- Are there dependencies on third-party services, teams, or decisions not yet made?
+- Does the scope feel right — or has it expanded beyond the brief?
+
+Present any score 6+ risks and ask: *"Do you want to address these before generating user stories, or continue and track them?"*
+
 ---
 
 ## Phase 4: User Stories
@@ -163,6 +178,13 @@ Present the user stories, then ask:
 
 *After user approves: Check for a project `CLAUDE.md` in the current or parent directory. If it contains an **Output paths** table, save the user stories to the file listed for `/user-story`. Update **Status** to **Done** and **Last updated** to today's date. Confirm the file was written.*
 
+**Risk gate**: Before proceeding, identify any risks in the user story set:
+- Are any P0 stories XL complexity with high uncertainty?
+- Are there stories with unresolved dependencies between them?
+- Are there edge cases that suggest the problem is larger than the brief assumed?
+
+Present any score 6+ risks and ask: *"Do you want to address these before prioritization, or continue and reflect them in the RICE scores?"*
+
 ---
 
 ## Phase 5: Prioritization
@@ -185,6 +207,12 @@ Present the prioritization output, then ask:
 > Does this prioritization reflect your team's current constraints and goals? Reply **"continue"** to get roadmap placement, or adjust scores/scope before proceeding.
 
 *After user approves: Check for a project `CLAUDE.md` in the current or parent directory. If it contains an **Output paths** table, save the prioritization output to the file listed for `/prioritization`. Update **Status** to **Done** and **Last updated** to today's date. Confirm the file was written.*
+
+**Risk gate**: Before proceeding, review the v1 scope cut:
+- Have any "Could" or "Won't" items created downstream dependencies that could block "Must" items?
+- Is the v1 scope achievable within the team's capacity, or is it still over-committed?
+
+Present any score 6+ risks and ask: *"Do you want to adjust the scope before roadmap placement, or continue with the current cut?"*
 
 ---
 
@@ -209,6 +237,16 @@ Present the roadmap placement recommendation, then ask:
 
 *After user approves: Check for a project `CLAUDE.md` in the current or parent directory. If it contains an **Output paths** table, save the roadmap output to the file listed for `/roadmap`. Update **Status** to **Done** and **Last updated** to today's date. Confirm the file was written.*
 
+**Risk gate — PM phase summary**: Before handing off to design, produce a consolidated risk summary of all risks identified across Phases 1–6:
+
+Present as a table:
+
+| Risk | Category | Score | Mitigation status |
+|------|----------|-------|------------------|
+| [Risk] | Schedule / Scope / Assumption / Dependency | 1–9 | Addressed / Accepted / Open |
+
+Flag any Open risks with score 6+. Ask: *"Are there any open risks you want to address before starting the design workflow, or are you comfortable proceeding?"*
+
 Then deliver the final summary:
 
 ---
@@ -224,17 +262,22 @@ Output a clean summary package:
 **Completed**: [Date]
 
 ### Documents Produced
-- Problem Statement
+- Product Brief
 - Competitive Landscape
 - PRD
 - User Stories ([n] stories)
 - Prioritization (RICE + MoSCoW)
 - Roadmap Recommendation
 
+### Open Risks Carried into Design
+| Risk | Score | Status |
+|------|-------|--------|
+| [Risk] | [1–9] | Accepted / To address |
+
 ### Next Steps
-1. Run `/design [feature]` — UX brief, wireframes, and design handoff
+1. Run `/design [feature]` — UX brief (referencing the brief + user stories), wireframes, and design handoff
 2. [e.g., Validate top assumption: [assumption] by [method] before design begins]
-3. [e.g., Any other PM actions needed before design starts]
+3. [e.g., Any open risks to address before design starts]
 
 ### Top Open Questions
 1.
@@ -243,5 +286,3 @@ Output a clean summary package:
 ```
 
 Ask the user if they'd like any section exported as a separate document.
-
-> **Note on Rollout**: Rollout belongs at the end of the product development cycle — after design and dev are complete and the product is ready to ship. Run `/rollout` separately at that point.

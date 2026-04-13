@@ -137,6 +137,17 @@ Use this structure:
 
 ---
 
+## Phase D — Testing & Launch
+**Status**: Not started
+**Automated tests**: Pending
+**PM requirements test**: Pending
+**Design conformance test**: Pending
+**Bug triage**: Pending
+**Risk clearance**: Pending
+**Rollout**: Pending
+
+---
+
 ## Document Sync Queue
 *Documents flagged for update due to downstream changes. Cleared when updated.*
 
@@ -167,31 +178,35 @@ Present the full workflow roadmap so the user knows what lies ahead, then recomm
 
 ### Your workflow roadmap
 
-1. PM workflow (/pm)
-   Problem framing → Competitive analysis → PRD → User stories → Prioritization → Roadmap
+Phase A — PM + Design Alignment (/pm → /design)
+  Brief → Brainstorm (iterative) → Competitive analysis → PRD → User stories →
+  Prioritization → Roadmap → UX brief → Wireframe spec → HTML mockups →
+  Design review → Usability test → Design handoff
 
-2. Design workflow (/design)
-   UX brief → Wireframe spec → HTML mockups → Design review → Usability test → Design handoff
+Phase B — Tech Design (/dev Phase 1–3)
+  Tech stack → Solution analysis → Architecture → Tech spec → API spec → Dev plan
 
-3. Dev workflow (/dev)
-   Tech spec → Dev plan → AI build → QA → Code review → Security review → Deployment
+Phase C — Dev Build (/dev Phase 4–9)
+  AI build → QA test plan → Code review → Performance review → Security review → Deployment
 
-4. Launch (/rollout)
-   Audience summaries → User training → Enablement package
+Phase D — Testing & Launch (/run Phase D)
+  Automated tests → PM requirements test → Design conformance test →
+  Bug triage cycle → Risk clearance gate → Rollout
 
 Exec-kit is tracking your project state in [project-slug]-state.md.
-It will keep you moving forward and surface when earlier documents need updating.
+Run /run [project] at the start of each session — it reads the state file and
+picks up exactly where you left off.
 ```
 
 Then append the standard **What's next?** block:
 
-> **What's next?** Run `/pm [project-name]` to start the PM workflow — problem framing, competitive analysis, PRD, user stories, prioritization, and roadmap.
+> **What's next?** Run `/run [project-name]` to begin Phase A — the `/run` skill will guide you through the full lifecycle from PM alignment through testing and launch.
 >
 > **Optionally run at this point:**
 >
 > | Skill / Agent | Plugin | What it does |
 > |--------------|--------|-------------|
-> | `competitive-analyst` agent | pm-claude-kit | Research competitors in parallel before the PM workflow begins — useful if you want competitive context before framing the problem |
-> | `/prd` skill | pm-claude-kit | Jump straight to a full PRD if the problem is already well-understood |
+> | `competitive-analyst` agent | pm-claude-kit | Research competitors in parallel before PM work begins — useful if you want competitive context before framing the problem |
+> | `/release-plan` skill | exec-kit | Generate a full release plan with phases, milestones, and build layers before starting work |
 >
-> *Reply with anything you'd like to run, or say "start pm" to begin the PM workflow.*
+> *Reply with anything you'd like to run first, or say "start" to begin with `/run`.*

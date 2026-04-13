@@ -34,15 +34,15 @@ If no optional skills or agents apply at a given phase, omit the table and just 
 
 | After this phase | Recommended next step | Optional to run |
 |-----------------|----------------------|-----------------|
-| Phase 1 — Tech Spec | Phase 2 — API Spec (if API-first) or Phase 3 — Dev Plan | `tech-spec-reviewer` agent *(dev-workflow-kit)* — completeness and engineering risks; `pm-tech-reviewer` agent *(dev-workflow-kit)* — PM-readable summary and complexity flags; `arch-reviewer` agent *(dev-workflow-kit)* — quality attribute audit; `ai-opportunity-analyst` agent *(dev-workflow-kit)* — where AI adds value in this product |
+| Phase 1 — Solution Analysis & Tech Spec | Phase 2 — API Spec (if API-first) or Phase 3 — Dev Plan | `tech-spec-reviewer` agent *(dev-workflow-kit)* — completeness and engineering risks; `pm-tech-reviewer` agent *(dev-workflow-kit)* — PM-readable summary and complexity flags; `arch-reviewer` agent *(dev-workflow-kit)* — quality attribute audit |
 | Phase 2 — API Spec | Phase 3 — Dev Plan | No additional agents at this point |
-| Phase 3 — Dev Plan | Phase 4 — AI Build *(optional)* or Phase 5 — QA | `builder` agent *(dev-workflow-kit)* — implement the code layer by layer now (invokes Phase 4); `solution-analyst` agent *(dev-workflow-kit)* — if any technical approach is still undecided |
+| Phase 3 — Dev Plan | Phase 4 — AI Build *(optional)* or Phase 5 — QA | `builder` agent *(dev-workflow-kit)* — implement the code layer by layer now (invokes Phase 4) |
 | Phase 4 — AI Build | Phase 5 — QA or Phase 6 — Code Review | `code-reviewer` agent *(dev-workflow-kit)* — immediate review of the files just built |
 | Phase 5 — QA Test Plan | Phase 6 — Code Review | `test-case-generator` agent *(dev-workflow-kit)* — expand test cases from user stories |
 | Phase 6 — Code Review | Phase 7 — Performance Review (if SLOs defined) or Phase 8 — Security | `code-reviewer` agent *(dev-workflow-kit)* — line-level findings on actual source files |
 | Phase 7 — Performance Review | Phase 8 — Security Review | No additional agents at this point |
 | Phase 8 — Security Review | Phase 9 — Deployment | `security-reviewer` agent *(dev-workflow-kit)* — OWASP audit of actual source files |
-| Phase 9 — Deployment *(final)* | **Launch package: run `/rollout [feature]`** *(pm-claude-kit)* | exec-kit `/run [project]` — start the live delivery and execution cycle |
+| Phase 9 — Deployment *(final)* | **Phase D testing: run `/run [project]`** *(exec-kit)* | exec-kit `/status` — stakeholder status report before launch |
 
 ---
 
@@ -107,30 +107,67 @@ All code generated in Phases 1–9 must be written with learning in mind. The bu
 
 ## Phase 1 — Solution Analysis & Technical Specification
 
-Start by offering: *"Would you like me to run the `solution-analyst` agent first? It reads your codebase and researches options before committing to a design — recommended when the right technical approach is not yet clear."*
+### Step 1a: Read design outputs
 
-If the user proceeds with solution analysis, run the `solution-analyst` agent to:
-- Read the existing codebase to understand stack, patterns, and constraints
-- Research 2–4 distinct technical approaches with real-world evidence
-- Produce a structured options comparison and a clear recommendation
+Before any technical analysis, check for completed design deliverables in the project directory. These are required inputs for the solution analysis and tech spec:
+
+- **Design handoff** (`design/design-handoff.md`) — screen inventory, components, states, interactions, acceptance criteria. This defines exactly what must be built.
+- **Wireframe spec** (`design/wireframe-spec.md`) — user flows, screen structure, edge cases. Use this to understand scope and interaction complexity.
+- **UX brief** (`design/ux-brief.md`) — design constraints that may affect technical choices (platform, accessibility, performance).
+
+If the design handoff does not exist, ask: *"Has the design workflow been completed? The tech spec should reference the approved design so technical choices account for what's being built."*
+
+### Step 1b: Tech stack determination
+
+The tech stack must be established before the tech spec is written. Check if it was already decided in Phase B of `/run` (look for it in the state file or `dev/tech-spec.md`).
+
+If the tech stack has not been decided, determine it now:
+- **Hosting platform** — Vercel, Netlify, AWS, Railway, Fly.io, etc. with rationale
+- **Database** — Postgres, SQLite, Supabase, PlanetScale, etc.
+- **Auth system** — Clerk, Auth0, NextAuth, Supabase Auth, etc.
+- **Frontend framework** — Next.js, React + Vite, SvelteKit, etc.
+- **Backend approach** — API routes (monolith), separate backend, serverless functions
+- **CI/CD tooling** — GitHub Actions, Vercel auto-deploy, etc.
+- **Key third-party services** — any external APIs, payments, email, etc.
+
+For a solo PM-led build, prefer managed services and proven frameworks. Recommend the simplest stack that handles the design requirements.
+
+Document the tech stack in the tech spec and confirm with the user before proceeding.
+
+### Step 1c: Solution analysis
+
+Offer: *"Would you like me to run the `solution-analyst` agent first? It reads your codebase and researches options before committing to a technical design — recommended when the right approach is not yet clear."*
+
+If the user proceeds with solution analysis, run the `solution-analyst` agent with:
+- The design handoff and wireframe spec as context for what must be built
+- The existing codebase to understand stack and patterns
+- The decided tech stack as a constraint
+
+Research 2–4 distinct technical approaches with real-world evidence. Produce a structured options comparison and a clear recommendation.
+
+### Step 1d: Architecture design
 
 Once an approach is agreed, produce an architectural design following the process and template of the `/arch-design` skill:
 - Define NFRs that every downstream decision must satisfy
-- Select and justify the architectural style
+- Select and justify the architectural style (referencing the decided tech stack)
 - Define component boundaries, integration patterns, and cross-cutting concerns
 - Write ADRs for each significant architectural choice
 
 After presenting the architectural design, offer: *"Want me to run the `arch-reviewer` agent to audit the architecture against quality attributes (performance, scalability, availability, security, maintainability, testability, evolvability)?"*
 
-Incorporate the approved architectural design into the technical specification following the process and template of the `/tech-spec` skill:
+### Step 1e: Technical specification
+
+Incorporate the approved architectural design and tech stack into the technical specification following the process and template of the `/tech-spec` skill:
 - Carry the chosen option from the solution analysis into the Solution Options section
+- Include the decided tech stack prominently (hosting, database, auth, framework, CI/CD)
+- Reference the design handoff for data model requirements and API surface
 - Define data models, system components, and key dependencies
 - Identify technical risks and constraints upfront
 
-After presenting the tech spec, offer:
-- *"Want me to run the `tech-spec-reviewer` agent to check for gaps and engineering risks? (Engineering perspective — completeness, performance, reliability)"*
-- *"Want me to run the `pm-tech-reviewer` agent for a PM-readable summary of what was decided and why, with complexity and risk translated into product terms?"*
-- *"Want me to run the `ai-opportunity-analyst` agent to identify where AI could add value in this product — including cost estimates and a fit assessment for each opportunity?"*
+After presenting the tech spec, always offer:
+- *"Want me to run the `ai-opportunity-analyst` agent to identify where AI could add value in this product — including cost estimates and a fit assessment for each opportunity? Recommended before finalizing the tech spec."*
+- *"Want me to run the `tech-spec-reviewer` agent to check for gaps and engineering risks?"*
+- *"Want me to run the `pm-tech-reviewer` agent for a PM-readable summary of what was decided and why?"*
 
 If this is a solo PM-led build, always offer `pm-tech-reviewer` — it is the primary approval review for this context.
 
@@ -160,9 +197,15 @@ If the feature involves APIs, produce an API spec following the process and temp
 
 ## Phase 3 — Development Plan
 
-Produce a development plan following the process and template of the `/dev-plan` skill, based on the approved tech spec.
+Produce a development plan following the process and template of the `/dev-plan` skill. This phase requires all three of the following to be complete before starting:
+- ✅ Tech spec approved (Phase 1) — defines what to build and the architecture
+- ✅ Arch design approved (Phase 1) — defines component boundaries and sequencing constraints
+- ✅ API spec approved or skipped (Phase 2) — defines the API surface tasks must implement
 
-- Break the implementation into tasks with estimates and dependencies
+If any of these are incomplete, do not start the dev plan — return to the relevant phase first.
+
+- Break the implementation into tasks with estimates and dependencies (reference the arch design for component sequencing)
+- Reference the design handoff for acceptance criteria per task — each build task should map to one or more screens or interactions in the design
 - Propose sprint allocation and sequencing
 - Surface any blockers that must be resolved before development can start
 
@@ -298,8 +341,11 @@ Output a clean summary package:
 ### Code Built
 [If Phase 4 AI Build was run: list key files and layers completed. Otherwise: "Not run — build manually using the dev plan."]
 
-### Open Items Before Launch
-1. [Any unresolved findings or TBDs]
-2.
-3.
+### Open Items Before Phase D Testing
+1. [Any unresolved findings from code review, perf review, or security review]
+2. [Any TODO comments in code that must be addressed before testing]
+3. [Any design acceptance criteria not yet implemented]
+
+### Next Step
+Run `/run [project]` to begin Phase D — automated tests, PM requirements test, design conformance test, bug triage, risk clearance, and rollout.
 ```
