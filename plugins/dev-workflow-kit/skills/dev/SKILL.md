@@ -14,6 +14,38 @@ Work through each phase below sequentially. After completing each phase, present
 
 ---
 
+**Navigation standard — applies at every checkpoint**
+
+After presenting each phase output, always append a **What's next?** block before waiting for the user's response. Use this exact format:
+
+> **What's next?** [Recommended next step — next phase name, or next workflow if this is the final phase]
+>
+> **Optionally run at this point:**
+>
+> | Skill / Agent | Plugin | What it does |
+> |--------------|--------|-------------|
+> | `name` | kit | One-line description |
+>
+> *Reply with the name of anything you'd like to run first, or say "continue" to proceed.*
+
+If no optional skills or agents apply at a given phase, omit the table and just show the next step recommendation.
+
+**Phase lookup table — use this to populate the block at each checkpoint:**
+
+| After this phase | Recommended next step | Optional to run |
+|-----------------|----------------------|-----------------|
+| Phase 1 — Tech Spec | Phase 2 — API Spec (if API-first) or Phase 3 — Dev Plan | `tech-spec-reviewer` agent *(dev-workflow-kit)* — completeness and engineering risks; `pm-tech-reviewer` agent *(dev-workflow-kit)* — PM-readable summary and complexity flags; `arch-reviewer` agent *(dev-workflow-kit)* — quality attribute audit; `ai-opportunity-analyst` agent *(dev-workflow-kit)* — where AI adds value in this product |
+| Phase 2 — API Spec | Phase 3 — Dev Plan | No additional agents at this point |
+| Phase 3 — Dev Plan | Phase 4 — AI Build *(optional)* or Phase 5 — QA | `builder` agent *(dev-workflow-kit)* — implement the code layer by layer now (invokes Phase 4); `solution-analyst` agent *(dev-workflow-kit)* — if any technical approach is still undecided |
+| Phase 4 — AI Build | Phase 5 — QA or Phase 6 — Code Review | `code-reviewer` agent *(dev-workflow-kit)* — immediate review of the files just built |
+| Phase 5 — QA Test Plan | Phase 6 — Code Review | `test-case-generator` agent *(dev-workflow-kit)* — expand test cases from user stories |
+| Phase 6 — Code Review | Phase 7 — Performance Review (if SLOs defined) or Phase 8 — Security | `code-reviewer` agent *(dev-workflow-kit)* — line-level findings on actual source files |
+| Phase 7 — Performance Review | Phase 8 — Security Review | No additional agents at this point |
+| Phase 8 — Security Review | Phase 9 — Deployment | `security-reviewer` agent *(dev-workflow-kit)* — OWASP audit of actual source files |
+| Phase 9 — Deployment *(final)* | **Launch package: run `/rollout [feature]`** *(pm-claude-kit)* | exec-kit `/run [project]` — start the live delivery and execution cycle |
+
+---
+
 ## Phase 0 — Project Profile & Builder Context
 
 Before any technical design begins, establish three things: project tier, build context, and which optional phases to include.

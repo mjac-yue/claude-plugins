@@ -10,6 +10,36 @@ Work through the phases below. First determine which project phase is active, th
 
 ---
 
+**Navigation standard — applies at every phase transition**
+
+At the completion of each major phase (A, B, C) and at the end of each cycle summary, always append a **What's next?** block. Use this exact format:
+
+> **What's next?** [Recommended next step]
+>
+> **Optionally run at this point:**
+>
+> | Skill / Agent | Plugin | What it does |
+> |--------------|--------|-------------|
+> | `name` | kit | One-line description |
+>
+> *Reply with the name of anything you'd like to run, or say "continue" to proceed.*
+
+If no optional skills or agents apply, omit the table and just show the next step recommendation.
+
+**Phase transition lookup table — use this to populate the block:**
+
+| At this transition | Recommended next step | Optional to run |
+|-------------------|----------------------|-----------------|
+| Phase A — Round Planning (A1) | Begin PM + Design work for this round | `requirements-gap-finder` agent *(pm-claude-kit)* — stress-test PRD before Design starts; `/prd` skill *(pm-claude-kit)* — generate or refine the PRD |
+| Phase A — Sign-off (A3) | Phase B — Tech Design | `prd-reviewer` agent *(pm-claude-kit)* — final PRD critique before sign-off |
+| Phase B — Round Planning (B1) | Begin Eng review for this round | `arch-reviewer` agent *(dev-workflow-kit)* — architecture quality audit; `pm-tech-reviewer` agent *(dev-workflow-kit)* — translate technical decisions for PM |
+| Phase B — Sign-off (B3) | Phase C — Dev Build | `/tech-spec` skill *(dev-workflow-kit)* — formal tech spec if not yet produced; `/dev-plan` skill *(dev-workflow-kit)* — ordered build task list |
+| Phase C — Cycle Planning (C1) | Begin development cycle | `plan-reviewer` agent *(exec-kit)* — check cycle plan for over-commitment and dependency issues |
+| Phase C — Retrospective (C3) | Next cycle or launch | `blocker-coach` agent *(exec-kit)* — diagnose any unresolved blockers from this cycle |
+| Phase C — All layers complete *(final)* | **Launch package: run `/rollout [feature]`** *(pm-claude-kit)* | `/status` skill *(exec-kit)* — final stakeholder status report; `/retro` skill *(exec-kit)* — end-of-project retrospective |
+
+---
+
 ## State File — Session Continuity
 
 This skill writes and reads a persistent state file named `[project-name]-state.md` in the project folder. This file is the resume point for every new session.

@@ -14,6 +14,35 @@ Work through each phase below sequentially. After completing each phase, present
 
 ---
 
+**Navigation standard — applies at every checkpoint**
+
+After presenting each phase output, always append a **What's next?** block before waiting for the user's response. Use this exact format:
+
+> **What's next?** [Recommended next step — next phase name, or next workflow if this is the final phase]
+>
+> **Optionally run at this point:**
+>
+> | Skill / Agent | Plugin | What it does |
+> |--------------|--------|-------------|
+> | `name` | kit | One-line description |
+>
+> *Reply with the name of anything you'd like to run first, or say "continue" to proceed.*
+
+If no optional skills or agents apply at a given phase, omit the table and just show the next step recommendation.
+
+**Phase lookup table — use this to populate the block at each checkpoint:**
+
+| After this phase | Recommended next step | Optional to run |
+|-----------------|----------------------|-----------------|
+| Phase 1 — UX Brief | Phase 2 — Information Architecture & Flow | `user-research-planner` agent *(design-ux-kit)* — research plan before committing to a design direction |
+| Phase 2 — Wireframe Spec *(Tier 2 final)* | **Start dev: run `/dev [feature]`** | `ux-reviewer` agent *(design-ux-kit)* — heuristics + accessibility audit; `pm-design-reviewer` agent *(design-ux-kit)* — requirements coverage check |
+| Phase 2 — Wireframe Spec *(Tier 3–4)* | Phase 3 — Design Review | `ux-reviewer` agent *(design-ux-kit)*; `pm-design-reviewer` agent *(design-ux-kit)* |
+| Phase 3 — Design Review | Phase 4 — Usability Test (if UX unknowns) or Phase 5 — Design Handoff | `ux-reviewer` agent *(design-ux-kit)* — deeper structured audit; `pm-design-reviewer` agent *(design-ux-kit)* — PM-perspective requirements check |
+| Phase 4 — Usability Test | Phase 5 — Design Handoff | `user-research-planner` agent *(design-ux-kit)* — formal study if test uncovered deep unknowns |
+| Phase 5 — Design Handoff *(final)* | **Start dev: run `/dev [feature]`** | `pm-design-reviewer` agent *(design-ux-kit)* — final requirements coverage check before dev handoff |
+
+---
+
 ## Phase 0 — Project Profile
 
 Before producing anything, establish the project tier. If a Project Profile Card was already produced by exec-kit's `/release` skill, accept it and skip this phase.
