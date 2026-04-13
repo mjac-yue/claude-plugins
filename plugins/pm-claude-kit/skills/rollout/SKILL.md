@@ -1,10 +1,12 @@
 ---
 name: rollout
-description: Generate a product rollout package — audience-specific product summaries and user training materials. Use when a feature or product is ready to launch and needs communication and enablement content.
+description: Generate a product rollout package — audience-specific product summaries and user training materials. Use when a feature or product is ready to launch and needs communication and enablement content. Run this AFTER design and development are complete, not during requirements or spec phases.
 disable-model-invocation: true
 ---
 
 Create a rollout package for: $ARGUMENTS
+
+> **Timing**: This skill should be run at the end of the product development cycle — after design is signed off and development is complete. If requirements are still being written or design has not started, return to `/pm` or `/design` first.
 
 **Output standard — tables**: All documents are read in Obsidian. Always include a blank line before any Markdown table — Obsidian requires this to render `|` syntax as a table rather than plain text.
 

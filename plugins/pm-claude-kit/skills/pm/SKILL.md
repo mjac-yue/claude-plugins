@@ -33,10 +33,12 @@ Derive the tier and declare it, then apply the phase gating below:
 
 | Tier | Default phases | Not default — add back if needed |
 |------|---------------|----------------------------------|
-| **Tier 1 (Micro)** | Problem framing only (one paragraph). Produce a one-paragraph brief with scope, goal, and first action. | Phases 2–7 |
-| **Tier 2 (Small)** | Phase 1 (abbreviated), Phase 4 (2–3 stories only). Run `/brief` instead of PRD. Abbreviated Phase 7. | Phases 2, 3, 5, 6 |
-| **Tier 3 (Medium)** | Phases 1–5, 7. Phase 6 (roadmap) if needed for stakeholder communication. | Phase 6 (roadmap) |
-| **Tier 4 (Large)** | All phases. | — |
+| **Tier 1 (Micro)** | Problem framing only (one paragraph). Produce a one-paragraph brief with scope, goal, and first action. | Phases 2–6 |
+| **Tier 2 (Small)** | Phase 1 (abbreviated), Phase 4 (2–3 stories only). Run `/brief` instead of PRD. | Phases 2, 3, 5, 6 |
+| **Tier 3 (Medium)** | Phases 1–5. Phase 6 (roadmap) if needed for stakeholder communication. | Phase 6 (roadmap) |
+| **Tier 4 (Large)** | Phases 1–6. | — |
+
+> **Note on Phase 7 — Rollout Package**: Rollout is intentionally excluded from the default `/pm` workflow. It belongs at the end of the product development cycle — after design and dev are complete and the product is ready to ship. Run `/rollout` separately at that point. Do not produce rollout materials as part of initial requirements and spec work.
 
 **Checkpoint 0**: Confirm tier before proceeding.
 
@@ -209,48 +211,13 @@ Produce:
 
 ---
 
-**CHECKPOINT 6 / 7 — Roadmap Placement**
+**CHECKPOINT 6 / 6 — Roadmap Placement**
 
 Present the roadmap placement recommendation, then ask:
 
-> Does this placement make sense given your current planning cycle? Reply **"continue"** to generate the rollout package, or adjust before proceeding.
+> Does this placement make sense given your current planning cycle? Reply **"continue"** to complete the PM workflow, or adjust before proceeding.
 
 *After user approves: Check for a project `CLAUDE.md` in the current or parent directory. If it contains an **Output paths** table, save the roadmap output to the file listed for `/roadmap`. Update **Status** to **Done** and **Last updated** to today's date. Confirm the file was written.*
-
----
-
-## Phase 7: Rollout Package — *Tier 3–4 full; Tier 2 abbreviated*
-
-**Tier 1**: Not included by default. Add back if needed.
-**Tier 2**: Produce a one-paragraph launch note — what shipped, who it affects, and one key thing users need to know. No training materials, no full audience breakdown.
-**Tier 3**: Produce internal announcement + support briefing only. Skip customer-facing announcement and training materials unless the change is user-facing.
-**Tier 4**: Full output below.
-
-With the spec complete and roadmap placement confirmed, produce the launch enablement materials.
-
-Generate a rollout package that includes:
-
-**Product Summaries** (tailor to the audiences that apply):
-1. **Internal / team announcement** — what shipped, why it matters, metrics to watch
-2. **Customer-facing announcement** — benefit-first, plain language, clear call to action
-3. **Executive summary** — 1 paragraph: what launched, expected impact, signal timing
-4. **Support team briefing** — what changed, common questions + answers, escalation path
-
-**User Training Materials**:
-1. **Quick Start Guide** — 3-5 steps to get going, one pro tip
-2. **Step-by-Step Instructions** — full walkthrough of the primary use case and key variants; include [screenshot: description] placeholders where visuals are needed
-3. **FAQ** — 5-8 questions users will ask, answered in plain language
-4. **Tips & Best Practices** — how to get the most value; common mistakes to avoid
-
-Note any placeholders (screenshots, links, product-specific details) that need to be filled in before publishing.
-
----
-
-**CHECKPOINT 7 / 7 — Rollout Package**
-
-Present the rollout package, then:
-
-*Check for a project `CLAUDE.md` in the current or parent directory. If it contains an **Output paths** table, save the rollout output to the file listed for `/rollout`. Update **Status** to **Done** and **Last updated** to today's date. Confirm the file was written.*
 
 Then deliver the final summary:
 
@@ -263,24 +230,22 @@ Output a clean summary package:
 ```
 ## [Feature Name] — PM Spec Package
 
-**Status**: Ready for review / Ready for engineering
+**Status**: Ready for design
 **Completed**: [Date]
 
 ### Documents Produced
+[List only what was produced for this tier]
 - Problem Statement
-- Competitive Landscape
-- PRD
+- Competitive Landscape (if run)
+- PRD or Feature Brief
 - User Stories ([n] stories)
-- Prioritization (RICE + MoSCoW)
-- Roadmap Recommendation
-- Rollout Package (summaries + training materials)
+- Prioritization (RICE + MoSCoW) (if run)
+- Roadmap Recommendation (if run)
 
 ### Next Steps
-1. [e.g., Share PRD with engineering for sizing]
-2. [e.g., Get design review on user flows]
-3. [e.g., Validate top assumption: [assumption] by [method]]
-4. [e.g., Add to Q[X] planning doc]
-5. [e.g., Fill in screenshot placeholders in training materials before publishing]
+1. Run `/design [feature]` — UX brief, wireframes, and design handoff
+2. [e.g., Validate top assumption: [assumption] by [method] before design begins]
+3. [e.g., Any other PM actions needed before design starts]
 
 ### Top Open Questions
 1.
