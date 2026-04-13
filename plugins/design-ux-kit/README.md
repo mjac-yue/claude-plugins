@@ -12,6 +12,7 @@ A Claude Code plugin for designers and product teams. Provides slash command ski
 | `/brainstorm [design challenge]` | Structured design brainstorm — asks discovery questions first, then generates concepts across 7 angles with real-world examples, produces Mermaid direction maps and user flow diagrams, side-by-side experience descriptions, and recommends best bet / bold move / quick prototype with alternatives |
 | `/ux-brief [feature or problem]` | Define design scope, target users, goals, constraints, and success criteria |
 | `/wireframe-spec [feature or flow]` | Map key screens, user flows, navigation structure, and interaction states |
+| `/wireframe-html [feature or wireframe spec]` | Produce an interactive HTML wireframe — brainstorms design directions first, generates a self-contained HTML file with inline CSS and vanilla JS, supports iterative feedback rounds, and surfaces discoveries that should update product documents (PRD, user stories) |
 | `/design-review [design description]` | Heuristic review against Nielsen's 10 usability principles and WCAG 2.1 AA accessibility |
 | `/usability-test [feature or flow]` | Generate a usability test plan with tasks, participant criteria, and discussion guide |
 | `/design-handoff [feature]` | Produce a developer-ready handoff spec with component inventory, states, and acceptance criteria |
@@ -57,6 +58,11 @@ You should see `design-ux-kit` listed. The skills will now be available as slash
 ### Brainstorm design concepts before committing to a direction
 ```
 /brainstorm How should users set up their notification preferences — mobile, multiple account types
+```
+
+### Produce an interactive HTML wireframe
+```
+/wireframe-html Notification preferences settings screen — see wireframe spec
 ```
 
 ### Write a UX brief

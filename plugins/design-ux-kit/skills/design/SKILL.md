@@ -25,8 +25,8 @@ Then apply the phase gating below:
 | Tier | Default phases | Not default — add back if needed |
 |------|---------------|----------------------------------|
 | **Tier 1 (Micro)** | If there is a UI change: describe it in plain prose (2–3 sentences). No formal design output needed by default. | All phases |
-| **Tier 2 (Small)** | Phase 1 (abbreviated UX brief), Phase 2 (key screens only). The wireframe spec serves as the handoff. | Phases 3, 4, 5 |
-| **Tier 3 (Medium)** | Phases 1, 2, 3, 5. Phase 4 (usability test) if genuine UX unknowns exist. | Phase 4 (usability test) |
+| **Tier 2 (Small)** | Phase 1 (abbreviated UX brief), Phase 2 (key screens only), Phase 3 (HTML mockup for key screens — serves as handoff). | Phases 4, 5, 6 |
+| **Tier 3 (Medium)** | Phases 1, 2, 3, 4, 6. Phase 5 (usability test) if genuine UX unknowns exist. | Phase 5 (usability test) |
 | **Tier 4 (Large)** | All phases. | — |
 
 **Checkpoint 0**: Confirm tier before proceeding.
@@ -69,11 +69,34 @@ Produce a wireframe specification following the process and template of the `/wi
 
 ---
 
-## Phase 3 — Design Review — *Tier 3–4 only*
+## Phase 3 — HTML Mockup & Iteration — *Tier 2–4*
 
-**Tier 1–2**: Not included by default — design is simple enough that a brief self-check is sufficient. Note any obvious usability concerns inline when presenting Phase 2. Add back if needed.
+**Tier 2**: Produce HTML for the 2–4 key screens from Phase 2. Run 1–2 iteration rounds. The approved HTML mockup serves as the design handoff for Tier 2 — no separate Phase 6 needed.
+**Tier 3–4**: Full process below.
 
-Conduct a heuristic design review following the process and template of the `/design-review` skill, applied to the wireframe spec — use the design-review-template.md structure.
+Produce an interactive HTML wireframe following the process of the `/wireframe-html` skill:
+
+1. **Brainstorm design directions** — present 2–3 distinct layout/interaction directions (name, 2–3 sentence description, real-world example, key design assumption). Ask the user which direction to build before writing any HTML. If a `/brainstorm` has already been run and a direction was chosen, confirm it and proceed.
+
+2. **Produce the HTML mockup** — single self-contained file (inline CSS + minimal vanilla JS). Cover all screens from the wireframe spec. Include a screen navigation bar, mobile/desktop viewport toggle, all states (default, error, empty, loading), and inline design annotations. Style as a clear wireframe (monochrome, placeholder boxes, placeholder text).
+
+3. **Collect feedback** — present the HTML in a fenced code block. Ask specifically: layout fit for the user's context, missing screens or states, confusing flows, unmet PRD requirements.
+
+4. **Iterate** — apply feedback and produce an updated file. List changes made before the code block. Keep a running changelog as HTML comments in `<head>`. After 3 rounds, recommend running the `ux-reviewer` agent before continuing.
+
+5. **Surface PM document updates** — after the mockup is approved, identify discoveries (edge cases, ambiguous requirements, new constraints) that should flow back to product documents. State exactly which document to update and what to change. Ask the user before making edits.
+
+*After user approves: Save the HTML file. If the project `CLAUDE.md` has an output path for `/wireframe-html`, save there — otherwise save as `design/wireframe.html`. Update the **Project status** table. Confirm the file path.*
+
+**Checkpoint 3**: Get approval on the final mockup before moving to Phase 4.
+
+---
+
+## Phase 4 — Design Review — *Tier 3–4 only*
+
+**Tier 1–2**: Not included by default — the HTML mockup from Phase 3 is sufficient for simple projects. Add back if needed.
+
+Conduct a heuristic design review following the process and template of the `/design-review` skill, applied to the approved HTML mockup and wireframe spec — use the design-review-template.md structure.
 
 - Evaluate against Nielsen's 10 usability heuristics
 - Flag accessibility concerns (WCAG 2.1 AA)
@@ -85,11 +108,11 @@ After presenting the review, offer two options:
 
 *After user approves: Check for a project `CLAUDE.md` in the current or parent directory. If it contains an **Output paths** table, save the design review to the file listed for `/design-review`. Update **Status** to **Done** and **Last updated** to today's date. Confirm the file was written.*
 
-**Checkpoint 3**: Get approval (and incorporate any revisions) before moving to Phase 4.
+**Checkpoint 4**: Get approval (and incorporate any revisions) before moving to Phase 5.
 
 ---
 
-## Phase 4 — Usability Test Plan — *Tier 4, or Tier 3 if UX unknowns exist*
+## Phase 5 — Usability Test Plan — *Tier 4, or Tier 3 if UX unknowns exist*
 
 **Tier 1–2**: Not included by default. Add back if needed.
 **Tier 3**: Run only if there are genuine UX unknowns — novel interaction patterns, unclear user mental models, or significant deviation from existing conventions. Otherwise not included by default — note: *"Usability test not run — add back before v2 if user adoption is lower than expected."*
@@ -102,17 +125,18 @@ Produce a usability test plan following the process and template of the `/usabil
 
 *After user approves: Check for a project `CLAUDE.md` in the current or parent directory. If it contains an **Output paths** table, save the usability test plan to the file listed for `/usability-test`. Update **Status** to **Done** and **Last updated** to today's date. Confirm the file was written.*
 
-**Checkpoint 4**: Get approval before moving to Phase 5.
+**Checkpoint 5**: Get approval before moving to Phase 6.
 
 ---
 
-## Phase 5 — Design Handoff — *Tier 3–4 only*
+## Phase 6 — Design Handoff — *Tier 3–4 only*
 
-**Tier 1–2**: Not included by default — the wireframe from Phase 2 serves as the handoff for Tier 2. Tier 1 needs no handoff doc. Add back if needed.
+**Tier 1–2**: Not included by default — the HTML mockup from Phase 3 serves as the handoff for Tier 2. Tier 1 needs no handoff doc. Add back if needed.
 
 Produce a design handoff spec following the process and template of the `/design-handoff` skill — apply the design-handoff-template.md structure and steps.
 
 - Document every screen with component inventory, states, and interaction specs
+- Reference the approved HTML mockup as the source of truth for states and interactions
 - Define acceptance criteria engineering can verify
 - List open questions and decisions deferred to implementation
 
@@ -120,4 +144,4 @@ After presenting the handoff spec, offer: *"Want me to run the `pm-design-review
 
 *After presenting: Check for a project `CLAUDE.md` in the current or parent directory. If it contains an **Output paths** table, save the design handoff to the file listed for `/design-handoff`. Update **Status** to **Done** and **Last updated** to today's date. Confirm the file was written.*
 
-**Checkpoint 5**: Present the complete handoff package. Confirm the design workflow is complete.
+**Checkpoint 6**: Present the complete handoff package. Confirm the design workflow is complete.
