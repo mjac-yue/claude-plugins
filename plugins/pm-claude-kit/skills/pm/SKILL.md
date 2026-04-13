@@ -40,9 +40,25 @@ Derive the tier and declare it, then apply the phase gating below:
 
 > **Note on Phase 7 — Rollout Package**: Rollout is intentionally excluded from the default `/pm` workflow. It belongs at the end of the product development cycle — after design and dev are complete and the product is ready to ship. Run `/rollout` separately at that point. Do not produce rollout materials as part of initial requirements and spec work.
 
-**Checkpoint 0**: Confirm tier before proceeding.
+**Step C — Skipped phase opt-in**
 
----
+After establishing the tier, present the phases not included by default and ask:
+
+*"Before we start — the following phases are skipped by default for your tier. Would you like to add any of them back in?"*
+
+Present only the phases skipped for the established tier, using this description for each:
+
+| Phase | What it adds | When to add it back |
+|-------|-------------|---------------------|
+| Phase 2 — Competitive Landscape | Structured analysis of competing products, approaches, and whitespace | Entering a new market, need to differentiate, or need stakeholder context on competition |
+| Phase 3 — PRD (Full) | Full product requirements doc with goals, requirements, risks, and open questions | Need a formal spec for engineering handoff or stakeholder review instead of a brief |
+| Phase 4 — User Stories | Complete story set with Given/When/Then acceptance criteria, priority, sizing, and edge cases | Need sprint-ready tickets before design begins |
+| Phase 5 — Prioritization | RICE scores + MoSCoW classification with v1 scope recommendation and trade-offs | Have more requirements than capacity and need a defensible scope cut |
+| Phase 6 — Roadmap Placement | Where this fits: Now/Next/Later, suggested quarter, dependencies, and what it displaces | Need to communicate placement to stakeholders or align with an existing planning cycle |
+
+Accept any number of additions. Confirm: *"Got it — I'll include [X, Y] in addition to the defaults. Here's the updated phase list for this session: [list]."*
+
+**Checkpoint 0**: Confirm tier and phase list before proceeding.
 
 ---
 

@@ -29,7 +29,26 @@ Then apply the phase gating below:
 | **Tier 3 (Medium)** | Phases 1, 2, 3, 4, 6. Phase 5 (usability test) if genuine UX unknowns exist. | Phase 5 (usability test) |
 | **Tier 4 (Large)** | All phases. | — |
 
-**Checkpoint 0**: Confirm tier before proceeding.
+**Step C — Skipped phase opt-in**
+
+After establishing the tier, present the phases not included by default and ask:
+
+*"Before we start — the following phases are skipped by default for your tier. Would you like to add any of them back in?"*
+
+Present only the phases skipped for the established tier, using this description for each:
+
+| Phase | What it adds | When to add it back |
+|-------|-------------|---------------------|
+| Phase 1 — UX Brief | Full brief with research recommendations, constraints, success criteria, and assumptions to validate | Complex user problem, multiple user types, or significant unknowns before design begins |
+| Phase 2 — Wireframe Spec | Full IA and flow document: all screens, user flows, component inventory, edge cases | Need a written spec alongside or instead of HTML mockups |
+| Phase 3 — HTML Mockup | Interactive HTML wireframes per screen with iteration rounds | Need a browser-viewable, shareable prototype before design review or handoff |
+| Phase 4 — Design Review | Heuristic audit against Nielsen's 10 usability heuristics + WCAG 2.1 AA | Multiple screens or complex interactions worth auditing before handoff |
+| Phase 5 — Usability Test Plan | Test script, participant criteria, task scenarios, and success metrics | Novel interactions, unclear user mental models, or high-risk flows that need validation |
+| Phase 6 — Design Handoff | Full component inventory, interaction specs, and acceptance criteria per screen | Engineering team needs a formal written spec beyond the HTML mockup |
+
+Accept any number of additions. Confirm: *"Got it — I'll include [X, Y] in addition to the defaults. Here's the updated phase list for this session: [list]."*
+
+**Checkpoint 0**: Confirm tier and phase list before proceeding.
 
 ---
 

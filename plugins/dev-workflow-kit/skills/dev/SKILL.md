@@ -16,7 +16,7 @@ Work through each phase below sequentially. After completing each phase, present
 
 ## Phase 0 — Project Profile & Builder Context
 
-Before any technical design begins, establish two things: project tier and build context.
+Before any technical design begins, establish three things: project tier, build context, and which optional phases to include.
 
 **Step A — Project tier**
 
@@ -26,11 +26,11 @@ Otherwise ask: *"How would you describe the size of this project — Micro (days
 
 Apply phase gating based on the tier:
 
-| Tier | Phases to run |
-|------|--------------|
-| **Tier 1 (Micro)** | Produce an ordered task list with build sequence (infrastructure first) and a 5-item launch checklist. Write code with the commenting standard below. | All planning docs — Phases 1–8 |
-| **Tier 2 (Small)** | Phase 3 (dev plan — abbreviated task list), Phase 5 (abbreviated code review checklist), Phase 7 (security review if auth or user data involved), Phase 8 (abbreviated deployment guide). | Phases 1, 2, 4, 6 |
-| **Tier 3 (Medium)** | Phases 1 (tech spec; arch design if novel architecture), 3, 4, 5, 7, 8. Phase 6 (perf review) if performance SLOs are defined. | Phase 2 (API spec) unless API-first; Phase 6 if no SLOs |
+| Tier | Default phases | Not default — add back if needed |
+|------|---------------|----------------------------------|
+| **Tier 1 (Micro)** | Ordered task list + 5-item launch checklist. Write code with the commenting standard below. Phase 4 (AI Build) if requested. Phase 9 (abbreviated deploy checklist). | Phases 1, 2, 3, 5, 6, 7, 8 |
+| **Tier 2 (Small)** | Phase 3 (abbreviated dev plan), Phase 6 (abbreviated code review checklist), Phase 8 (security check if auth or user data involved), Phase 9 (abbreviated deployment guide). | Phases 1, 2, 4 (AI Build), 5, 7 |
+| **Tier 3 (Medium)** | Phases 1 (tech spec; arch design if novel architecture), 3, 5, 6, 8, 9. Phase 7 (perf review) if performance SLOs are defined. | Phase 2 (API spec) unless API-first; Phase 4 (AI Build); Phase 7 if no SLOs |
 | **Tier 4 (Large)** | All phases. | — |
 
 **Step B — Builder context**
@@ -47,9 +47,27 @@ Ask:
 
 Surface this check at Checkpoint 1 — if the proposed architecture violates any of these constraints, flag it explicitly and recommend a simpler alternative before proceeding.
 
+**Step C — Skipped phase opt-in**
+
+After establishing the tier and builder context, present the phases that are not included by default and ask:
+
+*"Before we start — the following phases are skipped by default for your tier. Would you like to add any of them back in?"*
+
+Present only the phases that are skipped for the established tier. Use this description for each:
+
+| Phase | What it adds | When to add it back |
+|-------|-------------|---------------------|
+| Phase 1 — Solution Analysis & Tech Spec | Formal architecture document, solution options comparison, ADRs | You have 2+ technical approaches to evaluate, or the architecture is novel |
+| Phase 2 — API Specification | Full API contract with endpoints, schemas, auth model | Your feature includes API endpoints that other systems will consume |
+| Phase 4 — AI Build | Claude writes the code layer by layer following the dev plan | You want Claude to implement the feature, not just plan it |
+| Phase 5 — QA & Test Plan | Full test case suite with unit, integration, and e2e coverage | You want structured QA before launch, not just a manual checklist |
+| Phase 7 — Performance Review | Validates against latency and throughput SLOs | You have defined performance targets (e.g. p95 < 200ms) |
+
+Accept any number of additions. Update the phase list for this session before proceeding. Confirm: *"Got it — I'll include [X, Y, Z] in addition to the defaults. Here's the updated phase list for this session: [list]."*
+
 **Coding standard — applies to all code produced in this workflow**:
 
-All code generated in Phases 1–8 must be written with learning in mind. The builder is a PM with some coding experience who uses AI assistance and needs to understand what was built, not just run it. Apply these commenting rules to every code file produced:
+All code generated in Phases 1–9 must be written with learning in mind. The builder is a PM with some coding experience who uses AI assistance and needs to understand what was built, not just run it. Apply these commenting rules to every code file produced:
 
 - **File-level comment**: Every file starts with a 2–4 line comment explaining what this file does and how it fits into the overall system
 - **Function/method comments**: Every function gets a comment explaining: what it does, what each parameter means, and what it returns — in plain English, not jargon
@@ -59,6 +77,8 @@ All code generated in Phases 1–8 must be written with learning in mind. The bu
 - **TODO comments**: Any placeholder or deferred implementation is marked `// TODO: [description]` so nothing is silently incomplete
 
 These comments exist to help the builder understand the codebase as it grows, not just to document for others. Write them as if explaining to a smart non-engineer who will read this code to learn from it.
+
+**Checkpoint 0**: Confirm tier, builder context, and final phase list before proceeding.
 
 ---
 
@@ -141,7 +161,35 @@ Produce a development plan following the process and template of the `/dev-plan`
 
 ---
 
-## Phase 4 — QA & Test Plan — *Tier 3–4 only*
+## Phase 4 — AI Build — *Optional, all tiers*
+
+**All tiers**: Not included by default. Add back when you want Claude to implement the feature, not just plan it. Recommended for solo PM-led builds using AI coding assistance.
+
+This phase hands off the approved dev plan to the `builder` agent, which implements the code layer by layer, pauses after each layer for review, and applies the full commenting standard throughout.
+
+Offer: *"Want me to run the `builder` agent to implement this? It will work through the dev plan layer by layer, pause after each layer for your review, and write all code with full comments so you can understand what was built."*
+
+If the user accepts, invoke the `builder` agent with the following context:
+- The approved dev plan (location in project directory)
+- The feature brief (location in project directory)
+- The wireframe spec if it exists (location in project directory)
+- The builder context from Phase 0 (solo PM-led, team size, constraints)
+
+The `builder` agent will:
+1. Read all context files before writing any code
+2. Work through build layers in the order defined in the dev plan
+3. Pause after each layer and present a summary of files created/modified
+4. Apply the Phase 0 commenting standard to every file
+5. Respect all solo builder constraints (monolith, managed services, proven frameworks)
+6. Flag any task that is significantly more complex than the dev plan estimated
+
+When the builder agent completes, present the build summary (files created, TODOs remaining, any deviations from the plan) and confirm readiness for Phase 5 (QA) and Phase 6 (Code Review).
+
+**Checkpoint 4**: Confirm build is complete and code is ready for review before moving to Phase 5.
+
+---
+
+## Phase 5 — QA & Test Plan — *Tier 3–4 only*
 
 **Tier 1**: Not included by default. Note the two or three things to manually verify before shipping, inline. Add back if needed.
 **Tier 2**: Formal test plan not included by default. Instead, list 4–6 specific things to verify before launch — happy path, the most likely error state, and one edge case. Inline, not a separate document. Add back the full plan if needed.
@@ -156,11 +204,11 @@ After presenting the test plan, offer: *"Want me to run the `test-case-generator
 
 *After user approves: Check for a project `CLAUDE.md` in the current or parent directory. If it contains an **Output paths** table, save the test plan to the file listed for `/test-plan`. Update **Status** to **Done** and **Last updated** to today's date. Confirm the file was written.*
 
-**Checkpoint 4**: Get approval before moving to Phase 5.
+**Checkpoint 5**: Get approval before moving to Phase 6.
 
 ---
 
-## Phase 5 — Code Review — *Tier 2–4*
+## Phase 6 — Code Review — *Tier 2–4*
 
 **Tier 1**: Formal review not included by default. Apply the commenting standard from Phase 0 as you write — that's the quality check. Add back if needed.
 **Tier 2**: Abbreviated checklist only — correctness, error handling, security (if auth/data), no dead code. One pass, no formal findings document.
@@ -174,11 +222,11 @@ Conduct a structured code review following the process and template of the `/cod
 
 After presenting findings, offer: *"Want me to run the `code-reviewer` agent to review actual source files with specific line-level findings?"*
 
-**Checkpoint 5**: Get approval before moving to Phase 6.
+**Checkpoint 6**: Get approval before moving to Phase 7.
 
 ---
 
-## Phase 6 — Performance Review — *Tier 3–4, only if performance SLOs are defined*
+## Phase 7 — Performance Review — *Tier 3–4, only if performance SLOs are defined*
 
 **Tier 1–2**: Not included by default. Add back if needed.
 **Tier 3**: Run only if performance SLOs are explicitly defined in the tech spec (e.g., p95 latency < 200ms). If no SLOs exist: note any obvious performance risks inline (e.g., unbounded queries, missing indexes) and skip the formal review.
@@ -189,11 +237,11 @@ Conduct a performance review following the process and template of the `/perf-re
 - Identify bottlenecks on the critical path (DB queries, external calls, caching gaps)
 - Summarize load test results if available and flag any SLO violations
 
-**Checkpoint 6**: Get approval before moving to Phase 7.
+**Checkpoint 7**: Get approval before moving to Phase 8.
 
 ---
 
-## Phase 7 — Security Review — *Tier 2–4, conditional on risk*
+## Phase 8 — Security Review — *Tier 2–4, conditional on risk*
 
 **Tier 1**: Not included by default unless the change touches authentication, authorisation, or user data — if it does, run the abbreviated Tier 2 check below. Add back for any change involving auth or sensitive data.
 **Tier 2**: Abbreviated — check four things only: (1) is user input validated? (2) are auth checks in place? (3) is sensitive data not logged or exposed? (4) are dependencies up to date? Flag any issue, skip the formal findings document.
@@ -207,11 +255,11 @@ Conduct a security review following the process and template of the `/security-r
 
 After presenting findings, offer: *"Want me to run the `security-reviewer` agent to audit actual source files for specific, line-level vulnerabilities?"*
 
-**Checkpoint 7**: Get approval before moving to Phase 8.
+**Checkpoint 8**: Get approval before moving to Phase 9.
 
 ---
 
-## Phase 8 — Deployment — *All tiers, depth scales*
+## Phase 9 — Deployment — *All tiers, depth scales*
 
 **Tier 1**: 5-step deploy checklist only — the specific commands to run, one smoke test, done.
 **Tier 2**: Abbreviated deployment guide — platform-specific steps, environment variables to set, smoke test checklist (5–8 items), rollback in one sentence.
@@ -229,7 +277,7 @@ With development complete and all reviews signed off, produce a deployment guide
 
 *After presenting: Check for a project `CLAUDE.md` in the current or parent directory. If it contains an **Output paths** table, save the deployment guide to the file listed for `/deployment`. Update **Status** to **Done** and **Last updated** to today's date. Confirm the file was written.*
 
-**Checkpoint 8**: Present the complete deployment guide. Confirm the full dev workflow is complete.
+**Checkpoint 9**: Present the complete deployment guide. Confirm the full dev workflow is complete.
 
 ---
 
@@ -246,6 +294,9 @@ Output a clean summary scaled to the tier:
 
 ### Documents Produced
 [List only what was actually produced for this tier]
+
+### Code Built
+[If Phase 4 AI Build was run: list key files and layers completed. Otherwise: "Not run — build manually using the dev plan."]
 
 ### Open Items Before Launch
 1. [Any unresolved findings or TBDs]

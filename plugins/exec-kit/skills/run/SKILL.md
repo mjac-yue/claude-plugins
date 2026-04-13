@@ -101,7 +101,22 @@ Ask if not already clear from the input:
 
 If the user provides standup updates or cycle context that makes the phase obvious, infer it rather than asking.
 
-Once confirmed, jump to the relevant section below.
+Once confirmed, ask:
+
+**Optional feature opt-in**
+
+*"A few optional quality checks are available throughout this workflow but off by default — would you like to enable any of them?"*
+
+| Feature | What it does | Default |
+|---------|-------------|---------|
+| `requirements-gap-finder` at round start | Stress-tests the PRD for edge cases before Design starts each Phase A round | Off |
+| `prd-reviewer` at Phase A sign-off | Structured critique of the PRD before PM and Designer sign off | Off |
+| `plan-reviewer` at cycle start | Reviews each cycle plan for over-commitment and dependency issues before work begins | Off |
+| `blocker-coach` on blockers | Diagnoses blockers surfaced in standups and produces structured unblocking options | Off |
+
+Accept any selections. Note enabled features and invoke them automatically at the relevant checkpoints throughout the session — no need to ask again. Confirm: *"Got it — I'll run [X, Y] automatically at the relevant checkpoints. Let's continue."*
+
+Jump to the relevant section below.
 
 ---
 
