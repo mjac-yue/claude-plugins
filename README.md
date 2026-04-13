@@ -79,6 +79,7 @@ You can override the recommendation — the plugin explains the trade-offs and c
 |-------|-------------|
 | `/init` | Initialize a new project — creates the standard folder structure, placeholder files, and a `CLAUDE.md` that auto-saves skill outputs across sessions |
 | `/pm` | End-to-end PM workflow orchestrator — 7 phases from problem framing to rollout package |
+| `/brainstorm` | Structured product brainstorm — discovery questions, idea generation with real-world examples, Mermaid concept maps, evaluation table, and ranked recommendations with alternatives |
 | `/brief` | One-page feature brief — lightweight alternative to a full PRD for smaller features |
 | `/prd` | Full Product Requirements Document with goals, requirements, success metrics, and risks |
 | `/user-story` | User stories with Given/When/Then acceptance criteria, priority, and complexity |
@@ -107,6 +108,7 @@ You can override the recommendation — the plugin explains the trade-offs and c
 | Skill | What it does |
 |-------|-------------|
 | `/design` | End-to-end design workflow orchestrator — 5 phases from UX brief to dev handoff |
+| `/brainstorm` | Structured design brainstorm — discovery questions, concept generation with real-world examples, Mermaid direction maps and user flow diagrams, side-by-side experience descriptions, and ranked recommendations with alternatives |
 | `/ux-brief` | UX brief defining scope, target users, goals, constraints, and success criteria |
 | `/wireframe-spec` | Wireframe specification — screens, user flows, components, states, and interactions in structured text |
 | `/design-review` | Heuristic design review against Nielsen's 10 usability principles and WCAG 2.1 AA |

@@ -10,6 +10,7 @@ A Claude Code plugin for Product Managers. Provides slash command skills for com
 |---------|-------------|
 | `/init [project name]` | Initialize a new project — creates the standard folder structure, placeholder files, and a `CLAUDE.md` that auto-saves skill outputs across sessions |
 | `/pm [feature or problem]` | End-to-end PM workflow orchestrator — 7 phases from problem framing through rollout package, with checkpoints |
+| `/brainstorm [challenge or problem]` | Structured product brainstorm — asks discovery questions first, then generates ideas across 7 angles with real-world examples, produces Mermaid concept maps and decision trees, and recommends best bet / bold move / quick win with alternatives |
 | `/brief [feature description]` | One-page feature brief — lightweight alternative to a full PRD for smaller or experimental features |
 | `/prd [feature description]` | Full Product Requirements Document with goals, requirements, success metrics, and risks |
 | `/user-story [feature]` | User stories with Given/When/Then acceptance criteria, priority, and complexity |
@@ -66,6 +67,11 @@ Creates `notification-preferences/` with a `CLAUDE.md` and placeholder files for
 ### Run the full PM workflow
 ```
 /pm Build a notification preferences feature for mobile users
+```
+
+### Brainstorm solutions to a product problem
+```
+/brainstorm We're losing users at the onboarding step where they invite teammates
 ```
 
 ### Write a quick brief

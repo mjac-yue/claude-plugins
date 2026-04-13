@@ -9,6 +9,7 @@ A Claude Code plugin for designers and product teams. Provides slash command ski
 | Command | Description |
 |---------|-------------|
 | `/design [brief or feature]` | Full Design & UX workflow orchestrator — runs all phases from UX brief through handoff, with checkpoints |
+| `/brainstorm [design challenge]` | Structured design brainstorm — asks discovery questions first, then generates concepts across 7 angles with real-world examples, produces Mermaid direction maps and user flow diagrams, side-by-side experience descriptions, and recommends best bet / bold move / quick prototype with alternatives |
 | `/ux-brief [feature or problem]` | Define design scope, target users, goals, constraints, and success criteria |
 | `/wireframe-spec [feature or flow]` | Map key screens, user flows, navigation structure, and interaction states |
 | `/design-review [design description]` | Heuristic review against Nielsen's 10 usability principles and WCAG 2.1 AA accessibility |
@@ -51,6 +52,11 @@ You should see `design-ux-kit` listed. The skills will now be available as slash
 ### Run the full design workflow
 ```
 /design Add a bulk export feature — users need to download their data as CSV
+```
+
+### Brainstorm design concepts before committing to a direction
+```
+/brainstorm How should users set up their notification preferences — mobile, multiple account types
 ```
 
 ### Write a UX brief
