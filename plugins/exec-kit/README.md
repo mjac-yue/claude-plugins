@@ -36,6 +36,7 @@ Phases A and B are **iterative**, not linear handoffs. PM and Design feed back a
 | `/status [project and cycle context]` | Stakeholder status report — RAG status, progress against release plan, risks, decisions needed. |
 | `/risk [project context]` | Risk register — identify, score (likelihood × impact), define mitigations and owners. |
 | `/kickoff [project description]` | Project kickoff doc — scope, team roles, decision authority, working rhythm, communication norms. |
+| `/presentation [topic or brief]` | Create a presentation as a Marp markdown file — cover, agenda, content slides, summary, and closing. Tailored to audience and goal. |
 
 ### Agents
 
