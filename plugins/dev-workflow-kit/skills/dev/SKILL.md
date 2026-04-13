@@ -50,29 +50,31 @@ If no optional skills or agents apply at a given phase, omit the table and just 
 
 ### Prerequisites check
 
-Before any technical design or build begins, confirm the local environment is ready. Present the checklist below and ask the user to run each check command. If anything is missing, provide the install instructions before proceeding — missing tools discovered mid-build cause avoidable delays.
+Before any build begins, confirm the local environment matches what the tech stack requires.
 
-| Tool | Why needed | Check command | Minimum version |
-|------|-----------|---------------|-----------------|
-| **Node.js** | React frontend, Vite build tooling, npm | `node --version` | 18.x or higher |
-| **Python** | Serverless functions, scripts, or backend logic | `python3 --version` | 3.11 or higher |
-| **Git** | Version control; required for auto-deploy pipelines | `git --version` | Any recent version |
-| **Vercel CLI** | Runs frontend and serverless functions together locally; one-command deployment | `vercel --version` | Latest — install: `npm install -g vercel` |
+**Read the tech spec first.** Check `dev/tech-spec.md` (or equivalent) for the decided stack — language, runtime, framework, hosting platform, and any CLI tools. If a Local Development Setup section exists in the tech spec, use that as the source of truth for what to check.
 
-**Accounts required**: Vercel (vercel.com) and GitHub — Vercel deploys from GitHub on push to `main`.
+**If no tech spec exists yet** (running `/dev` before Phase 1 is complete): skip the prerequisites check and note — *"Prerequisites will be confirmed once the tech spec is complete and the stack is decided."*
 
-If Node.js is missing or outdated, recommend **nvm** for version management:
-```bash
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-nvm install 20 && nvm use 20
-```
+**If the tech spec exists**, derive the checklist from it:
+- Identify every runtime, CLI tool, and account the stack requires
+- Ask the user to run the relevant check commands and confirm each one
+- For anything missing, provide the install command specific to the decided stack
+- Once all checks pass, confirm the verified versions and note that they should be recorded in the tech spec's Local Development Setup section
 
-If Python is below 3.11: `brew install python@3.11`
-If Vercel CLI is missing: `npm install -g vercel`
+Common patterns by stack (use only what applies):
 
-Once confirmed, note the installed versions — these should be recorded in the tech spec's Local Development Setup section.
+| If the stack includes… | Check | Minimum |
+|------------------------|-------|---------|
+| Node.js / React / Vite / Next.js | `node --version` | 18.x+ |
+| Python backend or serverless | `python3 --version` | 3.11+ |
+| Git (all projects) | `git --version` | Any recent |
+| Vercel deployment | `vercel --version` | Latest |
+| Docker | `docker --version` | 20.x+ |
+| Ruby on Rails | `ruby --version` | 3.x+ |
+| Go | `go version` | 1.21+ |
 
-*If the project already has a tech spec with a Local Development Setup section, check whether the confirmed versions match. Flag any version mismatch before proceeding.*
+Do not present tools that aren't part of the decided stack. A React + Vercel project does not need a Docker check. A Python Flask project does not need a Node.js check.
 
 ### Builder context
 
