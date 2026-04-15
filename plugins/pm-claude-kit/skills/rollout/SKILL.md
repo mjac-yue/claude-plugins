@@ -14,17 +14,64 @@ Use the template in [rollout-template.md](rollout-template.md) as the structure.
 
 Follow this process:
 
-### Step 1: Clarify context
-If not already clear from the input, ask:
-1. Who are the **audiences**? (internal team, customers, executives, support staff — pick all that apply)
-2. What is the **rollout scope**? (all users, beta group, specific segment, phased)
-3. Is there a **PRD or feature description** to reference? If so, use it as the source of truth.
+### Step 0: Read project inputs
 
-If sufficient context exists, proceed directly.
+Before writing anything, check the project directory for:
+- **Product brief** (`pm/brief.md`) — original scope, users, and success criteria
+- **PRD** (`pm/prd.md`) — full requirements. Use as source of truth for what was planned
+- **User stories** (`pm/user-stories.md`) — P0/P1/P2 feature list
+- **Roadmap** (`pm/roadmap.md`) — planned horizon and timeline
+- **Risk register** (`[project]-risks.md`) — open and accepted risks at launch
+- **Phase D test results** (from exec-kit `/run` Phase D) — what was tested, what passed, what was deferred
+
+Use these to produce the project completion summary in Step 1 and to ground all audience summaries in what was actually built (not just what was planned).
+
+### Step 1: Project Completion Summary
+
+Produce a project-level completion summary before any audience-specific content. This is the single source of truth for what shipped.
+
+**What was built**
+[2–3 sentences: what the product or feature does, the core user workflow, the primary benefit delivered]
+
+**Features implemented (v1)**
+
+| Feature | Priority | Status |
+|---------|----------|--------|
+| [Feature from user stories] | P0/P1 | ✓ Shipped / Deferred to v2 |
+
+**What was deferred to v2**
+[List any P1/P2 items cut from v1 scope and the reason]
+
+**Timeline summary**
+- Project started: [Date from kickoff]
+- Phase A complete (PM + Design): [Date]
+- Phase B complete (Tech Design): [Date]
+- Phase C complete (Dev Build): [Date]
+- Phase D complete (Testing): [Date]
+- Launch date: [Date]
+
+**Resulting risks at launch**
+[Pull from Phase D risk clearance — any Accepted risks with post-launch mitigations. If none, state "No open risks at launch."]
+
+| Risk | Score | Post-launch mitigation |
+|------|-------|----------------------|
+| [Risk] | [1–9] | [What happens if it triggers] |
+
+**Success metrics to watch**
+[Pull from the product brief or PRD success criteria — the 2–3 metrics that will tell us v1 succeeded]
 
 ---
 
-### Step 2: Product Summary (per audience)
+### Step 2: Clarify rollout context
+If not already clear from the input, ask:
+1. Who are the **audiences**? (internal team, customers, executives, support staff — pick all that apply)
+2. What is the **rollout scope**? (all users, beta group, specific segment, phased)
+
+If sufficient context exists from the project inputs, proceed directly.
+
+---
+
+### Step 3: Product Summary (per audience)
 
 Write a tailored summary for each relevant audience. Each version has a different focus:
 
@@ -54,7 +101,7 @@ Write a tailored summary for each relevant audience. Each version has a differen
 
 ---
 
-### Step 3: User Training Materials
+### Step 4: User Training Materials
 
 Produce practical, task-oriented training content. Structure it around what users need to **do**, not what the feature **is**.
 

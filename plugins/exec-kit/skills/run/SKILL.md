@@ -35,8 +35,14 @@ If no optional skills or agents apply, omit the table and just show the next ste
 | Phase B — Round Planning (B1) | Begin Eng review for this round | `arch-reviewer` agent *(dev-workflow-kit)* — architecture quality audit; `pm-tech-reviewer` agent *(dev-workflow-kit)* — translate technical decisions for PM |
 | Phase B — Sign-off (B3) | Phase C — Dev Build | `/tech-spec` skill *(dev-workflow-kit)* — formal tech spec if not yet produced; `/dev-plan` skill *(dev-workflow-kit)* — ordered build task list |
 | Phase C — Cycle Planning (C1) | Begin development cycle | `plan-reviewer` agent *(exec-kit)* — check cycle plan for over-commitment and dependency issues |
-| Phase C — Retrospective (C3) | Next cycle or launch | `blocker-coach` agent *(exec-kit)* — diagnose any unresolved blockers from this cycle |
-| Phase C — All layers complete *(final)* | **Launch package: run `/rollout [feature]`** *(pm-claude-kit)* | `/status` skill *(exec-kit)* — final stakeholder status report; `/retro` skill *(exec-kit)* — end-of-project retrospective |
+| Phase C — Retrospective (C3) | Next cycle or Phase D | `blocker-coach` agent *(exec-kit)* — diagnose any unresolved blockers from this cycle |
+| Phase C — All layers complete *(final)* | Phase D — Testing & Launch | `/risk` skill *(exec-kit)* — review open risks before entering testing |
+| Phase D — D1 Automated Tests | Phase D — D2 PM Requirements Test | No additional agents at this point |
+| Phase D — D2 PM Requirements Test | Phase D — D3 Design Conformance Test | No additional agents at this point |
+| Phase D — D3 Design Conformance Test | Phase D — D4 Bug Triage | `code-reviewer` agent *(dev-workflow-kit)* — line-level review of bugs found |
+| Phase D — D4 Bug Triage | Phase D — D5 Risk Clearance | `blocker-coach` agent *(exec-kit)* — diagnose any bugs blocking launch |
+| Phase D — D5 Risk Clearance | Phase D — D6 Rollout | No additional agents at this point |
+| Phase D — D6 Rollout *(final)* | **Project complete** | `/status` skill *(exec-kit)* — final stakeholder status report; `/retro` skill *(exec-kit)* — end-of-project retrospective |
 
 ---
 
@@ -103,6 +109,20 @@ Confirm with the user before proceeding. If no state file exists, proceed with P
 
 ---
 
+## Phase D — Testing & Launch
+**Status**: Not started | In progress | ✓ Complete [Date]
+**D1 — Automated tests**: Pending | ✓ Pass [Date] | ✗ Fail — [N bugs found]
+**D2 — PM requirements test**: Pending | ✓ Pass [Date] | ✗ Fail — [N gaps found]
+**D3 — Design conformance test**: Pending | ✓ Pass [Date] | ✗ Fail — [N discrepancies found]
+**D4 — Bug triage**: Pending | In progress — [N P0] [N P1] [N P2] open | ✓ Complete [Date]
+**D5 — Risk clearance**: Pending | ✓ Cleared [Date] | ✗ Hold — [blocking risk]
+**D6 — Rollout**: Pending | ✓ Complete [Date]
+
+**Open bugs**:
+- [Bug] — P[0/1/2] — [Owner]
+
+---
+
 ## Key Decisions
 | Date | Phase | Decision |
 |------|-------|----------|
@@ -128,6 +148,7 @@ Ask if not already clear from the input:
 > - **(A) PM + Design alignment** — PM and Design are iterating toward sign-off. No Eng resources engaged yet.
 > - **(B) Tech design** — Eng is reviewing PM + Design outputs, identifying constraints. All three roles engaged.
 > - **(C) Dev build** — PM + Design are signed off, Eng is building. Standups are daily, cycles are sprint or Kanban.
+> - **(D) Testing & Launch** — Code is complete. Running automated tests, PM requirements test, design conformance test, bug triage, risk clearance, and rollout.
 
 If the user provides standup updates or cycle context that makes the phase obvious, infer it rather than asking.
 
@@ -143,6 +164,7 @@ Once confirmed, ask:
 | `prd-reviewer` at Phase A sign-off | Structured critique of the PRD before PM and Designer sign off | Off |
 | `plan-reviewer` at cycle start | Reviews each cycle plan for over-commitment and dependency issues before work begins | Off |
 | `blocker-coach` on blockers | Diagnoses blockers surfaced in standups and produces structured unblocking options | Off |
+| `/risk` at each phase transition | Runs a risk gate after each phase completes — surfaces new risks and asks whether to address before proceeding | Off |
 
 Accept any selections. Note enabled features and invoke them automatically at the relevant checkpoints throughout the session — no need to ask again. Confirm: *"Got it — I'll run [X, Y] automatically at the relevant checkpoints. Let's continue."*
 
@@ -518,4 +540,204 @@ Output a clean handoff summary scaled to the phase:
 
 ### Cycle [N+1] Focus
 Layer [N] — [Layer name] | [Cycle goal for next cycle]
+```
+
+---
+
+## Phase D — Testing & Launch
+
+*Work unit: testing sprint. PM, Designer, and Eng all active. Each test type produces pass/fail results and a bug list. Bugs are triaged and fixed in cycles before risk clearance is granted.*
+
+---
+
+### D1 — Automated Tests
+
+Before any manual testing, run (or direct the builder to run) the automated test suite:
+- Unit tests, integration tests, and e2e tests defined in the QA test plan (`dev/test-plan.md`)
+- If no automated tests exist, note this and treat all coverage as manual in D2/D3
+
+Produce a test run summary:
+```
+## Automated Test Run — [Date]
+
+**Unit tests**: [N passed] / [N total] — [Pass / Fail]
+**Integration tests**: [N passed] / [N total] — [Pass / Fail]
+**E2E tests**: [N passed] / [N total] — [Pass / Fail]
+
+### Failures
+- [Test name] — [What failed] — [Likely cause]
+
+### Coverage gaps
+- [Any area not covered by automated tests that needs manual testing]
+```
+
+If any critical failures exist (P0 tests failing), stop and resolve before D2. Log bugs to the bug register.
+
+**Checkpoint D1**: Confirm automated test results before proceeding.
+**Write state**: Update Phase D — D1 status with pass/fail and number of bugs found.
+
+---
+
+### D2 — PM Requirements Test
+
+The PM manually tests that every P0 user story and acceptance criterion from `pm/user-stories.md` is met by the built product.
+
+Structure the test as a requirements coverage check:
+
+For each P0 user story:
+1. State the story and its acceptance criteria (Given/When/Then)
+2. Step through the built feature and verify each criterion
+3. Mark as: ✓ Pass | ✗ Fail — [what's wrong] | ⚠ Partial — [what's missing]
+
+Produce a summary:
+```
+## PM Requirements Test — [Date]
+
+**Stories tested**: [N]
+**Pass**: [N] | **Fail**: [N] | **Partial**: [N]
+
+### Failures / Gaps
+- Story [ID]: [What's not working or missing]
+  → Bug: [Brief description]
+
+### P1/P2 items not in scope for v1
+- [Confirm these are intentionally deferred]
+```
+
+Log all failures as bugs. Ask: *"Do you want to fix the failures before design conformance testing, or continue and address them all in D4 bug triage?"*
+
+**Checkpoint D2**: Confirm PM test results.
+**Write state**: Update Phase D — D2 status with pass/fail and gaps found.
+
+---
+
+### D3 — Design Conformance Test
+
+The PM or Designer verifies that the built product matches the approved design handoff (`design/design-handoff.md`).
+
+For each screen in the design handoff:
+1. Compare the built screen against the handoff spec
+2. Check: layout zones, components present, labels, states (empty/loading/error/success), interactions, transitions, accessibility requirements
+3. Mark as: ✓ Match | ✗ Discrepancy — [what's different] | N/A — [screen not yet built]
+
+Produce a summary:
+```
+## Design Conformance Test — [Date]
+
+**Screens tested**: [N]
+**Match**: [N] | **Discrepancy**: [N] | **Not built**: [N]
+
+### Discrepancies
+- Screen: [Name]
+  - [Component / state / interaction that doesn't match the design]
+  → Severity: P0 (blocks launch) / P1 (fix soon) / P2 (polish)
+  → Bug: [Brief description]
+```
+
+Log all discrepancies as bugs. Offer: *"Want me to run the `ux-reviewer` agent on the built product to catch anything the conformance check missed?"*
+
+**Checkpoint D3**: Confirm design conformance results.
+**Write state**: Update Phase D — D3 status with discrepancies found.
+
+---
+
+### D4 — Bug Triage
+
+Consolidate all bugs from D1 (automated test failures), D2 (PM requirements gaps), and D3 (design discrepancies) into a single triage table.
+
+For each bug, assign:
+- **Priority**: P0 (blocks launch — cannot ship), P1 (must fix before launch), P2 (fix soon after launch), P3 (backlog)
+- **Owner**: who fixes it
+- **Estimate**: S / M / L effort
+- **Source**: D1 / D2 / D3
+
+Present the triage table and the launch readiness summary:
+
+```
+## Bug Triage — [Date]
+
+| # | Bug | Priority | Owner | Estimate | Source | Status |
+|---|-----|----------|-------|----------|--------|--------|
+| 1 | [Description] | P0 | [Owner] | S/M/L | D1/D2/D3 | Open |
+
+### Summary
+- P0 bugs (launch blockers): [N]
+- P1 bugs (must fix): [N]
+- P2 bugs (post-launch): [N]
+- P3 bugs (backlog): [N]
+
+### Estimated fix effort
+- P0: [total estimate]
+- P1: [total estimate]
+```
+
+If P0 bugs exist, run a fix cycle: the builder addresses P0s, then re-run the relevant test (D1/D2/D3) to confirm the fix. Repeat until no P0s remain.
+
+Offer: *"Want me to invoke the `blocker-coach` agent on any P0 bug that's proving hard to fix?"*
+
+**Checkpoint D4**: No P0 bugs open before proceeding. P1s must have an owner and a fix date.
+**Write state**: Update Phase D — D4 status with open bug counts and fix progress.
+
+---
+
+### D5 — Risk Clearance
+
+Run the `/risk` skill in Phase D clearance mode (Step 6 of the risk skill):
+
+1. Read the full risk register (`[project]-risks.md`)
+2. Review every Open or Accepted risk — was it addressed during D1/D2/D3 testing?
+3. Confirm no new risks were surfaced during testing that aren't in the register
+4. Produce the launch risk clearance report:
+
+```
+## Launch Risk Clearance — [Date]
+
+### Open risks at launch
+| Risk | Score | Status | Post-launch mitigation |
+|------|-------|--------|----------------------|
+| [Risk] | [1–9] | Accepted | [What we'll do if it triggers post-launch] |
+
+### Launch recommendation
+[Clear to launch / Hold — [what must be resolved]]
+```
+
+**Clearance gate**: Do not proceed to D6 if any score 6+ risk is Open with no mitigation or acceptance decision. Ask the user to resolve or explicitly accept each one.
+
+**Checkpoint D5**: Launch risk clearance sign-off.
+**Write state**: Update Phase D — D5 status with clearance decision.
+
+---
+
+### D6 — Rollout
+
+With all tests passed, bugs triaged, and risks cleared, invoke the `/rollout` skill from pm-claude-kit.
+
+The rollout skill will produce the full launch package including:
+- Project / product completion summary (features implemented, timelines, resulting risks)
+- Audience-specific product summaries (internal team, customers, executives, support)
+- User training materials (quick start guide, step-by-step instructions, FAQ, tips)
+
+**Checkpoint D6**: Confirm the rollout package is complete.
+**Write state**: Update Phase D — D6 complete. Set overall project status to ✓ Complete.
+
+---
+
+## Phase D completion summary
+
+```
+## [Project Name] — Testing & Launch Complete
+
+**Phase D dates**: [Start] to [End]
+**Automated tests**: [N passed / N total]
+**PM requirements**: [N passed / N total]
+**Design conformance**: [N matched / N screens]
+**Bugs fixed**: [N P0] [N P1] fixed | [N P2] deferred to post-launch
+**Risk clearance**: ✓ Cleared — [N risks accepted with post-launch mitigations]
+
+### Launch package
+- Rollout doc: [file/location]
+- Open post-launch risks: [list or "none"]
+- Metrics to watch: [from the product brief's success criteria]
+
+**Project status**: Complete ✓
 ```

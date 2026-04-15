@@ -10,6 +10,19 @@ Generate a development plan for: $ARGUMENTS
 
 Use the template in [dev-plan-template.md](dev-plan-template.md) as the structure.
 
+## Step 0: Read required inputs
+
+All three of the following must be complete before the dev plan is written. Check for them in the project directory:
+
+- **Tech spec** (`dev/tech-spec.md`) — includes the decided tech stack, data model, and component breakdown. Required.
+- **Arch design** (`dev/arch-design.md`) — defines component boundaries, integration patterns, and the build sequencing constraints. Required. The dev plan task order must respect these dependencies.
+- **API spec** (`dev/api-spec.md`) — defines endpoint tasks that must be implemented. Required if the feature has APIs. If API spec was skipped (no APIs), note this and proceed.
+- **Design handoff** (`design/design-handoff.md`) — acceptance criteria per screen. Use to ensure every build task has a clear "done" condition linked to the design.
+
+If the tech spec or arch design are missing, stop and ask the user to complete those phases first.
+
+## Step 1–8: Produce the dev plan
+
 Follow this process:
 1. **Restate the goal and constraints** — what is being built, by when, and with what team size or resource constraints?
 2. **Break down the work into tasks**. For each task:
@@ -18,7 +31,7 @@ Follow this process:
    - Estimate in story points or days (include reasoning for non-obvious estimates)
    - Dependencies (which other tasks must be complete first)
    - Owner role (which type of engineer should own this)
-3. **Identify the critical path** — the sequence of dependent tasks that determines the earliest possible completion date
+3. **Identify the critical path** — the sequence of dependent tasks that determines the earliest possible completion date. Use the arch design's component boundaries to determine what must be built before what.
 4. **Flag blockers** — anything that must be resolved, decided, or procured before work can start (design assets, API keys, third-party contracts, platform decisions)
 5. **Propose sprint allocation** — group tasks into sprints (1- or 2-week), accounting for dependencies and parallelism. Assume typical capacity (e.g., 70–80% for planned work, remainder for reviews and unplanned).
 6. **Define milestones** — meaningful checkpoints (e.g., "API complete and tested", "feature flag off in staging") that signal progress
