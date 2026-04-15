@@ -6,6 +6,9 @@ disable-model-invocation: true
 
 Run a product brainstorm for: $ARGUMENTS
 
+> **Learning note — Product Brainstorm**
+> The goal of brainstorming is to generate many options before converging on one — this is called divergent thinking. Research consistently shows that the best ideas rarely come from the first instinct; they emerge after pushing past the obvious solutions to explore adjacent, contrarian, and minimal approaches. The structured brainstorm you're about to run is designed to prevent anchoring on the first idea and to surface angles you'd otherwise miss before you commit to a direction.
+
 **Output standard — diagrams**: All documents are read in Obsidian. Use Mermaid syntax (` ```mermaid ` blocks) for all diagrams — Obsidian renders these natively. Use `flowchart TD` or `flowchart LR` for concept maps and decision trees, `sequenceDiagram` for user flows with back-and-forth steps.
 
 **Output standard — tables**: Always include a blank line before any Markdown table — Obsidian requires this to render `|` syntax as a table rather than plain text.

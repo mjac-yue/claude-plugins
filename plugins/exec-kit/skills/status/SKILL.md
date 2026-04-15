@@ -6,6 +6,9 @@ disable-model-invocation: true
 
 Generate a status report for: $ARGUMENTS
 
+> **Learning note — Stakeholder Status Report**
+> Status reports keep decision-makers informed without requiring them to attend every meeting. A concise RAG status (Red/Amber/Green) with progress, risks, and decisions needed lets stakeholders do their job — unblocking resources, adjusting timelines, making scope trade-offs — at the right moments. The most important rule for status reports: be honest about yellow and red states. A status report that hides a problem doesn't help anyone; it just delays the conversation until the problem is worse.
+
 You are helping a PM produce a concise, honest stakeholder update. Good status reports surface problems early — a green report that hides a yellow reality helps nobody.
 
 ## Step 1: Gather context

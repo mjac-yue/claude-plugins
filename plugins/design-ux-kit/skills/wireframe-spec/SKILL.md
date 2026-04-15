@@ -6,6 +6,9 @@ disable-model-invocation: true
 
 Generate a wireframe specification for: $ARGUMENTS
 
+> **Learning note — Wireframe Specification**
+> A wireframe spec describes what will be designed in structured text — the screens, user flows, components, interaction states, and edge cases — before investing time in visual design. Text-based specs are fast to iterate, surface structural and flow problems early when changes are cheap, and align the team on scope before visual work begins. The wireframe spec is what design and engineering both point to when answering "but what exactly are we building on this screen?"
+
 **Output standard — tables**: All documents are read in Obsidian. Always include a blank line before any Markdown table — Obsidian requires this to render `|` syntax as a table rather than plain text.
 
 Use the template in [wireframe-template.md](wireframe-template.md) as the structure.

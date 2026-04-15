@@ -6,6 +6,9 @@ disable-model-invocation: true
 
 Produce an architectural design for: $ARGUMENTS
 
+> **Learning note — Architectural Design**
+> Architecture decisions are the hardest to change later. The choices made here — how components communicate, how data is structured, how the system scales — create structural constraints that persist for years. A formal architecture review forces you to consider non-functional requirements (performance, security, maintainability, testability) before they become production problems. The goal isn't to over-engineer; it's to make the important structural decisions explicitly, while the cost of changing them is still low.
+
 **Output standard — diagrams**: All documents are read in Obsidian. Use Mermaid syntax (` ```mermaid ` blocks) for all diagrams — `flowchart LR` for system context and component relationships, `sequenceDiagram` for integration flows, `erDiagram` for data ownership maps.
 
 **Output standard — tables**: Always include a blank line before any Markdown table. Obsidian requires this to render `|` syntax as a table rather than plain text.

@@ -6,6 +6,9 @@ disable-model-invocation: true
 
 Create a competitive analysis for: $ARGUMENTS
 
+> **Learning note — Competitive Analysis**
+> Understanding the competitive landscape before you design or build tells you what's already been tried, what users are already accustomed to, and where genuine whitespace exists. It also helps you avoid building something that already exists — or missing a simple positioning angle that would make your product stand out. You don't need to outperform every competitor on every dimension; you need to be better than alternatives on the dimensions that matter most to your target user.
+
 **Output standard — tables**: All documents are read in Obsidian. Always include a blank line before any Markdown table — Obsidian requires this to render `|` syntax as a table rather than plain text.
 
 Use the template in [competitive-template.md](competitive-template.md) as the structure.

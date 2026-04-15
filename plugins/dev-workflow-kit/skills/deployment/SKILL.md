@@ -6,6 +6,9 @@ disable-model-invocation: true
 
 Produce a deployment guide for: $ARGUMENTS
 
+> **Learning note — Deployment Guide**
+> Deployment is the highest-risk moment in the product development lifecycle — you're moving code from a controlled environment to one with real users and real data. A deployment guide ensures every step is planned before you start, environment variables and secrets are ready, and there's a clear rollback plan if something goes wrong. Unplanned deployments are where most production incidents originate. The time spent writing a deployment guide is a small fraction of the time it takes to recover from a preventable incident.
+
 **Output standard — tables**: All documents are read in Obsidian. Always include a blank line before any Markdown table — Obsidian requires this to render `|` syntax as a table rather than plain text.
 
 Use the template in [deployment-template.md](deployment-template.md) as the structure.

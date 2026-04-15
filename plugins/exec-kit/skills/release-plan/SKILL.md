@@ -6,6 +6,9 @@ disable-model-invocation: true
 
 Generate a release plan for: $ARGUMENTS
 
+> **Learning note — Release Plan**
+> A release plan is the master schedule that sequences all the work from first commit to launch. It identifies dependencies between workstreams (you can't build the UI before the API it needs), establishes go/no-go criteria, and gives the whole team a shared timeline to coordinate around. Without it, teams frequently discover at the last minute that two critical pieces of work were blocked on each other, or that a third-party dependency wasn't ready. The release plan doesn't prevent surprises — it surfaces them early enough to do something about them.
+
 **Output standard — diagrams**: All documents are read in Obsidian. Use Mermaid syntax (` ```mermaid ` blocks) for all diagrams. Use `flowchart TD` for dependency maps and build sequences, `gantt` for timelines if phase dates are known.
 
 **Output standard — tables**: Always include a blank line before any Markdown table. Obsidian requires this to render `|` syntax as a table rather than plain text.

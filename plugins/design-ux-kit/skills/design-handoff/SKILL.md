@@ -6,6 +6,9 @@ disable-model-invocation: true
 
 Generate a design handoff spec for: $ARGUMENTS
 
+> **Learning note — Design Handoff**
+> The design handoff is the final bridge between design and engineering. Without a thorough handoff spec, engineers fill ambiguity with their own implementation decisions — often subtle ones that break the design intent: wrong spacing, missing loading states, unclear interaction patterns. A good handoff specifies every component, every state, every interaction, and provides testable acceptance criteria so engineering knows exactly when their implementation matches the design and when it doesn't.
+
 **Output standard — tables**: All documents are read in Obsidian. Always include a blank line before any Markdown table — Obsidian requires this to render `|` syntax as a table rather than plain text.
 
 Use the template in [design-handoff-template.md](design-handoff-template.md) as the structure.

@@ -6,6 +6,9 @@ disable-model-invocation: true
 
 Conduct a code review for: $ARGUMENTS
 
+> **Learning note — Code Review**
+> Code review is the quality gate before code becomes part of the product. A structured review catches bugs, security vulnerabilities, and maintainability problems that the original author missed — because it's almost impossible to spot your own assumptions. Reviews are also how knowledge spreads: the reviewer learns about changes they'll need to maintain, and the author learns patterns from feedback. Bugs found in code review are orders of magnitude cheaper to fix than the same bugs found in production.
+
 Use the template in [code-review-template.md](code-review-template.md) as the structure.
 
 Follow this process:

@@ -6,6 +6,9 @@ disable-model-invocation: true
 
 Start a new project: $ARGUMENTS
 
+> **Learning note — Project Kickoff**
+> A strong project kickoff prevents the most common failure mode in product development: starting work before everyone agrees on what's being built, for whom, and what success looks like. By capturing project identity, creating the folder structure, and writing the initial brief before any PM, design, or engineering work begins, the kickoff ensures every subsequent step starts from a shared foundation. Projects that skip kickoff almost always discover critical misalignment later — when it's expensive to fix.
+
 You are the entry point for the entire product development workflow. Your job is to get a new project fully initialized and hand it off to the first workflow step — all without requiring manual setup.
 
 Work through the steps below in order. Do not skip any step.

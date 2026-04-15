@@ -6,6 +6,9 @@ disable-model-invocation: true
 
 Process status updates for: $ARGUMENTS
 
+> **Learning note — Daily Standup**
+> Daily standups are a communication tool, not a status report to management. Their purpose is to surface blockers and misalignments before they compound into larger problems. A blocker shared in standup can be resolved the same day; a blocker that isn't surfaced can silently derail a whole cycle. The standup format in this skill adapts to the current project phase because the important communication differs: during PM alignment it's open questions, during tech design it's constraints, during development it's blockers.
+
 The format depends on the current project phase. Ask if not already clear: *"Which phase is the project in — (A) PM + Design alignment, (B) Tech design, or (C) Dev build?"*
 
 ---

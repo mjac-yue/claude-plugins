@@ -6,6 +6,9 @@ disable-model-invocation: true
 
 Create a QA test plan for: $ARGUMENTS
 
+> **Learning note — QA Test Plan**
+> A test plan defines what "working" means before the feature ships. It documents the happy path, edge cases, error states, and acceptance criteria so that QA, engineering, and PM have an objective standard to test against. Features shipped without a test plan tend to have well-tested obvious paths and untested edge cases that become post-launch bugs. Writing the test plan before development also surfaces ambiguities in the requirements — if you can't write a test for something, the requirement isn't specific enough yet.
+
 **Output standard — tables**: All documents are read in Obsidian. Always include a blank line before any Markdown table — Obsidian requires this to render `|` syntax as a table rather than plain text.
 
 Use the template in [test-plan-template.md](test-plan-template.md) as the structure.

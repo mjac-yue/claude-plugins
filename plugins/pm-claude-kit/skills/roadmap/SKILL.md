@@ -6,6 +6,9 @@ disable-model-invocation: true
 
 Create a product roadmap for: $ARGUMENTS
 
+> **Learning note — Product Roadmap**
+> A roadmap communicates direction and sequence — not just what will be built, but roughly when and in what order. It creates alignment across the team, gives stakeholders a way to plan around upcoming features, and forces you to be explicit about trade-offs. A roadmap is always a hypothesis, not a commitment; its most important function is creating a shared starting point for conversations about priorities and timing.
+
 **Output standard — tables**: All documents are read in Obsidian. Always include a blank line before any Markdown table — Obsidian requires this to render `|` syntax as a table rather than plain text.
 
 Use the template in [roadmap-template.md](roadmap-template.md) as the structure.

@@ -6,6 +6,9 @@ disable-model-invocation: true
 
 Create a rollout package for: $ARGUMENTS
 
+> **Learning note — Product Rollout**
+> A feature isn't complete when code ships — it's complete when users understand it and adopt it. The rollout package bridges the gap between "technically live" and "users getting value from it." Different audiences need different messages: customers want to know how their problem is solved, support teams need to know what changed and what questions to expect, and executives want to know the strategic impact. Getting these communications right is often what determines whether a technically good product actually succeeds in practice.
+
 > **Timing**: This skill should be run at the end of the product development cycle — after design is signed off and development is complete. If requirements are still being written or design has not started, return to `/pm` or `/design` first.
 
 **Output standard — tables**: All documents are read in Obsidian. Always include a blank line before any Markdown table — Obsidian requires this to render `|` syntax as a table rather than plain text.

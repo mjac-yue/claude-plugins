@@ -6,6 +6,9 @@ disable-model-invocation: true
 
 Help prioritize: $ARGUMENTS
 
+> **Learning note — Feature Prioritization**
+> Every team has more ideas than time to build them. Prioritization frameworks like RICE (Reach × Impact × Confidence ÷ Effort) give you a structured, shareable way to make the "what first?" decision — based on evidence rather than whoever argues most loudly in the room. Good prioritization also means being explicit about what you're *not* doing, which is just as important as what you are, because it prevents scope creep and keeps the team focused on the highest-impact work.
+
 **Output standard — tables**: All documents are read in Obsidian. Always include a blank line before any Markdown table — Obsidian requires this to render `|` syntax as a table rather than plain text.
 
 Use the template in [rice-template.md](rice-template.md) as the structure.

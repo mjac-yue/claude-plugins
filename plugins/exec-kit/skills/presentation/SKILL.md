@@ -6,6 +6,9 @@ disable-model-invocation: true
 
 Create a Marp presentation for: $ARGUMENTS
 
+> **Learning note — Stakeholder Presentation**
+> Stakeholder presentations are how product decisions get made, funded, and communicated. A well-structured deck ensures your analysis, proposal, or update is understood clearly — regardless of how complex the underlying work is. The most common mistake in presentations is leading with detail rather than conclusion: start with what you're asking the audience to understand or decide, then provide the supporting evidence. This skill uses Marp, a markdown-based presentation tool, so slides can be version-controlled and regenerated as easily as any other document.
+
 **Output standard — Marp markdown**: All presentations are rendered with [Marp](https://marp.app/). The output must be a valid `.md` file with the Marp frontmatter block at the top. Every slide is separated by `---`. Use the template in [presentation-template.md](presentation-template.md) as the structural reference.
 
 **Output standard — diagrams**: Use Mermaid syntax (` ```mermaid ` blocks) for any diagrams — `flowchart LR` for flows, `sequenceDiagram` for sequences, `erDiagram` for data models. Marp renders Mermaid natively.
