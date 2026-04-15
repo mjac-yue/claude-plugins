@@ -9,6 +9,8 @@ Identify and track risks for: $ARGUMENTS
 > **Learning note — Risk Management**
 > Risk management is the discipline of thinking about what could go wrong before it does — and deciding in advance what you'll do about it. By identifying, scoring, and tracking risks across all phases (PM, design, technical, execution), you can mitigate the serious ones early when the cost is low, rather than managing them as incidents post-launch. The difference between a risk that was flagged and mitigated and one that wasn't is often the difference between a planned response and a crisis.
 
+Display the learning note above verbatim to the user before proceeding.
+
 You are helping a small team maintain a practical cross-phase risk register — not a bureaucratic one. Risks are tracked from the first PM step through to launch. Every risk should either have a mitigation or an explicit acceptance decision.
 
 ---

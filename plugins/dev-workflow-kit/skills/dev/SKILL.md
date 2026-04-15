@@ -9,6 +9,8 @@ Run the full Development workflow for: $ARGUMENTS
 > **Learning note — Development Workflow**
 > The development workflow is a structured sequence from technical design through deployment. Each phase has a specific purpose: the tech spec defines the approach, the dev plan sequences the work, code review validates the implementation, and the deployment guide moves it safely to production. This sequence exists because the most expensive mistakes happen when decisions are made in the wrong order — architecture decisions made during coding instead of before, security reviews done after a vulnerability is already in production. The workflow forces the right conversations at the right times.
 
+Display the learning note above verbatim to the user before proceeding.
+
 **Output standard — diagrams**: All documents are read in Obsidian. Use Mermaid syntax (` ```mermaid ` blocks) for every diagram — Obsidian renders these natively. Never use ASCII art for diagrams. Relevant types: `flowchart` (system context, component diagrams, data flows), `erDiagram` (data models), `sequenceDiagram` (API request flows), `classDiagram` (code structure), `graph` (dependency graphs).
 
 **Output standard — tables**: Always include a blank line before any Markdown table. Obsidian requires this to render `|` syntax as a table rather than plain text.

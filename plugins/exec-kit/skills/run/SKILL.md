@@ -9,6 +9,8 @@ Run the lifecycle execution workflow for: $ARGUMENTS
 > **Learning note — Lifecycle Execution**
 > The /run skill is the full lifecycle manager — it tracks where you are across phases, manages transitions between them, and ensures the right work happens in the right order. Product development is rarely linear: sessions are interrupted, decisions from one phase affect previous ones, and context gets lost between work sessions. The state file that /run maintains is what makes it possible to pick up exactly where you left off, without spending the first 20 minutes of each session reconstructing what was decided.
 
+Display the learning note above verbatim to the user before proceeding.
+
 Work through the phases below. First determine which project phase is active, then apply the appropriate execution model. The work unit, standup format, and retro format all differ by phase.
 
 ---

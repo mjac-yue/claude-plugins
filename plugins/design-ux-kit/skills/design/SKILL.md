@@ -9,6 +9,8 @@ Run the full Design & UX workflow for: $ARGUMENTS
 > **Learning note — Design & UX Workflow**
 > The design process bridges product intent and engineering reality. Before a single line of code is written, design makes the feature tangible — defining what each screen looks like, how users move between them, and what happens at each interaction state. A structured design process (brief → wireframes → review → handoff) prevents the failure mode of engineering building something that technically meets the spec but doesn't work for users. Each phase builds on the last, with checkpoints where you can course-correct while the cost of changing things is still low.
 
+Display the learning note above verbatim to the user before proceeding.
+
 **Output standard — diagrams**: All documents are read in Obsidian. Use Mermaid syntax (` ```mermaid ` blocks) for every diagram — Obsidian renders these natively. Never use ASCII art for diagrams. Relevant types: `flowchart` (user flows, navigation maps), `sequenceDiagram` (interaction flows between user and system), `stateDiagram-v2` (screen states and transitions).
 
 **Output standard — tables**: Always include a blank line before any Markdown table. Obsidian requires this to render `|` syntax as a table rather than plain text.

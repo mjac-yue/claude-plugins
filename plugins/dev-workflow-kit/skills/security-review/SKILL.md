@@ -9,6 +9,8 @@ Conduct a security review for: $ARGUMENTS
 > **Learning note — Security Review**
 > Security vulnerabilities are exponentially more expensive to fix after launch than before — and the most common ones (broken access control, injection, authentication failures) follow predictable patterns documented in the OWASP Top 10. A security review before deployment is your last structured opportunity to catch these before real users and real data are at risk. It's also a trust issue: users who have their data exposed because of a preventable vulnerability rarely return.
 
+Display the learning note above verbatim to the user before proceeding.
+
 Use the template in [security-review-template.md](security-review-template.md) as the structure.
 
 Follow this process, evaluating each OWASP Top 10 category plus additional checks:

@@ -9,6 +9,8 @@ Run a design brainstorm for: $ARGUMENTS
 > **Learning note — Design Brainstorm**
 > Before committing to a design direction, it's worth exploring multiple approaches. The design brainstorm generates concepts across different angles — conventional patterns, adjacent ideas from other domains, minimal approaches, accessibility-first constraints — to prevent anchoring too quickly on the first solution. The best design is often not the obvious one, and this brainstorm gives you a structured way to discover alternatives before you invest time building anything.
 
+Display the learning note above verbatim to the user before proceeding.
+
 **Output standard — diagrams**: All documents are read in Obsidian. Use Mermaid syntax (` ```mermaid ` blocks) for all diagrams — Obsidian renders these natively. Use `flowchart TD` for user flows and decision trees, `flowchart LR` for concept maps and direction comparisons, `sequenceDiagram` for back-and-forth interaction flows between user and system.
 
 **Output standard — tables**: Always include a blank line before any Markdown table — Obsidian requires this to render `|` syntax as a table rather than plain text.

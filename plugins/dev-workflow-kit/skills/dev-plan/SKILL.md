@@ -9,6 +9,8 @@ Generate a development plan for: $ARGUMENTS
 > **Learning note — Development Plan**
 > A development plan breaks a feature into discrete, sequenced tasks with estimates and dependencies. Without it, engineers often start on the wrong pieces (building UI before the API it depends on), block each other, or discover at the end that the work was larger than expected. The dev plan is the bridge between "what to build" (tech spec) and "how we'll build it in what order" — it makes engineering work predictable and surfaces sequencing problems before they become schedule problems.
 
+Display the learning note above verbatim to the user before proceeding.
+
 **Output standard — tables**: All documents are read in Obsidian. Always include a blank line before any Markdown table — Obsidian requires this to render `|` syntax as a table rather than plain text.
 
 Use the template in [dev-plan-template.md](dev-plan-template.md) as the structure.

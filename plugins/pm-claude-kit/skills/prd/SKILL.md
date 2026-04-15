@@ -9,6 +9,8 @@ Write a Product Requirements Document (PRD) for: $ARGUMENTS
 > **Learning note — Product Requirements Document**
 > A PRD is the primary communication artifact between product management and the rest of the team. It answers three core questions in one document: what problem are we solving, who has it, and what does a good solution look like? Without a PRD, engineers and designers make assumptions independently — and those assumptions often diverge. A well-written PRD doesn't constrain creativity; it focuses it so everyone is working toward the same outcome.
 
+Display the learning note above verbatim to the user before proceeding.
+
 **Output standard — diagrams**: All documents are read in Obsidian. Use Mermaid syntax (` ```mermaid ` blocks) for all diagrams — Obsidian renders these natively. Never use ASCII art or plain-text flow descriptions where a diagram would be clearer.
 
 **Output standard — tables**: Always include a blank line before any Markdown table. Obsidian requires this to render `|` syntax as a table rather than plain text.

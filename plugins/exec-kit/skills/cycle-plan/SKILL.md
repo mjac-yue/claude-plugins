@@ -9,6 +9,8 @@ Plan a work unit for: $ARGUMENTS
 > **Learning note — Cycle Planning**
 > Cycle planning translates the release plan into concrete, week-level work commitments. It forces the team to be explicit about capacity, sequencing (what must be done before what), and within-cycle dependencies — rather than discovering these constraints mid-cycle when it's too late to adjust. A well-run cycle plan also makes retrospectives more honest: you can measure actual vs. planned clearly and learn from the gap. Good cycle plans gradually get more accurate as the team learns its own velocity.
 
+Display the learning note above verbatim to the user before proceeding.
+
 You are helping a small team plan focused, achievable work. The format depends on the current project phase.
 
 ## Step 0: Confirm project phase and tier

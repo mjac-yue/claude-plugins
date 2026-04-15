@@ -9,6 +9,8 @@ Run the full release setup for: $ARGUMENTS
 > **Learning note — Release Orchestrator**
 > Not every project needs the same level of process. A three-day bug fix doesn't need the same documentation and ceremony as a three-month product launch. The release skill assesses your project's scope and team size to determine the right level of process — ensuring small projects aren't burdened with unnecessary overhead while large projects have the structure they need to stay coordinated. The tier system is a starting point, not a constraint; you can always add or remove steps as your project evolves.
 
+Display the learning note above verbatim to the user before proceeding.
+
 **Output standard — diagrams**: All documents are read in Obsidian. Use Mermaid syntax (` ```mermaid ` blocks) for every diagram — Obsidian renders these natively. Never use ASCII art for diagrams. Supported diagram types: `flowchart` (dependency maps, workflows), `gantt` (timelines), `erDiagram` (data models), `sequenceDiagram` (flows), `graph` (component relationships).
 
 **Output standard — tables**: Always include a blank line before any Markdown table. Obsidian requires this to render `|` syntax as a table rather than plain text.

@@ -9,6 +9,8 @@ Write a feature brief for: $ARGUMENTS
 > **Learning note — Feature Brief**
 > A feature brief is the one-page alternative to a full PRD — it captures the essential problem, solution, and success criteria without requiring a full requirements process. Briefs are most useful early in discovery (before you've committed to an approach) and for smaller features where a full PRD would be overkill. The brief is typically the first document design and engineering read, so clarity here prevents questions and misalignment later.
 
+Display the learning note above verbatim to the user before proceeding.
+
 **Output standard — tables**: All documents are read in Obsidian. Always include a blank line before any Markdown table — Obsidian requires this to render `|` syntax as a table rather than plain text.
 
 Use the template in [brief-template.md](brief-template.md) as the structure.

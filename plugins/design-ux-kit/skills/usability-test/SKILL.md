@@ -9,6 +9,8 @@ Create a usability test plan for: $ARGUMENTS
 > **Learning note — Usability Testing**
 > Usability testing is how you find out whether your design actually works — before engineering invests weeks building it. Watching real users attempt real tasks reveals problems that internal reviews always miss: users interpret labels differently than the team did, find confusion in flows that seemed logical, and abandon tasks at points nobody anticipated. A structured test plan defines what you're testing, who you're testing with, and what results would trigger a redesign — so the test produces actionable decisions, not vague observations.
 
+Display the learning note above verbatim to the user before proceeding.
+
 **Output standard — tables**: All documents are read in Obsidian. Always include a blank line before any Markdown table — Obsidian requires this to render `|` syntax as a table rather than plain text.
 
 Use the template in [usability-test-template.md](usability-test-template.md) as the structure.

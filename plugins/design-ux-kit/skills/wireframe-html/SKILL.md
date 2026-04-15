@@ -9,6 +9,8 @@ Produce an HTML wireframe for: $ARGUMENTS
 > **Learning note — Interactive HTML Wireframe**
 > There's a category of problem that only appears when you actually interact with a design: flows that seem logical in a spec but feel confusing in motion, missing states that only become obvious when you hit an error, and layouts that break at a different screen size. An interactive HTML wireframe makes the design clickable and testable before any visual design or engineering work begins — it's the fastest way to surface these problems at the cheapest moment to fix them.
 
+Display the learning note above verbatim to the user before proceeding.
+
 **Output standard — HTML**: All HTML output must be a single self-contained file — inline CSS in a `<style>` block, inline JS in a `<script>` block, no external CDN or file dependencies. Use semantic HTML5 elements. Style as a clear wireframe: monochrome palette (white, light grey, mid grey, dark grey, black), placeholder images as grey `div` boxes with dimensions labeled inside, `[Placeholder text]` for content that will be real copy. The wireframe aesthetic should communicate structure and flow — not finished visual design.
 
 **Output standard — responsiveness**: Every wireframe must include mobile and desktop layouts. Use a CSS class toggle or a `<select>` dropdown in the page to switch between viewports. Default to the mobile view.

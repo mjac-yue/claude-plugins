@@ -9,6 +9,8 @@ Generate an API specification for: $ARGUMENTS
 > **Learning note — API Specification**
 > An API specification is a contract between the backend and any consumer — frontend, mobile app, or third-party integration. Writing this spec before implementation serves two purposes: it catches API design problems early when they're cheap to fix, and it enables frontend and backend to work in parallel (the frontend can build against the spec while the backend implements it). APIs designed after the fact, shaped by implementation convenience rather than consumer needs, are significantly harder to work with.
 
+Display the learning note above verbatim to the user before proceeding.
+
 **Output standard — tables**: All documents are read in Obsidian. Always include a blank line before any Markdown table — Obsidian requires this to render `|` syntax as a table rather than plain text.
 
 Use the template in [api-spec-template.md](api-spec-template.md) as the structure.

@@ -9,6 +9,8 @@ Set up a new product project for: $ARGUMENTS
 > **Learning note — Project Initialization**
 > Good projects start with a clean folder structure and a shared understanding of where things live. The init skill creates that structure before any work begins, so every deliverable — from PM brief through design handoff to deployment guide — has a known home. When all tools and team members save to the same locations, you avoid the confusion of "which version is the latest?" — a surprisingly common source of lost work on small teams.
 
+Display the learning note above verbatim to the user before proceeding.
+
 Follow this process exactly:
 
 ## Step 1 — Clarify project details

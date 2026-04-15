@@ -9,6 +9,8 @@ Conduct a performance review for: $ARGUMENTS
 > **Learning note — Performance Review**
 > Performance problems are often invisible until they're catastrophic — queries that are fast with 100 rows become unusably slow with 100,000, and latency that's imperceptible with 10 users becomes frustrating at 1,000. A structured performance review identifies bottlenecks on the critical path, missing database indexes, and scale risks before users encounter them. Many performance fixes are cheap at design time and expensive after launch — especially database schema decisions that require migrations on production data.
 
+Display the learning note above verbatim to the user before proceeding.
+
 Use the template in [perf-review-template.md](perf-review-template.md) as the structure.
 
 Follow this process:

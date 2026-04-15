@@ -9,6 +9,8 @@ Run a retrospective for: $ARGUMENTS
 > **Learning note — Retrospective**
 > Retrospectives are how teams improve over time rather than repeating the same patterns. By reflecting on what worked and what didn't at the end of each round or cycle — not just at the end of the project — small improvements compound into significant gains. The key is specificity: "communication was good" isn't actionable, but "writing decisions in the shared doc prevented a 3-way email thread" is. This skill adapts the format to the current project phase because the questions worth asking are different at each stage.
 
+Display the learning note above verbatim to the user before proceeding.
+
 The format depends on the current project phase. Ask if not already clear: *"Which phase is the project in — (A) PM + Design alignment, (B) Tech design, or (C) Dev build?"*
 
 ---

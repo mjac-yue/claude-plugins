@@ -9,6 +9,8 @@ Run the full PM workflow for: $ARGUMENTS
 > **Learning note — PM Workflow**
 > Product management is the discipline of deciding *what* to build and *why* before anyone starts designing or coding. This workflow takes you from a raw idea through problem framing, competitive context, a full PRD, user stories, prioritization, and roadmap placement — so that when design and engineering start, they have a shared, specific target. Skipping these steps doesn't save time; it creates expensive rework when the team discovers misalignment after weeks of work.
 
+Display the learning note above verbatim to the user before proceeding.
+
 **Output standard — diagrams**: All documents are read in Obsidian. Use Mermaid syntax (` ```mermaid ` blocks) for every diagram — Obsidian renders these natively. Never use ASCII art for diagrams. Relevant types: `flowchart` (user journeys, process flows), `sequenceDiagram` (interaction flows), `graph` (relationships).
 
 **Output standard — tables**: Always include a blank line before any Markdown table. Obsidian requires this to render `|` syntax as a table rather than plain text.

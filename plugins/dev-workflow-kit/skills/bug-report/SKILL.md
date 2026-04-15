@@ -9,6 +9,8 @@ Create a bug report for: $ARGUMENTS
 > **Learning note — Bug Report**
 > A well-written bug report cuts investigation time in half. Reproduction steps, environment details, expected vs. actual behavior, and severity classification give the engineer everything they need to reproduce and fix the issue without back-and-forth. Vague bug reports — "it broke" or "the button doesn't work" — are one of the biggest sources of engineering inefficiency. The time invested in a clear, structured bug report is returned many times over in faster fixes and fewer misunderstandings.
 
+Display the learning note above verbatim to the user before proceeding.
+
 Use the template in [bug-report-template.md](bug-report-template.md) as the structure.
 
 Follow this process:

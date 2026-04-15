@@ -9,6 +9,8 @@ Review this design: $ARGUMENTS
 > **Learning note — Design Review**
 > A design review evaluates a wireframe or prototype against established usability principles and accessibility standards before engineering begins. Nielsen's 10 heuristics capture decades of research about what makes interfaces intuitive, and WCAG 2.1 AA defines the minimum accessibility bar for most products. Catching usability problems and accessibility violations at this stage — rather than after the product is built — is dramatically cheaper in both time and user trust. A finding in a design review takes minutes to fix; the same issue in production can take weeks.
 
+Display the learning note above verbatim to the user before proceeding.
+
 **Output standard — tables**: All documents are read in Obsidian. Always include a blank line before any Markdown table — Obsidian requires this to render `|` syntax as a table rather than plain text.
 
 Use the template in [design-review-template.md](design-review-template.md) as the structure.

@@ -9,6 +9,8 @@ Generate a technical specification for: $ARGUMENTS
 > **Learning note — Technical Specification**
 > A technical specification translates product requirements into an engineering blueprint. It documents the chosen approach, data model, APIs, dependencies, and risks before a single line of code is written — so engineers can align on these decisions together rather than making them independently. The most important value of a tech spec isn't the document itself; it's the conversation it forces before implementation begins, when the cost of changing direction is still low.
 
+Display the learning note above verbatim to the user before proceeding.
+
 **Output standard — diagrams**: All documents are read in Obsidian. Use Mermaid syntax (` ```mermaid ` blocks) for all diagrams — `flowchart LR` for system context and component diagrams, `erDiagram` for data models, `sequenceDiagram` for API request flows.
 
 **Output standard — tables**: Always include a blank line before any Markdown table. Obsidian requires this to render `|` syntax as a table rather than plain text.

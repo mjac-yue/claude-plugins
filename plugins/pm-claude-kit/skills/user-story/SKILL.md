@@ -9,6 +9,8 @@ Create user stories for: $ARGUMENTS
 > **Learning note — User Stories**
 > User stories translate product requirements into discrete, testable units of work written from the user's perspective. The format — "As a [user], I want [capability] so that [benefit]" — keeps the team focused on user value rather than technical tasks. Acceptance criteria in Given/When/Then format define exactly when a story is "done," which prevents the common problem of a feature being "finished" by engineering but not actually meeting the user's need.
 
+Display the learning note above verbatim to the user before proceeding.
+
 **Output standard — tables**: All documents are read in Obsidian. Always include a blank line before any Markdown table — Obsidian requires this to render `|` syntax as a table rather than plain text.
 
 Use the template in [user-story-template.md](user-story-template.md) as the structure.

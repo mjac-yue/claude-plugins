@@ -9,6 +9,8 @@ Create a UX brief for: $ARGUMENTS
 > **Learning note — UX Brief**
 > The UX brief is the design team's equivalent of the product brief — it translates PM requirements into design terms. It defines what experience is being designed, which users to prioritize, what success looks like from a UX perspective, and what constraints the designer must work within. Without it, designers often over-scope (designing screens that weren't requested) or under-scope (missing flows that were implied but not explicit). The UX brief ensures design and product start from the same shared understanding.
 
+Display the learning note above verbatim to the user before proceeding.
+
 **Output standard — tables**: All documents are read in Obsidian. Always include a blank line before any Markdown table — Obsidian requires this to render `|` syntax as a table rather than plain text.
 
 Use the template in [ux-brief-template.md](ux-brief-template.md) as the structure.
