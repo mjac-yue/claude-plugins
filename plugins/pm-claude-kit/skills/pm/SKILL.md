@@ -35,6 +35,22 @@ After presenting each phase output, always append a **What's next?** block befor
 
 If no optional skills or agents apply at a given phase, omit the table and just show the next step recommendation.
 
+---
+
+**Review-Iterate-Approve standard — applies at phases marked with a designated reviewer**
+
+At any phase that designates a reviewer below, follow this loop automatically — do not skip it:
+
+1. **Run the reviewer** — invoke the designated agent immediately after presenting the phase deliverable. Do not ask whether to run it; just run it.
+2. **Present findings** — summarise critical gaps, high-priority issues, and recommendations from the reviewer's output. Group by severity (Critical / High / Medium).
+3. **Ask what to update** — after the findings, always ask: *"What would you like to update based on this review? List the specific items you want changed, or say **'approved'** if you're satisfied and ready to move on."*
+4. **Apply updates** — make the changes the user requests to the deliverable.
+5. **Re-run the reviewer** — run the same reviewer again on the updated deliverable.
+6. **Repeat** from step 2 until the user explicitly says **"approved"**.
+7. **Only then** proceed to the next phase checkpoint and save the file.
+
+---
+
 **Phase lookup table — use this to populate the block at each checkpoint:**
 
 | After this phase | Recommended next step | Optional to run |
@@ -143,11 +159,14 @@ Write it fully — no placeholder text. Make explicit any assumptions embedded i
 
 ---
 
-**CHECKPOINT 3 / 6 — PRD Draft**
+**CHECKPOINT 3 / 6 — PRD Draft** *(designated reviewer: `prd-reviewer`)*
 
-Present the full PRD, then ask:
+Present the full PRD, then immediately run the **Review-Iterate-Approve loop**:
 
-> Review the PRD above. Reply **"continue"** to generate user stories, or share specific sections to revise. You can also ask to run the `prd-reviewer` agent for a structured critique before proceeding.
+1. Run the `prd-reviewer` agent on the PRD just produced.
+2. Present its findings (critical gaps, high-priority issues, recommendations).
+3. Ask: *"What would you like to update based on this review? List specific items, or say **'approved'** to move on."*
+4. Apply updates, re-run `prd-reviewer`, repeat until the user says **"approved"**.
 
 *After user approves: Check for a project `CLAUDE.md` in the current or parent directory. If it contains an **Output paths** table, save the output to the file listed for `/prd`. Update **Status** to **Done** and **Last updated** to today's date. Confirm the file was written.*
 
@@ -175,11 +194,14 @@ Group stories by persona or feature area. Aim for completeness — these should 
 
 ---
 
-**CHECKPOINT 4 / 6 — User Stories**
+**CHECKPOINT 4 / 6 — User Stories** *(designated reviewer: `requirements-gap-finder`)*
 
-Present the user stories, then ask:
+Present the user stories, then immediately run the **Review-Iterate-Approve loop**:
 
-> Review the user stories above. Reply **"continue"** to move to prioritization, or identify stories to add, remove, or revise. You can also ask to run the `requirements-gap-finder` agent to check for edge cases.
+1. Run the `requirements-gap-finder` agent on the user stories just produced.
+2. Present its findings (missing edge cases, gaps, ambiguous acceptance criteria).
+3. Ask: *"What would you like to update based on this review? List specific stories or criteria to change, or say **'approved'** to move on."*
+4. Apply updates, re-run `requirements-gap-finder`, repeat until the user says **"approved"**.
 
 *After user approves: Check for a project `CLAUDE.md` in the current or parent directory. If it contains an **Output paths** table, save the user stories to the file listed for `/user-story`. Update **Status** to **Done** and **Last updated** to today's date. Confirm the file was written.*
 

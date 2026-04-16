@@ -35,6 +35,22 @@ After presenting each phase output, always append a **What's next?** block befor
 
 If no optional skills or agents apply at a given phase, omit the table and just show the next step recommendation.
 
+---
+
+**Review-Iterate-Approve standard — applies at phases marked with a designated reviewer**
+
+At any phase that designates a reviewer below, follow this loop automatically — do not skip it:
+
+1. **Run the reviewer** — invoke the designated agent immediately after presenting the phase deliverable. Do not ask whether to run it; just run it.
+2. **Present findings** — summarise critical gaps, high-priority issues, and recommendations from the reviewer's output. Group by severity (Critical / High / Medium / Low).
+3. **Ask what to update** — after the findings, always ask: *"What would you like to update based on this review? List the specific items you want changed, or say **'approved'** if you're satisfied and ready to move on."*
+4. **Apply updates** — make the changes the user requests to the deliverable.
+5. **Re-run the reviewer** — run the same reviewer again on the updated deliverable.
+6. **Repeat** from step 2 until the user explicitly says **"approved"**.
+7. **Only then** proceed to the next phase checkpoint and save the file.
+
+---
+
 **Phase lookup table — use this to populate the block at each checkpoint:**
 
 | After this phase | Recommended next step | Optional to run |
@@ -169,12 +185,16 @@ Incorporate the approved architectural design and tech stack into the technical 
 - Define data models, system components, and key dependencies
 - Identify technical risks and constraints upfront
 
-After presenting the tech spec, always offer:
-- *"Want me to run the `ai-opportunity-analyst` agent to identify where AI could add value in this product — including cost estimates and a fit assessment for each opportunity? Recommended before finalizing the tech spec."*
-- *"Want me to run the `tech-spec-reviewer` agent to check for gaps and engineering risks?"*
-- *"Want me to run the `pm-tech-reviewer` agent for a PM-readable summary of what was decided and why?"*
+After presenting the tech spec, immediately run the **Review-Iterate-Approve loop** *(designated reviewer: `tech-spec-reviewer`)*:
 
-If this is a solo PM-led build, always offer `pm-tech-reviewer` — it is the primary approval review for this context.
+1. Run the `tech-spec-reviewer` agent on the tech spec just produced — checks for completeness, engineering risks, missing components, and underspecified logic.
+2. Present its findings (critical gaps, high-risk areas, underspecified sections), grouped by severity.
+3. Ask: *"What would you like to update based on this review? List specific sections or decisions to revise, or say **'approved'** to move on."*
+4. Apply updates, re-run `tech-spec-reviewer`, repeat until the user says **"approved"**.
+
+After the loop, separately offer:
+- *"Want me to run the `pm-tech-reviewer` agent for a PM-readable summary of what was decided and why?"* (Always offer for solo PM-led builds — it is the primary comprehension check for this context.)
+- *"Want me to run the `ai-opportunity-analyst` agent to identify where AI could add value in this product?"*
 
 **Solo builder complexity check**: Before checkpoint, confirm the proposed architecture satisfies the Phase 0 constraints. If any component is flagged — microservices, self-hosted infrastructure, XL complexity estimates — explicitly note this and present a simpler alternative side-by-side before asking for approval.
 
@@ -270,7 +290,12 @@ Conduct a structured code review following the process and template of the `/cod
 - Flag blocking issues that must be resolved before merge
 - Flag non-blocking suggestions and nits separately
 
-After presenting findings, offer: *"Want me to run the `code-reviewer` agent to review actual source files with specific line-level findings?"*
+After presenting findings, immediately run the **Review-Iterate-Approve loop** *(designated reviewer: `code-reviewer`)*:
+
+1. Run the `code-reviewer` agent on the actual source files — line-level findings on correctness, test coverage, error handling, security, and pattern consistency.
+2. Present its findings, distinguishing **blocking issues** (must fix before merge) from **non-blocking suggestions**.
+3. Ask: *"What would you like to update based on this review? List specific files or issues to address, or say **'approved'** if all blockers are resolved."*
+4. Apply updates, re-run `code-reviewer`, repeat until the user says **"approved"**.
 
 **Checkpoint 6**: Get approval before moving to Phase 7.
 
@@ -298,7 +323,12 @@ Conduct a security review following the process and template of the `/security-r
 - Assign severity to each finding (Critical / High / Medium / Low)
 - Block launch on any Critical finding
 
-After presenting findings, offer: *"Want me to run the `security-reviewer` agent to audit actual source files for specific, line-level vulnerabilities?"*
+After presenting findings, immediately run the **Review-Iterate-Approve loop** *(designated reviewer: `security-reviewer`)*:
+
+1. Run the `security-reviewer` agent on actual source files — OWASP Top 10 audit with specific, line-level vulnerability findings.
+2. Present its findings with severity (Critical / High / Medium / Low). Note: **Critical findings block launch** — they must be resolved before the loop can end.
+3. Ask: *"What would you like to update based on this review? List specific vulnerabilities or files to fix, or say **'approved'** once all Critical and High findings are resolved."*
+4. Apply fixes, re-run `security-reviewer`, repeat until the user says **"approved"**. Do not accept approval while any Critical finding remains open.
 
 **Checkpoint 8**: Get approval before moving to Phase 9.
 

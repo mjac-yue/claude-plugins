@@ -35,6 +35,22 @@ After presenting each phase output, always append a **What's next?** block befor
 
 If no optional skills or agents apply at a given phase, omit the table and just show the next step recommendation.
 
+---
+
+**Review-Iterate-Approve standard — applies at phases marked with a designated reviewer**
+
+At any phase that designates a reviewer below, follow this loop automatically — do not skip it:
+
+1. **Run the reviewer** — invoke the designated agent immediately after presenting the phase deliverable. Do not ask whether to run it; just run it.
+2. **Present findings** — summarise critical gaps, high-priority issues, and recommendations from the reviewer's output. Group by severity (Critical / High / Medium).
+3. **Ask what to update** — after the findings, always ask: *"What would you like to update based on this review? List the specific items you want changed, or say **'approved'** if you're satisfied and ready to move on."*
+4. **Apply updates** — make the changes the user requests to the deliverable.
+5. **Re-run the reviewer** — run the same reviewer again on the updated deliverable.
+6. **Repeat** from step 2 until the user explicitly says **"approved"**.
+7. **Only then** proceed to the next phase checkpoint and save the file.
+
+---
+
 **Phase lookup table — use this to populate the block at each checkpoint:**
 
 | After this phase | Recommended next step | Optional to run |
@@ -78,9 +94,14 @@ Produce a wireframe specification following the process and template of the `/wi
 - Define component inventory and interaction states for each screen
 - Note any branching paths, error states, or edge cases
 
-After presenting the spec, offer: *"Want me to run the `user-research-planner` agent on this wireframe spec? It will assess whether any open design questions or assumptions need user validation before we build the HTML mockup. If it surfaces changes, we'll update the spec before moving to mockups."*
+After presenting the spec, immediately run the **Review-Iterate-Approve loop** *(designated reviewer: `pm-design-reviewer`)*:
 
-If the user accepts and research findings require design direction changes, update the wireframe spec before proceeding.
+1. Run the `pm-design-reviewer` agent on the wireframe spec just produced.
+2. Present its findings (requirements coverage gaps, missing user flows, handoff readiness issues).
+3. Ask: *"What would you like to update based on this review? List specific items, or say **'approved'** to move on."*
+4. Apply updates, re-run `pm-design-reviewer`, repeat until the user says **"approved"**.
+
+After the loop, separately offer: *"Want me to also run the `user-research-planner` agent to assess whether any open design questions need user validation before we build the HTML mockup?"* If the user accepts and findings require changes, update the wireframe spec before proceeding.
 
 *After user approves: Check for a project `CLAUDE.md` in the current or parent directory. If it contains an **Output paths** table, save the wireframe spec to the file listed for `/wireframe-spec`. Update **Status** to **Done** and **Last updated** to today's date. Confirm the file was written.*
 
@@ -116,9 +137,14 @@ Conduct a heuristic design review following the process and template of the `/de
 - Flag accessibility concerns (WCAG 2.1 AA)
 - Surface inconsistencies, friction points, and missing states
 
-After presenting the review, offer two options:
-- *"Want me to run the `ux-reviewer` agent for a deeper structured audit? (Designer perspective — heuristics, accessibility, missing states)"*
-- *"Want me to run the `pm-design-reviewer` agent to check coverage against your PRD or brief? (PM perspective — requirements coverage, user flow completeness, handoff readiness)"*
+After presenting the review, immediately run the **Review-Iterate-Approve loop** *(designated reviewer: `ux-reviewer`)*:
+
+1. Run the `ux-reviewer` agent on the HTML mockup and design review just produced — deep structured audit against Nielsen's 10 heuristics and WCAG 2.1 AA.
+2. Present its findings (usability issues, accessibility gaps, missing states), grouped by severity.
+3. Ask: *"What would you like to update based on this review? List specific screens, flows, or components to change, or say **'approved'** to move on."*
+4. Apply updates to the HTML mockup and design review, re-run `ux-reviewer`, repeat until the user says **"approved"**.
+
+After the loop, separately offer: *"Want me to also run the `pm-design-reviewer` agent to confirm all PRD requirements are covered before handoff?"*
 
 *After user approves: Check for a project `CLAUDE.md` in the current or parent directory. If it contains an **Output paths** table, save the design review to the file listed for `/design-review`. Update **Status** to **Done** and **Last updated** to today's date. Confirm the file was written.*
 
@@ -151,8 +177,13 @@ Produce a design handoff spec following the process and template of the `/design
 - Define acceptance criteria engineering can verify
 - List open questions and decisions deferred to implementation
 
-After presenting the handoff spec, offer: *"Want me to run the `pm-design-reviewer` agent one final time against the complete handoff? It checks that every requirement is covered and the spec is specific enough for a developer to build without a sync meeting."*
+After presenting the handoff spec, immediately run the **Review-Iterate-Approve loop** *(designated reviewer: `pm-design-reviewer`)*:
 
-*After presenting: Check for a project `CLAUDE.md` in the current or parent directory. If it contains an **Output paths** table, save the design handoff to the file listed for `/design-handoff`. Update **Status** to **Done** and **Last updated** to today's date. Confirm the file was written.*
+1. Run the `pm-design-reviewer` agent on the complete handoff spec — checks every requirement is covered and the spec is specific enough for a developer to build without a sync meeting.
+2. Present its findings (uncovered requirements, underspecified interactions, handoff gaps).
+3. Ask: *"What would you like to update based on this review? List specific sections or screens to revise, or say **'approved'** to finalise the handoff."*
+4. Apply updates, re-run `pm-design-reviewer`, repeat until the user says **"approved"**.
+
+*After user approves: Check for a project `CLAUDE.md` in the current or parent directory. If it contains an **Output paths** table, save the design handoff to the file listed for `/design-handoff`. Update **Status** to **Done** and **Last updated** to today's date. Confirm the file was written.*
 
 **Checkpoint 6**: Present the complete handoff package. Confirm the design workflow is complete.
