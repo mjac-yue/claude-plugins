@@ -157,7 +157,15 @@ Fill in the defaults based on the tier:
 - Set risk checkpoints
 - Build the complete launch readiness checklist
 
-After presenting (Tier 3–4 only), offer: *"Want me to run the `plan-reviewer` agent to check the plan before we proceed?"*
+**Tier 3–4 only — Review-Iterate-Approve loop** *(designated reviewer: `plan-reviewer`)*:
+
+After presenting the full release plan, immediately run the loop:
+1. Run the `plan-reviewer` agent — checks for over-commitment, missing dependencies, wrong build-layer sequencing, and feasibility.
+2. Present its findings (critical issues, warnings, suggestions).
+3. Ask: *"What would you like to update based on this review? List specific items, or say **'approved'** to proceed."*
+4. Apply updates, re-run `plan-reviewer`, repeat until the user says **"approved"**.
+
+**Tier 1–2**: No reviewer loop — proceed directly to checkpoint.
 
 **Checkpoint 2**: Get approval before proceeding to the risk register.
 

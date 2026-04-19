@@ -215,3 +215,5 @@ Then append the standard **What's next?** block:
 > | `/release-plan` skill | exec-kit | Generate a full release plan with phases, milestones, and build layers before starting work |
 >
 > *Reply with anything you'd like to run first, or say "start" to begin with `/run`.*
+
+**Optional team document**: If the user is working with a team (not solo), offer to produce a kickoff document using the structure from [kickoff-template.md](kickoff-template.md) — covers team roles, working rhythm, decision-making authority, communication norms, and key dependencies. Save as `[project-slug]-kickoff.md` in the project root. This is separate from `CLAUDE.md` and is intended for sharing with collaborators.

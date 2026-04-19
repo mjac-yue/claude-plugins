@@ -1,7 +1,7 @@
 ---
 name: init
 description: Project initialisation agent — creates the project directory and folder structure, writes a populated CLAUDE.md with output paths and status table, creates placeholder deliverable files in pm/, design/, and dev/, and writes the initial exec state file. Invoked automatically by the /kickoff skill. Do not invoke directly.
-model: claude-sonnet-4-5
+model: sonnet
 tools:
   - Read
   - Write

@@ -422,7 +422,12 @@ At the start of each new cycle, produce a cycle plan following the process and t
 - Assign parallel workstreams if 2-person team
 - Set the cycle goal
 
-After presenting the plan, offer: *"Want me to run the `plan-reviewer` agent to check this cycle plan for over-commitment or dependency issues before you start?"*
+After presenting the plan, immediately run the **Review-Iterate-Approve loop** *(designated reviewer: `plan-reviewer`)*:
+
+1. Run the `plan-reviewer` agent — checks for over-commitment, dependency issues, and incorrect build-layer sequencing.
+2. Present its findings (critical issues, warnings).
+3. Ask: *"What would you like to update based on this review? List specific items, or say **'approved'** to start the cycle."*
+4. Apply updates, re-run `plan-reviewer`, repeat until the user says **"approved"**.
 
 **Checkpoint C1**: Get approval before the cycle begins.
 **Write state**: Update `[project]-state.md` — current phase (C), cycle number, current build layer, selected work items and owners, cycle goal.
@@ -639,7 +644,7 @@ Produce a summary:
   → Bug: [Brief description]
 ```
 
-Log all discrepancies as bugs. Offer: *"Want me to run the `ux-reviewer` agent on the built product to catch anything the conformance check missed?"*
+Log all discrepancies as bugs. Offer: *"Want me to run the `ux-reviewer` agent *(design-ux-kit)* on the built product to catch anything the conformance check missed?"*
 
 **Checkpoint D3**: Confirm design conformance results.
 **Write state**: Update Phase D — D3 status with discrepancies found.

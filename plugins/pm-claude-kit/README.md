@@ -16,9 +16,7 @@ A Claude Code plugin for Product Managers. Provides slash command skills for com
 | `/user-story [feature]` | User stories with Given/When/Then acceptance criteria, priority, and complexity |
 | `/competitive-analysis [product/market]` | Competitive landscape from existing knowledge — positioning, gaps, and whitespace |
 | `/prioritization [list of features]` | RICE, MoSCoW, and impact/effort prioritization for features or initiatives |
-| `/okr [goal/team/quarter]` | OKRs with measurable key results, baselines, and data sources |
 | `/roadmap [feature or initiative]` | Product roadmap by theme and timeframe (Now/Next/Later or quarterly) |
-| `/meeting-notes [raw notes or description]` | Structure raw meeting notes into decisions, action items, and open questions |
 | `/rollout [feature]` | Launch enablement package — audience summaries and user training materials |
 | `/tech-stack [project description]` | Tech stack recommendation optimized for solo PM-builder — framework, database, hosting, cost estimate |
 
@@ -87,11 +85,6 @@ Creates `notification-preferences/` with a `CLAUDE.md` and placeholder files for
 ### Create user stories
 ```
 /user-story Notification preferences — users should control which emails they receive
-```
-
-### Process meeting notes
-```
-/meeting-notes Discussed Q3 roadmap. Sarah wants to prioritize mobile. John pushed back on timeline. We agreed to do discovery first. Sarah to run 5 user interviews by end of month.
 ```
 
 ### Competitive analysis

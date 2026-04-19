@@ -113,7 +113,7 @@ When called at the end of Phase D (before rollout), produce a **launch risk clea
 
 ## Output format
 
-Produce the risk register as a table, sorted by score descending:
+Use the structure from [risk-template.md](risk-template.md) — summary table, active risks table, and per-risk detail blocks. Produce the register sorted by score descending:
 
 | # | Risk | Category | L | I | Score | Status | Mitigation / Decision | Owner | Review date |
 |---|------|----------|---|---|-------|--------|----------------------|-------|------------|
