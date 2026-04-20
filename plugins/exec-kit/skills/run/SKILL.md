@@ -239,6 +239,16 @@ Structure into:
 - What decisions were made
 - What is still open or flagged [TBC]
 
+After summarising PRD changes, run the **downstream design impact check**: check the project `CLAUDE.md` status table for any design artifact that is no longer "Not started". For each one, the PRD changes may have invalidated assumptions it was built on. Flag affected artifacts and add them to the Document Sync Queue in `[project]-state.md`. Do not mark those artifacts as current until they have been reviewed and updated.
+
+| Design artifact | If status is not "Not started" | Action |
+|----------------|-------------------------------|--------|
+| UX brief | Flag for update | Revisit problem framing and user goals against updated PRD |
+| Wireframe spec | Flag for update | Revisit screen list and flows against updated requirements |
+| HTML mockups | Flag for update | Revisit after wireframe spec is updated |
+| Design review | Flag for update | Re-run once mockups are updated |
+| Design handoff | Flag for update | Re-run once design review is complete |
+
 **Design changes this round**
 - What screens were created or revised
 - What design decisions were made

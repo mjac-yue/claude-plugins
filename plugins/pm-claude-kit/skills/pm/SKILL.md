@@ -191,6 +191,18 @@ Present the full PRD, then immediately run the **Review-Iterate-Approve loop**:
 
 *After user approves: Check for a project `CLAUDE.md` in the current or parent directory. If it contains an **Output paths** table, save the output to the file listed for `/prd`. Update **Status** to **Done** and **Last updated** to today's date. Confirm the file was written.*
 
+**Downstream design impact check**: After any PRD changes are approved, check the project `CLAUDE.md` status table for design artifacts that are no longer "Not started". For each one that exists, the PRD changes may have invalidated assumptions it was built on — flag it for review and update before it can be considered current:
+
+| Design artifact | If status is not "Not started" | Action |
+|----------------|-------------------------------|--------|
+| UX brief | Flag for update | Revisit problem framing, user goals, and constraints against the updated PRD |
+| Wireframe spec | Flag for update | Revisit screen list, flows, and component decisions against updated requirements |
+| HTML mockups | Flag for update | Revisit after wireframe spec is updated |
+| Design review | Flag for update | Re-run once mockups are updated |
+| Design handoff | Flag for update | Re-run once design review is complete |
+
+Tell the user which design artifacts are affected and add them to the Document Sync Queue in the state file. Do not proceed as if these are current until they have been reviewed and updated.
+
 **Risk gate**: Before proceeding, identify any risks surfaced in writing the PRD:
 - Are there P0 requirements with unclear acceptance criteria or high implementation uncertainty?
 - Are there dependencies on third-party services, teams, or decisions not yet made?
@@ -258,6 +270,18 @@ Present the user stories, then immediately run the **Review-Iterate-Approve loop
 4. Apply updates, re-run `requirements-gap-finder`, repeat until the user says **"approved"**.
 
 *After user approves: Check for a project `CLAUDE.md` in the current or parent directory. If it contains an **Output paths** table, save the user stories to the file listed for `/user-story`. Update **Status** to **Done** and **Last updated** to today's date. Confirm the file was written.*
+
+**Downstream design impact check**: After any user story changes are approved, check the project `CLAUDE.md` status table for design artifacts that are no longer "Not started". User story changes — new edge cases, revised acceptance criteria, added or removed flows — can invalidate design decisions already made:
+
+| Design artifact | If status is not "Not started" | Action |
+|----------------|-------------------------------|--------|
+| UX brief | Flag for update | Revisit user goals and task flows against updated stories |
+| Wireframe spec | Flag for update | Revisit screen list and interaction flows against updated acceptance criteria |
+| HTML mockups | Flag for update | Revisit after wireframe spec is updated |
+| Design review | Flag for update | Re-run once mockups are updated |
+| Design handoff | Flag for update | Re-run once design review is complete |
+
+Tell the user which design artifacts are affected and add them to the Document Sync Queue in the state file. Do not proceed as if these are current until they have been reviewed and updated.
 
 **Risk gate**: Before proceeding, identify any risks in the user story set:
 - Are any P0 stories XL complexity with high uncertainty?
