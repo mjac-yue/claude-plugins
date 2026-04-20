@@ -266,19 +266,36 @@ Run at the end of each round before deciding whether to start another:
 
 **Apply the Questions Gate** — check `questions.md` before sign-off. All P0 questions must be resolved and affected documents updated. P1 questions block sign-off; they must be resolved here. Carry P2 forward.
 
+**Phase A artifact completeness check** — before recommending sign-off, read the project `CLAUDE.md` and check the status of every required Phase A deliverable. Phase A is not complete until ALL of the following are Done:
+
+| Workstream | Required artifact | Skill that produces it |
+|------------|-------------------|----------------------|
+| PM | Brief | `/brief` (done at kickoff) |
+| PM | Competitive analysis | `/competitive-analysis` |
+| PM | PRD | `/prd` — must have passed at least one `prd-reviewer` loop |
+| PM | User stories | `/user-story` |
+| PM | Prioritization | `/prioritization` |
+| PM | Roadmap | `/roadmap` |
+| Design | UX brief | `/ux-brief` |
+| Design | Wireframe spec | `/wireframe-spec` |
+| Design | HTML mockups | `/wireframe-html` |
+| Design | Design review | `/design-review` |
+| Design | Design handoff | `/design-handoff` |
+
+For any artifact that is Not started or In progress: do not recommend sign-off. Instead, tell the user which artifact is missing and which skill to run next. Only once all rows show Done should sign-off be offered.
+
 - Review all open questions from this round in `questions.md` — are any still unresolved?
-- Assess PRD completeness independently of question resolution: are all P0 requirements defined with acceptance criteria? Has the PRD been through at least one `prd-reviewer` pass? Resolving open questions is necessary but not sufficient — the PM must explicitly confirm the PRD quality meets the bar before sign-off is recorded.
-- Assess design completeness: are all P0 screens covered?
+- Assess PRD completeness independently of question resolution: are all P0 requirements defined with acceptance criteria? Has the PRD been through at least one `prd-reviewer` pass? Resolving open questions is necessary but not sufficient — the PM must explicitly confirm PRD quality meets the bar.
 - Check for scope drift: did the round introduce new requirements that need to be scoped?
 
 **Sign-off decision**:
-- If all P0/P1 questions in `questions.md` are resolved AND the PM explicitly confirms PRD quality AND the Designer confirms design completeness → record sign-off and move to Phase B
-- If P0/P1 questions remain, or PRD quality is not confirmed, or design has gaps → plan the next round; note what specifically must be resolved
+- If all Phase A artifacts are Done AND all P0/P1 questions in `questions.md` are resolved AND the PM explicitly confirms PRD quality AND the Designer confirms design completeness → record sign-off and move to Phase B
+- If any artifact is missing, or P0/P1 questions remain, or quality is not confirmed → identify exactly what is missing and direct the user to the appropriate skill before sign-off
 
 Offer: *"Want me to run the `prd-reviewer` agent to check the PRD before you sign off?"* (Requires pm-claude-kit to be installed.)
 
-**Checkpoint A3**: Record sign-off or confirm next round scope.
-**Write state**: Update `[project]-state.md` — open P0/P1 questions summary, PM and Designer sign-off status. If Phase A is complete, mark status ✓ and set Current Position to Phase B.
+**Checkpoint A3**: Record sign-off or confirm what must be completed next.
+**Write state**: Update `[project]-state.md` — artifact completion status, open P0/P1 questions summary, PM and Designer sign-off status. If Phase A is complete, mark status ✓ and set Current Position to Phase B.
 
 ---
 
