@@ -11,6 +11,19 @@ Start a new project: $ARGUMENTS
 
 Display the learning note above verbatim to the user before proceeding.
 
+**Output standard — file writing**: Write all deliverables directly to their output files. Do not print full document content to the terminal. At the end of each step, present a **Review before continuing** block listing every file written and what changed, so the user knows exactly what to open before approving. Format:
+
+> **Review before continuing**
+> - `[file path]` — [one line: what was written or updated]
+> - `questions.md` — [N new questions added, e.g. "2 P0, 1 P1"] *(omit if none)*
+
+**Questions gate standard — applies at every step**: Before completing any step, check `questions.md` for open questions:
+- Any open **P0** question → stop; resolve with the user now, record the decision in `questions.md`, update all affected documents listed on that entry, then continue
+- Any open **P1** question → flag to user; must be resolved before the current phase can sign off
+- **P2** questions → note and carry forward
+
+**Logging questions**: Whenever a question is surfaced during this skill, write it to `questions.md` immediately with: question text, priority (P0/P1/P2), phase raised, owner, and affected documents (every file that will need updating when the question is resolved).
+
 You are the entry point for the entire product development workflow. Your job is to get a new project fully initialized and hand it off to the first workflow step — all without requiring manual setup.
 
 Work through the steps below in order. Do not skip any step.
@@ -174,7 +187,22 @@ Use this structure:
 
 ---
 
-## Step 5 — Present the workflow roadmap and recommended next step
+## Step 5 — Generate the initial release plan
+
+Run the `/release-plan` skill using the project context captured in Steps 1–4. This is mandatory — not optional. The release plan at this stage is based on the brief and initial scope; it will be refined as the PRD, design, and tech design mature.
+
+Pass the following context:
+- Project name and description
+- Primary user and problem statement
+- Builder context (solo PM / small team / larger team)
+- Out-of-scope boundaries from Step 1
+- Today's date
+
+After the release plan is generated, save it to the project directory and update the Project status table in `CLAUDE.md`. Then continue to Step 6.
+
+---
+
+## Step 6 — Present the workflow roadmap and recommended next step
 
 Present the full workflow roadmap so the user knows what lies ahead, then recommend the immediate next step.
 
@@ -212,7 +240,6 @@ Then append the standard **What's next?** block:
 > | Skill / Agent | Plugin | What it does |
 > |--------------|--------|-------------|
 > | `competitive-analyst` agent | pm-claude-kit | Research competitors in parallel before PM work begins — useful if you want competitive context before framing the problem |
-> | `/release-plan` skill | exec-kit | Generate a full release plan with phases, milestones, and build layers before starting work |
 >
 > *Reply with anything you'd like to run first, or say "start" to begin with `/run`.*
 

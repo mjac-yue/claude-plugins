@@ -11,6 +11,19 @@ Run the lifecycle execution workflow for: $ARGUMENTS
 
 Display the learning note above verbatim to the user before proceeding.
 
+**Output standard — file writing**: Write all deliverables directly to their output files. Do not print full document content to the terminal. At the end of each checkpoint, present a **Review before continuing** block listing every file written and what changed, so the user knows exactly what to open before approving. Format:
+
+> **Review before continuing**
+> - `[file path]` — [one line: what was written or updated]
+> - `questions.md` — [N new questions added, e.g. "2 P0, 1 P1"] *(omit if none)*
+
+**Questions gate standard — applies at every checkpoint throughout this skill**: Before completing any checkpoint, check `questions.md` for open questions:
+- Any open **P0** question → stop; resolve with the user now, record the decision and date in `questions.md` (moving the row to Resolved Decisions), update every document listed in the "Affected docs" column, then continue
+- Any open **P1** question → flag to user; must be resolved before the current phase can sign off
+- **P2** questions → note and carry forward
+
+**Logging questions**: Whenever a question is surfaced during this skill — in iteration updates, constraint reviews, standup blockers, or any other context — write it to `questions.md` immediately with: question text, priority (P0/P1/P2), phase raised, owner, and affected documents. Do not store questions only in the state file; the log is the single source of truth.
+
 Work through the phases below. First determine which project phase is active, then apply the appropriate execution model. The work unit, standup format, and retro format all differ by phase.
 
 ---
@@ -133,6 +146,18 @@ Confirm with the user before proceeding. If no state file exists, proceed with P
 |------|-------|----------|
 | | | |
 
+## Questions & Decisions Log
+> Full log: `questions.md` — summary of open items below.
+
+**Open P0 (blockers)**:
+- (none) or [Question — Owner]
+
+**Open P1 (must resolve before sign-off)**:
+- (none) or [Question — Owner]
+
+**Open P2 (carry forward)**:
+- (none) or [Question — Owner]
+
 ## Artifacts
 | Artifact | File | Status |
 |----------|------|--------|
@@ -196,8 +221,10 @@ At the start of each round, produce a round plan:
 
 After presenting the plan, offer: *"Want me to run the `requirements-gap-finder` agent to stress-test the current PRD before Design starts this round?"* (Requires pm-claude-kit to be installed.)
 
+**Apply the Questions Gate** — check `questions.md` before confirming the round plan. Resolve any P0 questions now; flag P1 questions to the user; carry P2 forward. Update `questions.md` with any new questions surfaced during round planning.
+
 **Checkpoint A1**: Confirm round scope before work begins.
-**Write state**: Update `[project]-state.md` — current phase (A), round number, round scope (PRD sections / screens in scope), open questions carried from previous round.
+**Write state**: Update `[project]-state.md` — current phase (A), round number, round scope (PRD sections / screens in scope), open P0/P1 questions summary (full log in `questions.md`).
 
 ---
 
@@ -222,6 +249,8 @@ Structure into:
 - Questions from PM that require Design input
 - Decisions that need to be made before the next round can proceed
 
+Write every question surfaced here to `questions.md` immediately — assign priority (P0 if it blocks the current round, P1 if it must resolve before sign-off, P2 otherwise), owner, and list every document that will need updating when it is resolved.
+
 **Round health**
 - Are PM and Design converging toward sign-off, or are new questions opening up?
 - Is scope creeping? Flag if new requirements are being introduced mid-round.
@@ -235,19 +264,21 @@ This phase can be run multiple times within a round. Each run processes one upda
 
 Run at the end of each round before deciding whether to start another:
 
-- Review all open questions from this round — are any still unresolved?
-- Assess PRD completeness: are all P0 requirements defined with acceptance criteria?
+**Apply the Questions Gate** — check `questions.md` before sign-off. All P0 questions must be resolved and affected documents updated. P1 questions block sign-off; they must be resolved here. Carry P2 forward.
+
+- Review all open questions from this round in `questions.md` — are any still unresolved?
+- Assess PRD completeness independently of question resolution: are all P0 requirements defined with acceptance criteria? Has the PRD been through at least one `prd-reviewer` pass? Resolving open questions is necessary but not sufficient — the PM must explicitly confirm the PRD quality meets the bar before sign-off is recorded.
 - Assess design completeness: are all P0 screens covered?
 - Check for scope drift: did the round introduce new requirements that need to be scoped?
 
 **Sign-off decision**:
-- If no open questions remain and both PM and Designer are satisfied → record sign-off and move to Phase B
-- If open questions remain → plan the next round; note what specifically needs to be resolved
+- If all P0/P1 questions in `questions.md` are resolved AND the PM explicitly confirms PRD quality AND the Designer confirms design completeness → record sign-off and move to Phase B
+- If P0/P1 questions remain, or PRD quality is not confirmed, or design has gaps → plan the next round; note what specifically must be resolved
 
 Offer: *"Want me to run the `prd-reviewer` agent to check the PRD before you sign off?"* (Requires pm-claude-kit to be installed.)
 
 **Checkpoint A3**: Record sign-off or confirm next round scope.
-**Write state**: Update `[project]-state.md` — remaining open questions, PM and Designer sign-off status. If Phase A is complete, mark status ✓ and set Current Position to Phase B.
+**Write state**: Update `[project]-state.md` — open P0/P1 questions summary, PM and Designer sign-off status. If Phase A is complete, mark status ✓ and set Current Position to Phase B.
 
 ---
 
@@ -308,8 +339,10 @@ At the start of each review round:
 - Define the goal for this round: which components Eng will review, which constraints PM/Design will respond to
 - Set the sync point: when all three will review Eng's findings and PM/Design responses
 
+**Apply the Questions Gate** — check `questions.md` before confirming the round plan. Resolve any P0 questions now; flag P1 questions; carry P2 forward. Write any new constraints or questions surfaced here to `questions.md`.
+
 **Checkpoint B1**: Confirm round scope before work begins.
-**Write state**: Update `[project]-state.md` — current phase (B), round number, components under review this round, open constraints carried from previous round.
+**Write state**: Update `[project]-state.md` — current phase (B), round number, components under review this round, open P0/P1 questions summary (full log in `questions.md`).
 
 ---
 
@@ -348,6 +381,8 @@ Structure into:
 - Questions from Eng that need Design decisions
 - Unresolved constraints requiring further investigation
 
+Write every open question or unresolved constraint to `questions.md` immediately — assign priority (P0 if it blocks the round, P1 if it must resolve before Phase B sign-off, P2 otherwise), owner, and list all documents that will need updating when resolved.
+
 **Round health**
 - Are constraints being resolved, or are new ones being uncovered?
 - Are PM/Design updates introducing scope that needs another Eng review?
@@ -359,7 +394,9 @@ Structure into:
 
 Run at the end of each review round:
 
-- Review all open constraints — are any still unresolved?
+**Apply the Questions Gate** — check `questions.md` before sign-off. All P0 questions must be resolved and affected documents updated. P1 questions block sign-off. Carry P2 forward.
+
+- Review all open constraints and questions in `questions.md` — are any still unresolved?
 - Confirm the tech stack is decided — hosting, database, auth, CI/CD. If not yet agreed, this is a blocker for Phase B completion.
 - Prompt to update the release plan Layer 1 with the confirmed tech choices (replacing the TBD placeholders set during initial planning).
 - Check that all PRD and design updates are internally consistent
@@ -429,8 +466,10 @@ After presenting the plan, immediately run the **Review-Iterate-Approve loop** *
 3. Ask: *"What would you like to update based on this review? List specific items, or say **'approved'** to start the cycle."*
 4. Apply updates, re-run `plan-reviewer`, repeat until the user says **"approved"**.
 
+**Apply the Questions Gate** — check `questions.md` before starting the cycle. Resolve any P0 questions now; flag P1 questions; carry P2 forward. Write any new questions or blockers surfaced during cycle planning to `questions.md`.
+
 **Checkpoint C1**: Get approval before the cycle begins.
-**Write state**: Update `[project]-state.md` — current phase (C), cycle number, current build layer, selected work items and owners, cycle goal.
+**Write state**: Update `[project]-state.md` — current phase (C), cycle number, current build layer, selected work items and owners, cycle goal, open P0/P1 questions summary.
 
 ---
 
@@ -457,8 +496,10 @@ Run a retrospective following the process and template of the `/retro` skill:
 - Define one process change to try next cycle
 - Check whether the release plan is still on track
 
+**Apply the Questions Gate** — check `questions.md` before closing the cycle. Any blockers surfaced in standups that were logged as P0 questions must be resolved before the retrospective can complete. Write any new questions surfaced during retro to `questions.md`.
+
 **Checkpoint C3**: Get approval before generating the status report.
-**Write state**: Update `[project]-state.md` — completed items, carried-over items with reasons, next cycle focus.
+**Write state**: Update `[project]-state.md` — completed items, carried-over items with reasons, next cycle focus, open P0/P1 questions summary.
 
 ---
 
@@ -583,6 +624,8 @@ Produce a test run summary:
 
 If any critical failures exist (P0 tests failing), stop and resolve before D2. Log bugs to the bug register.
 
+**Apply the Questions Gate** — check `questions.md` before proceeding to D2. Resolve any P0 questions now and update affected documents.
+
 **Checkpoint D1**: Confirm automated test results before proceeding.
 **Write state**: Update Phase D — D1 status with pass/fail and number of bugs found.
 
@@ -616,6 +659,8 @@ Produce a summary:
 
 Log all failures as bugs. Ask: *"Do you want to fix the failures before design conformance testing, or continue and address them all in D4 bug triage?"*
 
+**Apply the Questions Gate** — check `questions.md` before proceeding to D3. Resolve any P0 questions and update affected documents.
+
 **Checkpoint D2**: Confirm PM test results.
 **Write state**: Update Phase D — D2 status with pass/fail and gaps found.
 
@@ -645,6 +690,8 @@ Produce a summary:
 ```
 
 Log all discrepancies as bugs. Offer: *"Want me to run the `ux-reviewer` agent *(design-ux-kit)* on the built product to catch anything the conformance check missed?"*
+
+**Apply the Questions Gate** — check `questions.md` before proceeding to D4. Resolve any P0 questions and update affected documents.
 
 **Checkpoint D3**: Confirm design conformance results.
 **Write state**: Update Phase D — D3 status with discrepancies found.
@@ -685,6 +732,8 @@ If P0 bugs exist, run a fix cycle: the builder addresses P0s, then re-run the re
 
 Offer: *"Want me to invoke the `blocker-coach` agent on any P0 bug that's proving hard to fix?"*
 
+**Apply the Questions Gate** — check `questions.md` before proceeding to D5. All P0 and P1 questions must be resolved before risk clearance begins.
+
 **Checkpoint D4**: No P0 bugs open before proceeding. P1s must have an owner and a fix date.
 **Write state**: Update Phase D — D4 status with open bug counts and fix progress.
 
@@ -712,6 +761,8 @@ Run the `/risk` skill in Phase D clearance mode (Step 6 of the risk skill):
 ```
 
 **Clearance gate**: Do not proceed to D6 if any score 6+ risk is Open with no mitigation or acceptance decision. Ask the user to resolve or explicitly accept each one.
+
+**Apply the Questions Gate** — check `questions.md` before launch. No open P0 or P1 questions permitted at this stage. Any remaining P2 questions should be logged as post-launch follow-ups.
 
 **Checkpoint D5**: Launch risk clearance sign-off.
 **Write state**: Update Phase D — D5 status with clearance decision.

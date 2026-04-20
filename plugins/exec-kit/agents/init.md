@@ -75,6 +75,7 @@ All skills save their outputs to these paths. Do not change the paths — skills
 
 | Skill | Output file | Status | Last updated |
 |-------|-------------|--------|--------------|
+| Questions & Decisions | `questions.md` | Active | [Today's date] |
 | `/pm` | *(orchestrator — see below)* | — | — |
 | `/competitive-analysis` | `pm/competitive-analysis.md` | Not started | — |
 | `/prd` | `pm/prd.md` | Not started | — |
@@ -136,6 +137,7 @@ Replace `[project-slug]` with the actual slugified project name.
 
 Write the following empty placeholder files so skills can append to them without needing to create them:
 
+- `questions.md` — Questions & Decisions Log (see format below)
 - `pm/competitive-analysis.md` — header: `# [Project Name] — Competitive Analysis`
 - `pm/prd.md` — header: `# [Project Name] — PRD`
 - `pm/user-stories.md` — header: `# [Project Name] — User Stories`
@@ -153,7 +155,29 @@ Write the following empty placeholder files so skills can append to them without
 - `dev/test-plan.md` — header: `# [Project Name] — QA Test Plan`
 - `dev/deployment.md` — header: `# [Project Name] — Deployment Guide`
 
-Each file should contain only the header line. Do not add placeholder content.
+All files except `questions.md` should contain only the header line. Do not add placeholder content.
+
+Write `questions.md` to the project root with the following structure:
+
+```markdown
+# [Project Name] — Questions & Decisions Log
+
+> Open P0 questions block step progression. P1 questions block phase sign-off. P2 questions are carried forward.
+
+---
+
+## Open Questions
+
+| # | Question | Priority | Phase raised | Owner | Affected docs |
+|---|----------|----------|--------------|-------|---------------|
+
+---
+
+## Resolved Decisions
+
+| # | Question | Priority | Phase raised | Owner | Affected docs | Decision | Date resolved |
+|---|----------|----------|--------------|-------|---------------|----------|---------------|
+```
 
 ---
 

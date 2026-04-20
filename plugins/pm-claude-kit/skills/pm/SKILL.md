@@ -11,9 +11,22 @@ Run the full PM workflow for: $ARGUMENTS
 
 Display the learning note above verbatim to the user before proceeding.
 
+**Output standard — file writing**: Write all deliverables directly to their output files. Do not print full document content to the terminal. At the end of each checkpoint, present a **Review before continuing** block listing every file written and what changed, so the user knows exactly what to open before approving. Format:
+
+> **Review before continuing**
+> - `[file path]` — [one line: what was written or updated]
+> - `questions.md` — [N new questions added, e.g. "2 P0, 1 P1"] *(omit if none)*
+
 **Output standard — diagrams**: All documents are read in Obsidian. Use Mermaid syntax (` ```mermaid ` blocks) for every diagram — Obsidian renders these natively. Never use ASCII art for diagrams. Relevant types: `flowchart` (user journeys, process flows), `sequenceDiagram` (interaction flows), `graph` (relationships).
 
 **Output standard — tables**: Always include a blank line before any Markdown table. Obsidian requires this to render `|` syntax as a table rather than plain text.
+
+**Questions gate standard — applies at every checkpoint**: Before completing any phase, check `questions.md` for open questions:
+- Any open **P0** question → stop; resolve with the user now, record the decision, update all affected documents listed on that entry, then continue
+- Any open **P1** question → flag to user; must be resolved before this phase sign-off
+- **P2** questions → note and carry forward
+
+**Logging questions**: Whenever a question is surfaced during this workflow — in the brief, PRD, competitive analysis, or any other output — write it to `questions.md` immediately with: question text, priority (P0/P1/P2), phase raised, owner, and affected documents (every file that will need updating when the question is resolved). Do not embed open questions only within the document; the log is the single source of truth.
 
 You are a senior product manager executing a structured discovery-to-spec process. Work through each phase below in sequence. **After each phase, stop and present a checkpoint** — do not proceed to the next phase until the user confirms or provides feedback.
 
@@ -57,10 +70,10 @@ At any phase that designates a reviewer below, follow this loop automatically �
 |-----------------|----------------------|-----------------|
 | Phase 1 — Product Brief | Phase 2 — Competitive Landscape (or brainstorm to refine brief) | `/brainstorm` skill *(pm-claude-kit)* — run if the solution direction is unclear or needs more exploration before committing to the PRD |
 | Phase 2 — Competitive Landscape | Phase 3 — PRD Draft | `prd-reviewer` agent *(pm-claude-kit)* — critique competitive framing before writing the PRD; `competitive-analyst` agent *(pm-claude-kit)* — run live web research if quick scan was used |
-| Phase 3 — PRD Draft | Phase 4 — User Stories | `prd-reviewer` agent *(pm-claude-kit)* — 8-dimension structured PRD critique; `requirements-gap-finder` agent *(pm-claude-kit)* — edge cases and missing requirements |
-| Phase 4 — User Stories | Phase 5 — Prioritization | `requirements-gap-finder` agent *(pm-claude-kit)* — stress-test stories before scope is cut |
-| Phase 5 — Prioritization | Phase 6 — Roadmap Placement | No additional agents at this point |
-| Phase 6 — Roadmap Placement *(final)* | **Start design: run `/design [feature]`** | No additional agents at this point |
+| Phase 3 — PRD Draft | Phase 4 — Roadmap Placement | `prd-reviewer` agent *(pm-claude-kit)* — 8-dimension structured PRD critique; `requirements-gap-finder` agent *(pm-claude-kit)* — edge cases and missing requirements |
+| Phase 4 — Roadmap Placement | Phase 5 — User Stories | No additional agents at this point |
+| Phase 5 — User Stories | Phase 6 — Prioritization | `requirements-gap-finder` agent *(pm-claude-kit)* — stress-test stories before scope is cut |
+| Phase 6 — Prioritization *(final)* | **Start design: run `/design [feature]`** | No additional agents at this point |
 
 ---
 
@@ -76,13 +89,15 @@ Follow the process of the `/brief` skill:
 4. **Define success criteria** — two to three measurable signals that confirm the feature is working. Prefer outcome metrics over output metrics.
 5. **Draw the scope boundary** — what this brief does NOT include. Prevents scope creep from the first conversation.
 6. **List key assumptions** — two to three beliefs about users, behavior, or context this brief depends on. Flag which carries the most risk if wrong.
-7. **Surface open questions** — anything that must be answered before design or development starts.
+7. **Surface open questions** — anything that must be answered before design or development starts. Write each question to `questions.md` immediately (do not embed only in the brief document) with priority, phase raised, owner, and affected documents.
 
 If $ARGUMENTS already answers some of these, skip those questions and confirm your understanding.
 
 ---
 
 **CHECKPOINT 1 / 6 — Product Brief**
+
+**Apply the Questions Gate** — check `questions.md` before proceeding. Resolve any P0 questions now; flag P1 questions; carry P2 forward.
 
 Present the brief, then ask:
 
@@ -124,6 +139,8 @@ First, ask the user:
 
 **CHECKPOINT 2 / 6 — Competitive Landscape**
 
+**Apply the Questions Gate** — check `questions.md` before proceeding. Resolve any P0 questions now; flag P1 questions; carry P2 forward.
+
 Present the competitive landscape output, then ask:
 
 > Does this match your understanding of the competitive space? Reply **"continue"** to move to PRD drafting, or share feedback to adjust.
@@ -161,6 +178,10 @@ Write it fully — no placeholder text. Make explicit any assumptions embedded i
 
 **CHECKPOINT 3 / 6 — PRD Draft** *(designated reviewer: `prd-reviewer`)*
 
+**Apply the Questions Gate** — check `questions.md` before proceeding. Any P0 questions must be resolved and affected documents updated before the PRD review begins.
+
+Note: The PRD template includes an "Open Questions" section — any questions listed there must also be written to `questions.md`. The log is the single source of truth; the PRD section should reference it rather than duplicate it.
+
 Present the full PRD, then immediately run the **Review-Iterate-Approve loop**:
 
 1. Run the `prd-reviewer` agent on the PRD just produced.
@@ -179,7 +200,38 @@ Present any score 6+ risks and ask: *"Do you want to address these before genera
 
 ---
 
-## Phase 4: User Stories
+## Phase 4: Roadmap Placement
+
+With the PRD reviewed and approved, place this initiative on the roadmap now — while the problem and solution are freshly defined. The roadmap will be refined after prioritization in Phase 6.
+
+Produce:
+1. **Recommended horizon** — Now / Next / Later, with reasoning
+2. **Suggested quarter** — if the user has indicated current planning cycle, slot it specifically
+3. **Dependencies to resolve first** — what must happen before this can start
+4. **Confidence level** — High / Medium / Low, with the key risks that affect it
+5. **What this displaces or deprioritizes** — no roadmap addition is free; flag the trade-off
+
+---
+
+**CHECKPOINT 4 / 6 — Roadmap Placement**
+
+**Apply the Questions Gate** — check `questions.md` before proceeding. Resolve any P0 questions; flag P1 questions; carry P2 forward.
+
+Present the roadmap placement, then ask:
+
+> Does this placement make sense given your current planning cycle? Reply **"continue"** to move to user stories, or adjust before proceeding.
+
+*After user approves: Check for a project `CLAUDE.md` in the current or parent directory. If it contains an **Output paths** table, save the roadmap output to the file listed for `/roadmap`. Update **Status** to **Done** and **Last updated** to today's date. Confirm the file was written.*
+
+**Risk gate**: Before proceeding, identify any risks from roadmap placement:
+- Are there dependencies that could shift the timing?
+- Does this placement create conflicts with other planned work?
+
+Present any score 6+ risks and ask: *"Do you want to address these before writing user stories, or continue and track them?"*
+
+---
+
+## Phase 5: User Stories
 
 With the PRD confirmed, generate user stories.
 
@@ -194,7 +246,9 @@ Group stories by persona or feature area. Aim for completeness — these should 
 
 ---
 
-**CHECKPOINT 4 / 6 — User Stories** *(designated reviewer: `requirements-gap-finder`)*
+**CHECKPOINT 5 / 6 — User Stories** *(designated reviewer: `requirements-gap-finder`)*
+
+**Apply the Questions Gate** — check `questions.md` before proceeding. Resolve any P0 questions; flag P1 questions; carry P2 forward.
 
 Present the user stories, then immediately run the **Review-Iterate-Approve loop**:
 
@@ -214,7 +268,7 @@ Present any score 6+ risks and ask: *"Do you want to address these before priori
 
 ---
 
-## Phase 5: Prioritization
+## Phase 6: Prioritization
 
 With the stories confirmed, score and rank the work.
 
@@ -227,42 +281,23 @@ Produce:
 
 ---
 
-**CHECKPOINT 5 / 6 — Prioritization**
+**CHECKPOINT 6 / 6 — Prioritization**
+
+**Apply the Questions Gate** — check `questions.md` before proceeding. All open P0 and P1 questions must be resolved before the PM workflow can complete. Resolve each, update affected documents, then continue.
 
 Present the prioritization output, then ask:
 
-> Does this prioritization reflect your team's current constraints and goals? Reply **"continue"** to get roadmap placement, or adjust scores/scope before proceeding.
+> Does this prioritization reflect your team's current constraints and goals? Reply **"continue"** to complete the PM workflow, or adjust scores/scope before proceeding.
 
-*After user approves: Check for a project `CLAUDE.md` in the current or parent directory. If it contains an **Output paths** table, save the prioritization output to the file listed for `/prioritization`. Update **Status** to **Done** and **Last updated** to today's date. Confirm the file was written.*
+*After user approves: Check for a project `CLAUDE.md` in the current or parent directory. If it contains an **Output paths** table, save the prioritization output to the file listed for `/prioritization`. Update **Status** to **Done** and **Last updated** to today's date. Also update `pm/roadmap.md` if prioritization has shifted the timing or scope of what was placed in Phase 4. Confirm files were written.*
 
 **Risk gate**: Before proceeding, review the v1 scope cut:
 - Have any "Could" or "Won't" items created downstream dependencies that could block "Must" items?
 - Is the v1 scope achievable within the team's capacity, or is it still over-committed?
 
-Present any score 6+ risks and ask: *"Do you want to adjust the scope before roadmap placement, or continue with the current cut?"*
+Present any score 6+ risks and ask: *"Do you want to adjust the scope before completing the PM workflow, or continue with the current cut?"*
 
 ---
-
-## Phase 6: Roadmap Placement
-
-With prioritization confirmed, recommend where this fits on the roadmap.
-
-Produce:
-1. **Recommended horizon** — Now / Next / Later, with reasoning
-2. **Suggested quarter** — if the user has indicated current planning cycle, slot it specifically
-3. **Dependencies to resolve first** — what must happen before this can start
-4. **Confidence level** — High / Medium / Low, with the key risks that affect it
-5. **What this displaces or deprioritizes** — no roadmap addition is free; flag the trade-off
-
----
-
-**CHECKPOINT 6 / 6 — Roadmap Placement**
-
-Present the roadmap placement recommendation, then ask:
-
-> Does this placement make sense given your current planning cycle? Reply **"continue"** to complete the PM workflow, or adjust before proceeding.
-
-*After user approves: Check for a project `CLAUDE.md` in the current or parent directory. If it contains an **Output paths** table, save the roadmap output to the file listed for `/roadmap`. Update **Status** to **Done** and **Last updated** to today's date. Confirm the file was written.*
 
 **Risk gate — PM phase summary**: Before handing off to design, produce a consolidated risk summary of all risks identified across Phases 1–6:
 
