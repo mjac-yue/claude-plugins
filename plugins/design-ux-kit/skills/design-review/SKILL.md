@@ -42,11 +42,35 @@ For each finding, assign a severity: **Critical** (blocks task completion) / **M
 
 Produce a prioritized list of findings with specific, actionable recommendations.
 
+## Review-Iterate-Approve loop
+
+After presenting findings, enter this loop — do not skip it:
+
+1. **Ask what to update** — *"What would you like to update based on this review? List specific screens, flows, components, or states to change, or say **'approved'** if you're satisfied."*
+2. **Apply updates** — make the requested changes to the design artifacts:
+   - Update `design/wireframe-spec.md` if screen definitions, flows, or component specs change
+   - Update `design/wireframes/wireframe.html` (or the HTML mockup file) if screen content or interactions change
+3. **Upstream PM cascade** — after applying design updates, check the project `CLAUDE.md` status table for PM artifacts that are no longer "Not started". Design changes often surface requirements gaps or scope adjustments that must flow back:
+
+   | PM artifact | If status is not "Not started" | What to check |
+   |------------|-------------------------------|---------------|
+   | PRD (`pm/prd.md`) | Flag for review | Do any design changes reveal missing, ambiguous, or conflicting requirements? |
+   | User stories (`pm/user-stories.md`) | Flag for review | Do any new flows, edge cases, or states need new or updated stories? |
+   | Brief (`pm/brief.md`) | Flag for review | Do any design changes affect stated scope, users, or success criteria? |
+
+   Tell the user which PM artifacts are affected and what specifically needs updating. Apply any PM document updates before proceeding. Add updated PM artifacts to the Document Sync Queue in the state file if one exists.
+
+4. **Offer re-run** — ask: *"Want me to re-run the design review to confirm all findings are resolved?"*
+   - If yes → re-run the full review against the updated artifacts, produce a new findings report, and repeat from step 1
+   - If no → proceed to save
+
+5. **Repeat** from step 1 until the user explicitly says **"approved"** and declines a re-run.
+
 ## Save output
 
-After presenting the design review to the user:
+After the loop completes:
 1. Check if a project `CLAUDE.md` exists in the current working directory or any parent directory
-2. If it contains an **Output paths** table, find the row for `/design-review` and save the output to that file path
+2. If it contains an **Output paths** table, find the row for `/design-review` and save the final review to that file path
 3. Update the **Status** field to **Done** and **Last updated** to today's date at the top of the file
 4. In that same project `CLAUDE.md`, find the **Project status** table and set the **Status** column to **Done** for the row matching this deliverable
 5. Confirm the file was written to the user

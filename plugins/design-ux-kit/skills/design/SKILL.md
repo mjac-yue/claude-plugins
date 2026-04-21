@@ -142,7 +142,18 @@ After presenting the review, immediately run the **Review-Iterate-Approve loop**
 1. Run the `ux-reviewer` agent on the HTML mockup and design review just produced — deep structured audit against Nielsen's 10 heuristics and WCAG 2.1 AA.
 2. Present its findings (usability issues, accessibility gaps, missing states), grouped by severity.
 3. Ask: *"What would you like to update based on this review? List specific screens, flows, or components to change, or say **'approved'** to move on."*
-4. Apply updates to the HTML mockup and design review, re-run `ux-reviewer`, repeat until the user says **"approved"**.
+4. Apply updates to the HTML mockup (`design/wireframes/wireframe.html`) and wireframe spec (`design/wireframe-spec.md`) as needed.
+5. **Upstream PM cascade** — after applying any design updates, check the project `CLAUDE.md` status table for PM artifacts that are no longer "Not started". Design changes can surface requirements gaps or scope adjustments that must flow back:
+
+   | PM artifact | If status is not "Not started" | What to check |
+   |------------|-------------------------------|---------------|
+   | PRD (`pm/prd.md`) | Flag for review | Do design changes reveal missing, ambiguous, or conflicting requirements? |
+   | User stories (`pm/user-stories.md`) | Flag for review | Do new flows, edge cases, or states need new or updated stories? |
+   | Brief (`pm/brief.md`) | Flag for review | Do design changes affect stated scope, users, or success criteria? |
+
+   Tell the user which PM artifacts are affected and what specifically needs updating. Apply PM document updates before proceeding. Add to the Document Sync Queue in the state file if one exists.
+
+6. Re-run `ux-reviewer` on the updated artifacts, repeat from step 2 until the user says **"approved"**.
 
 After the loop, separately offer: *"Want me to also run the `pm-design-reviewer` agent to confirm all PRD requirements are covered before handoff?"*
 
