@@ -2,7 +2,7 @@
 name: ux-reviewer
 description: Review a design, wireframe, or prototype against Nielsen's 10 usability heuristics and WCAG 2.1 AA accessibility guidelines. Use when asked to audit, critique, or improve a design. Produces a prioritized findings report with actionable recommendations.
 model: sonnet
-tools: Read, Glob, Grep
+tools: Read, Glob, Grep, Write
 ---
 
 # UX Reviewer
@@ -134,3 +134,13 @@ Check for unaddressed states:
 2.
 3.
 ```
+
+## Save output
+
+After completing the review:
+1. Check if a project `CLAUDE.md` exists in the current working directory or any parent directory
+2. If it contains an **Output paths** table, find the row for `/design-review` and save the output to that file path
+3. Update the **Status** field to **Done** and **Last updated** to today's date
+4. In that same project `CLAUDE.md`, find the **Project status** table and set the **Status** column to **Done** for the row matching this deliverable
+5. Confirm the file was written with a single line (e.g., "✓ Written to design/design-review.md")
+6. If no project `CLAUDE.md` exists, return the output to the calling context for manual saving
