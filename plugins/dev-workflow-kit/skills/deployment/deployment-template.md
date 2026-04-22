@@ -5,9 +5,17 @@
 **Deployment target**: [Platform name]
 **Deploy type**: First deploy / Update to existing
 
+> **Learning note — Deployment Guide**
+> - **Why**: The step-by-step playbook for taking code from local or staging to production — every step is explicit so nothing is forgotten under pressure
+> - **Who uses it**: Engineers execute deploys consistently and safely; new team members perform their first deploy without tribal knowledge; Engineering leads use it for audit trails and incident post-mortems
+> - **Key decisions**: Are all environment variables set? Did all smoke tests pass? If something breaks — rollback or hotfix?
+> - **Next step**: Successful smoke test → post-deploy notes → monitoring confirmed active
+
 ---
 
 ## Pre-Deployment Checklist
+
+> **Note — Pre-Deployment Checklist**: Complete all items before running the deploy command. The three most common deploy failures: missing environment variables, unconfigured third-party services, and database migrations that weren't run.
 
 Complete all items before running the deploy command.
 
@@ -20,6 +28,8 @@ Complete all items before running the deploy command.
 - [ ] [Other third-party service] — [what needs to be done]
 
 ### Environment Variables
+
+> **Note — Environment Variables**: Never commit secrets to git — the consequences are severe and the mistake is easy to make when working quickly. Use `.gitignore` for local `.env` files and the platform's secret management for production.
 
 Set the following environment variables in your hosting platform's dashboard:
 
@@ -51,6 +61,8 @@ Set the following environment variables in your hosting platform's dashboard:
 
 ## Deploy Steps
 
+> **Note — Deploy Steps**: Follow these steps exactly — deploy steps are not a place for improvisation. The continuous deployment setup replaces manual deploys with a reliable automated process and creates an audit trail.
+
 ### First-Time Setup
 
 ```bash
@@ -80,6 +92,8 @@ Set the following environment variables in your hosting platform's dashboard:
 
 ## Domain & DNS
 
+> **Note — Domain & DNS**: Propagation takes 15 minutes to 48 hours — the site may appear to work from some locations and not others during propagation. SSL certificate handling is typically automatic on modern platforms. Skip this section for internal tools or projects using the platform's default URL.
+
 *Skip this section if using the platform's default URL.*
 
 ### Buy a Domain (if needed)
@@ -102,6 +116,10 @@ Add these records at your domain registrar or DNS provider:
 
 ## Smoke Test Checklist
 
+> **Note — Smoke Test Checklist**: Run immediately after deploy — catching a broken deploy immediately costs minutes to rollback; catching it after users encounter it costs hours of incident response. Each test is binary: pass or fail, not "seems okay."
+
+> 💡 **Tip**: *[Your AI will identify which smoke tests are most critical given your specific feature and the user flows most at risk from this deployment.]*
+
 Run these immediately after deploy to confirm the product is working. Each test is pass/fail.
 
 - [ ] **Home page loads**: Navigate to `[URL]` — page loads without error, no console errors
@@ -120,6 +138,8 @@ Run these immediately after deploy to confirm the product is working. Each test 
 ---
 
 ## Monitoring Setup
+
+> **Note — Monitoring Setup**: Set up monitoring before announcing the launch — issues often emerge immediately after deploy when production traffic hits code that worked in staging.
 
 Set up these two things before announcing the launch:
 
@@ -150,6 +170,8 @@ On [platform]: [Navigation path to logs — e.g., Project → Functions → Logs
 
 ## Rollback Plan
 
+> **Note — Rollback Plan**: A rollback plan that isn't tested before launch is not a rollback plan. Database migration rollbacks on live production databases with real user data can be irreversible — the warning below is critical, not advisory.
+
 ### If the deploy breaks something immediately:
 
 **On [platform]**: Go to Deployments → Previous deployment → Redeploy
@@ -172,6 +194,8 @@ This takes approximately [X] minutes and returns to the last known working versi
 ---
 
 ## Post-Deploy Notes
+
+> **Note — Post-Deploy Notes**: The 24-hour monitoring check is the most commonly skipped — many production issues emerge not immediately after deploy but after real usage patterns (overnight batch jobs, peak traffic, structurally different user data) hit the new code.
 
 - [ ] Update `[status page / internal doc]` with new deploy version
 - [ ] Fill in any `[screenshot placeholder]` in user-facing documentation

@@ -5,13 +5,23 @@
 **Rollout Scope**: [All users | Beta group | Phased — describe]  
 **Status**: Draft | Ready for Review | Approved
 
+> **Learning note — Rollout Package**
+> - **Why**: A feature isn't complete until users can adopt it — adoption requires more than deploying code
+> - **Who uses it**: PM owns rollout; Marketing handles messaging; Support needs briefing; Executives need the summary
+> - **Key decisions**: What rollout strategy reduces risk; are all customer-facing teams aligned on launch date and key messages?
+> - **Next step**: All items checked → launch announcement → monitor adoption metrics
+
 ---
 
 ## Product Summaries
 
+> **Note — Product Summaries**: Different audiences need different versions of the same information. Key discipline: write benefit-first — lead with what users can now *do*, not what was built.
+
 ---
 
 ### Internal / Team Announcement
+
+> **Note — Internal Announcement**: Aligns the team on what shipped and what's out of scope — preventing incorrect promises to customers. The most important field: "What's not included yet" — proactively naming deferrals prevents internal teams from telling customers it's coming when it isn't.
 
 **Subject**: [Feature Name] is live
 
@@ -35,6 +45,10 @@
 
 ### Customer-Facing Announcement
 
+> **Note — Customer-Facing Announcement**: Leads with benefit, not feature. Structure: opening paragraph = the user's old struggle; body = what's now possible; CTA = exactly what to do next. If users don't know a feature launched, it won't drive expected metric movement.
+
+> 💡 **Tip**: *[Your AI will draft the benefit-first headline and opening hook tailored to your specific user persona and the problem this feature solves.]*
+
 **Subject / Headline**: [Benefit-first headline — what users can now do]
 
 [Opening: describe the problem users had before]
@@ -54,6 +68,8 @@
 
 ### Executive Summary
 
+> **Note — Executive Summary**: Gives leadership what they need to brief customers and partners: what launched, why it matters, expected impact, and when to expect evidence. Key field: "Signal timing" — executives need to know when to expect results so they're not asking prematurely.
+
 [Feature Name] launched on [date] to [scope of users].
 
 [1 sentence: what it does and why it was prioritized]
@@ -70,6 +86,8 @@
 
 ### Support Team Briefing
 
+> **Note — Support Team Briefing**: Support is the first contact when users are confused — if not briefed before launch, they're learning alongside customers. The most valuable part: the FAQ, based on real questions from user research and beta testing, not hypothetical ones.
+
 **What changed for users**: [Describe the experience change from a user's perspective]
 
 **Setup or prerequisites**: [Anything users need to do before they can use this]
@@ -78,8 +96,6 @@
 
 | Question | Answer |
 |----------|--------|
-| | |
-| | |
 | | |
 
 **Known limitations**:
@@ -92,9 +108,13 @@
 
 ## User Training Materials
 
+> **Note — User Training Materials**: Closes the gap between a feature being available and users actually adopting it. If usage metrics are low post-launch, the first question to ask: could users find and understand the training materials?
+
 ---
 
 ### Quick Start Guide
+
+> **Note — Quick Start Guide**: Entry point for new users — should take 2–3 minutes and demonstrate immediate value. Most common mistake: making it too long. Users overwhelmed in the first 5 steps often abandon the feature entirely.
 
 **Get started with [Feature Name] in [X] steps**
 
@@ -122,6 +142,8 @@
 ---
 
 ### Step-by-Step Instructions
+
+> **Note — Step-by-Step Instructions**: Supports use cases beyond the quick start — variant workflows and less common scenarios. Each step should be specific enough to follow without interpretation: "configure the settings" is not a step; "click the Settings icon in the top-right corner" is.
 
 #### Primary Use Case: [Name]
 
@@ -165,6 +187,8 @@
 
 ### Frequently Asked Questions
 
+> **Note — FAQ**: Reduces repeated support contacts by anticipating questions. Write answers in plain language — users need to know what to do, not the technical reason. If a question appears more than 3 times in support tickets post-launch, add it to the next iteration.
+
 **Q: [Question]**  
 A: [Answer in plain language]
 
@@ -178,11 +202,13 @@ A: [Answer]
 A: [Answer]
 
 **Q: [Question]**  
-A: [Answer — include escalation note if needed, e.g., "If you're still seeing this, contact support at [link]"]
+A: [Answer — include escalation note if needed]
 
 ---
 
 ### Tips & Best Practices
+
+> **Note — Tips & Best Practices**: Drives power-user behavior — teaches users to get more value beyond basic usage. "Common mistakes to avoid" is particularly valuable: features where users adopt best practices early tend to have better retention.
 
 **Get the most out of [Feature Name]:**
 
@@ -199,6 +225,8 @@ A: [Answer — include escalation note if needed, e.g., "If you're still seeing 
 ---
 
 ## Publishing Checklist
+
+> **Note — Publishing Checklist**: Final gate before launch — ensures rollout work is completed and distributed, not just drafted. Review 48 hours before launch, not the morning of. Analytics confirmed is the one item that should never be skipped.
 
 - [ ] All [screenshot] placeholders replaced with actual screenshots
 - [ ] All links tested and working

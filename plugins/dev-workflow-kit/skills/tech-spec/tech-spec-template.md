@@ -7,15 +7,25 @@
 **Related Design Handoff**: [Link]
 **Engineering Owner**: [Name]
 
+> **Learning note — Technical Specification**
+> - **Why**: Translates *what* needs to be built (PRD) into *how* — making implementation decisions explicit and reviewable before any code is written
+> - **Who uses it**: Engineers write it; PM verifies requirements are faithfully translated; Engineering leads review architectural choices and estimate delivery confidence
+> - **Key decisions**: Which technical approach is chosen and why? What open questions must resolve before implementation begins?
+> - **Next step**: Approved spec → dev plan; open questions tracked to resolution before sprint starts
+
 ---
 
 ## Overview
+
+> **Note — Overview**: Answers three questions in one paragraph: what is being built, why it matters to the product, and what approach was chosen. If this can't be written clearly in one paragraph, the feature scope needs more alignment before engineering begins.
 
 *One paragraph: what is being built, the product goal, and the approach at a high level.*
 
 ---
 
 ## Requirements Summary
+
+> **Note — Requirements Summary**: Restating requirements in engineering terms catches PRD ambiguities that weren't visible until implementation was considered. The "clarification needed" column is the most important — unresolved ambiguities are the most common cause of rework.
 
 *Restate the key product requirements in engineering terms. Flag any ambiguities.*
 
@@ -30,6 +40,10 @@
 ---
 
 ## Solution Options
+
+> **Note — Solution Options**: Evaluating multiple approaches before committing is the highest-leverage activity in the spec — it prevents the "we should have done it differently" conversation six weeks into implementation. The Decision section is the design record that prevents relitigating choices later.
+
+> 💡 **Tip**: *[Your AI will evaluate each option against your specific NFRs, team constraints, and existing stack — and flag which trade-offs matter most for this initiative.]*
 
 *Evaluate 2–4 distinct approaches before committing to one. This section is the design decision record — it prevents relitigating choices later.*
 
@@ -102,6 +116,8 @@
 
 ### Decision
 
+> **Note — Decision**: The most referenced section after implementation begins — future engineers look here when asking "why did we build it this way?" Name the specific trade-offs accepted, not just the benefits. The "options ruled out" table prevents re-proposing approaches already evaluated and rejected.
+
 **Recommended option**: [Option N — Name]
 
 **Rationale**: [Why this option best satisfies the requirements and constraints. Be specific about the trade-offs being accepted.]
@@ -116,6 +132,8 @@
 ---
 
 ## Architecture
+
+> **Note — Architecture**: Translates the chosen option into a concrete technical blueprint. The system diagram and data flow surface coupling risks and integration complexity not visible from requirements alone. Link to the full arch-design document if it exists.
 
 *This section is populated from the architectural design. Run `/arch-design` or the `arch-reviewer` agent to produce the full design, then summarise the key outputs here. Link to the full architectural design document if it exists separately.*
 
@@ -198,6 +216,8 @@ flowchart LR
 
 ## Data Model
 
+> **Note — Data Model**: Defines the shape of data and relationships between entities. Ambiguous data ownership between services is one of the most common sources of bugs and inconsistency. Database changes require migration planning — list them separately.
+
 ### New / Modified Entities
 
 #### [Entity Name]
@@ -224,6 +244,8 @@ flowchart LR
 
 ## Key Business Logic
 
+> **Note — Key Business Logic**: Documents non-obvious rules, calculations, and decisions that go beyond simple CRUD. If the logic is complex enough to explain in words, it's complex enough to document here — "it's obvious from the code" is rarely true for future engineers.
+
 *Describe any non-trivial algorithms, rules, or calculations. Skip anything self-evident.*
 
 ### [Logic name]
@@ -237,6 +259,8 @@ flowchart LR
 
 ## APIs
 
+> **Note — APIs**: A high-level index of endpoints produced or consumed. Listing consumed APIs is as important as produced ones — unready internal dependencies block integration and slip timelines. Use `/api-spec` for detailed schemas.
+
 *List endpoints this feature produces or consumes. Use `/api-spec` for detailed schemas.*
 
 | Method | Path | Purpose | Owner |
@@ -246,6 +270,10 @@ flowchart LR
 ---
 
 ## Dependencies
+
+> **Note — Dependencies**: The most common source of timeline risk — not because they're hard to build, but because they depend on other teams or services that don't share your priorities.
+
+> 💡 **Tip**: *[Your AI will flag which dependencies carry the highest timeline risk given your current phase and team setup, and identify where cost could surprise you at scale.]*
 
 ### Internal Dependencies
 
@@ -273,6 +301,8 @@ flowchart LR
 ---
 
 ## AI Opportunities
+
+> **Note — AI Opportunities**: Forces a deliberate evaluation of where AI adds value vs. complexity. The Deferred and Rejected tables are as important as Adopted — they prevent relitigating proposals already evaluated. Run the `ai-opportunity-analyst` agent for a structured assessment.
 
 *Populated from the `ai-opportunity-analyst` agent. Run it against this spec and the PRD to identify where AI could add meaningful value — and where simpler approaches are the right call.*
 
@@ -306,6 +336,8 @@ flowchart LR
 
 ## Technical Risks
 
+> **Note — Technical Risks**: Surface what could go wrong during implementation before it does. A risk identified and mitigated in the spec is far cheaper than one discovered in production.
+
 | Risk | Likelihood | Impact | Mitigation |
 |------|-----------|--------|------------|
 | Performance: [describe] | H/M/L | H/M/L | |
@@ -317,6 +349,8 @@ flowchart LR
 
 ## Complexity Estimate
 
+> **Note — Complexity Estimate**: Include non-obvious work like migrations, error handling, and testing. "Confidence: Low" is important to state explicitly — it signals a spike or more information is needed before committing to a timeline.
+
 | Component | Size | Rationale |
 |-----------|------|-----------|
 | | S / M / L / XL | |
@@ -327,6 +361,8 @@ flowchart LR
 ---
 
 ## Open Questions
+
+> **Note — Open Questions**: Every question needs an owner and a due date — a question without an owner won't get answered. Any question still open when implementation starts is a risk to the timeline.
 
 | Question | Owner | Due | Status |
 |----------|-------|-----|--------|

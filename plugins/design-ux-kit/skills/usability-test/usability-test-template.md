@@ -6,9 +6,17 @@
 **Test type**: Moderated remote | Moderated in-person | Unmoderated remote
 **Target test dates**: [Date range]
 
+> **Learning note — Usability Test Plan**
+> - **Why**: Answers questions internal review can't — do users understand the design, can they complete tasks, and where do they get confused?
+> - **Who uses it**: PM makes scope and design decisions with user evidence; Designers fix specific UX problems before launch; Leadership reduces launch risk on high-stakes features
+> - **Key decisions**: Which test findings require a redesign vs. confirm the design is ready to ship?
+> - **Next step**: Test findings → prioritized design fixes → updated handoff or sign-off for launch
+
 ---
 
 ## Test Objectives
+
+> **Note — Test Objectives**: Well-defined objectives make findings actionable. Each objective should map to a specific decision: "Can users find the filter?" tells the Designer whether to make it more discoverable. If no decision changes based on the findings, the test isn't worth running.
 
 *What specific questions must this test answer? What decisions depend on the results?*
 
@@ -19,6 +27,8 @@
 ---
 
 ## Participant Criteria
+
+> **Note — Participant Criteria**: Research with the wrong participants produces misleading findings. Key discipline: the "must not have" criteria are as important as the "must have" — participants with deep familiarity often compensate for usability problems that would block a real user.
 
 **Number of participants**: [N per persona; typically 5 for qualitative]
 
@@ -34,6 +44,8 @@
 
 ### Screener Questions
 
+> **Note — Screener Questions**: Determine who gets invited — the filter between general population and participants who represent your target users. Accept/reject criteria must be defined before recruiting begins. Most common mistake: not screening for specific context of use.
+
 1. [Question] → Accept if: [answer] / Reject if: [answer]
 2. [Question] → Accept if: / Reject if:
 3. [Question] → Accept if: / Reject if:
@@ -41,6 +53,8 @@
 ---
 
 ## Tasks & Scenarios
+
+> **Note — Tasks & Scenarios**: Where the research produces its most important findings. Key discipline: write tasks as user goals in natural language ("find a way to export your data"), not as instructions ("click Export") — the latter tests whether users can follow instructions, not whether the design is intuitive.
 
 *Write tasks as realistic goals in user language — not instructions to click buttons.*
 
@@ -67,6 +81,8 @@
 
 ## Discussion Guide
 
+> **Note — Discussion Guide**: Structures the session so every participant covers the same ground — making findings comparable. Key technique: the think-aloud prompt is the most important research method in usability testing — narrating thoughts reveals the mental model, not just what users click.
+
 ### Warm-Up (5 min)
 - Tell me a bit about your role and how you typically [relevant activity].
 - How often do you [relevant behavior]?
@@ -89,6 +105,10 @@
 
 ## Success Thresholds
 
+> **Note — Success Thresholds**: Converts subjective observation into objective evaluation — defines before the sessions what result would trigger a redesign vs. confirm readiness to ship. Without thresholds defined upfront, teams argue about whether 60% task completion is "good enough" after the data is in.
+
+> 💡 **Tip**: *[Your AI will suggest appropriate success thresholds based on your feature type, user sophistication level, and the stakes of the user flow being tested.]*
+
 | Metric | Target | Trigger redesign if |
 |--------|--------|-------------------|
 | Task 1 completion rate | ≥ 80% | < 60% |
@@ -100,6 +120,8 @@
 
 ## Analysis Approach
 
+> **Note — Analysis Approach**: Ensures findings are synthesized into actionable recommendations, not just interesting observations. Key principle: define the output format upfront — a 5-slide summary is often more useful than a 50-page report. Turnaround should be fast — insights lose value as memory fades.
+
 - **Session notes**: [Observation sheet / rainbow spreadsheet / etc.]
 - **Synthesis method**: [Affinity mapping / frequency count / severity grid]
 - **Output**: [Findings report / presentation / Jira tickets]
@@ -108,6 +130,8 @@
 ---
 
 ## Logistics
+
+> **Note — Logistics**: Logistics failures delay research or produce unreliable results — wrong tool, broken prototype, inadequate incentive. Key rule: incentives commensurate with participants' time and expertise attract representative participants; under-incentivized research often doesn't.
 
 | Item | Detail |
 |------|--------|

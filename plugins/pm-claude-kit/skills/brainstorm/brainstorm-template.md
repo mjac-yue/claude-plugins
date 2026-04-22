@@ -3,9 +3,17 @@
 **Status**: Draft
 **Last updated**: [Date]
 
+> **Learning note — PM Brainstorm**
+> - **Why**: Generates many options before evaluating any — avoids anchoring on the first idea that comes to mind
+> - **Who uses it**: PM to avoid premature convergence; team to surface approaches that wouldn't emerge linearly
+> - **Key decisions**: Which idea cluster to invest in; what assumptions to test before committing
+> - **Next step**: Best-bet recommendation feeds into a brief or PRD
+
 ---
 
 ## Discovery
+
+> **Note — Discovery**: Clarifying questions surface assumptions, constraints, and success conditions that should inform every idea. Key outcome: after reading the discovery answers, can someone generate better-targeted ideas than without it?
 
 *Questions asked to clarify the challenge:*
 
@@ -23,6 +31,8 @@
 
 ## Challenge Statement
 
+> **Note — Challenge Statement**: The HMW format frames the challenge as open-ended and solvable. Key discipline: specific enough to generate focused ideas, but broad enough to leave room for novel approaches.
+
 **How might we** [restate as HMW question]?
 
 **Primary user**: [Who they are and what they're trying to achieve]
@@ -36,6 +46,8 @@
 ---
 
 ## Ideas
+
+> **Note — Ideas by Theme**: Grouping reveals patterns — clusters of similar approaches and tensions between them. Key insight: the most conventional cluster has the clearest path; the most novel cluster often has the most upside and most risk.
 
 ### [Theme 1 Name]
 
@@ -69,6 +81,8 @@
 
 ## Concept Map
 
+> **Note — Concept Map**: Shows which directions are complementary, which are alternatives, and where genuine tensions exist. Key insight: are tensions a sign of a genuinely hard trade-off, or a false dilemma?
+
 ```mermaid
 flowchart LR
     A([Theme 1 Name]) --- B([Theme 2 Name])
@@ -78,11 +92,13 @@ flowchart LR
     B -. "in tension" .- C
 ```
 
-*Replace nodes and labels with actual theme names and relationships.*
-
 ---
 
 ## Evaluation
+
+> **Note — Evaluation**: The convergent phase — makes trade-offs explicit rather than implicit. Key question: are there ideas that score high enough on "speed to validate" to run a quick test before committing?
+
+> 💡 **Tip**: *[Your AI will highlight which ideas best fit your specific constraints — timeline, team size, technical feasibility — and which assumptions most need testing before committing.]*
 
 | Idea | User impact | Feasibility | Novelty | Speed to validate | Notes |
 | ---- | ----------- | ----------- | ------- | ----------------- | ----- |
@@ -96,6 +112,8 @@ flowchart LR
 
 ## Decision Tree
 
+> **Note — Decision Tree**: Makes the implicit selection logic into an explicit, visual argument. If someone wants to change the recommendation, they must change the decision criteria — and this tree makes that discussion concrete.
+
 ```mermaid
 flowchart TD
     Start([What matters most right now?]) --> Q1{Differentiation\npriority?}
@@ -105,11 +123,11 @@ flowchart TD
     Q2 -->|No| Best([Best bet: Idea Z])
 ```
 
-*Replace with actual ideas and decision criteria.*
-
 ---
 
 ## Recommendations
+
+> **Note — Recommendations**: Three recommendations serve different risk profiles. Key discipline: name the "key assumption" for each — that becomes the primary hypothesis to test before committing.
 
 ### Best bet — [Idea name]
 [2–3 sentences on why this is the strongest overall option]
@@ -136,6 +154,8 @@ flowchart TD
 
 ## Worth Revisiting
 
+> **Note — Worth Revisiting**: Documents why an idea is lower priority and what would change that — prevents relitigating brainstorm decisions every quarter.
+
 | Idea | Why lower priority now | What would change this |
 | ---- | ---------------------- | ---------------------- |
 | [Idea X] | [Reason] | [Condition that would unlock it] |
@@ -144,6 +164,8 @@ flowchart TD
 ---
 
 ## What's Missing
+
+> **Note — What's Missing**: Naming gaps is intellectual honesty — prevents over-confidence. These gaps are the input to the next discovery sprint. If any gap would change the recommendation, investigate before writing the brief.
 
 - [Gap 1 — data, research, stakeholder perspective, or unexplored angle]
 - [Gap 2]

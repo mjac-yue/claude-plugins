@@ -8,9 +8,17 @@
 **Team**: [Names and roles]
 **Related PRD**: [Link]
 
+> **Learning note — Release Plan**
+> - **Why**: Master schedule that sequences all project work from discovery through launch — surfaces dependency conflicts before they become blockers
+> - **Who uses it**: PM manages dependencies and protects launch date; Engineering plans sprint capacity; Stakeholders see when to expect the product
+> - **Key decisions**: Which phases have buffer; which dependencies are on the critical path; when to call a scope cut vs. a timeline slip
+> - **Next step**: Approved release plan → kickoff complete; updated at every phase transition and cycle close
+
 ---
 
 ## Project Overview
+
+> **Note — Project Overview**: Gives any stakeholder the context to evaluate the plan. Key field: "success definition" — if the team can't agree on it at the start, discovery isn't complete and execution shouldn't begin.
 
 **What we're building**: [One sentence]
 **Why now**: [Strategic reason or deadline]
@@ -19,6 +27,10 @@
 ---
 
 ## Phases & Milestones
+
+> **Note — Phases & Milestones**: Top-level schedule — every phase, owner, target date, and gate criteria. Key column: gate criteria — concrete conditions that determine when a phase is complete, not subjective assessment. "PM and Designer mutually sign off" is a gate criterion; "looks good" is not.
+
+> 💡 **Tip**: *[Your AI will highlight which phases carry the most schedule risk given your team size, dependencies, and feature complexity.]*
 
 | Phase | Milestone | Owner | Target date | Status | Gate criteria |
 |-------|-----------|-------|-------------|--------|---------------|
@@ -35,6 +47,8 @@
 
 ## Alignment Rounds — Phase A (PM + Design)
 
+> **Note — Phase A Alignment Rounds**: Iterative PM → Design → feedback loop. The number of rounds is variable. Key discipline: sign-off gate prevents moving to Engineering prematurely, when changes cost hours of Designer time rather than days of Engineering time.
+
 *Each round is one pass of the PM → Design → feedback loop. Rounds continue until mutual sign-off.*
 
 | Round | PM changes | Design changes | Open questions | Status |
@@ -50,7 +64,7 @@
 
 ## Tech Design Rounds — Phase B
 
-*Each round is one pass of the Eng review → constraint identification → PM/Design response loop.*
+> **Note — Phase B Tech Design Rounds**: Engineering validates that PM + Design outputs are buildable within real system constraints. Key value: constraints found here are orders of magnitude cheaper to resolve than constraints discovered mid-build. Three-way sign-off gate ensures Engineering isn't starting with unresolved concerns.
 
 | Round | Constraints identified | PRD updates needed | Design updates needed | Resolution status |
 |-------|----------------------|-------------------|----------------------|------------------|
@@ -64,7 +78,7 @@
 
 ## Dependency Map
 
-*What must be complete before each subsequent phase can start. Note the iterative feedback loops in Phases A and B.*
+> **Note — Dependency Map**: Visualizes the critical path — the sequence where any delay pushes the launch date. Key insight: feedback loops in Phases A and B are where the most time is saved by running tight, well-scoped rounds rather than open-ended iterations.
 
 ```mermaid
 flowchart TD
@@ -98,12 +112,15 @@ flowchart TD
 
 ## Build Sequence
 
+> **Note — Build Sequence**: Orders development work so each layer is stable before the next begins — prevents building feature code on top of an unstable foundation, which leads to expensive rewrites. Key insight: PM uses layer structure to understand what can be descoped if timelines slip (P2 in Layer 4 can often be deferred; foundation work in Layer 2 cannot).
+
 *Work must be completed in layer order. Do not start a layer until the previous layer is stable.*
 
 ---
 
 ### PM Layer — Discovery & Requirements
-*Must be complete before Design can start. PM-led, no Eng or Design resources required.*
+
+> **Note — PM Layer**: Where requirements are shaped before any design or engineering investment. Key principle: a rushed PM layer produces a vague PRD that Design and Engineering can't execute against, leading to expensive corrections later.
 
 - [ ] Problem framing and assumptions documented
 - [ ] Competitive landscape assessed
@@ -117,9 +134,8 @@ flowchart TD
 ---
 
 ### Design Layer — Exploration & Alignment
-*Runs iteratively with PM until mutual sign-off. No Eng resources required.*
 
-**Round structure**: Each round, Design works from the current PRD state → produces or refines screens → surfaces open questions → PM updates PRD → Design updates screens → repeat.
+> **Note — Design Layer**: Runs iteratively with the PM layer until both parties agree the design is ready for Engineering to review. Key principle: every problem caught here saves 5–10× the effort in Engineering. The sign-off gate is two-way — PM signs off on design quality, Designer signs off on requirement completeness.
 
 - [ ] UX brief produced (user goals, flows, constraints)
 - [ ] Key screens wireframed (all P0 flows covered)
@@ -129,12 +145,13 @@ flowchart TD
 - [ ] Design review complete — usability, accessibility, edge cases
 - [ ] Design handoff doc prepared
 
-**Design Layer complete when**: PM and Designer mutually sign off — PRD is final, all screens are covered, no open questions remain.
+**Design Layer complete when**: PM and Designer mutually sign off — PRD is final, all screens covered, no open questions.
 
 ---
 
 ### Tech Design Layer — Constraint Resolution
-*Eng reviews PM + Design outputs and identifies technical constraints. All three roles engaged.*
+
+> **Note — Tech Design Layer**: Engineering's first formal engagement with PM and Design outputs. Key value: prevents Engineering from starting development only to discover a key requirement is infeasible — one of the most expensive types of mid-sprint discovery.
 
 - [ ] Eng reviews PRD and design handoff
 - [ ] Technical constraints identified and documented
@@ -149,7 +166,8 @@ flowchart TD
 ---
 
 ### Layer 1 — Infrastructure
-*Must be in place before any feature code is written. Specific tech choices — hosting platform, database, auth system, CI/CD tooling — are determined in Phase B. Fill in the bracketed items below only after Phase B is complete.*
+
+> **Note — Layer 1 Infrastructure**: Foundation everything else runs on — no feature code should be written before the deploy pipeline is working, the database is accessible, and auth is configured. Specific technology choices are determined in Phase B and filled in after.
 
 - [ ] Hosting environment provisioned — *[TBD in Phase B]*
 - [ ] Database provisioned and accessible — *[TBD in Phase B]*
@@ -164,7 +182,8 @@ flowchart TD
 ---
 
 ### Layer 2 — Foundation
-*Core data models, auth flows, and base APIs. Everything in Layer 3+ is built on top of these.*
+
+> **Note — Layer 2 Foundation**: Core data models, auth flows, and base APIs that all feature code builds on. Key discipline: starting feature code before the foundation is stable leads to expensive refactoring when the data model needs to change.
 
 - [ ] [Entity 1] — data model + CRUD endpoints
 - [ ] [Entity 2] — data model + CRUD endpoints
@@ -177,7 +196,8 @@ flowchart TD
 ---
 
 ### Layer 3 — Core Features (P0)
-*Must-haves. Cannot launch without these.*
+
+> **Note — Layer 3 Core Features**: The P0 requirements — the things without which the product doesn't solve the user problem. Key discipline: if a P0 feature is proving more complex than estimated, either extend the timeline or escalate the scope decision to the PM — don't quietly reduce quality.
 
 - [ ] [Feature 1] — [one-line description]
 - [ ] [Feature 2] — [one-line description]
@@ -188,7 +208,8 @@ flowchart TD
 ---
 
 ### Layer 4 — Feature Layer (P1/P2)
-*Built on top of P0. Can be deferred to v1.1 if timeline is at risk.*
+
+> **Note — Layer 4 Features**: P1/P2 features add significant value but aren't launch-blocking — they can be deferred if timeline is at risk. Key discipline: resist shipping P1 features in a degraded state to hit the date — a partial feature often creates more support burden than deferring it entirely.
 
 - [ ] [Feature 4] — [one-line description]
 - [ ] [Feature 5] — [one-line description]
@@ -198,7 +219,8 @@ flowchart TD
 ---
 
 ### Layer 5 — Integration & Polish
-*Third-party integrations, edge cases, UX refinements.*
+
+> **Note — Layer 5 Integration & Polish**: Error states, empty states, and loading states live here — what users encounter when things don't go perfectly. Key insight: these often differentiate a product that gets recommended from one that generates support tickets.
 
 - [ ] [Integration 1] — [service and purpose]
 - [ ] Error states and empty states for all flows
@@ -210,6 +232,9 @@ flowchart TD
 ---
 
 ### Layer 6 — QA & Launch
+
+> **Note — Layer 6 QA & Launch**: Final gate before real users interact with the product. Key rule: a rollback plan that isn't tested before launch is not a rollback plan.
+
 - [ ] Test plan execution complete
 - [ ] All P0/P1 bugs resolved
 - [ ] Smoke test checklist passing in production environment
@@ -221,7 +246,7 @@ flowchart TD
 
 ## Critical Path
 
-*The sequence where any delay pushes the launch date.*
+> **Note — Critical Path**: The sequence where any delay pushes the launch date. Key signal: the "highest current risk" field should be updated at every status report — if the answer is always "nothing," the critical path isn't being monitored carefully enough.
 
 **Path**: Phase A sign-off → Phase B sign-off → [Layer 1] → [Layer 2] → [Layer 3] → Launch
 
@@ -231,7 +256,7 @@ flowchart TD
 
 ## Parallel Workstreams
 
-*Where team members can work simultaneously without blocking each other.*
+> **Note — Parallel Workstreams**: Reduce total elapsed time by enabling team members to work simultaneously on independent tasks. Key discipline: plan the sync point before the workstreams start, not after — integration problems discovered at merge are the most expensive type of rework.
 
 | Phase / Cycle | [Person 1] | [Person 2] | Sync point |
 |--------------|-----------|-----------|------------|
@@ -242,6 +267,10 @@ flowchart TD
 ---
 
 ## Go / No-Go Criteria
+
+> **Note — Go / No-Go Criteria**: Objective conditions that must be true before each phase transition. Key principle: a phase gate that passes on time but with criteria unmet almost always creates more delay downstream than simply waiting for readiness.
+
+> 💡 **Tip**: *[Your AI will flag which gate criteria are most likely to be incomplete given your current project state and highlight where to focus to stay on track.]*
 
 | Phase gate | Must be true to proceed |
 |-----------|------------------------|
@@ -258,6 +287,8 @@ flowchart TD
 
 ## Risk Checkpoints
 
+> **Note — Risk Checkpoints**: Scheduled moments to proactively review what could go wrong. Key checkpoint: mid-build (halfway through Layer 3) — last moment to descope P1 features before they're partially built, which makes descoping more expensive.
+
 | Checkpoint | When | What to review |
 |-----------|------|---------------|
 | After PM Layer | Before Design starts | Is the problem well-defined? Is scope realistic? Are key assumptions documented? |
@@ -271,6 +302,8 @@ flowchart TD
 ---
 
 ## Launch Readiness Checklist
+
+> **Note — Launch Readiness Checklist**: Final gate before launch. Most commonly skipped items that cause the most painful incidents: rollback procedure not tested, monitoring not configured, and analytics not instrumented.
 
 **Product**
 - [ ] All P0 acceptance criteria met and verified
@@ -298,6 +331,8 @@ flowchart TD
 ---
 
 ## Open Questions
+
+> **Note — Open Questions**: Represent risks to the timeline — decisions that if resolved differently could change the plan. Questions open for more than one week without progress should be escalated — waiting is often a sign the wrong person owns the question.
 
 | Question | Owner | Due | Status |
 |----------|-------|-----|--------|

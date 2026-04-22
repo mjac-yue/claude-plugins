@@ -6,9 +6,17 @@
 **Related Tech Spec**: [Link]
 **API version**: v[N]
 
+> **Learning note — API Specification**
+> - **Why**: The contract between teams that build an API and teams that consume it — changes after consumers build against it are breaking changes that require versioning
+> - **Who uses it**: Backend engineers implement against it; frontend engineers and partners build integrations; QA designs integration tests from it
+> - **Key decisions**: What constitutes a breaking change? How are credentials obtained and passed? What are the rate limits and error codes?
+> - **Next step**: Approved spec → implementation; any post-approval changes require a versioning decision
+
 ---
 
 ## Overview
+
+> **Note — Overview**: The "who are the consumers" answer shapes every design decision — a public API for third-party developers has different versioning, documentation, and stability requirements than an internal API consumed only by a frontend team.
 
 **Purpose**: [What does this API enable? Who are the consumers?]
 **Base URL**: `https://api.example.com/v1`
@@ -18,6 +26,8 @@
 ---
 
 ## Authentication
+
+> **Note — Authentication**: The "how to obtain credentials" and "how to include in requests" steps are the most important for consumer onboarding — missing or unclear instructions are the top source of integration support requests.
 
 **Method**: [API Key / OAuth 2.0 / JWT / Session cookie]
 
@@ -36,6 +46,8 @@ Authorization: Bearer <token>
 
 ## Rate Limiting
 
+> **Note — Rate Limiting**: Consumers need to understand limits so they can design integrations to avoid hitting them (through caching, batching, or backoff). The "behavior when exceeded" column is critical — a 429 without a retry-after header will cause consumers to spin in a tight loop.
+
 | Limit | Scope | Behavior when exceeded |
 |-------|-------|----------------------|
 | [N] requests/minute | Per API key | HTTP 429, retry-after header |
@@ -43,6 +55,10 @@ Authorization: Bearer <token>
 ---
 
 ## Endpoints
+
+> **Note — Endpoints**: Each endpoint block should be complete enough that a consumer can integrate without asking questions — every parameter type, required/optional status, constraint, and error code. The most common spec gaps are missing error codes and underspecified field constraints.
+
+> 💡 **Tip**: *[Your AI will flag any endpoint design inconsistencies, missing error codes, or field constraints that could cause integration problems for consumers of this specific API.]*
 
 ---
 
@@ -120,6 +136,8 @@ Authorization: Bearer <token>
 
 ## Shared Schemas
 
+> **Note — Shared Schemas**: A change to a shared schema is a breaking change to every endpoint that uses it — this is why versioning policy must be defined before the API is consumed externally.
+
 ### [SchemaName]
 
 ```json
@@ -138,6 +156,8 @@ Authorization: Bearer <token>
 
 ## Error Response Format
 
+> **Note — Error Response Format**: A consistent error envelope allows consumers to write a single error-handling function that works for every API error. The `code` field is the most important — machine-readable codes allow consumers to handle specific failure modes rather than generic messages.
+
 All errors return the same envelope:
 
 ```json
@@ -154,6 +174,10 @@ All errors return the same envelope:
 
 ## Versioning
 
+> **Note — Versioning**: Engineers need a clear definition of breaking vs. non-breaking changes; consumers need a deprecation policy to plan migrations. URL versioning (`/v1/`) is simpler than header versioning — the deprecation timeline should be long enough for consumers to migrate (typically 3–6 months minimum for external APIs).
+
+> 💡 **Tip**: *[Your AI will recommend an appropriate versioning strategy and deprecation timeline based on your consumer profile and the stability requirements of this specific API.]*
+
 **Strategy**: [URL versioning (`/v1/`) / Header versioning]
 **Deprecation policy**: [e.g., 6 months notice, deprecation header on sunset date]
 **Current version**: v[N]
@@ -162,6 +186,8 @@ All errors return the same envelope:
 ---
 
 ## Webhooks (if applicable)
+
+> **Note — Webhooks**: Three most important things to specify: delivery semantics (at-least-once means duplicates are possible and consumers must be idempotent), retry policy, and verification (consumers must validate HMAC signatures or accept spoofed events).
 
 ### [Event Name]
 
@@ -184,6 +210,8 @@ All errors return the same envelope:
 
 ## Usage Examples
 
+> **Note — Usage Examples**: A concrete `curl` command with a real-looking request and response is more useful than the most thorough parameter table — consumers copy-paste them as starting points. If you can't write a concise example, the endpoint design may be too complex.
+
 ### Example 1: [Common use case]
 
 **Request**:
@@ -205,6 +233,8 @@ curl -X POST https://api.example.com/v1/resource \
 ---
 
 ## Open Questions
+
+> **Note — Open Questions**: Every unresolved question here is a potential breaking change later if the wrong assumption is baked into consumer integrations. Resolve before implementation begins.
 
 | Question | Owner | Due | Status |
 |----------|-------|-----|--------|

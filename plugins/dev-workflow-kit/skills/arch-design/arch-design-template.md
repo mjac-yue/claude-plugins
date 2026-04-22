@@ -7,9 +7,19 @@
 **Related Solution Analysis**: [Link]
 **Engineering Owner**: [Name]
 
+> **Learning note — Architectural Design**
+> - **Why**: Defines the blueprint for system structure — components, responsibilities, communication patterns, and non-functional properties — before writing any code
+> - **Who uses it**: Engineers make structural decisions when changes are cheap; Engineering leads evaluate quality attribute coverage; PMs understand delivery dependencies and integration risks
+> - **Key decisions**: Which architectural style fits the NFRs and team constraints? How do components communicate and what are the failure modes? ADRs preserve the *why* for future engineers
+> - **Next step**: Approved design → tech spec Architecture section; ADRs added to the project's decision log
+
 ---
 
 ## Non-Functional Requirements (NFRs)
+
+> **Note — Non-Functional Requirements**: NFRs are the foundation of every architectural decision — a system designed for 100 RPS will fail at 10,000 RPS. State them explicitly before making choices so reviewers can evaluate whether the design actually achieves them.
+
+> 💡 **Tip**: *[Your AI will identify which NFRs are most constraining for this specific system and flag where architectural choices may not meet stated targets.]*
 
 *These drive every architectural decision. State them before making choices.*
 
@@ -29,6 +39,8 @@
 
 ## Architectural Style
 
+> **Note — Architectural Style**: The highest-level structural decision — it determines how the system is decomposed and how components communicate. The "styles considered and rejected" table prevents future engineers from proposing a different style without knowing why the current one was chosen.
+
 **Chosen style**: [Monolith / Layered / Microservices / Event-driven / CQRS / Hexagonal / Hybrid]
 
 **Rationale**: [Why this style fits the NFRs and the team's operational capability. Be specific — reference the NFRs above.]
@@ -43,6 +55,8 @@
 ---
 
 ## System Context
+
+> **Note — System Context**: Shows where this system sits in the broader landscape — what users interact with it, what external systems it connects to. The trust boundaries annotation is especially important for security review — they define where authentication and authorization must be enforced.
 
 *Where this system or feature sits in the broader landscape.*
 
@@ -60,6 +74,8 @@ flowchart LR
 ---
 
 ## Component Design
+
+> **Note — Component Design**: The "Does NOT own" column is as important as the "Owns" column — explicit exclusions prevent scope creep at the component level and reduce coordination overhead during implementation.
 
 ### Component Overview
 
@@ -95,6 +111,8 @@ flowchart LR
 
 ## Integration Patterns
 
+> **Note — Integration Patterns**: Synchronous dependencies on unreliable services will bring down the caller. The data ownership table is equally important — ambiguous ownership is the most common cause of data inconsistency bugs in multi-component systems.
+
 | Integration | Components | Pattern | Consistency | Failure handling |
 |-------------|-----------|---------|-------------|-----------------|
 | [A → B] | [From] → [To] | Sync REST / Async event / gRPC / File | Strong / Eventual | Retry + DLQ / Circuit breaker / Fallback |
@@ -111,6 +129,8 @@ flowchart LR
 ---
 
 ## Cross-Cutting Concerns
+
+> **Note — Cross-Cutting Concerns**: Affect every component rather than one specific area — inconsistent auth enforcement creates security holes; inconsistent logging makes tracing impossible. The most common gap is observability — systems not instrumented during design end up with poor debuggability in production.
 
 ### Authentication & Authorization
 - **Identity provider**: [Where identities are established]
@@ -142,6 +162,10 @@ flowchart LR
 
 ## Architectural Risks
 
+> **Note — Architectural Risks**: Structural weaknesses that could cause the system to fail its NFRs under real-world conditions — they can't be fixed with a patch. A risk with a documented mitigation is a managed risk; an undocumented risk is a future incident.
+
+> 💡 **Tip**: *[Your AI will assess which architectural risks are most likely to materialize given your chosen style, NFRs, and team size — and recommend where to prioritize mitigation.]*
+
 | Risk | Quality attribute | Likelihood | Impact | Mitigation |
 |------|------------------|-----------|--------|------------|
 | Single point of failure: [describe] | Availability | H/M/L | H/M/L | |
@@ -152,6 +176,8 @@ flowchart LR
 ---
 
 ## Architecture Decision Records (ADRs)
+
+> **Note — ADRs**: The most durable artifact of the design process — code changes constantly, but the reasoning behind structural decisions needs to survive team turnover. Write one ADR per significant decision: storage technology, communication pattern, auth model, deployment topology.
 
 ---
 
@@ -198,6 +224,8 @@ flowchart LR
 ---
 
 ## Open Questions
+
+> **Note — Open Questions**: Architectural questions affect the system's fundamental structure and are more expensive to change later than tech spec questions. The "impact on architecture" column forces specificity about what changes depending on the answer.
 
 | Question | Impact on architecture | Owner | Due |
 |----------|----------------------|-------|-----|
