@@ -440,12 +440,21 @@ Run at the end of each review round:
 - Confirm Eng has reviewed and accepted the latest design handoff
 - Check for scope changes: did constraint resolution add new requirements that aren't in the release plan?
 
+**Phase B artifact write** — Before sign-off, tech design decisions must be written to dev documents. These decisions exist only in the state file and conversation until this step runs. Check the project `CLAUDE.md` for an **Output paths** table to determine file locations; otherwise use the defaults below.
+
+| Dev artifact | Default file | Required for sign-off |
+|-------------|-------------|----------------------|
+| Architecture design | `dev/arch-design.md` | Yes — produce using `/arch-design` skill if not yet written |
+| Technical specification | `dev/tech-spec.md` | Yes — produce using `/tech-spec` skill if not yet written; must include the confirmed tech stack (hosting, database, auth, CI/CD), resolved constraints, and data model decisions |
+
+For each artifact: if the file does not exist, produce it now using the relevant skill before proceeding. If it exists but predates constraint resolutions from this Phase B, update it to reflect the final agreed decisions. Update **Status** to **Done** and **Last updated** to today's date in the project `CLAUDE.md` status table for each file written. Confirm the file paths to the user.
+
 **Sign-off decision**:
-- If all constraints resolved and all three parties are satisfied → record sign-off and move to Phase C
-- If constraints remain → plan the next review round; note what specifically needs resolution
+- If all constraints resolved AND Phase B artifacts are written to dev files AND all three parties are satisfied → record sign-off and move to Phase C
+- If constraints remain, or dev artifacts are not yet written → identify exactly what is missing before sign-off can be granted
 
 **Checkpoint B3**: Record three-way sign-off or confirm next round scope.
-**Write state**: Update `[project]-state.md` — remaining open constraints, PM/Designer/Eng sign-off status. If Phase B is complete, mark status ✓ and set Current Position to Phase C.
+**Write state**: Update `[project]-state.md` — remaining open constraints, PM/Designer/Eng sign-off status, paths to written dev artifacts. If Phase B is complete, mark status ✓ and set Current Position to Phase C.
 
 ---
 
@@ -603,7 +612,8 @@ Output a clean handoff summary scaled to the phase:
 ### Dev ready
 - Tech stack confirmed: [hosting platform, database, auth system, CI/CD tooling]
 - Release plan Layer 1 updated: [confirm TBD placeholders have been replaced with confirmed choices]
-- Tech spec: [file/location or "not required for this tier"]
+- Arch design: [file/location]
+- Tech spec: [file/location]
 - First cycle: [what Layer 1 work looks like]
 ```
 
