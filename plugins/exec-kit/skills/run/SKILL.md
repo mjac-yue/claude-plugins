@@ -560,8 +560,12 @@ Eng: Signed off / Pending
 
 ## Phase C — Dev Build
 
-*Work unit: sprint or Kanban cycle. Standups are daily. Retros are end of cycle.*
+*Work unit: sprint or Kanban cycle. Retros are end of cycle.*
 *Roles: Eng-led. PM + Design available for questions, not actively producing.*
+
+**Cadence by team size** — check the team size recorded in the state file before running C2 or C3:
+- **Solo builder (team size = 1)**: lightweight daily focus check-in (C2) + cycle close (C3). No standup ceremony; no retrospective.
+- **Project team (team size ≥ 2)**: daily standup (C2) + full retrospective (C3).
 
 ---
 
@@ -598,7 +602,26 @@ In both cases, the cycle plan is the approved version — include any changes ma
 
 ---
 
-### C2 — Daily Standup (run each day)
+### C2 — Daily Check-in (Solo) / Standup (Team)
+
+**Solo builder (team size = 1) — Daily Focus check-in:**
+
+The solo daily check-in is a brief orient-and-focus prompt, not a standup ceremony. When the user checks in (any message indicating they're starting a work session or asking what to do next):
+
+1. Look at the approved cycle plan (in `[project]-state.md`) and the current Status column in `dev/dev-plan.md`
+2. Identify the next uncompleted task in the cycle sequence, respecting within-cycle dependencies
+3. Present a one-line focus prompt:
+
+   > *"Today: [task name and one-line description]. [N] tasks remain in this cycle ([N] days of work). On track / [N] days behind."*
+
+4. Accept task completions: if the user reports one or more tasks as done, update `dev/dev-plan.md` Status column to `✓` for each completed task immediately. Do not wait for retro or cycle close to record completions.
+5. If the user surfaces a blocker, flag it and offer to invoke the `blocker-coach` agent.
+
+No structured "done / in progress / blocked" output required. No cycle health narrative. Keep it to one short exchange.
+
+---
+
+**Project team (team size ≥ 2) — Daily Standup:**
 
 Process standup updates following the process and template of the `/standup` skill:
 - Accept free-text or bullet-point updates from each person
@@ -606,15 +629,45 @@ Process standup updates following the process and template of the `/standup` ski
 - Surface blockers and decisions needed immediately
 - Assess cycle health — is the team on track?
 
-**Task tracking**: For each task reported as Done in today's standup, open `dev/dev-plan.md` and update its Status column to `✓ Done`. This keeps the dev plan as the live day-to-day task tracker throughout the cycle. If the dev plan task table does not have a Status column, add one before updating.
-
-This phase can be run multiple times. Each run processes one day's updates.
-
-**No checkpoint** — standups are continuous. Flag anything requiring a cycle plan revision.
+**Task tracking**: For each task reported as Done in today's standup, open `dev/dev-plan.md` and update its Status column to `✓`. This keeps the dev plan as the live day-to-day task tracker throughout the cycle. If the dev plan task table does not have a Status column, add one before updating.
 
 ---
 
-### C3 — Retrospective (end of cycle)
+This phase can be run multiple times per cycle. Each run processes one session's updates.
+
+**No checkpoint** — check-ins and standups are continuous. Flag anything requiring a cycle plan revision.
+
+---
+
+### C3 — Cycle Close (Solo) / Retrospective (Team)
+
+**Solo builder (team size = 1) — Cycle Close:**
+
+The solo cycle close focuses entirely on completion accounting and document updates. Skip the retrospective ceremony (what worked / what didn't / action items / process change).
+
+1. Ask: *"What was completed this cycle?"* Accept free-text, bullet list, or "everything."
+2. For any task the user reports as completed that isn't already `✓` in `dev/dev-plan.md`, update its Status column now.
+3. Note any tasks not completed with a brief reason (carried to next cycle, descoped, blocked).
+
+**Update release plan**: Open the release plan file and apply the following updates:
+- For each work item completed this cycle: tick the corresponding `[ ]` checkbox in the build sequence section of the release plan (the layer checklist — e.g., Layer 1 — Infrastructure, Layer 2 — Foundation)
+- If a build layer is fully complete, mark the layer heading as `✓ Complete [Date]` and tick any remaining unchecked items in that layer's checklist
+- For items carried over, add a note to their checklist entry indicating the expected cycle
+- Do not rely on the state file for this; the release plan file must reflect actual completion status
+
+**Apply the Questions Gate** — check `questions.md`. Resolve any P0 blockers before closing the cycle.
+
+**Checkpoint C3**: Confirm the completion list before writing state.
+**Write state**: Update `[project]-state.md` —
+- Cycle summary block: tasks completed, tasks carried over with reasons, next cycle focus
+- Artifacts table Dev rows: for every dev artifact completed this cycle, update its row to ✓ Done [Date] with file path
+- Open P0/P1 questions summary
+
+Present a brief cycle close summary — completed vs planned count, any carried items, next cycle focus. One short block, no narrative sections.
+
+---
+
+**Project team (team size ≥ 2) — Retrospective:**
 
 Run a retrospective following the process and template of the `/retro` skill:
 - Assess what was completed vs planned
