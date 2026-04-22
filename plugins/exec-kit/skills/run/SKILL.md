@@ -585,6 +585,15 @@ After presenting the plan, immediately run the **Review-Iterate-Approve loop** *
 **Apply the Questions Gate** — check `questions.md` before starting the cycle. Resolve any P0 questions now; flag P1 questions; carry P2 forward. Write any new questions or blockers surfaced during cycle planning to `questions.md`.
 
 **Checkpoint C1**: Get approval before the cycle begins.
+
+**Persist the approved cycle plan** — after the user says "approved", save the full cycle plan using the approach that matches the team size recorded in the state file:
+
+- **Solo builder (team size = 1)**: Add a `## Cycle [N] — Plan` section to `[project]-state.md` directly below the Phase C status block. Include: cycle goal, approved task table (with estimates and dependencies), day-by-day schedule, verification criteria, and any key decisions made during the plan-reviewer loop. This keeps everything in one file and avoids document sprawl for a solo builder.
+
+- **Project team (team size ≥ 2)**: Write the full approved cycle plan to `dev/cycles/cycle-[N].md`. Include: cycle goal, approved task table, day-by-day schedule with assignees, verification criteria, key decisions from the plan-reviewer loop, and carried items with rationale. Update `[project]-state.md` to reference the file path. Create the `dev/cycles/` directory if it does not exist.
+
+In both cases, the cycle plan is the approved version — include any changes made during the review-iterate loop, not the initial draft.
+
 **Write state**: Update `[project]-state.md` — current phase (C), cycle number, current build layer, selected work items and owners, cycle goal, open P0/P1 questions summary. For any dev artifact that is being produced this cycle (e.g., dev plan, QA test plan), update its Artifacts table row from "Not started" to "In progress [Date]".
 
 ---
