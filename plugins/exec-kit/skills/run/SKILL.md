@@ -173,12 +173,51 @@ Confirm with the user before proceeding. If no state file exists, proceed with P
 - (none) or [Question — Owner]
 
 ## Artifacts
+
+### Project
 | Artifact | File | Status |
 |----------|------|--------|
-| Release plan | | Draft / Active |
-| PRD | | Draft / Final |
-| Design handoff | | In progress / Ready |
-| Tech spec (if produced) | | Draft / Final |
+| Release plan | | Draft \| Active \| ✓ Complete [Date] |
+| Risk register | | Not started \| Active \| ✓ Cleared [Date] |
+
+### PM
+| Artifact | File | Status |
+|----------|------|--------|
+| Brief | | Not started \| In progress \| ✓ Done [Date] |
+| Competitive analysis | | Not started \| In progress \| ✓ Done [Date] |
+| PRD | | Not started \| In progress \| ✓ Done [Date] |
+| User stories | | Not started \| In progress \| ✓ Done [Date] |
+| Prioritization | | Not started \| In progress \| ✓ Done [Date] |
+| Roadmap | | Not started \| In progress \| ✓ Done [Date] |
+
+### Design
+| Artifact | File | Status |
+|----------|------|--------|
+| UX brief | | Not started \| In progress \| ✓ Done [Date] |
+| Wireframe spec | | Not started \| In progress \| ✓ Done [Date] |
+| HTML mockup | | Not started \| In progress \| ✓ Done [Date] |
+| Design review | | Not started \| In progress \| ✓ Done [Date] |
+| Usability test plan | | Not started \| N/A \| ✓ Done [Date] |
+| Design handoff | | Not started \| In progress \| ✓ Done [Date] |
+
+### Dev
+| Artifact | File | Status |
+|----------|------|--------|
+| Arch design | | Not started \| In progress \| ✓ Done [Date] |
+| Tech spec | | Not started \| In progress \| ✓ Done [Date] |
+| API spec | | Not started \| N/A \| ✓ Done [Date] |
+| Dev plan | | Not started \| In progress \| ✓ Done [Date] |
+| QA test plan | | Not started \| In progress \| ✓ Done [Date] |
+| Code review | | Not started \| In progress \| ✓ Done [Date] |
+| Security review | | Not started \| In progress \| ✓ Done [Date] |
+| Deployment guide | | Not started \| In progress \| ✓ Done [Date] |
+
+---
+
+## Document Sync Queue
+> Artifacts flagged for review due to upstream changes. Remove each entry once the artifact has been reviewed and updated.
+
+- (none)
 ```
 
 ---
@@ -282,6 +321,8 @@ Write every question surfaced here to `questions.md` immediately — assign prio
 
 This phase can be run multiple times within a round. Each run processes one update cycle.
 
+**Write state**: Update `[project]-state.md` — for each artifact flagged by the downstream design impact check, add an entry to the **Document Sync Queue** section (artifact name, date flagged, reason). Update the status of any PM or Design artifact that progressed this round (e.g., PRD from "Not started" to "In progress").
+
 ---
 
 ### A3 — Round Review and Sign-off Check
@@ -331,7 +372,12 @@ Offer: *"Want me to run the `prd-reviewer` agent to check the PRD before you sig
 **Update release plan**: Open the release plan file and mark the PM Layer and Design Layer rows as Complete with today's date. Mark all Phase A gate criteria as met. Confirm the file was written.
 
 **Checkpoint A3**: Record sign-off or confirm what must be completed next.
-**Write state**: Update `[project]-state.md` — artifact completion status, open P0/P1 questions summary, PM and Designer sign-off status. If Phase A is complete, mark status ✓ and set Current Position to Phase B.
+**Write state**: Update `[project]-state.md` —
+- Phase A status → ✓ Complete [Date]; PM sign-off ✓ [Date]; Designer sign-off ✓ [Date]
+- Current Position → Phase B
+- Artifacts table: mark every PM row (Brief, Competitive analysis, PRD, User stories, Prioritization, Roadmap) and every Design row (UX brief, Wireframe spec, HTML mockup, Design review, Usability test plan or N/A, Design handoff) as ✓ Done [Date] with the actual file path
+- Clear any Document Sync Queue entries that were resolved during this sign-off
+- Open P0/P1 questions summary → update to reflect all resolved
 
 ---
 
@@ -473,7 +519,12 @@ For each artifact: if the file does not exist, produce it now using the relevant
 **Update release plan**: Open the release plan file and mark the Tech Design Layer row as Complete with today's date. Apply any scope changes from constraint resolution to the affected layer rows. Confirm the file was written.
 
 **Checkpoint B3**: Record three-way sign-off or confirm next round scope.
-**Write state**: Update `[project]-state.md` — remaining open constraints, PM/Designer/Eng sign-off status, paths to written dev artifacts. If Phase B is complete, mark status ✓ and set Current Position to Phase C.
+**Write state**: Update `[project]-state.md` —
+- Phase B status → ✓ Complete [Date]; PM sign-off ✓; Designer sign-off ✓; Eng sign-off ✓
+- Current Position → Phase C
+- Artifacts table Dev rows: Arch design → ✓ Done [Date] [file path]; Tech spec → ✓ Done [Date] [file path]; API spec → ✓ Done [Date] [file path] or N/A
+- Clear Open constraints list (move resolved ones to Key Decisions)
+- Open P0/P1 questions summary → update to reflect all resolved
 
 ---
 
@@ -534,7 +585,7 @@ After presenting the plan, immediately run the **Review-Iterate-Approve loop** *
 **Apply the Questions Gate** — check `questions.md` before starting the cycle. Resolve any P0 questions now; flag P1 questions; carry P2 forward. Write any new questions or blockers surfaced during cycle planning to `questions.md`.
 
 **Checkpoint C1**: Get approval before the cycle begins.
-**Write state**: Update `[project]-state.md` — current phase (C), cycle number, current build layer, selected work items and owners, cycle goal, open P0/P1 questions summary.
+**Write state**: Update `[project]-state.md` — current phase (C), cycle number, current build layer, selected work items and owners, cycle goal, open P0/P1 questions summary. For any dev artifact that is being produced this cycle (e.g., dev plan, QA test plan), update its Artifacts table row from "Not started" to "In progress [Date]".
 
 ---
 
@@ -569,7 +620,10 @@ Run a retrospective following the process and template of the `/retro` skill:
 - Do not rely on the state file for this; the release plan file must reflect actual completion status
 
 **Checkpoint C3**: Get approval before generating the status report.
-**Write state**: Update `[project]-state.md` — completed items, carried-over items with reasons, next cycle focus, open P0/P1 questions summary.
+**Write state**: Update `[project]-state.md` —
+- Completed items and carried-over items with reasons; next cycle focus
+- Artifacts table Dev rows: for every dev artifact completed this cycle (dev plan, QA test plan, code review, security review, deployment guide — whichever applies), update its row to ✓ Done [Date] with the actual file path. Do not leave rows as "In progress" once the artifact is written and approved.
+- Open P0/P1 questions summary
 
 ---
 
@@ -860,7 +914,13 @@ The rollout skill will produce the full launch package including:
 **Update release plan**: Open the release plan file and mark all remaining QA & Launch layer rows as Done with today's actual date. Record the actual launch date against the planned date in the timeline section. Mark the overall project as Complete. Confirm the file was written.
 
 **Checkpoint D6**: Confirm the rollout package is complete.
-**Write state**: Update Phase D — D6 complete. Set overall project status to ✓ Complete.
+**Write state**: Update `[project]-state.md` —
+- Phase D status → ✓ Complete [Date]; D6 Rollout → ✓ Complete [Date]
+- Current Position → Project complete
+- Artifacts table Dev rows: Deployment guide → ✓ Done [Date] with file path (if not already marked)
+- Artifacts table Project rows: Release plan → ✓ Complete [Date]; Risk register → ✓ Cleared [Date]
+- Clear Document Sync Queue (should be empty at launch)
+- Overall project status → ✓ Complete
 
 ---
 
