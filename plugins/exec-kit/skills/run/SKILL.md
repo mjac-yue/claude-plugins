@@ -298,9 +298,19 @@ For any artifact that is Not started or In progress: do not recommend sign-off. 
 - Assess PRD completeness independently of question resolution: are all P0 requirements defined with acceptance criteria? Has the PRD been through at least one `prd-reviewer` pass? Resolving open questions is necessary but not sufficient — the PM must explicitly confirm PRD quality meets the bar.
 - Check for scope drift: did the round introduce new requirements that need to be scoped?
 
+**Design → PM cascade check** — Before sign-off, review PM documents against the completed design artifacts. Design decisions frequently surface requirements gaps, scope adjustments, or new constraints that must flow back before the PM can meaningfully sign off. For each PM artifact that is not "Not started", check against the full set of completed design deliverables (UX brief, wireframe spec, HTML mockups, design review, design handoff):
+
+| PM artifact | What to check |
+|------------|---------------|
+| PRD (`pm/prd.md`) | Do design decisions reveal missing, ambiguous, or conflicting requirements? |
+| User stories (`pm/user-stories.md`) | Do new flows, edge cases, or states discovered in design need new or updated stories? |
+| Brief (`pm/brief.md`) | Do design decisions affect stated scope, users, or success criteria? |
+
+For each artifact with gaps, state exactly what needs updating and why. Apply PM document updates before sign-off. If no updates are needed, confirm explicitly: *"Design review found no changes required to PM documents."*
+
 **Sign-off decision**:
-- If all Phase A artifacts are Done AND all P0/P1 questions in `questions.md` are resolved AND the PM explicitly confirms PRD quality AND the Designer confirms design completeness → record sign-off and move to Phase B
-- If any artifact is missing, or P0/P1 questions remain, or quality is not confirmed → identify exactly what is missing and direct the user to the appropriate skill before sign-off
+- If all Phase A artifacts are Done AND the design → PM cascade check is complete (updates applied or confirmed none needed) AND all P0/P1 questions in `questions.md` are resolved AND the PM explicitly confirms PRD quality AND the Designer confirms design completeness → record sign-off and move to Phase B
+- If any artifact is missing, or the cascade check has unresolved PM updates, or P0/P1 questions remain, or quality is not confirmed → identify exactly what is missing and direct the user to the appropriate skill before sign-off
 
 Offer: *"Want me to run the `prd-reviewer` agent to check the PRD before you sign off?"* (Requires pm-claude-kit to be installed.)
 
