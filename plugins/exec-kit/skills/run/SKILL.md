@@ -24,6 +24,20 @@ Display the learning note above verbatim to the user before proceeding.
 
 **Logging questions**: Whenever a question is surfaced during this skill — in iteration updates, constraint reviews, standup blockers, or any other context — write it to `questions.md` immediately with: question text, priority (P0/P1/P2), phase raised, owner, and affected documents. Do not store questions only in the state file; the log is the single source of truth.
 
+**Release plan update standard — applies throughout this skill**: The release plan file (path listed in the project `CLAUDE.md` output paths table, or `[project]-release-plan.md` by default) is the live source of truth for phase status, layer completion, actual dates, and scope. It must be written to — not just referenced — at each of the following events:
+
+| Event | What to update in the release plan file |
+|-------|----------------------------------------|
+| Phase A sign-off (A3) | Mark PM Layer and Design Layer rows as Complete with actual date; mark all Phase A gate criteria as met |
+| Tech stack agreed (B2) | Replace TBD placeholders in Layer 1 with confirmed hosting, database, auth, and CI/CD choices |
+| Phase B sign-off (B3) | Mark Tech Design Layer as Complete with actual date; update any layer scope affected by constraint resolutions |
+| Build layer complete (C3) | Mark completed work items and the layer row as Done with actual date; update planned vs. actual dates for the current position |
+| End-of-cycle status (C4) | Update the overall timeline health — adjust future layer dates if this cycle slipped or completed early |
+| Test gate passed (D1–D3) | Mark the corresponding QA & Launch layer sub-item as passed with the actual date |
+| Project complete (D6) | Mark all remaining layers Done; record actual launch date against planned |
+
+At each of these events, open the release plan file, make the specific updates, and confirm to the user which file was written. Never leave the release plan as a kickoff snapshot — every phase completion must be reflected in the file before the checkpoint is closed.
+
 Work through the phases below. First determine which project phase is active, then apply the appropriate execution model. The work unit, standup format, and retro format all differ by phase.
 
 ---
@@ -314,6 +328,8 @@ For each artifact with gaps, state exactly what needs updating and why. Apply PM
 
 Offer: *"Want me to run the `prd-reviewer` agent to check the PRD before you sign off?"* (Requires pm-claude-kit to be installed.)
 
+**Update release plan**: Open the release plan file and mark the PM Layer and Design Layer rows as Complete with today's date. Mark all Phase A gate criteria as met. Confirm the file was written.
+
 **Checkpoint A3**: Record sign-off or confirm what must be completed next.
 **Write state**: Update `[project]-state.md` — artifact completion status, open P0/P1 questions summary, PM and Designer sign-off status. If Phase A is complete, mark status ✓ and set Current Position to Phase B.
 
@@ -395,7 +411,8 @@ Structure into:
 - Proposed auth system: [what Eng recommends and why]
 - Proposed CI/CD tooling: [what Eng recommends and why]
 - Any other foundational technical choices: [e.g. language, framework, third-party services]
-- *Once agreed, update Layer 1 of the release plan with the confirmed choices.*
+
+Once the tech stack is agreed, immediately open the release plan file and replace every TBD placeholder in Layer 1 with the confirmed choices. Do not defer this to B3 — the Layer 1 specifics must be in the file as soon as they are decided so the team can act on them. Confirm the file was written.
 
 **Constraints identified by Eng**
 - Technical constraint: [what the constraint is]
@@ -435,10 +452,10 @@ Run at the end of each review round:
 
 - Review all open constraints and questions in `questions.md` — are any still unresolved?
 - Confirm the tech stack is decided — hosting, database, auth, CI/CD. If not yet agreed, this is a blocker for Phase B completion.
-- Prompt to update the release plan Layer 1 with the confirmed tech choices (replacing the TBD placeholders set during initial planning).
-- Check that all PRD and design updates are internally consistent
-- Confirm Eng has reviewed and accepted the latest design handoff
-- Check for scope changes: did constraint resolution add new requirements that aren't in the release plan?
+- Confirm Layer 1 TBD placeholders were already replaced in the release plan file during B2. If not, do it now before proceeding.
+- Check that all PRD and design updates are internally consistent.
+- Confirm Eng has reviewed and accepted the latest design handoff.
+- Check for scope changes: did constraint resolution add, remove, or resize any work items in the release plan layers? If yes, open the release plan file and update the affected layer rows before sign-off.
 
 **Phase B artifact write** — Before sign-off, tech design decisions must be written to dev documents. These decisions exist only in the state file and conversation until this step runs. Check the project `CLAUDE.md` for an **Output paths** table to determine file locations; otherwise use the defaults below.
 
@@ -452,6 +469,8 @@ For each artifact: if the file does not exist, produce it now using the relevant
 **Sign-off decision**:
 - If all constraints resolved AND Phase B artifacts are written to dev files AND all three parties are satisfied → record sign-off and move to Phase C
 - If constraints remain, or dev artifacts are not yet written → identify exactly what is missing before sign-off can be granted
+
+**Update release plan**: Open the release plan file and mark the Tech Design Layer row as Complete with today's date. Apply any scope changes from constraint resolution to the affected layer rows. Confirm the file was written.
 
 **Checkpoint B3**: Record three-way sign-off or confirm next round scope.
 **Write state**: Update `[project]-state.md` — remaining open constraints, PM/Designer/Eng sign-off status, paths to written dev artifacts. If Phase B is complete, mark status ✓ and set Current Position to Phase C.
@@ -540,9 +559,14 @@ Run a retrospective following the process and template of the `/retro` skill:
 - Surface what worked and what didn't
 - Define one action item per person
 - Define one process change to try next cycle
-- Check whether the release plan is still on track
 
 **Apply the Questions Gate** — check `questions.md` before closing the cycle. Any blockers surfaced in standups that were logged as P0 questions must be resolved before the retrospective can complete. Write any new questions surfaced during retro to `questions.md`.
+
+**Update release plan**: Open the release plan file and apply the following updates based on the retrospective:
+- Mark every work item completed this cycle as Done in the appropriate layer row
+- If a build layer is fully complete, mark the layer row as Done with today's actual date
+- For items carried over, update their layer row to reflect the slip — note the new expected cycle
+- Do not rely on the state file for this; the release plan file must reflect actual completion status
 
 **Checkpoint C3**: Get approval before generating the status report.
 **Write state**: Update `[project]-state.md` — completed items, carried-over items with reasons, next cycle focus, open P0/P1 questions summary.
@@ -556,6 +580,8 @@ Generate a stakeholder status report following the process and template of the `
 - Show progress against release plan phases and build layers
 - Summarise what shipped this cycle and what's planned next
 - Surface any open risks and decisions needed from stakeholders
+
+**Update release plan**: If this cycle completed early or slipped, open the release plan file and adjust the planned dates for future layers to reflect the revised timeline. The release plan dates must stay realistic — do not leave them as the original kickoff estimates if the project has moved. Confirm the file was written.
 
 **Checkpoint C4**: Present the end-of-cycle package.
 **Write state**: Update `[project]-state.md` — RAG status, release plan health, and any Key Decisions made this cycle.
@@ -673,6 +699,8 @@ If any critical failures exist (P0 tests failing), stop and resolve before D2. L
 
 **Apply the Questions Gate** — check `questions.md` before proceeding to D2. Resolve any P0 questions now and update affected documents.
 
+**Update release plan**: Open the release plan file and mark the D1 — Automated Tests sub-item in the QA & Launch layer as passed (or failed with count of bugs found). Confirm the file was written.
+
 **Checkpoint D1**: Confirm automated test results before proceeding.
 **Write state**: Update Phase D — D1 status with pass/fail and number of bugs found.
 
@@ -708,6 +736,8 @@ Log all failures as bugs. Ask: *"Do you want to fix the failures before design c
 
 **Apply the Questions Gate** — check `questions.md` before proceeding to D3. Resolve any P0 questions and update affected documents.
 
+**Update release plan**: Open the release plan file and mark the D2 — PM Requirements Test sub-item as passed or failed with gap count. Confirm the file was written.
+
 **Checkpoint D2**: Confirm PM test results.
 **Write state**: Update Phase D — D2 status with pass/fail and gaps found.
 
@@ -739,6 +769,8 @@ Produce a summary:
 Log all discrepancies as bugs. Offer: *"Want me to run the `ux-reviewer` agent *(design-ux-kit)* on the built product to catch anything the conformance check missed?"*
 
 **Apply the Questions Gate** — check `questions.md` before proceeding to D4. Resolve any P0 questions and update affected documents.
+
+**Update release plan**: Open the release plan file and mark the D3 — Design Conformance Test sub-item as passed or failed with discrepancy count. Confirm the file was written.
 
 **Checkpoint D3**: Confirm design conformance results.
 **Write state**: Update Phase D — D3 status with discrepancies found.
@@ -824,6 +856,8 @@ The rollout skill will produce the full launch package including:
 - Project / product completion summary (features implemented, timelines, resulting risks)
 - Audience-specific product summaries (internal team, customers, executives, support)
 - User training materials (quick start guide, step-by-step instructions, FAQ, tips)
+
+**Update release plan**: Open the release plan file and mark all remaining QA & Launch layer rows as Done with today's actual date. Record the actual launch date against the planned date in the timeline section. Mark the overall project as Complete. Confirm the file was written.
 
 **Checkpoint D6**: Confirm the rollout package is complete.
 **Write state**: Update Phase D — D6 complete. Set overall project status to ✓ Complete.
