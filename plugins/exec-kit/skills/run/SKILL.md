@@ -597,6 +597,8 @@ Process standup updates following the process and template of the `/standup` ski
 - Surface blockers and decisions needed immediately
 - Assess cycle health — is the team on track?
 
+**Task tracking**: For each task reported as Done in today's standup, open `dev/dev-plan.md` and update its Status column to `✓ Done`. This keeps the dev plan as the live day-to-day task tracker throughout the cycle. If the dev plan task table does not have a Status column, add one before updating.
+
 This phase can be run multiple times. Each run processes one day's updates.
 
 **No checkpoint** — standups are continuous. Flag anything requiring a cycle plan revision.
@@ -614,9 +616,9 @@ Run a retrospective following the process and template of the `/retro` skill:
 **Apply the Questions Gate** — check `questions.md` before closing the cycle. Any blockers surfaced in standups that were logged as P0 questions must be resolved before the retrospective can complete. Write any new questions surfaced during retro to `questions.md`.
 
 **Update release plan**: Open the release plan file and apply the following updates based on the retrospective:
-- Mark every work item completed this cycle as Done in the appropriate layer row
-- If a build layer is fully complete, mark the layer row as Done with today's actual date
-- For items carried over, update their layer row to reflect the slip — note the new expected cycle
+- For each work item completed this cycle: tick the corresponding `[ ]` checkbox in the build sequence section of the release plan (the layer checklist — e.g., Layer 1 — Infrastructure, Layer 2 — Foundation)
+- If a build layer is fully complete, mark the layer heading as `✓ Complete [Date]` and tick any remaining unchecked items in that layer's checklist
+- For items carried over, add a note to their checklist entry indicating the expected cycle
 - Do not rely on the state file for this; the release plan file must reflect actual completion status
 
 **Checkpoint C3**: Get approval before generating the status report.
