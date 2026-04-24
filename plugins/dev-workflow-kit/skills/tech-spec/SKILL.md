@@ -58,3 +58,4 @@ After presenting the technical specification to the user:
 4. In that same project `CLAUDE.md`, find the **Project status** table and set the **Status** column to **Done** for the row matching this deliverable
 5. Confirm the file was written to the user
 6. If no project `CLAUDE.md` exists, present the output for manual copying
+7. Prompt the user: *"Run `/dev-workflow-kit:log [one-line summary]` to record this in the work log — e.g. `/dev-workflow-kit:log Completed tech spec for [feature name]`"*

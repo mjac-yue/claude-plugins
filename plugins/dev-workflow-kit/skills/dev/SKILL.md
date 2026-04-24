@@ -384,3 +384,5 @@ Output a clean summary package:
 ### Next Step
 Run `/run [project]` to begin Phase D — automated tests, PM requirements test, design conformance test, bug triage, risk clearance, and rollout.
 ```
+
+After presenting the summary, prompt the user: *"Run `/dev-workflow-kit:log [one-line summary]` to record this in the work log — e.g. `/dev-workflow-kit:log Completed full dev workflow for [feature name]`"*
