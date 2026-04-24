@@ -59,6 +59,12 @@ For each changed file, evaluate:
 - Is there unnecessary computation inside loops?
 - Are expensive operations cached where they should be?
 
+**Code Minimalism**
+- Is there more code than the task requires? Flag unnecessary abstractions, premature generalization, and helpers that exist for a single call site
+- Is there dead code, redundant logic, or duplicate paths that could be removed?
+- Are there intermediate variables that only restate their initializer?
+- Does the change introduce coupling or complexity that won't pay off? Less code means less surface area to maintain and fewer places for bugs to hide
+
 **Readability & Patterns**
 - Use Grep to find how similar operations are done elsewhere in the codebase
 - Flag deviations from established patterns

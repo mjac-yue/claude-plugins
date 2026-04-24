@@ -79,6 +79,14 @@
 |----------|----------|---------|---------------|
 | | | | |
 
+### Code Minimalism
+
+> **Note — Code Minimalism**: Less code is better — every unnecessary line is more surface area to maintain and more places for bugs to hide. Flag abstractions built for a single call site, dead code, redundant logic, and complexity that won't pay off. The standard is: the minimum code a competent engineer would still be proud of.
+
+| Severity | Location | Finding | Recommendation |
+|----------|----------|---------|---------------|
+| | | | |
+
 ### Readability & Maintainability
 
 > **Note — Readability & Maintainability**: Ask: "Would a new team member understand this in six months without PR context?" The most important readability tool is naming — a well-named function eliminates the need for a comment.
@@ -130,6 +138,7 @@
 - [ ] Error states are handled and surfaced appropriately
 - [ ] No security vulnerabilities introduced
 - [ ] No obvious performance regressions
+- [ ] No unnecessary abstractions, dead code, or bloat introduced
 - [ ] Code is readable and consistent with codebase patterns
 - [ ] No dead code, debug logs, or unresolved TODOs
 - [ ] Documentation updated (if public API or behavior changed)

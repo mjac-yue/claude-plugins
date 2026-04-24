@@ -38,11 +38,16 @@ Follow this process:
    - Are there N+1 queries or unnecessary repeated computation?
    - Are expensive operations cached where appropriate?
    - Are database queries indexed?
-7. **Readability & maintainability**:
+7. **Code minimalism** — less code is better:
+   - Is there more code than the task requires? Flag unnecessary abstractions, premature generalization, and helpers that exist for a single call site
+   - Is there dead code, redundant logic, or duplicate paths that could be collapsed or removed?
+   - Are there intermediate variables that only restate their initializer?
+   - Does the change introduce complexity or coupling that doesn't pay off? Prefer the minimum code a competent engineer would still be proud of
+8. **Readability & maintainability**:
    - Are names (variables, functions, classes) clear and consistent with the codebase?
    - Is there dead code, commented-out code, or TODOs that should be resolved?
 
-8. **Comment quality** (required for PM-led builds):
+9. **Comment quality** (required for PM-led builds):
    - Does every file have a file-level comment explaining its purpose and role in the system?
    - Does every function/method have a comment explaining what it does, its parameters, and return value in plain English?
    - Are non-obvious logic blocks explained with inline comments that describe *why*, not just *what*?
@@ -50,7 +55,7 @@ Follow this process:
    - When a specific approach was chosen over an obvious alternative, is that choice noted?
    - Are all TODOs marked with `// TODO:` and a description?
    - Flag missing comments as **Non-blocking** issues — they don't break behavior but impede learning and future maintenance.
-9. **Patterns & consistency**:
+10. **Patterns & consistency**:
    - Does the code follow the established patterns in this codebase?
    - Are there better abstractions already available that should be used?
    - Does the change introduce unnecessary coupling or complexity?
