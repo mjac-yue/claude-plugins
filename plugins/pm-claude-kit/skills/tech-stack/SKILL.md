@@ -168,5 +168,15 @@ Follow this process:
    ├── package.json
    └── .gitignore
 
-   **Next step**: Save the tech stack document to dev/tech-stack.md, then run `/arch-design` or `/tech-spec` to begin the technical design.
+   **Next step**: Run `/arch-design` or `/tech-spec` to begin the technical design.
    ```
+
+## Save output
+
+After presenting the scaffold confirmation to the user:
+1. Check if a project `CLAUDE.md` exists in the current working directory or any parent directory
+2. If it contains an **Output paths** table, find the row for `/tech-stack` and save the tech stack recommendation document to that file path (default: `dev/tech-stack.md`)
+3. Update the **Status** field to **Done** and **Last updated** to today's date at the top of the file
+4. In that same project `CLAUDE.md`, find the **Project status** table and set the **Status** column to **Done** for the row matching this deliverable
+5. Confirm the file was written to the user
+6. If no project `CLAUDE.md` exists, present the tech stack recommendation for manual copying

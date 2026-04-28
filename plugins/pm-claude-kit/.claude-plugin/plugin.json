@@ -1,6 +1,6 @@
 {
   "name": "pm-claude-kit",
-  "description": "A Claude Code plugin for Product Managers. Provides skills for PRDs, user stories, meeting notes, competitive analysis, OKRs, and prioritization — plus specialized review agents.",
+  "description": "A Claude Code plugin for Product Managers. Provides 11 slash-command skills (init, pm, brief, brainstorm, prd, user-story, competitive-analysis, prioritization, roadmap, rollout, tech-stack) and 3 specialized agents (prd-reviewer, requirements-gap-finder, competitive-analyst) covering the full product lifecycle.",
   "version": "1.0.0",
   "author": {
     "name": "Martin Yue"

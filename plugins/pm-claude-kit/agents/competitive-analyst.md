@@ -133,3 +133,15 @@ Produce the full competitive analysis in this format:
 | | High / Medium / Low | [what couldn't be verified] |
 
 *Flag any areas where public data was thin and primary research (trials, demos, customer interviews) is recommended.*
+
+---
+
+## Save output
+
+After presenting the full analysis:
+1. Check if a project `CLAUDE.md` exists in the current working directory or any parent directory
+2. If it contains an **Output paths** table, find the row for `/competitive-analysis` and save the output to that file path (default: `pm/competitive-analysis.md`)
+3. Update the **Status** field to **Done** and **Last updated** to today's date at the top of the file
+4. In that same project `CLAUDE.md`, find the **Project status** table and set the **Status** column to **Done** for the row matching Competitive Analysis
+5. Confirm the file was written to the user
+6. If no project `CLAUDE.md` exists, present the output for manual copying

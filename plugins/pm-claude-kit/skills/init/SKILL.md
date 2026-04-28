@@ -58,6 +58,19 @@ Create these files:
 - `pm/prioritization.md` — "Prioritization" — `/prioritization`
 - `pm/roadmap.md` — "Roadmap" — `/roadmap`
 - `pm/rollout.md` — "Rollout Package" — `/rollout`
+- `pm/questions.md` — "Questions Log" — used by `/pm` throughout the workflow
+
+For `pm/questions.md`, use this format instead of the standard placeholder:
+
+```
+# Questions Log
+
+**Project**: [Project Name]
+**Last updated**: —
+
+| Question | Priority | Phase Raised | Owner | Affected Documents |
+|----------|----------|-------------|-------|-------------------|
+```
 
 **design/ folder:**
 - `design/ux-brief.md` — "UX Brief" — `/ux-brief`
@@ -129,6 +142,7 @@ When any skill generates output in this project, **save it to the corresponding 
 | `/prioritization` | `pm/prioritization.md` |
 | `/roadmap` | `pm/roadmap.md` |
 | `/rollout` | `pm/rollout.md` |
+| `/pm` (questions log) | `pm/questions.md` |
 | `/ux-brief` | `design/ux-brief.md` |
 | `/wireframe-spec` | `design/wireframe-spec.md` |
 | `/design-review` | `design/design-review.md` |
@@ -181,6 +195,7 @@ When agents need to find project documents or code, look here:
 | PM | Prioritization | Not started |
 | PM | Roadmap | Not started |
 | PM | Rollout Package | Not started |
+| PM | Questions Log | Not started |
 | Design | UX Brief | Not started |
 | Design | Wireframe Spec | Not started |
 | Design | Design Review | Not started |
@@ -207,7 +222,7 @@ After creating all files, output:
 
 📁 [project-name]/
 ├── CLAUDE.md
-├── pm/          (7 deliverables)
+├── pm/          (8 deliverables)
 ├── design/      (5 deliverables)
 └── dev/         (7 deliverables)
 

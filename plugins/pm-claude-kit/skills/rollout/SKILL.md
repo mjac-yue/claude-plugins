@@ -26,8 +26,7 @@ Before writing anything, check the project directory for:
 - **PRD** (`pm/prd.md`) — full requirements. Use as source of truth for what was planned
 - **User stories** (`pm/user-stories.md`) — P0/P1/P2 feature list
 - **Roadmap** (`pm/roadmap.md`) — planned horizon and timeline
-- **Risk register** (`[project]-risks.md`) — open and accepted risks at launch
-- **Phase D test results** (from exec-kit `/run` Phase D) — what was tested, what passed, what was deferred
+- **Phase D test results** (from exec-kit `/run` Phase D, if installed) — what was tested, what passed, what was deferred. Skip if not available.
 
 Use these to produce the project completion summary in Step 1 and to ground all audience summaries in what was actually built (not just what was planned).
 

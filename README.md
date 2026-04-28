@@ -107,10 +107,11 @@ You can override the recommendation — the plugin explains the trade-offs and c
 
 | Skill | What it does |
 |-------|-------------|
-| `/design` | End-to-end design workflow orchestrator — 5 phases from UX brief to dev handoff |
+| `/design` | End-to-end design workflow orchestrator — 6 phases from UX brief to dev handoff |
 | `/brainstorm` | Structured design brainstorm — discovery questions, concept generation with real-world examples, Mermaid direction maps and user flow diagrams, side-by-side experience descriptions, and ranked recommendations with alternatives |
 | `/ux-brief` | UX brief defining scope, target users, goals, constraints, and success criteria |
 | `/wireframe-spec` | Wireframe specification — screens, user flows, components, states, and interactions in structured text |
+| `/wireframe-html` | Interactive HTML wireframe — brainstorms directions first, produces a self-contained HTML file with viewport toggle and state simulation, supports iterative feedback rounds, surfaces discoveries that update product documents |
 | `/design-review` | Heuristic design review against Nielsen's 10 usability principles and WCAG 2.1 AA |
 | `/usability-test` | Usability test plan with participant criteria, task scenarios, success metrics, and discussion guide |
 | `/design-handoff` | Design handoff spec for engineering — components, states, interactions, and acceptance criteria |
