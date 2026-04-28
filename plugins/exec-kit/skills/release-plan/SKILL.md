@@ -161,3 +161,12 @@ Cover only what genuinely applies to this project. Don't include items that are 
 **For Tier 3–4**: Use the full structure from [release-plan-template.md](release-plan-template.md).
 
 Output the complete plan. Do not use placeholder text — fill in every section based on the project context provided. Where specific details aren't known, make a reasonable estimate and flag it with *[TBC]* so the team knows what to confirm.
+
+## Save output
+
+After presenting the release plan to the user:
+1. Check if a project `CLAUDE.md` exists in the current working directory or any parent directory
+2. If it contains an **Output paths** table, find the row for `/release-plan` and save the output to that file path; if no row exists, save to `execution/release-plan.md` in the project directory
+3. Update the **Status** field to **Done** and **Last updated** to today's date at the top of the file
+4. Confirm the file was written to the user
+5. If no project directory exists, present the output for manual copying

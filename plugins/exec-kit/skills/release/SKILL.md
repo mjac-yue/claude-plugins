@@ -246,3 +246,14 @@ Populate it using the format defined in `/run`. Initial values:
 
 Then note to the user:
 > *"State file created at `[project-name]-state.md`. Start every future session by opening this file or telling Claude to read it — this is how work resumes across days and sessions."*
+
+## Prerequisite check
+
+Before running Phase 1 (Kickoff), check whether a project `CLAUDE.md` already exists with an Output paths table. If not, recommend running `/kickoff [project]` (exec-kit) first — it initialises the folder structure, CLAUDE.md, and Output paths table that all skills depend on for saving outputs. `/release` can be run standalone for planning purposes, but the state file it writes will be incomplete without project initialisation.
+
+## Save output
+
+The `/release` orchestrator creates and saves multiple files inline during each phase checkpoint. After presenting the final deliverable summary:
+1. Confirm that each document produced (kickoff summary, release plan, risk register, first round plan, state file) was written to disk
+2. List the file paths of everything created
+3. If any file was not saved, save it now to the project directory

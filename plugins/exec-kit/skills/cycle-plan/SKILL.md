@@ -161,4 +161,15 @@ List items considered but not included, with a brief reason. This prevents the s
 
 **Phase C only**: Use the structure from [cycle-plan-template.md](cycle-plan-template.md). The template is designed for dev cycles — it includes Layer Check, Selected Work, and Definition of Done sections that are not applicable to Phases A or B.
 
-For Phases A and B: use the structured output defined in the Phase A and Phase B steps above. No template needed.
+For Phases A and B: use the structured output defined in the Phase A and Phase B steps above. There is no separate template for Phase A or B rounds — the step-by-step output IS the format. When `/run` references "the cycle-plan template," it means the Phase C template for dev cycles; for Phase A and B rounds, follow the step outputs above.
+
+## Save output
+
+After presenting the cycle plan to the user:
+1. **Write state** per the Write state instruction in the phase above (standalone use only) — this is the primary persistence mechanism
+2. Additionally, save the cycle plan document:
+   - Check if a project `CLAUDE.md` exists in the current working directory or any parent directory
+   - If it contains an **Output paths** table with a row for `/cycle-plan`, save to that path
+   - If no output path is configured, save to `execution/cycle-[N].md` in the project directory (e.g., `execution/cycle-01.md`, incrementing by phase and round)
+3. Confirm the file was written to the user
+4. If no project directory exists, present the output for manual copying

@@ -1,6 +1,6 @@
 {
   "name": "dev-workflow-kit",
-  "description": "A Claude Code plugin for Development workflows. Covers technical design, API specs, development planning, and QA test plans — bridging product requirements to shipped code.",
+  "description": "A Claude Code plugin for Development workflows. Covers the full /dev orchestrator plus standalone skills for architectural design, technical specification, API specs, development planning, AI build (builder agent), QA test plans, code review, security review, performance review, deployment guides, and bug reporting — from design handoff to shipped code.",
   "version": "1.0.0",
   "author": {
     "name": "Martin Yue"

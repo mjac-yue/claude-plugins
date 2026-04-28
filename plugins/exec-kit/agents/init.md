@@ -97,6 +97,10 @@ All skills save their outputs to these paths. Do not change the paths — skills
 | `/dev-plan` | `dev/dev-plan.md` | Not started | — |
 | `/test-plan` | `dev/test-plan.md` | Not started | — |
 | `/deployment` | `dev/deployment.md` | Not started | — |
+| `/code-review` | `dev/code-review.md` | Not started | — |
+| `/security-review` | `dev/security-review.md` | Not started | — |
+| `/perf-review` | `dev/perf-review.md` | Not started | — |
+| `/bug-report` | `dev/bug-report.md` | Not started | — |
 
 ---
 
@@ -120,6 +124,8 @@ All skills save their outputs to these paths. Do not change the paths — skills
 | QA test plan | Not started | — |
 | Security review | Not started | — |
 | Deployment guide | Not started | — |
+| Code review | Not started | — |
+| Performance review | Not started | — |
 
 ---
 
@@ -154,6 +160,10 @@ Write the following empty placeholder files so skills can append to them without
 - `dev/dev-plan.md` — header: `# [Project Name] — Dev Plan`
 - `dev/test-plan.md` — header: `# [Project Name] — QA Test Plan`
 - `dev/deployment.md` — header: `# [Project Name] — Deployment Guide`
+- `dev/code-review.md` — header: `# [Project Name] — Code Review`
+- `dev/security-review.md` — header: `# [Project Name] — Security Review`
+- `dev/perf-review.md` — header: `# [Project Name] — Performance Review`
+- `dev/bug-report.md` — header: `# [Project Name] — Bug Report`
 
 All files except `questions.md` should contain only the header line. Do not add placeholder content.
 

@@ -139,7 +139,7 @@ Check for unaddressed states:
 
 After completing the review:
 1. Check if a project `CLAUDE.md` exists in the current working directory or any parent directory
-2. If it contains an **Output paths** table, find the row for `/design-review` and save the output to that file path
+2. If it contains an **Output paths** table, find the row for `/design-review` and **append** the UX review findings to that file — do not overwrite, as the `/design-review` skill may have already written to it. Add a `## UX Reviewer Findings` section header before appending.
 3. Update the **Status** field to **Done** and **Last updated** to today's date
 4. In that same project `CLAUDE.md`, find the **Project status** table and set the **Status** column to **Done** for the row matching this deliverable
 5. Confirm the file was written with a single line (e.g., "✓ Written to design/design-review.md")

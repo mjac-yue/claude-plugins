@@ -158,3 +158,13 @@ Produce a complete research plan covering:
 ```
 
 Flag any decisions that need the team's input before the plan is finalized (e.g., access to specific user segments, budget approval for incentives).
+
+## Save output
+
+After presenting the research plan or assumption validation plan:
+1. Check if a project `CLAUDE.md` exists in the current working directory or any parent directory
+2. If it contains an **Output paths** table, find the row for `/usability-test` and save the output to that file path (research plans feed directly into usability test planning)
+3. If no `/usability-test` row exists, save to `design/user-research-plan.md` in the project directory
+4. Update the **Status** field to **Done** and **Last updated** to today's date at the top of the file
+5. Confirm the file was written with a single line
+6. If no project `CLAUDE.md` exists, return the output for manual saving

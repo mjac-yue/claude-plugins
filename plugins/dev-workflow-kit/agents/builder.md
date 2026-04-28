@@ -86,3 +86,12 @@ After all layers are complete, present a final summary:
 
 ### Ready for Phase 5 (Code Review)
 ```
+
+## Save output
+
+After completing each build layer and presenting the build summary:
+1. Check if a project `CLAUDE.md` exists in the current working directory or any parent directory
+2. Append the build layer summary to `dev/build-log.md` — include the layer number, files created/modified, TODOs remaining, and any deviations from the dev plan
+3. If `dev/build-log.md` does not exist, create it with a header row
+4. Confirm the file was written with a single line
+5. All source code is written to the project `src/` directory (or framework equivalent) — these are the primary outputs

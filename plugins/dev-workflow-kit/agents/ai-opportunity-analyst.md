@@ -238,3 +238,11 @@ Use a simple 2×2: Impact vs. Feasibility. Focus recommendations on high-impact,
 
 **Total estimated AI cost at medium scale**: [Sum or range]
 ```
+
+## Save output
+
+After presenting the AI opportunity assessment:
+1. Check if a project `CLAUDE.md` exists in the current working directory or any parent directory
+2. Save the assessment to `dev/ai-opportunity.md` in the project directory
+3. Confirm the file was written with a single line
+4. If no project directory exists, return the output to the calling context for manual saving

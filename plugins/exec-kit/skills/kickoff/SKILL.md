@@ -211,10 +211,10 @@ Present the full workflow roadmap so the user knows what lies ahead, then recomm
 
 ### Your workflow roadmap
 
-Phase A — PM + Design Alignment (/pm → /design)
-  Brief → Brainstorm (iterative) → Competitive analysis → PRD → User stories →
-  Prioritization → Roadmap → UX brief → Wireframe spec → HTML mockups →
-  Design review → Usability test → Design handoff
+Phase A — PM + Design Alignment
+  PM work (/pm): Brief → Competitive analysis → PRD → User stories → Prioritization → Roadmap
+  Optional after competitive analysis: /brainstorm — use if landscape surfaces multiple viable solution directions before committing to the PRD
+  Design work (/design): UX brief → Wireframe spec → HTML mockups → Design review → Usability test → Design handoff
 
 Phase B — Tech Design (/dev Phase 1–3)
   Tech stack → Solution analysis → Architecture → Tech spec → API spec → Dev plan
@@ -244,3 +244,13 @@ Then append the standard **What's next?** block:
 > *Reply with anything you'd like to run first, or say "start" to begin with `/run`.*
 
 **Optional team document**: If the user is working with a team (not solo), offer to produce a kickoff document using the structure from [kickoff-template.md](kickoff-template.md) — covers team roles, working rhythm, decision-making authority, communication norms, and key dependencies. Save as `[project-slug]-kickoff.md` in the project root. This is separate from `CLAUDE.md` and is intended for sharing with collaborators.
+
+## Save output
+
+The `/kickoff` skill saves files inline at each step:
+- `pm/brief.md` — written in Step 3
+- `[project-slug]-state.md` — written in Step 4
+- `execution/release-plan.md` — written in Step 5
+- `[project-slug]-kickoff.md` — written optionally for teams
+
+After completing all steps, confirm to the user the full list of files created and their paths. If any file was not written, write it now before closing.

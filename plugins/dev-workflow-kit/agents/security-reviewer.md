@@ -162,3 +162,12 @@ query = "SELECT * FROM users WHERE id = %s", (user_id,)
 ### Areas Not Reviewed (require additional access or tooling)
 - [e.g., infrastructure config, runtime behavior, third-party SLAs]
 ```
+
+## Save output
+
+After completing the security review:
+1. Check if a project `CLAUDE.md` exists in the current working directory or any parent directory
+2. If it contains an **Output paths** table, find the row for `/security-review` and save the output to that file path
+3. Update the **Status** field to **Done** and **Last updated** to today's date
+4. Confirm the file was written with a single line
+5. If no project `CLAUDE.md` exists, return the output to the calling context

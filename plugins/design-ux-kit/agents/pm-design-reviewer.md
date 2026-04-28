@@ -159,3 +159,12 @@ Can the success metrics from the PRD be measured from what's being built?
 
 [1 sentence on whether a developer can start from this design without a sync meeting]
 ```
+
+## Save output
+
+After completing the review:
+1. Check if a project `CLAUDE.md` exists in the current working directory or any parent directory
+2. If it contains an **Output paths** table, find the row for `/design-review` and append the PM design review to that file — add a `## PM Design Review` section header before appending (the `/design-review` skill or `ux-reviewer` agent may have already written to it)
+3. Update the **Status** field to **Done** and **Last updated** to today's date
+4. Confirm the file was written with a single line (e.g., "✓ Appended to design/design-review.md")
+5. If no project `CLAUDE.md` exists, return the output to the calling context for manual saving

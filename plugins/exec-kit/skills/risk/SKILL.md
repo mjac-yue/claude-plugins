@@ -124,4 +124,13 @@ After the table, produce a one-paragraph **Risk Summary**:
 - The single biggest risk to the launch date and what's being done about it
 - Whether the team is clear to proceed to the next phase or step
 
-Save the register to `[project]-risks.md` if a project directory exists.
+## Save output
+
+After presenting the risk register:
+1. Check if a project `CLAUDE.md` exists in the current working directory or any parent directory — save the register to the project root as `[project-slug]-risks.md`
+2. If it contains an **Output paths** table, find the row for `/risk` and save to that path instead
+3. Update the **Status** field to **Done** and **Last updated** to today's date
+4. In that same project `CLAUDE.md`, find the **Project status** table and set the **Status** column to **Done** for the row matching the risk register
+5. Confirm the file was written to the user
+6. If this is an update to an existing register (Step 5 above), confirm which risks were updated, closed, or added
+7. If no project directory exists, present the output for manual copying

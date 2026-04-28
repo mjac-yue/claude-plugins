@@ -41,3 +41,13 @@ Follow this process:
 9. **Recommendations** — prioritize by impact. Distinguish between: fix before launch (blocks SLO) / fix soon (degrades at scale) / monitor (acceptable now, watch).
 
 Output a performance review with findings ranked by impact and concrete next steps.
+
+## Save output
+
+After presenting the performance review to the user:
+1. Check if a project `CLAUDE.md` exists in the current working directory or any parent directory
+2. If it contains an **Output paths** table, find the row for `/perf-review` and save the output to that file path
+3. Update the **Status** field to **Done** and **Last updated** to today's date at the top of the file
+4. In that same project `CLAUDE.md`, find the **Project status** table and set the **Status** column to **Done** for the row matching this deliverable
+5. Confirm the file was written to the user
+6. If no project `CLAUDE.md` exists, present the output for manual copying

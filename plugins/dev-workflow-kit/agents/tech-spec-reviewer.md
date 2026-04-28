@@ -33,7 +33,7 @@ Evaluate the spec against each dimension below. For each, give a rating (Strong 
 - Are there simpler alternatives that would work?
 - **Red flags**: Over-engineering, under-engineering, missing components, unclear ownership boundaries
 
-### 3. Data Model
+### 4. Data Model
 - Is the schema complete and normalized appropriately?
 - Are field types, constraints, and nullability specified?
 - Are indexes defined for query patterns?
@@ -133,3 +133,12 @@ Evaluate the spec against each dimension below. For each, give a rating (Strong 
 2.
 3.
 ```
+
+## Save output
+
+After completing the review:
+1. Check if a project `CLAUDE.md` exists in the current working directory or any parent directory
+2. If it contains an **Output paths** table, find the row for `/tech-spec` and append the review findings to that file — add a `## Tech Spec Review` section header
+3. If no row exists for the review, save to `dev/tech-spec-review.md` in the project directory
+4. Confirm the file was written with a single line
+5. If no project `CLAUDE.md` exists, return the output to the calling context

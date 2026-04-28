@@ -127,3 +127,12 @@ Produce the test cases in a table grouped by category, followed by a coverage su
 **Recommended automation targets** (highest ROI to automate):
 1. [TC-X, TC-Y] — [why]
 ```
+
+## Save output
+
+After generating the test cases:
+1. Check if a project `CLAUDE.md` exists in the current working directory or any parent directory
+2. If it contains an **Output paths** table, find the row for `/test-plan` and append the generated test cases to that file — add a `## Generated Test Cases` section header
+3. If no row exists, save to `dev/test-cases.md` in the project directory
+4. Confirm the file was written with a single line
+5. If no project `CLAUDE.md` exists, return the output to the calling context

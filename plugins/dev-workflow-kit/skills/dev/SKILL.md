@@ -386,3 +386,12 @@ Run `/run [project]` to begin Phase D — automated tests, PM requirements test,
 ```
 
 After presenting the summary, prompt the user: *"Run `/dev-workflow-kit:log [one-line summary]` to record this in the work log — e.g. `/dev-workflow-kit:log Completed full dev workflow for [feature name]`"*
+
+## Save output
+
+After presenting the final deliverable summary:
+1. Check if a project `CLAUDE.md` exists in the current working directory or any parent directory
+2. If it contains an **Output paths** table, confirm each dev artifact (arch-design, tech-spec, api-spec, dev-plan, test-plan, deployment) has been saved to its listed file path during the relevant phase checkpoint — each is saved inline at approval, so this is a confirmation step
+3. Update the **Status** field to **Done** and **Last updated** to today's date for any dev artifact not yet updated
+4. Confirm to the user which files are written and current
+5. If no project `CLAUDE.md` exists, note that outputs were presented inline and should be saved manually

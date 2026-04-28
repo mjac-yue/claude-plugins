@@ -210,3 +210,12 @@ Grep and read for common structural problems:
 2.
 3.
 ```
+
+## Save output
+
+After completing the review:
+1. Check if a project `CLAUDE.md` exists in the current working directory or any parent directory
+2. If it contains an **Output paths** table, find the row for `/arch-design` and append the review findings — add an `## Architecture Review` section header
+3. If no row exists, save to `dev/arch-review.md` in the project directory
+4. Confirm the file was written with a single line
+5. If no project `CLAUDE.md` exists, return the output to the calling context

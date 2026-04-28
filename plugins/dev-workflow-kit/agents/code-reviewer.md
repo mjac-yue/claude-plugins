@@ -145,3 +145,12 @@ Do not generate findings that are speculative — only flag issues you can demon
 - [ ] Non-obvious logic explained with inline comments
 - [ ] All TODOs marked with `// TODO:` and a description
 ```
+
+## Save output
+
+After completing the code review:
+1. Check if a project `CLAUDE.md` exists in the current working directory or any parent directory
+2. If it contains an **Output paths** table, find the row for `/code-review` and save the output to that file path
+3. Update the **Status** field to **Done** and **Last updated** to today's date
+4. Confirm the file was written with a single line
+5. If no project `CLAUDE.md` exists, return the output to the calling context

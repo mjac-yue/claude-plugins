@@ -184,3 +184,11 @@ Produce a clear recommendation:
 2. Carry the recommended option forward into `/tech-spec` as the chosen approach
 3. Document the Decision section in the tech spec with the full options table above
 ```
+
+## Save output
+
+After presenting the options analysis and recommendation:
+1. Check if a project `CLAUDE.md` exists in the current working directory or any parent directory
+2. Save the solution analysis to `dev/solution-analysis.md` in the project directory
+3. Confirm the file was written with a single line
+4. If no project directory exists, return the output to the calling context for manual saving

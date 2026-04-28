@@ -1,6 +1,6 @@
 {
   "name": "exec-kit",
-  "description": "Skills and agents for project execution: release planning with dependency tracking, cycle planning, standups, retrospectives, status reports, and risk management. Designed for 1-2 person PM-led teams.",
+  "description": "Full project lifecycle management for 1–2 person PM-led teams. Covers project kickoff and initialisation (/kickoff + init agent), release setup (/release orchestrator), release planning, cycle planning, standup, retrospectives, status reports, risk management, and end-to-end lifecycle execution (/run orchestrator from Phase A through launch). Includes /test-run for end-to-end workflow walkthroughs and /presentation for Marp slide decks.",
   "version": "1.0.0",
   "author": {
     "name": "Martin Yue"

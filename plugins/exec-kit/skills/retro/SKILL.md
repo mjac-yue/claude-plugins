@@ -135,3 +135,13 @@ The single highest-value change to try next cycle. Small and testable.
 ---
 
 Use the structure from [retro-template.md](retro-template.md).
+
+## Save output
+
+After presenting the retrospective:
+1. **Write state** per the Write state instructions in the phase above — this is the primary persistence mechanism
+2. Additionally, check if a project `CLAUDE.md` exists in the current working directory or any parent directory
+3. If it contains an **Output paths** table, find the row for `/retro` (or a `retro-[N].md` pattern) and save the retrospective document to that path
+4. If no output path is configured for `/retro`, save to `execution/retro-[cycle-number].md` in the project directory (e.g., `execution/retro-01.md`)
+5. Confirm the file was written to the user
+6. If no project directory exists, present the output for manual copying

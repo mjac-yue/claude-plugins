@@ -55,3 +55,13 @@ The report should be readable in under 2 minutes.
 ---
 
 Use the structure from [status-template.md](status-template.md).
+
+## Save output
+
+After presenting the status report:
+1. Check if a project `CLAUDE.md` exists in the current working directory or any parent directory
+2. If it contains an **Output paths** table, find the row for `/status` and save the report to that file path
+3. If no output path is configured for `/status`, save to `execution/status-[date].md` in the project directory (e.g., `execution/status-2026-04-27.md`) — one file per reporting period
+4. Update the **Status** field to **Done** and **Last updated** to today's date
+5. Confirm the file was written to the user
+6. If no project directory exists, present the output for manual copying

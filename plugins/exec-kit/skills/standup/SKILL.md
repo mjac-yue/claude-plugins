@@ -92,6 +92,7 @@ Are constraints being resolved, or is Eng uncovering new ones at the same rate? 
 
 *Process daily updates from 1–2 people. Concise — should take less than 5 minutes to read.*
 *No state file write — daily standups are too frequent. State is written at cycle-level checkpoints in `/run` and `/retro`.*
+*If running standalone (outside `/run`): after processing standup updates, offer to update the Status column of `dev/dev-plan.md` for any tasks reported as Done. This keeps the dev plan current when not running inside the `/run` orchestrator.*
 
 **Step C1: Parse updates**
 
@@ -125,3 +126,9 @@ For anything requiring a decision before work can continue:
 
 For Phase A: follow the structured output defined in Steps A1–A4 above (PRD changes, design changes, cross-discipline open questions, alignment health).
 For Phase B: follow the structured output defined in Steps B1–B4 above (Eng constraints, PM/Design responses, open constraints, resolution health).
+
+## Save output
+
+**Phase A and B standups**: Output is captured by updating `[project]-state.md` (the Write state steps above). No separate file write needed.
+
+**Phase C standups** (standalone use, outside `/run`): Phase C standups are ephemeral by design — too frequent for individual files. If you want a persistent record, append the standup summary to `execution/standup-log.md` in the project directory. If that file does not exist and the user wants a log, create it with a header row.
