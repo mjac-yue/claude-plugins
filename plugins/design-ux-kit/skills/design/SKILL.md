@@ -55,7 +55,7 @@ At any phase that designates a reviewer below, follow this loop automatically �
 
 | After this phase | Recommended next step | Optional to run |
 |-----------------|----------------------|-----------------|
-| Phase 1 — UX Brief | Phase 2 — Wireframe Spec | No additional agents at this point — brief pulls directly from PM inputs |
+| Phase 1 — UX Brief | Phase 2 — Wireframe Spec | `/brainstorm` skill *(design-ux-kit)* — run if the UX brief has surfaced multiple viable design directions before committing to screen architecture in the wireframe spec |
 | Phase 2 — Wireframe Spec | Phase 3 — HTML Mockup | `user-research-planner` agent *(design-ux-kit)* — validate open design questions before building mockups; `pm-design-reviewer` agent *(design-ux-kit)* — requirements coverage check on the spec |
 | Phase 3 — HTML Mockup | Phase 4 — Design Review | `ux-reviewer` agent *(design-ux-kit)* — structured heuristic audit on the mockup |
 | Phase 4 — Design Review | Phase 5 — Usability Test Plan (if UX unknowns) or Phase 6 — Design Handoff | `ux-reviewer` agent *(design-ux-kit)* — deeper structured audit; `pm-design-reviewer` agent *(design-ux-kit)* — PM-perspective requirements check |
@@ -82,6 +82,8 @@ Pull scope, users, and success criteria directly from these documents. Do not as
 *After user approves: Check for a project `CLAUDE.md` in the current or parent directory. If it contains an **Output paths** table, save the UX brief to the file listed for `/ux-brief`. Update **Status** to **Done** and **Last updated** to today's date. Confirm the file was written.*
 
 **Checkpoint 1**: Get approval before moving to Phase 2.
+
+> **Optional**: Run `/brainstorm` if the UX brief has surfaced multiple viable design directions — brainstorm explores layout, interaction, and navigation concepts with real-world examples and ranked recommendations before you commit to screen architecture in the wireframe spec. Phase 3 (HTML Mockup) includes a lighter direction check, but `/brainstorm` is more thorough and produces artefacts you can reference throughout the design phase.
 
 ---
 
