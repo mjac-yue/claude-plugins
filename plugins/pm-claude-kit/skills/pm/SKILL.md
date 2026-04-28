@@ -68,8 +68,8 @@ At any phase that designates a reviewer below, follow this loop automatically �
 
 | After this phase | Recommended next step | Optional to run |
 |-----------------|----------------------|-----------------|
-| Phase 1 — Product Brief | Phase 2 — Competitive Landscape (or brainstorm to refine brief) | `/brainstorm` skill *(pm-claude-kit)* — run if the solution direction is unclear or needs more exploration before committing to the PRD |
-| Phase 2 — Competitive Landscape | Phase 3 — PRD Draft | `competitive-analyst` agent *(pm-claude-kit)* — run live web research if quick scan was used |
+| Phase 1 — Product Brief | Phase 2 — Competitive Landscape | No additional skills at this point |
+| Phase 2 — Competitive Landscape | Phase 3 — PRD Draft | `competitive-analyst` agent *(pm-claude-kit)* — run live web research if quick scan was used; `/brainstorm` skill *(pm-claude-kit)* — run if the competitive landscape has opened up multiple viable solution directions before committing to a PRD |
 | Phase 3 — PRD Draft | Phase 4 — User Stories | `prd-reviewer` agent *(pm-claude-kit)* — 8-dimension structured PRD critique; `requirements-gap-finder` agent *(pm-claude-kit)* — edge cases and missing requirements |
 | Phase 4 — User Stories | Phase 5 — Roadmap Placement | `requirements-gap-finder` agent *(pm-claude-kit)* — stress-test stories before scope is cut |
 | Phase 5 — Roadmap Placement | Phase 6 — Prioritization | No additional agents at this point |
@@ -102,8 +102,6 @@ If $ARGUMENTS already answers some of these, skip those questions and confirm yo
 Present the brief, then ask:
 
 > Does this capture the problem and direction accurately? Reply **"continue"** to move to competitive analysis, or share feedback to revise.
->
-> **Optional**: Run `/brainstorm` if the solution direction is unclear — brainstorm explores ideas broadly and can update this brief before we commit to a PRD. You can iterate brief → brainstorm → brief until the direction is solid.
 
 *After user approves: Check for a project `CLAUDE.md` in the current or parent directory. If it contains an **Output paths** table, save the brief to the file listed for `/brief`. Update **Status** to **Done** and **Last updated** to today's date. Confirm the file was written.*
 
@@ -144,6 +142,8 @@ First, ask the user:
 Present the competitive landscape output, then ask:
 
 > Does this match your understanding of the competitive space? Reply **"continue"** to move to PRD drafting, or share feedback to adjust.
+>
+> **Optional**: Run `/brainstorm` if the competitive landscape has surfaced multiple viable solution directions — brainstorm uses competitive context to generate differentiated options before you commit to one in the PRD. You can iterate competitive → brainstorm → competitive until the direction is clear.
 
 *After user approves: Check for a project `CLAUDE.md` in the current or parent directory. If it contains an **Output paths** table, save the competitive landscape output to the file listed for `/competitive-analysis`. Update **Status** to **Done** and **Last updated** to today's date. Confirm the file was written.*
 
