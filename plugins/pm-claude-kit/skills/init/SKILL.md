@@ -52,6 +52,7 @@ Create these files:
 
 **pm/ folder:**
 - `pm/brief.md` — "Feature Brief" — `/brief`
+- `pm/brainstorm.md` — "Brainstorm" — `/brainstorm`
 - `pm/prd.md` — "Product Requirements Document" — `/prd`
 - `pm/user-stories.md` — "User Stories" — `/user-story`
 - `pm/competitive-analysis.md` — "Competitive Analysis" — `/competitive-analysis`
@@ -136,6 +137,7 @@ When any skill generates output in this project, **save it to the corresponding 
 | Skill | Save to |
 |-------|---------|
 | `/brief` | `pm/brief.md` |
+| `/brainstorm` | `pm/brainstorm.md` |
 | `/prd` | `pm/prd.md` |
 | `/user-story` | `pm/user-stories.md` |
 | `/competitive-analysis` | `pm/competitive-analysis.md` |
@@ -189,6 +191,7 @@ When agents need to find project documents or code, look here:
 | Setup | Tech stack chosen | Not started |
 | Setup | Code scaffold | Not started |
 | PM | Feature Brief | Not started |
+| PM | Brainstorm | Not started |
 | PM | PRD | Not started |
 | PM | User Stories | Not started |
 | PM | Competitive Analysis | Not started |

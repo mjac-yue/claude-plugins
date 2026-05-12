@@ -32,8 +32,8 @@ Follow this process:
 7. **Surface open questions** — anything that must be answered before design or development starts. Assign an owner and urgency if known.
 
 8. **Recommend next step** — based on the feature type and complexity, recommend which skill to run next:
-   - Use `/ux-brief` if the feature has meaningful user-facing UX to design
-   - Use `/tech-spec` if the implementation approach needs to be decided before design
+   - Use `/ux-brief` *(requires design-ux-kit)* if the feature has meaningful user-facing UX to design
+   - Use `/tech-spec` *(requires dev-workflow-kit)* if the implementation approach needs to be decided before design
    - Use `/prd` if this feature is large enough to warrant full requirements documentation
    - Use `/tech-stack` first if the product's technology choices haven't been made yet
 
