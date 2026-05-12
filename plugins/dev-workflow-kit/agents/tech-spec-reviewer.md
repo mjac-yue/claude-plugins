@@ -40,7 +40,7 @@ Evaluate the spec against each dimension below. For each, give a rating (Strong 
 - Are migrations described and safe (no destructive changes without plan)?
 - **Red flags**: Missing indexes for obvious queries, nullable fields that should be required, no migration plan
 
-### 4. API Design (if applicable)
+### 5. API Design (if applicable)
 - Are endpoints consistent with existing API patterns?
 - Are request/response schemas fully specified?
 - Are all error cases defined?

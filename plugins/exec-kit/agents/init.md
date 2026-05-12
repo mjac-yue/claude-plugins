@@ -83,6 +83,7 @@ All skills save their outputs to these paths. Do not change the paths — skills
 | `/prioritization` | `pm/prioritization.md` | Not started | — |
 | `/roadmap` | `pm/roadmap.md` | Not started | — |
 | `/brief` | `pm/brief.md` | Done | [Today's date] |
+| `/brainstorm` | `pm/brainstorm.md` | Not started | — |
 | `/design` | *(orchestrator — see below)* | — | — |
 | `/ux-brief` | `design/ux-brief.md` | Not started | — |
 | `/wireframe-spec` | `design/wireframe-spec.md` | Not started | — |
@@ -144,6 +145,7 @@ Replace `[project-slug]` with the actual slugified project name.
 Write the following empty placeholder files so skills can append to them without needing to create them:
 
 - `questions.md` — Questions & Decisions Log (see format below)
+- `pm/brainstorm.md` — header: `# [Project Name] — Brainstorm`
 - `pm/competitive-analysis.md` — header: `# [Project Name] — Competitive Analysis`
 - `pm/prd.md` — header: `# [Project Name] — PRD`
 - `pm/user-stories.md` — header: `# [Project Name] — User Stories`

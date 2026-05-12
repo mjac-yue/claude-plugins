@@ -107,6 +107,6 @@ Ask: *"Should I apply these updates to the product documents now?"* If yes, make
 After the mockup is approved:
 1. Check if a project `CLAUDE.md` exists in the current working directory or any parent directory
 2. If it contains an **Output paths** table with a row for `/wireframe-html`, save the HTML file to that path
-3. If no path is configured, save the file as `design/wireframe.html`
+3. If no path is configured, save the file as `design/wireframes/wireframe.html`
 4. In the project `CLAUDE.md`, find the **Project status** table and set the **Status** column to **Done** for the HTML Mockup row
 5. Confirm the file path written to the user
