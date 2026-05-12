@@ -200,3 +200,5 @@ After presenting the handoff spec, immediately run the **Review-Iterate-Approve 
 *After user approves: Check for a project `CLAUDE.md` in the current or parent directory. If it contains an **Output paths** table, save the design handoff to the file listed for `/design-handoff`. Update **Status** to **Done** and **Last updated** to today's date. Confirm the file was written.*
 
 **Checkpoint 6**: Present the complete handoff package. Confirm the design workflow is complete.
+
+After confirming completion, automatically run the `/dashboard` skill process — read all current project documents and regenerate the project hub HTML file. Do not prompt the user; just run it and report the output filename. This ensures the hub includes all design documents and the interactive wireframe without requiring a separate command.

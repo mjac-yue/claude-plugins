@@ -372,3 +372,9 @@ Output a clean summary package:
 ```
 
 Ask the user if they'd like any section exported as a separate document.
+
+---
+
+## Dashboard regeneration
+
+After presenting the final deliverable summary, automatically run the `/dashboard` skill process — read all current project documents and regenerate the project hub HTML file. Do not prompt the user; just run it and report the output filename. This ensures the hub reflects the completed PM phase without requiring a separate command.

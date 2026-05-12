@@ -385,7 +385,9 @@ Output a clean summary package:
 Run `/run [project]` to begin Phase D — automated tests, PM requirements test, design conformance test, bug triage, risk clearance, and rollout.
 ```
 
-After presenting the summary, prompt the user: *"Run `/dev-workflow-kit:log [one-line summary]` to record this in the work log — e.g. `/dev-workflow-kit:log Completed full dev workflow for [feature name]`"*
+After presenting the summary, automatically run the `/dashboard` skill process — read all current project documents and regenerate the project hub HTML file. Do not prompt the user; just run it and report the output filename. This ensures the hub includes all dev documents, code review findings, and the deployment guide without requiring a separate command.
+
+Then prompt the user: *"Run `/dev-workflow-kit:log [one-line summary]` to record this in the work log — e.g. `/dev-workflow-kit:log Completed full dev workflow for [feature name]`"*
 
 ## Save output
 
