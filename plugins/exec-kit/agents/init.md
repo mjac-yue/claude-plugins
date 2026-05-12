@@ -84,6 +84,7 @@ All skills save their outputs to these paths. Do not change the paths — skills
 | `/roadmap` | `pm/roadmap.md` | Not started | — |
 | `/brief` | `pm/brief.md` | Done | [Today's date] |
 | `/brainstorm` | `pm/brainstorm.md` | Not started | — |
+| `/premortem` | `pm/premortem.md` | Not started | — |
 | `/design` | *(orchestrator — see below)* | — | — |
 | `/ux-brief` | `design/ux-brief.md` | Not started | — |
 | `/wireframe-spec` | `design/wireframe-spec.md` | Not started | — |
@@ -146,6 +147,7 @@ Write the following empty placeholder files so skills can append to them without
 
 - `questions.md` — Questions & Decisions Log (see format below)
 - `pm/brainstorm.md` — header: `# [Project Name] — Brainstorm`
+- `pm/premortem.md` — header: `# [Project Name] — Premortem`
 - `pm/competitive-analysis.md` — header: `# [Project Name] — Competitive Analysis`
 - `pm/prd.md` — header: `# [Project Name] — PRD`
 - `pm/user-stories.md` — header: `# [Project Name] — User Stories`

@@ -60,7 +60,7 @@ At any phase that designates a reviewer below, follow this loop automatically �
 | Phase 3 — HTML Mockup | Phase 4 — Design Review | `ux-reviewer` agent *(design-ux-kit)* — structured heuristic audit on the mockup |
 | Phase 4 — Design Review | Phase 5 — Usability Test Plan (if UX unknowns) or Phase 6 — Design Handoff | `ux-reviewer` agent *(design-ux-kit)* — deeper structured audit; `pm-design-reviewer` agent *(design-ux-kit)* — PM-perspective requirements check |
 | Phase 5 — Usability Test Plan | Phase 6 — Design Handoff | `user-research-planner` agent *(design-ux-kit)* — formal study if test uncovered deep unknowns |
-| Phase 6 — Design Handoff *(final)* | **Start dev: run `/dev [feature]`** | `pm-design-reviewer` agent *(design-ux-kit)* — final requirements coverage check before dev handoff |
+| Phase 6 — Design Handoff *(final)* | **Start dev: run `/dev [feature]`** | `pm-design-reviewer` agent *(design-ux-kit)* — final requirements coverage check before dev handoff; `/premortem` skill *(exec-kit)* — assume the project has already failed and surface design and UX risks before committing to the build |
 
 ---
 

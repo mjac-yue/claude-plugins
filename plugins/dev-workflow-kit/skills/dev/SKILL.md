@@ -57,7 +57,7 @@ At any phase that designates a reviewer below, follow this loop automatically �
 |-----------------|----------------------|-----------------|
 | Phase 1 — Solution Analysis & Tech Spec | Phase 2 — API Spec (if API-first) or Phase 3 — Dev Plan | `tech-spec-reviewer` agent *(dev-workflow-kit)* — completeness and engineering risks; `pm-tech-reviewer` agent *(dev-workflow-kit)* — PM-readable summary and complexity flags; `arch-reviewer` agent *(dev-workflow-kit)* — quality attribute audit |
 | Phase 2 — API Spec | Phase 3 — Dev Plan | No additional agents at this point |
-| Phase 3 — Dev Plan | Phase 4 — AI Build *(optional)* or Phase 5 — QA | `builder` agent *(dev-workflow-kit)* — implement the code layer by layer now (invokes Phase 4) |
+| Phase 3 — Dev Plan | Phase 4 — AI Build *(optional)* or Phase 5 — QA | `builder` agent *(dev-workflow-kit)* — implement the code layer by layer now (invokes Phase 4); `/premortem` skill *(exec-kit)* — assume the build has already failed and surface technical and execution risks before the first line of code is written |
 | Phase 4 — AI Build | Phase 5 — QA or Phase 6 — Code Review | `code-reviewer` agent *(dev-workflow-kit)* — immediate review of the files just built |
 | Phase 5 — QA Test Plan | Phase 6 — Code Review | `test-case-generator` agent *(dev-workflow-kit)* — expand test cases from user stories |
 | Phase 6 — Code Review | Phase 7 — Performance Review (if SLOs defined) or Phase 8 — Security | `code-reviewer` agent *(dev-workflow-kit)* — line-level findings on actual source files |
