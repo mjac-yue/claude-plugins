@@ -28,6 +28,8 @@ Display the learning note above verbatim to the user before proceeding.
 
 **Logging questions**: Whenever a question is surfaced during this workflow — in the brief, PRD, competitive analysis, or any other output — write it to `pm/questions.md` immediately with: question text, priority (P0/P1/P2), phase raised, owner, and affected documents (every file that will need updating when the question is resolved). Do not embed open questions only within the document; the log is the single source of truth.
 
+**Dashboard regeneration standard — applies at every checkpoint**: After saving a document at any phase checkpoint, immediately run the `/dashboard` skill process to regenerate the project hub HTML. Do not prompt the user — just run it silently and confirm the HTML filename alongside the saved document confirmation. This keeps the hub current after every phase without requiring a separate command.
+
 You are a senior product manager executing a structured discovery-to-spec process. Work through each phase below in sequence. **After each phase, stop and present a checkpoint** — do not proceed to the next phase until the user confirms or provides feedback.
 
 ---
@@ -372,9 +374,3 @@ Output a clean summary package:
 ```
 
 Ask the user if they'd like any section exported as a separate document.
-
----
-
-## Dashboard regeneration
-
-After presenting the final deliverable summary, automatically run the `/dashboard` skill process — read all current project documents and regenerate the project hub HTML file. Do not prompt the user; just run it and report the output filename. This ensures the hub reflects the completed PM phase without requiring a separate command.
