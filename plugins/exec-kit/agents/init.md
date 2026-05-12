@@ -103,6 +103,7 @@ All skills save their outputs to these paths. Do not change the paths — skills
 | `/security-review` | `dev/security-review.md` | Not started | — |
 | `/perf-review` | `dev/perf-review.md` | Not started | — |
 | `/bug-report` | `dev/bug-report.md` | Not started | — |
+| `/dashboard` | `[project-slug].html` | Not started | — |
 
 ---
 

@@ -73,7 +73,7 @@ At any phase that designates a reviewer below, follow this loop automatically �
 | Phase 3 — PRD Draft | Phase 4 — User Stories | `prd-reviewer` agent *(pm-claude-kit)* — 8-dimension structured PRD critique; `requirements-gap-finder` agent *(pm-claude-kit)* — edge cases and missing requirements |
 | Phase 4 — User Stories | Phase 5 — Roadmap Placement | `requirements-gap-finder` agent *(pm-claude-kit)* — stress-test stories before scope is cut |
 | Phase 5 — Roadmap Placement | Phase 6 — Prioritization | No additional agents at this point |
-| Phase 6 — Prioritization *(final)* | **Start design: run `/design [feature]`** | `/premortem` skill *(exec-kit)* — assume the project has already failed and work backwards to find the highest-risk gaps in requirements and scope before design begins |
+| Phase 6 — Prioritization *(final)* | **Start design: run `/design [feature]`** | `/premortem` skill *(exec-kit)* — assume the project has already failed and work backwards to find the highest-risk gaps in requirements and scope before design begins; `/dashboard` skill *(exec-kit)* — generate a self-contained HTML project hub with all current PM documents, status, and open questions |
 
 ---
 

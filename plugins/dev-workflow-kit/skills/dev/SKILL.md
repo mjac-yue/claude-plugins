@@ -63,7 +63,7 @@ At any phase that designates a reviewer below, follow this loop automatically �
 | Phase 6 — Code Review | Phase 7 — Performance Review (if SLOs defined) or Phase 8 — Security | `code-reviewer` agent *(dev-workflow-kit)* — line-level findings on actual source files |
 | Phase 7 — Performance Review | Phase 8 — Security Review | No additional agents at this point |
 | Phase 8 — Security Review | Phase 9 — Deployment | `security-reviewer` agent *(dev-workflow-kit)* — OWASP audit of actual source files |
-| Phase 9 — Deployment *(final)* | **Phase D testing: run `/run [project]`** *(exec-kit)* | exec-kit `/status` — stakeholder status report before launch |
+| Phase 9 — Deployment *(final)* | **Phase D testing: run `/run [project]`** *(exec-kit)* | exec-kit `/status` — stakeholder status report before launch; `/dashboard` skill *(exec-kit)* — regenerate the HTML project hub with all dev documents, code review findings, and deployment guide |
 
 ---
 
