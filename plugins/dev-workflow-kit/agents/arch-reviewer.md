@@ -94,6 +94,39 @@ Use the ATAM (Architecture Tradeoff Analysis Method) quality attributes as a fra
 - Are there components that, if changed, require coordinated changes across many others?
 - Are any architectural choices creating vendor or technology lock-in? Is that lock-in justified?
 
+### Phase 3.5: Review AI Architecture (skip if no AI/ML components)
+
+If the system includes AI/ML components, evaluate the AI architecture against the following criteria. A system can receive "Strong" on all ATAM attributes and still have critical AI architecture gaps — this phase exists to catch those.
+
+**Model serving layer**
+- Is the integration approach (API vs. self-hosted) justified against the NFRs? For a solo PM-led build, self-hosting is a significant operational risk — flag if present without explicit rationale.
+- Is the execution model (synchronous vs. async) appropriate for the feature's latency requirements?
+- Is there a caching strategy for AI outputs where inputs are predictably repeated? Missing caches on high-traffic, stable-prompt paths are a cost and latency risk.
+- Is rate limit handling designed — what happens in production when the AI API quota is hit?
+
+**Prompt pipeline**
+- Are prompts versioned and is there a rollback path? Prompts shipped without versioning cannot be rolled back without a code deploy.
+- Is context assembly defined — what data is injected, from where, in what format? Unspecified context assembly is a correctness and security risk (risk of PII leakage into prompts).
+- Is the token budget specified and is overflow handled? Prompts that silently truncate context produce incorrect outputs that are hard to debug.
+- For RAG: is the retrieval strategy (chunk size, overlap, dense/sparse/hybrid, reranking) specified? Unspecified retrieval configurations default to poor choices.
+
+**Evaluation and quality monitoring**
+- Is there an evaluation framework specified? An AI component without a defined eval strategy has no quality gate — it ships with unknown quality.
+- Are quality monitoring signals defined for production — what tells the team the AI component has degraded?
+- Is evaluation cadence specified (per-deploy, continuous, triggered)?
+
+**Fallback and graceful degradation**
+- Is there a fallback path for each AI failure mode: API unavailable, timeout, content filter triggered, output below quality threshold?
+- Does the fallback preserve core user value, or does it break the feature entirely? A broken feature on AI failure is an availability risk.
+
+**AI observability**
+- Is per-call logging specified (prompt, completion, model version, latency, token count, cost)? Without this, production debugging of AI issues is essentially impossible.
+- Is there cost tracking and alerting? AI API costs can spike unexpectedly — the architecture should treat cost overrun as an observable failure mode.
+
+Add findings to the Quality Attribute Evaluation table under a new row: **AI Architecture** — rated Strong / Adequate / At Risk / Unknown.
+
+---
+
 ### Phase 4: Review Architecture Decision Records
 
 For each ADR:
@@ -145,6 +178,7 @@ Grep and read for common structural problems:
 | Testability | Strong / Adequate / At Risk / Unknown | |
 | Observability | Strong / Adequate / At Risk / Unknown | |
 | Evolvability | Strong / Adequate / At Risk / Unknown | |
+| AI Architecture | Strong / Adequate / At Risk / N/A | *(skip if no AI/ML components)* |
 
 ---
 

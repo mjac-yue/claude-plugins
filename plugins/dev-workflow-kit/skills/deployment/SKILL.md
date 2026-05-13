@@ -37,6 +37,18 @@ Follow this process:
    - Database: provisioning steps, migration commands, seed data if needed
    - Third-party services: any API accounts that must be set up first (auth provider, email service, payment processor, etc.)
 
+**If `AI_IN_SCOPE`**, extend the pre-deployment checklist with AI-specific items:
+
+| AI pre-deployment item | What to check |
+|-----------------------|---------------|
+| **AI API key provisioning** | AI API key created, scoped to minimum permissions, stored in secrets manager / env vars — never in version control. Confirm separate keys for staging and production. |
+| **Production quota** | Confirm the production AI API account has sufficient rate limits and quota for expected launch traffic. Development accounts often have lower limits than production. |
+| **Prompt version locked** | Confirm which prompt version is deploying to production. Document it. Know how to roll back to the previous version without a code deploy. |
+| **AI observability wired** | Confirm per-call logging (prompt, completion, model, latency, token count, cost) is live in production — not just in development. |
+| **Cost alert configured** | Set up a daily cost ceiling alert on the AI API account. Know what the expected daily spend is and what threshold should trigger review. |
+| **Fallback path tested in staging** | Deliberately trigger AI API failure in staging and confirm the fallback behaves correctly before deploying to production. |
+| **Content filter behavior confirmed** | Test that content policy violations produce the correct user-facing message in production config — content filter behavior can differ between staging and production API tiers. |
+
 4. **Write the deploy steps** — numbered, specific, command-by-command where possible. Assume the reader knows basic terminal commands but not platform-specific CLIs.
 
 5. **Build the smoke test checklist** — 5-10 specific things to verify immediately after deploy that confirm the product is working. Each item should be a concrete action with an expected outcome, not a vague category.
@@ -56,6 +68,12 @@ Follow this process:
    - Error tracking (recommend a free tier tool)
    - Uptime monitoring (recommend a free tier tool)
    - Where to find logs on the chosen platform
+
+   **If `AI_IN_SCOPE`**, add AI-specific monitoring:
+   - **AI call logging**: confirm per-call logs (prompt, completion, latency, token count, cost) are flowing to the logging service and queryable
+   - **Cost dashboard**: confirm daily AI spend is visible and an alert fires at the configured ceiling
+   - **Quality signal**: define what the team will check weekly to confirm AI output quality hasn't degraded — at minimum, a sample review of 10–20 recent outputs
+   - **Recommended tools** (free tiers available): Helicone or LangSmith for AI-specific observability; Sentry for error tracking of AI call failures
 
 Be specific about commands and platform UI steps. If the stack is not specified clearly enough to give concrete steps, ask before producing a generic guide.
 

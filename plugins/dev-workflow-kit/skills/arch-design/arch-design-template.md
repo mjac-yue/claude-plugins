@@ -160,6 +160,63 @@ flowchart LR
 
 ---
 
+## AI Architecture *(complete if AI/ML components are in scope; delete this section if not)*
+
+> **Note — AI Architecture**: AI components introduce non-determinism, variable latency, cost scaling, and quality degradation patterns not present in traditional software. These decisions are as consequential as database and API design — make them explicitly before building.
+
+### Model Serving Layer
+
+| Decision | Choice | Rationale |
+|----------|--------|-----------|
+| **AI component type** | LLM generation / classification / embeddings / RAG / recommendations / vision | |
+| **Integration approach** | API (managed) / Self-hosted | |
+| **Execution model** | Synchronous / Asynchronous / Background | |
+| **Caching** | Cached — TTL: [X] / Not cached | |
+| **Rate limit handling** | Queue / Degrade gracefully / Error to user | |
+
+### Prompt Pipeline
+
+| Element | Design |
+|---------|--------|
+| **Prompt storage** | Inline in code / External config / Prompt management service: [tool] |
+| **Prompt versioning** | [Strategy — e.g., git-tracked config files, PromptLayer versions] |
+| **Context assembly** | [What data is injected, from where, and in what format] |
+| **Token budget** | Max context: [X] tokens. Overflow strategy: truncate / summarise / error |
+| **RAG retrieval** *(if applicable)* | Chunk size: [X]. Overlap: [X]. Strategy: dense / sparse / hybrid. Reranking: yes / no |
+
+### Evaluation & Quality Monitoring
+
+| Dimension | Approach |
+|-----------|---------|
+| **Definition of correct output** | [What does good look like — is ground truth available?] |
+| **Development eval** | Human eval / LLM-as-judge / Reference-based metrics / Framework: [tool] |
+| **Production monitoring** | [Signals indicating degradation — error rate, latency, user feedback, quality score] |
+| **Evaluation cadence** | Per-deploy / Continuous / Triggered by signal |
+
+### Fallback & Graceful Degradation
+
+| Failure mode | Fallback behaviour |
+|-------------|-------------------|
+| AI API unavailable | [Non-AI fallback / Queue for retry / Error message] |
+| Output below quality threshold | [Retry / Surface for human review / Fallback to rule-based] |
+| Content filter triggered | [Redirect to alternative flow / Error with explanation] |
+| Token budget exceeded | [Truncate context / Summarise / Error to user] |
+
+### AI Observability
+
+| Signal | What is logged | Where |
+|--------|---------------|-------|
+| Per-call | Prompt, completion, model version, latency, token count, cost | [logging service] |
+| Errors | AI API errors, content filter blocks, timeouts | [error tracker] |
+| Quality | Quality score per call (if eval is automated) | [dashboard] |
+| Cost | Per-feature / per-user / per-session cost attribution | [cost dashboard] |
+
+**Monthly cost estimate at medium scale**: [X tokens × Y requests/day × $Z/1k tokens × 30 days = $___]
+
+**Alert thresholds**: Cost > $[X]/day; Error rate > [Y]%; Latency p95 > [Z]ms
+
+---
+
 ## Architectural Risks
 
 > **Note — Architectural Risks**: Structural weaknesses that could cause the system to fail its NFRs under real-world conditions — they can't be fixed with a patch. A risk with a documented mitigation is a managed risk; an undocumented risk is a future incident.

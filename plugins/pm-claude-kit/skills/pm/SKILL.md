@@ -93,6 +93,17 @@ Follow the process of the `/brief` skill:
 6. **List key assumptions** — two to three beliefs about users, behavior, or context this brief depends on. Flag which carries the most risk if wrong.
 7. **Surface open questions** — anything that must be answered before design or development starts. Write each question to `pm/questions.md` immediately (do not embed only in the brief document) with priority, phase raised, owner, and affected documents.
 
+8. **AI component check** — first check the exec state file (`[project-slug]-state.md`) for the **AI components** field. If it reads "Yes", set `AI_IN_SCOPE` without asking again. If it reads "No", skip AI-specific guidance. If missing or "Not yet decided", ask: *"Does this feature involve any AI/ML components — LLMs, recommendations, semantic search, predictions, or AI-generated content?"* If yes, set `AI_IN_SCOPE` and update the state file's **AI components** field. Add to the brief:
+   - **AI success criteria**: what does "good" AI output look like, and how will quality be measured? (accuracy target, user satisfaction threshold, error rate ceiling)
+   - **AI cost constraint**: what is the acceptable cost per user or per request for the AI component?
+   - **Human override requirement**: can users correct or override AI outputs, and is that required?
+   - **Transparency requirement**: do users need to know when content is AI-generated?
+
+   > **Learning note — AI Product Requirements**
+   > AI features require a different type of success criteria than traditional software. A button either works or it doesn't — but an AI recommendation is "good enough" on a spectrum, and what "good enough" means must be defined before building, not after users complain. The brief is the right place to establish these thresholds: quality targets, cost ceilings, and transparency expectations. Without them, there is no way to evaluate whether the AI component is working or whether it needs iteration.
+
+   Display this learning note verbatim when `AI_IN_SCOPE` is confirmed.
+
 If $ARGUMENTS already answers some of these, skip those questions and confirm your understanding.
 
 ---
@@ -132,6 +143,18 @@ First, ask the user:
 2. **How they solve it** — one-line approach per competitor
 3. **Gaps and whitespace** — what none of them do well
 4. **Differentiation angle** — the specific bet we're making to win
+
+**If `AI_IN_SCOPE`**, add an AI capability dimension to the competitive analysis for each competitor:
+
+| AI capability dimension | Questions to answer |
+|------------------------|-------------------|
+| **AI features in market** | Which competitors use AI, and for which specific features? |
+| **Model quality signals** | What accuracy, quality, or reliability claims do they make? What do users say in reviews? |
+| **Latency** | Do competitors' AI features feel fast or slow? Is speed a competitive differentiator? |
+| **Transparency** | Do competitors disclose AI use to users? How? Does it build or erode trust? |
+| **AI differentiation whitespace** | Where are competitors' AI implementations weak or absent — where could we win on AI quality? |
+
+This AI capability dimension shapes the differentiation angle: if competitors have AI but low quality, winning on eval scores is a strategy. If competitors have no AI, being first to ship AI well is the strategy.
 
 **If live research (B):** Invoke the `competitive-analyst` agent with the focus area and competitor list derived from Phase 1. Present the agent's output at this checkpoint.
 
@@ -175,6 +198,21 @@ Use the structure from [prd-template.md](../prd/prd-template.md) — the same st
 - Open Questions
 
 Write it fully — no placeholder text. Make explicit any assumptions embedded in the requirements.
+
+**If `AI_IN_SCOPE`**, add an AI Requirements section to the PRD covering:
+
+| AI requirement dimension | Questions to answer |
+|--------------------------|-------------------|
+| **Model behavior** | What must the AI do, and what must it never do? Are there output format, tone, or safety constraints? |
+| **Quality thresholds** | What accuracy, relevance, or satisfaction score is the minimum bar for launch? |
+| **Latency SLA** | How long can the user wait for AI output? Is streaming an option or is it batch? |
+| **Data requirements** | What data does the AI component need, and does the product currently have it at sufficient volume and quality? |
+| **Evaluation criteria** | How will the team measure whether the AI is performing well enough, in development and in production? |
+| **Human override** | Can users flag, correct, or ignore AI outputs? Is this a P0 requirement or optional? |
+| **Transparency** | Is it disclosed to users when content is AI-generated? Is there a regulatory or trust reason this must be explicit? |
+| **Failure mode handling** | What does the product do when the AI component is unavailable, slow, or produces low-quality output? |
+
+Write AI requirements with the same P0/P1/P2 priority structure as other requirements. Avoid vague requirements like "AI should be accurate" — specify the measurement method and threshold.
 
 ---
 
@@ -224,6 +262,20 @@ For each major requirement or user flow:
 3. Write acceptance criteria in Given/When/Then format (3–5 per story)
 4. Note edge cases per story
 5. Flag dependencies between stories
+
+**If `AI_IN_SCOPE`**, apply these additional requirements to any story that involves AI output:
+
+- **Do not write deterministic AC for non-deterministic output.** Avoid: "Then the output is [exact text]." Use instead: "Then the output addresses the user's intent and scores ≥ [threshold] on [rubric]."
+- **Specify the quality threshold in the AC**, not in a vague requirement. Example: *"Given a valid prompt, when the AI responds, then at least 4 out of 5 sample responses reviewed by a PM against the evaluation rubric should be rated 4/5 or higher."*
+- **Write AC for every AI failure mode** as a separate Given/When/Then: API unavailable, content filter triggered, response timeout, output below quality threshold.
+- **Write AC for the loading and streaming states**: *"Given the AI is processing, when the user waits, then a streaming response appears token-by-token within 2 seconds of submission."*
+- **Write AC for the override/edit flow** if specified in the PRD: *"Given an AI-generated output, when the user edits it, then the system preserves the edit and does not re-run AI generation."*
+- **Flag any story with XL complexity where the AI quality threshold is undefined** — this is a pre-build risk that should be resolved before estimation.
+
+> **Learning note — AI Acceptance Criteria**
+> Writing AC for AI features requires accepting that you're testing a distribution, not a single output. The acceptance criterion is not "the AI says X" — it's "the AI says something that meets these criteria at least Y% of the time." Defining Y before building is the discipline. Teams that skip this discover post-launch that "the AI works" means different things to different stakeholders, and spend cycles arguing about quality instead of improving it.
+
+Display this learning note verbatim when writing stories for AI features.
 
 Group stories by persona or feature area. Aim for completeness — these should be ready to create as tickets.
 

@@ -83,6 +83,22 @@ Pull scope, users, and success criteria directly from these documents. Do not as
 - Surface any new design-specific assumptions beyond those already in the product brief
 - Identify research gaps — note these for the wireframe spec phase (user research decisions are made after the wireframe spec, not before)
 
+**If `AI_IN_SCOPE`** (check the product brief for the AI component check from Phase 1), add AI UX design constraints to the brief:
+
+| AI UX constraint | Design decision required |
+|-----------------|--------------------------|
+| **Latency tolerance** | How long will the user wait? What is shown during AI processing — spinner, skeleton, streaming output? |
+| **Uncertainty display** | Does the UI communicate confidence or uncertainty in AI outputs? How? (e.g., hedging language, explicit confidence indicator, "suggested" label) |
+| **Human override** | Can users edit, regenerate, reject, or ignore AI outputs? How is this afforded in the UI? |
+| **Error states** | What does the user see when the AI component fails, times out, or returns a low-quality result? |
+| **Transparency** | How does the UI communicate that output is AI-generated? Is a disclosure label required? |
+| **Feedback mechanism** | Can users rate or flag AI outputs? How is this feedback surface designed? |
+
+> **Learning note — Designing for AI**
+> AI components introduce UX challenges that static software doesn't have: outputs arrive late, vary across runs, and are sometimes wrong. Good AI UX doesn't hide this — it designs for it. Loading states that feel productive, error states that don't break trust, override flows that keep the user in control, and transparency signals that build credibility are not nice-to-haves for AI features. They are core to whether users adopt and trust the product. These decisions are made in the UX brief, before wireframing, because they shape every screen in the flow.
+
+Display this learning note verbatim when `AI_IN_SCOPE` is confirmed.
+
 *After user approves: Check for a project `CLAUDE.md` in the current or parent directory. If it contains an **Output paths** table, save the UX brief to the file listed for `/ux-brief`. Update **Status** to **Done** and **Last updated** to today's date. Confirm the file was written.*
 
 **Checkpoint 1**: Get approval before moving to Phase 2.
@@ -99,6 +115,20 @@ Produce a wireframe specification following the process and template of the `/wi
 - Map the key screens, user flows, and navigation structure
 - Define component inventory and interaction states for each screen
 - Note any branching paths, error states, or edge cases
+
+**If `AI_IN_SCOPE`**, specify AI interaction patterns for every screen that involves AI output:
+
+| AI interaction pattern | What to specify in the wireframe spec |
+|-----------------------|--------------------------------------|
+| **Loading state** | What is shown while waiting for AI output — progress indicator, skeleton content, streaming tokens appearing in real time, or a queued state for async processing |
+| **Success state** | How AI output is presented — is it clearly labelled as AI-generated? Is it editable inline or displayed as read-only? |
+| **Regeneration** | If the user can request a new AI output, where is that affordance? What happens to the previous output? |
+| **Override / edit** | If the user can modify AI output, how — inline edit, side-by-side, or a separate edit mode? |
+| **Error state** | What is shown when the AI component fails — fallback content, retry prompt, or graceful degradation to a non-AI path |
+| **Empty / no result** | What happens when the AI returns nothing useful — empty state, suggestion to rephrase, or a manual entry path |
+| **Feedback** | If users can rate or flag AI outputs, where is this affordance placed and what does it trigger |
+
+Document each AI interaction pattern per screen in the wireframe spec the same way other interaction states are documented — do not leave AI states as "TBD".
 
 After presenting the spec, immediately run the **Review-Iterate-Approve loop** *(designated reviewer: `pm-design-reviewer`)*:
 

@@ -85,6 +85,18 @@ Evaluate the spec against each dimension below. For each, give a rating (Strong 
 - Are there hidden complexity sources the estimate doesn't account for?
 - **Red flags**: XL estimate with no breakdown, S estimate for complex distributed work
 
+### 11. AI Completeness (skip if no AI/ML components)
+If the spec describes an AI/ML component, evaluate it against these additional dimensions:
+- **AI stack decisions**: are model provider, model tier, embedding model (if RAG), vector DB (if RAG), prompt management approach, and evaluation framework all specified with rationale?
+- **Evaluation criteria**: is there a defined quality threshold, an evaluation method, and a plan for ongoing quality monitoring? A spec that says "AI should produce good output" without specifying how "good" is measured is not actionable.
+- **Cost estimation**: is cost per request estimated? Is there a monthly cost projection at expected volume? Missing cost estimates for AI components routinely cause budget surprises.
+- **Non-determinism handling**: does the spec acknowledge that AI outputs vary across runs? Are acceptance criteria, test cases, and user-facing expectations designed around this?
+- **Token budget**: is the maximum context window specified? Is overflow handling defined?
+- **Data requirements**: is the data the AI component needs (volume, quality, format) specified? Does the product currently have it?
+- **Fallback behavior**: is the non-AI fallback path (API failure, content filter, quality threshold miss) specified for each failure mode?
+- **AI observability**: is logging, cost tracking, and quality monitoring specified — not just generic observability?
+- **Red flags**: "model TBD", eval criteria not specified, cost not estimated, no fallback defined, non-determinism not acknowledged in acceptance criteria
+
 ---
 
 ## Output Format
@@ -114,6 +126,7 @@ Evaluate the spec against each dimension below. For each, give a rating (Strong 
 | Dependencies & Sequencing | | |
 | Observability | | |
 | Complexity & Estimate | | |
+| AI Completeness | | *(N/A if no AI/ML components)* |
 
 ---
 

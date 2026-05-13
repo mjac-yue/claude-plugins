@@ -65,7 +65,47 @@ Follow this process:
    - Components with high coupling that resist change
    - Decisions that are hard to reverse (lock-in risks)
 
-7. **Write Architecture Decision Records (ADRs)** for each significant architectural choice:
+7. **Address AI architecture concerns** (skip this step entirely if no AI/ML components are in scope):
+
+   > **Learning note — AI Architecture**
+   > AI components introduce a new class of architectural concerns that traditional software design doesn't address. The core challenge: outputs are non-deterministic, latency is variable, costs scale with usage, and quality degrades in ways that are hard to detect without dedicated instrumentation. The architectural decisions made here — how prompts are managed, how outputs are evaluated, how fallbacks are designed — are as consequential as database and API design decisions. Making them explicitly during architecture review, rather than discovering them during production incidents, is the point.
+
+   Display this learning note verbatim before working through AI architecture concerns.
+
+   **a. Model serving layer**
+   - What type of AI component? (LLM generation, classification, embeddings, RAG, recommendations, vision, speech)
+   - API integration vs. self-hosted model — justify against latency, cost, data privacy, and team capability
+   - Synchronous vs. asynchronous — when must the user wait for AI output vs. when can processing be deferred?
+   - Caching strategy — which AI outputs are safe to cache and for how long? (Identical prompts on identical inputs are often cacheable)
+   - Rate limit handling — how does the system behave when AI API rate limits are hit? (queue, degrade, error)
+
+   **b. Prompt pipeline design**
+   - Where are prompts defined: inline in code, external config files, or a prompt management service?
+   - How are prompts versioned — how do you roll back a bad prompt in production without a full redeploy?
+   - How is context assembled — what data is injected into the prompt, from where, and in what format?
+   - Token budget — what is the maximum context window consumed per call, and how is overflow handled?
+   - For RAG: retrieval strategy (dense, sparse, or hybrid), chunk size, overlap, and whether reranking is applied
+
+   **c. Evaluation and quality monitoring**
+   - What does "correct" output look like — is ground truth available for automated evaluation?
+   - How will AI output quality be measured in development: human eval, LLM-as-judge, or reference-based metrics?
+   - How will quality be monitored in production — what signals indicate degradation (error rate, latency, user feedback, quality score)?
+   - What is the evaluation cadence: per-deploy, continuous, or triggered by quality signals?
+
+   **d. Fallback and graceful degradation**
+   - What happens when the AI API is unavailable or returns an error?
+   - What happens when output quality falls below threshold (low confidence, content filter triggered, timeout)?
+   - Is there a non-AI fallback path that preserves core functionality for users?
+
+   **e. AI observability**
+   - What is logged per AI call: prompt, completion, model version, latency, token count, estimated cost?
+   - How are AI-related errors and quality signals surfaced to the team in real time?
+   - How is cost tracked and attributed — per feature, per user, per session?
+   - What alerts fire if cost or error rate exceeds threshold?
+
+   Write ADRs for each significant AI architecture decision: model provider choice, RAG vs. no RAG, prompt management approach, evaluation strategy.
+
+8. **Write Architecture Decision Records (ADRs)** for each significant architectural choice:
    - Context: what situation prompted the decision?
    - Decision: what was chosen?
    - Rationale: why?

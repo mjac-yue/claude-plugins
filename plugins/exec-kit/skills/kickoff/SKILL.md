@@ -40,6 +40,7 @@ Ask the following questions. If $ARGUMENTS already answers any of them, skip tho
 4. *"What does success look like 3–6 months after launch?"*
 5. *"What is explicitly out of scope for v1?"*
 6. *"Who is building this — solo PM with AI assistance, a small team, or a larger engineering team?"*
+7. *"Does this product include any AI/ML components — LLMs, embeddings, semantic search, recommendations, predictions, or AI-generated content?"* (yes / no / not yet decided)
 
 Confirm the captured context back to the user before proceeding:
 
@@ -51,6 +52,7 @@ Confirm the captured context back to the user before proceeding:
 > *— Success looks like: [success]*
 > *— Out of scope: [out of scope]*
 > *— Builder: [builder type]*
+> *— AI components: [Yes — description / No / Not yet decided]*
 >
 > *Ready to initialize? I'll create the project structure and get you set up."*
 
@@ -66,6 +68,15 @@ Invoke the `init` agent with the confirmed project context. Pass:
 - Problem statement
 - Primary user
 - Builder type (solo PM / small team / larger team)
+- Today's date
+
+Pass to the `init` agent:
+- Project name (slugified)
+- Project description
+- Problem statement
+- Primary user
+- Builder type (solo PM / small team / larger team)
+- AI components (Yes — description / No / Not yet decided)
 - Today's date
 
 The `init` agent will:
@@ -134,6 +145,7 @@ Use this structure:
 **Description**: [description]
 **Primary user**: [user]
 **Builder context**: [solo PM / small team / larger team]
+**AI components**: [Yes — description of what AI does in this product / No / Not yet decided]
 **Brief**: pm/brief.md — Done
 
 ---

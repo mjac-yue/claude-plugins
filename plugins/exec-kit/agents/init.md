@@ -17,6 +17,7 @@ You will receive the following inputs from the kickoff skill:
 - **Problem statement**
 - **Primary user**
 - **Builder context** (solo PM / small team / larger team)
+- **AI components** (Yes — description / No / Not yet decided)
 - **Today's date**
 
 Work through the steps below in order. Do not skip any step.
@@ -96,6 +97,7 @@ All skills save their outputs to these paths. Do not change the paths — skills
 | `/arch-design` | `dev/arch-design.md` | Not started | — |
 | `/tech-spec` | `dev/tech-spec.md` | Not started | — |
 | `/api-spec` | `dev/api-spec.md` | Not started | — |
+| `/prompt-spec` | `dev/prompt-spec.md` | Not started | — |
 | `/dev-plan` | `dev/dev-plan.md` | Not started | — |
 | `/test-plan` | `dev/test-plan.md` | Not started | — |
 | `/deployment` | `dev/deployment.md` | Not started | — |
@@ -162,6 +164,7 @@ Write the following empty placeholder files so skills can append to them without
 - `dev/arch-design.md` — header: `# [Project Name] — Architecture Design`
 - `dev/tech-spec.md` — header: `# [Project Name] — Tech Spec`
 - `dev/api-spec.md` — header: `# [Project Name] — API Spec`
+- `dev/prompt-spec.md` — header: `# [Project Name] — Prompt Spec`
 - `dev/dev-plan.md` — header: `# [Project Name] — Dev Plan`
 - `dev/test-plan.md` — header: `# [Project Name] — QA Test Plan`
 - `dev/deployment.md` — header: `# [Project Name] — Deployment Guide`

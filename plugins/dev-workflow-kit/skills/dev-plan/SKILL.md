@@ -36,6 +36,24 @@ Follow this process:
    - Estimate in story points or days (include reasoning for non-obvious estimates)
    - Dependencies (which other tasks must be complete first)
    - Owner role (which type of engineer should own this)
+**If `AI_IN_SCOPE`** (check tech spec or arch design for AI components), include the following AI-specific task types in the breakdown. These will not emerge naturally from the design handoff or user stories but must be present for any AI build to ship safely:
+
+| AI task type | Description | Typical estimate | Dependency |
+|--------------|-------------|-----------------|------------|
+| **Prompt development** | Write, iterate, and version-lock the system prompt and context assembly logic | M–L | After data model is defined |
+| **Evaluation dataset creation** | Build 20–50 representative input/expected-output pairs covering core cases and edge cases | M | After prompt v1 is stable |
+| **Eval framework setup** | Wire scoring mechanism (human eval rubric, LLM-as-judge, or tool) and run initial baseline | M | After eval dataset is created |
+| **AI observability setup** | Instrument every AI call to log prompt, completion, model, latency, token count, and cost | S–M | Before any integration testing |
+| **Cost monitoring setup** | Set up per-request and daily cost tracking; configure alert thresholds | S | Alongside observability setup |
+| **Fallback path implementation** | Implement and test graceful degradation when AI API is unavailable or returns an error | S–M | After main AI integration is complete |
+| **Prompt versioning** | Establish how prompts are versioned, deployed, and rolled back in production | S | Before first staging deploy |
+| **Adversarial testing round** | Test prompt injection, edge case inputs, content filter triggers, and latency under load | M | After eval framework is set up |
+
+> **Learning note — Why AI tasks are underestimated**
+> AI features consistently run longer than equivalent non-AI features because the implementation cycle is different: code ships when it compiles; AI features ship when the eval score is high enough. Prompt iteration, evaluation, and quality monitoring are not optional polish — they are the implementation. Teams that don't explicitly plan for these tasks discover them after the "code complete" milestone.
+
+Display this learning note verbatim when `AI_IN_SCOPE` is confirmed.
+
 3. **Identify the critical path** — the sequence of dependent tasks that determines the earliest possible completion date. Use the arch design's component boundaries to determine what must be built before what.
 4. **Flag blockers** — anything that must be resolved, decided, or procured before work can start (design assets, API keys, third-party contracts, platform decisions)
 5. **Propose sprint allocation** — group tasks into sprints (1- or 2-week), accounting for dependencies and parallelism. Assume typical capacity (e.g., 70–80% for planned work, remainder for reviews and unplanned).

@@ -60,7 +60,7 @@ At any phase that designates a reviewer below, follow this loop automatically �
 | After this phase | Recommended next step | Optional to run |
 |-----------------|----------------------|-----------------|
 | Phase 1 — Solution Analysis & Tech Spec | Phase 2 — API Spec (if API-first) or Phase 3 — Dev Plan | `tech-spec-reviewer` agent *(dev-workflow-kit)* — completeness and engineering risks; `pm-tech-reviewer` agent *(dev-workflow-kit)* — PM-readable summary and complexity flags; `arch-reviewer` agent *(dev-workflow-kit)* — quality attribute audit |
-| Phase 2 — API Spec | Phase 3 — Dev Plan | No additional agents at this point |
+| Phase 2 — API Spec | Phase 3 — Dev Plan | `/prompt-spec` skill *(dev-workflow-kit)* — design the prompt pipeline for any LLM, embedding, or RAG component (system prompt, context assembly, token budget, versioning, eval criteria, fallback); run when `AI_IN_SCOPE` |
 | Phase 3 — Dev Plan | Phase 4 — AI Build *(optional)* or Phase 5 — QA | `builder` agent *(dev-workflow-kit)* — implement the code layer by layer now (invokes Phase 4); `/premortem` skill *(exec-kit)* — assume the build has already failed and surface technical and execution risks before the first line of code is written |
 | Phase 4 — AI Build | Phase 5 — QA or Phase 6 — Code Review | `code-reviewer` agent *(dev-workflow-kit)* — immediate review of the files just built |
 | Phase 5 — QA Test Plan | Phase 6 — Code Review | `test-case-generator` agent *(dev-workflow-kit)* — expand test cases from user stories |
@@ -101,6 +101,20 @@ Common patterns by stack (use only what applies):
 
 Do not present tools that aren't part of the decided stack. A React + Vercel project does not need a Docker check. A Python Flask project does not need a Node.js check.
 
+**If `AI_IN_SCOPE`**, determine the AI stack alongside the above:
+
+| AI stack decision | Options |
+|-------------------|---------|
+| **Model provider** | Anthropic, OpenAI, Google Gemini, open-source (Ollama, HuggingFace Inference) |
+| **Model tier** | Which model for which task — e.g., Claude Haiku for classification, Claude Sonnet for generation; weigh cost vs. capability per tier |
+| **Embedding model** | If RAG or semantic search is involved — e.g., OpenAI text-embedding-3-small, Voyage AI, Cohere Embed |
+| **Vector database** | Pinecone, Weaviate, pgvector, Chroma, Qdrant — only if embeddings are stored |
+| **Prompt management** | Inline in code, external config files, or a managed tool (LangChain, DSPy, PromptLayer, Helicone) |
+| **Evaluation framework** | How AI output quality will be measured — human eval, LLM-as-judge, or a framework (Ragas, Promptfoo, Braintrust) |
+| **AI observability** | How AI calls, latency, token counts, and costs will be logged and monitored (LangSmith, Helicone, custom logging) |
+
+For a solo PM-led build: prefer managed API integration over self-hosted models; start with manual evaluation before building custom eval tooling; instrument AI calls from day one — retrofitting observability is painful.
+
 ### Builder context
 
 Ask:
@@ -126,7 +140,35 @@ All code generated in Phases 1–9 must be written with learning in mind. The bu
 - **"Why not" comments**: When a specific approach was chosen over an obvious alternative, note it briefly
 - **TODO comments**: Any placeholder or deferred implementation is marked `// TODO: [description]` so nothing is silently incomplete
 
-**Checkpoint 0**: Confirm builder context before proceeding.
+### AI component context
+
+First check the exec state file (`[project-slug]-state.md`) for the **AI components** field. If it reads "Yes", set `AI_IN_SCOPE` without asking again. If it reads "No", skip all AI-specific guidance below. If missing or "Not yet decided", ask:
+> *"Does this build include any AI/ML components — LLMs, embeddings, semantic search, recommendations, predictions, or AI-generated content?"*
+
+If confirmed yes and the state file didn't already record it, update the **AI components** field in the state file now.
+
+**If AI components are in scope**, track this as `AI_IN_SCOPE` and apply the following automatically throughout all phases — do not wait to be asked:
+
+- **Phase 1b** — Determine the AI stack alongside the regular tech stack: model provider, model tier, embedding model, vector database, prompt management approach, and evaluation framework
+- **Phase 1c** — Run the `ai-opportunity-analyst` agent automatically before solution analysis; do not offer — run it
+- **Phase 1d** — Expand the architectural design to cover AI cross-cutting concerns using the AI Architecture section of the `/arch-design` skill: model serving layer, prompt pipeline design, token budget, evaluation hooks, and AI observability
+
+Flag these AI-specific solo builder risks at every relevant phase:
+
+| Risk | Description |
+|------|-------------|
+| **API cost accumulation** | Token costs compound quickly — establish a per-request cost target and monthly ceiling before building |
+| **Evaluation burden** | AI output quality cannot be verified by unit tests alone — plan an eval framework from the start |
+| **Non-determinism** | AI outputs vary across runs — design acceptance criteria and tests to account for this |
+| **Rate limits** | Third-party AI APIs have rate and quota limits that affect both development speed and production throughput |
+| **Prompt brittleness** | Prompts that work in development often degrade in production as input variation increases |
+
+> **Learning note — AI System Architecture**
+> Building software with AI components requires a new layer of architectural thinking that traditional software design doesn't cover. The core challenge: AI outputs are non-deterministic, latency is variable, costs scale with usage, and quality degrades in ways that are hard to detect without dedicated instrumentation. The decisions made in Phase 0 — whether AI is in scope, what kind of AI, and what constraints apply — cascade through every subsequent phase. A system designed without accounting for AI-specific concerns will discover them in production, where they are expensive to fix.
+
+Display the learning note above verbatim when `AI_IN_SCOPE` is confirmed.
+
+**Checkpoint 0**: Confirm builder context and AI component context before proceeding.
 
 ---
 
@@ -160,6 +202,8 @@ For a solo PM-led build, prefer managed services and proven frameworks. Recommen
 Document the tech stack in the tech spec and confirm with the user before proceeding.
 
 ### Step 1c: Solution analysis
+
+**If `AI_IN_SCOPE`**: Automatically run the `ai-opportunity-analyst` agent now — do not offer, run it. Pass the design handoff, wireframe spec, product brief, and decided AI stack as context. Present its findings before solution options so that AI architecture decisions inform the technical approach rather than being retrofitted onto it.
 
 Offer: *"Would you like me to run the `solution-analyst` agent first? It reads your codebase and researches options before committing to a technical design — recommended when the right approach is not yet clear."*
 
@@ -198,7 +242,6 @@ After presenting the tech spec, immediately run the **Review-Iterate-Approve loo
 
 After the loop, separately offer:
 - *"Want me to run the `pm-tech-reviewer` agent for a PM-readable summary of what was decided and why?"* (Always offer for solo PM-led builds — it is the primary comprehension check for this context.)
-- *"Want me to run the `ai-opportunity-analyst` agent to identify where AI could add value in this product?"*
 
 **Solo builder complexity check**: Before checkpoint, confirm the proposed architecture satisfies the Phase 0 constraints. If any component is flagged — microservices, self-hosted infrastructure, XL complexity estimates — explicitly note this and present a simpler alternative side-by-side before asking for approval.
 

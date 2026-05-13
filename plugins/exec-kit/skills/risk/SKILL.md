@@ -37,6 +37,17 @@ Systematically consider each category:
 - Security: auth gaps, input validation gaps, known OWASP exposure from the security review
 - Integration: external dependencies whose timelines are outside the team's control
 
+**AI risks** (surface when `AI_IN_SCOPE` — skip if not applicable)
+- **Quality risk**: AI output quality is below the threshold defined in the PRD and cannot be improved within the planned eval cycles before launch. Score: Likelihood × Impact. Mitigation: establish eval baseline before committing to launch date; define a quality gate.
+- **Cost overrun risk**: AI API token costs at production volume exceed the budget established in the PRD. Score accordingly. Mitigation: instrument cost per request in staging; set a daily ceiling alert before launch.
+- **Model vendor risk**: the chosen AI provider changes pricing, deprecates the model version, introduces rate limit changes, or has an outage that blocks the launch. Mitigation: design a prompt-layer abstraction that allows switching providers; confirm uptime SLA is acceptable.
+- **Prompt brittleness risk**: prompts perform well on the evaluation dataset but degrade when real user inputs arrive in production (more varied, more adversarial, different language distribution). Mitigation: adversarial prompt testing before launch; staged rollout.
+- **Evaluation gap risk**: no evaluation framework is in place before launch, so quality degradation in production will go undetected. This is a Likelihood 3 / Impact 3 = 9 risk for any AI feature without a defined eval strategy. Mitigation: eval framework and quality baseline are launch prerequisites.
+- **Data / PII risk**: user PII is sent to a third-party AI API without adequate data processing agreements or user disclosure. Regulatory Impact = 3 in most jurisdictions. Mitigation: audit what data is sent in prompts; confirm DPA with the AI provider; add user disclosure if required.
+- **Regulatory / compliance risk**: the jurisdiction or industry has restrictions on automated AI decisions (e.g., EU AI Act, GDPR Article 22, financial services regulations). Mitigation: legal review of use case before launch.
+
+Flag any AI risk with score 6+ as actively requiring mitigation — do not log and carry forward. Prompt brittleness and evaluation gap are common score-9 risks on AI builds that are frequently underweighted at kickoff.
+
 **Execution / project risks** (surface at kickoff and during /run)
 - Schedule: dependencies that could slip, estimation uncertainty, team capacity constraints
 - Resource: team availability, skill gaps, tool access, builder context (solo PM with limited eng bandwidth)

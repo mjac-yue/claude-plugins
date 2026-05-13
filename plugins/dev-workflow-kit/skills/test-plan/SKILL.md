@@ -24,6 +24,19 @@ Follow this process:
    - **Manual / exploratory**: which areas require human judgment (edge cases, visual correctness, UX feel)?
    - **Performance tests**: any latency, load, or throughput requirements to verify?
    - **Security tests**: any auth, input validation, or data exposure vectors to test?
+   - **AI evaluation tests** (if AI/ML components are in scope — skip if not):
+     > **Learning note — Testing AI Components**
+     > Traditional tests assume deterministic outputs — the same input always produces the same output, and you verify it exactly. AI components break this assumption: the same prompt can produce different completions. Testing AI requires a different approach: an evaluation dataset (representative input/expected output pairs) and a scoring mechanism (human judgment, LLM-as-judge, or reference-based metrics). Without an eval dataset established before launch, you have no baseline to detect quality degradation in production.
+     >
+     > Display this learning note verbatim before AI evaluation test planning.
+     - **Evaluation dataset**: define a representative set of 20–50 input/expected output pairs covering the core use cases, edge cases, and known failure modes. This is your regression test suite for AI quality.
+     - **Scoring mechanism**: how will outputs be judged — human eval rubric (1–5 scale with defined criteria), LLM-as-judge (another model scores the output against the rubric), or reference-based (output compared to a gold-standard answer)?
+     - **Quality threshold**: what minimum score constitutes a passing eval? Define this before running evals, not after seeing the results.
+     - **Adversarial prompt testing**: test inputs designed to trigger failure modes — prompt injection attempts, boundary-pushing content, empty inputs, extremely long inputs, inputs in unexpected languages.
+     - **Latency benchmarking**: measure p50/p95 AI call latency under representative load. Establish the acceptable ceiling and confirm the implementation is within it.
+     - **Cost benchmarking**: measure token consumption per representative request. Confirm the cost-per-request is within the target established in the PRD.
+     - **Fallback path testing**: deliberately trigger AI API failures (mock the API returning 500, timeout, rate limit) and confirm the fallback behaves as designed.
+     - **Content filter testing**: test inputs that should trigger the content policy and confirm the fallback message and UX behave correctly.
 3. **Key test cases**. For each test case:
    - Test case name
    - Preconditions / test data setup
