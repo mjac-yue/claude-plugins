@@ -120,6 +120,11 @@ Use this design system throughout:
 │                       │                                  │
 │ ● Overview            │                                  │
 │                       │                                  │
+│ Project               │                                  │
+│   Project Status      │                                  │
+│   Questions Log       │                                  │
+│   Project Risks       │                                  │
+│                       │                                  │
 │ PM                    │                                  │
 │   Brief               │                                  │
 │   PRD                 │                                  │
@@ -133,8 +138,6 @@ Use this design system throughout:
 │ Dev                   │                                  │
 │   Tech Spec           │                                  │
 │   ...                 │                                  │
-│                       │                                  │
-│ Questions             │                                  │
 └──────────────────────────────────────────────────────────┘
 ```
 
@@ -152,6 +155,11 @@ Sidebar is fixed, 240px wide, dark background. Main content scrolls independentl
   <ul class="nav-list">
     <li><a href="#" data-section="overview" class="nav-link active">Overview</a></li>
 
+    <li class="nav-group-label">Project</li>
+    <li><a href="#" data-section="project-status" class="nav-link">Project Status</a></li>
+    <li><a href="#" data-section="questions" class="nav-link">Questions Log</a></li>
+    <li><a href="#" data-section="risks" class="nav-link">Project Risks</a></li>
+
     <li class="nav-group-label">PM</li>
     <!-- One <li> per PM document that exists, with status dot -->
     <!-- Status dot: green=Done, blue=In Progress, grey=Not Started -->
@@ -162,9 +170,6 @@ Sidebar is fixed, 240px wide, dark background. Main content scrolls independentl
 
     <li class="nav-group-label">Dev</li>
     <!-- Dev documents -->
-
-    <li class="nav-group-label">Project</li>
-    <li><a href="#" data-section="questions" class="nav-link">Questions Log</a></li>
   </ul>
 </nav>
 ```
@@ -173,40 +178,71 @@ Show a small coloured dot before each nav item: green for Done, blue for In Prog
 
 ### Overview section (landing page)
 
-This is the first section shown on load. It contains:
+This is the first section shown on load. It is a tactical project snapshot — not a document list. It contains:
 
 **1. Project header**
 - Project name (h1)
 - Description
 - Problem statement, Primary user, Builder type, Started date — displayed as a clean metadata grid
 
-**2. Progress summary**
-A row of four stat cards:
-- Total deliverables: [N]
-- Done: [N] (green)
-- In progress: [N] (blue)
-- Not started: [N] (grey)
+**2. Progress bar chart**
+A horizontal stacked bar chart showing overall completion across all deliverables. Render as a pure CSS bar (no canvas/SVG required):
 
-**3. Project status table**
-A full-width table rendered from the CLAUDE.md Project status table (or the output paths table if no status table exists). Columns: Deliverable, Status (badge), Last Updated. Group rows by phase (PM / Design / Dev) using `<tbody>` with a group header row.
+```html
+<div class="progress-chart">
+  <div class="progress-bar-track">
+    <div class="bar-done"    style="width: [X]%"  title="Done: [N]"></div>
+    <div class="bar-active"  style="width: [X]%"  title="In progress: [N]"></div>
+    <div class="bar-pending" style="width: [X]%"  title="Not started: [N]"></div>
+  </div>
+  <div class="progress-legend">
+    <span class="legend-done">● Done ([N])</span>
+    <span class="legend-active">● In progress ([N])</span>
+    <span class="legend-pending">● Not started ([N])</span>
+  </div>
+</div>
+```
 
-**4. Open questions & tasks**
-Read from `questions.md`. Show only open questions (not resolved). Group by priority:
-- P0 questions in a red-bordered card: "Action required before proceeding"
-- P1 questions in an amber-bordered card: "Resolve before phase sign-off"
-- P2 questions in a grey card: "Carry forward"
+Below the bar, render a row of three stat chips (Done / In Progress / Not Started) as coloured counts.
 
-For each question show: question text, phase raised, owner, affected docs.
+**3. In progress**
+A highlighted card (blue left border) listing every deliverable currently marked "In Progress". For each item show: deliverable name, phase (PM / Design / Dev), and last updated date. If nothing is in progress, show a muted "No items currently in progress."
 
-If `questions.md` has no open questions, show a green "No open questions" badge.
+**4. Next steps**
+Infer the next 2–3 actionable steps based on what is Done vs. Not Started. For example: if PRD is Done but Tech Spec is Not Started, the next step is to run `/techspec`. Present as a short numbered list with the suggested slash command alongside each step.
 
-**5. Top risks (if premortem exists)**
-Read from `pm/premortem.md`. Extract the top 3 failure modes by risk score. Show as a compact risk table: Failure Mode, Category, Risk Score (coloured badge: 7–9 = red, 4–6 = amber, 1–3 = grey).
+**5. Issues & dependencies to resolve**
+Aggregate the most urgent blockers from two sources:
+- P0 and P1 open questions from `questions.md` — show question text, owner, and priority badge
+- Top risks scoring 7–9 from `pm/premortem.md` — show failure mode and risk score badge (red)
 
-If no premortem has been run, show a muted note: *"Run `/premortem` to surface failure risks before your next phase transition."*
+Group under two sub-headings: **Open questions** and **Top risks**. If both are empty, show a green "No blockers identified" badge. If `questions.md` has no open items, omit the Open questions sub-section. If no premortem exists, show a muted note under Top risks: *"Run `/premortem` to surface failure risks."*
 
 **6. Last generated timestamp**
 Small footer line: *"Dashboard generated: [date and time]"*
+
+---
+
+### Project Status section
+
+A standalone section (linked from the Project group in the nav). Render the full deliverable status table from the CLAUDE.md Project status table (or the output paths table if no status table exists). Columns: Deliverable, Status (badge), Last Updated. Group rows by phase (PM / Design / Dev) using `<tbody>` with a group header row.
+
+### Questions Log section
+
+A standalone section (linked from the Project group in the nav). Render all questions from `questions.md` — both open and resolved. Group by status (Open first, then Resolved). For open questions, apply the priority card treatment:
+- P0 in a red-bordered card
+- P1 in an amber-bordered card
+- P2 in a grey card
+
+For resolved questions, render as a simple flat list with a ~~strikethrough~~ style or muted colour.
+
+If `questions.md` doesn't exist or has no content, show a placeholder state.
+
+### Project Risks section
+
+A standalone section (linked from the Project group in the nav). Render the full premortem risk table from `pm/premortem.md`. Show all failure modes with: Failure Mode, Category, Risk Score (coloured badge: 7–9 = red, 4–6 = amber, 1–3 = grey), and any mitigation notes.
+
+If no premortem has been run, show a placeholder state with the note: *"Run `/premortem` to generate the risk log."*
 
 ### Document sections
 
