@@ -114,6 +114,8 @@ After writing all 5 files, output:
 >
 > Open the `pm/` folder to review. **Type `continue` to proceed to Phase 2 — Design.**
 
+After presenting the review block, immediately run the `/dashboard` skill process to generate the project hub HTML from the Phase 1 documents. Save it as `[slug].html` in the project root. Confirm the filename inline: *"Dashboard updated: `[slug].html`"* Do not prompt the user — just run it and confirm.
+
 ---
 
 ## Phase 2 — Design
@@ -155,6 +157,8 @@ After writing all 3 files, output:
 > - `design/design-handoff.md` — [N screens in inventory, N components specified]
 >
 > Open the `design/` folder to review. **Type `continue` to proceed to Phase 3 — Tech Design.**
+
+After presenting the review block, immediately run the `/dashboard` skill process to regenerate the project hub HTML with Phase 2 documents added. Confirm the filename inline: *"Dashboard updated: `[slug].html`"* Do not prompt the user — just run it and confirm.
 
 ---
 
@@ -207,6 +211,8 @@ After writing all 3 files, output:
 >
 > Open the `dev/` folder to review. **Type `continue` to proceed to Phase 4 — Execution Planning.**
 
+After presenting the review block, immediately run the `/dashboard` skill process to regenerate the project hub HTML with Phase 3 documents added. Confirm the filename inline: *"Dashboard updated: `[slug].html`"* Do not prompt the user — just run it and confirm.
+
 ---
 
 ## Phase 4 — Execution Planning
@@ -242,6 +248,8 @@ After writing both files, output:
 >
 > Open the `execution/` folder to review. **Type `continue` to proceed to Phase 5 — First Development Cycle.**
 
+After presenting the review block, immediately run the `/dashboard` skill process to regenerate the project hub HTML with Phase 4 documents added. Confirm the filename inline: *"Dashboard updated: `[slug].html`"* Do not prompt the user — just run it and confirm.
+
 ---
 
 ## Phase 5 — First Development Cycle
@@ -275,6 +283,8 @@ After writing both files, output:
 > - `execution/dev-plan.md` — [N tasks, critical path: X days, N milestones]
 > - `execution/retro-01.md` — [4 of 6 items completed, key process change: X]
 
+After presenting the review block, immediately run the `/dashboard` skill process to regenerate the project hub HTML with all Phase 5 documents added — this is the final, complete dashboard for the full test run. Confirm the filename inline: *"Dashboard updated: `[slug].html`"* Do not prompt the user — just run it and confirm.
+
 Then output the test run complete summary:
 
 ---
@@ -283,13 +293,15 @@ Then output the test run complete summary:
 >
 > All documents written to `~/Documents/Projects/test-runs/[slug]/`
 >
-> | Phase | Documents generated |
-> |-------|---------------------|
-> | 1 — PM Discovery | brief, competitive analysis, PRD, user stories, prioritization |
-> | 2 — Design | UX brief, wireframe spec, design handoff |
-> | 3 — Tech Design | arch design, tech spec, API spec |
-> | 4 — Execution Planning | release plan, cycle 1 plan |
-> | 5 — First Dev Cycle | dev plan, retro |
+> | Phase | Documents generated | Dashboard |
+> |-------|---------------------|-----------|
+> | 1 — PM Discovery | brief, competitive analysis, PRD, user stories, prioritization | ✓ updated |
+> | 2 — Design | UX brief, wireframe spec, design handoff | ✓ updated |
+> | 3 — Tech Design | arch design, tech spec, API spec | ✓ updated |
+> | 4 — Execution Planning | release plan, cycle 1 plan | ✓ updated |
+> | 5 — First Dev Cycle | dev plan, retro | ✓ final |
+>
+> **Dashboard**: Open `[slug].html` in a browser for a rendered view of the full project — all phases, status, and documents in one place.
 >
 > **What to check**: Open a document from each phase and verify the content is realistic and initiative-specific — not generic. The `💡 Tip` sections should contain product-relevant insights, not placeholder text. The PRD requirements, tech stack decisions, and release plan dates should all be internally consistent across phases.
 >
