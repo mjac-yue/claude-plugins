@@ -60,7 +60,7 @@ For each non-placeholder document, convert its markdown content to HTML. Apply t
 | `**bold**` | `<strong>` |
 | `*italic*` | `<em>` |
 | `` `inline code` `` | `<code>` |
-| ` ```code block``` ` | `<pre><code>` |
+| ` ```code block``` ` | `<pre><code>` — unless the block contains a diagram (see Diagram Rendering below) |
 | `- item` / `* item` | `<ul><li>` |
 | `1. item` | `<ol><li>` |
 | `> blockquote` | `<blockquote>` |
@@ -68,7 +68,36 @@ For each non-placeholder document, convert its markdown content to HTML. Apply t
 | `[text](url)` | `<a href="url">text</a>` |
 | Markdown table | `<table>` with `<thead>` and `<tbody>` |
 | Blank line between paragraphs | `<p>` |
-| ` ```mermaid ``` ` blocks | Replace with a `<div class="mermaid-note">` containing the diagram description as a code block — do not attempt to render Mermaid diagrams |
+
+### Diagram Rendering
+
+**Default rule**: Whenever content can be rendered more clearly as a visual HTML/CSS diagram than as a code block or text, render it visually. Never leave a diagram as raw ASCII or a plain code block when a richer HTML representation is achievable. No external CDN links — all rendering must use inline HTML and CSS only.
+
+Apply the following diagram-specific rules:
+
+**Mermaid flowcharts** (` ```mermaid ``` ` blocks containing `graph`, `flowchart`, or `LR`/`TD` directives):
+Render as a styled HTML/CSS node-and-edge diagram. Use `<div class="flow-node">` boxes connected by CSS borders and arrows (▼, →). Group nodes by row. Apply background colours to distinguish node types: rectangles for processes (`#f0f5ff` fill, `#4f8ef7` border), diamonds for decisions (`#fff8e6` fill, `#fd7e14` border), rounded rectangles for start/end (`#f0fff4` fill, `#198754` border). Each node shows its label. Edges are represented with `→` or `↓` connectors between nodes. Wrap in a `<div class="diagram-wrap">` with a light grey background and padding.
+
+**Mermaid sequence diagrams** (` ```mermaid ``` ` blocks containing `sequenceDiagram`):
+Render as an HTML table-based sequence diagram. Participants become column headers. Messages become rows with arrows (→ for solid, ⇢ for dashed) spanning the relevant columns. Activation boxes are shown as coloured spans. Wrap in `<div class="diagram-wrap">`.
+
+**Mermaid dependency / Gantt / other diagrams** (` ```mermaid ``` ` blocks not matching the above):
+Render as a styled `<div class="mermaid-note">` with a blue left border, the diagram type identified in a label, and the raw Mermaid source in a readable `<pre>` block. Better than a plain code block but honest about not rendering it.
+
+**ASCII wireframe diagrams** (` ``` ``` ` code blocks where lines contain box-drawing characters: `┌ ─ │ └ ┐ ┘ ├ ┤ ┬ ┴ ┼` or lines of `+--+` / `|  |` forming a layout grid):
+Convert to a styled HTML mockup using `<div>` and CSS. Interpret the ASCII structure as a UI layout:
+- Identify zones from the ASCII labels: HEADER, TOOLBAR, BODY / DOCUMENT BODY, FOOTER, SIDEBAR — render each as a styled `<div>` with appropriate background (`#f1f3f5` for chrome zones, `#ffffff` for content areas, `#1a1a2e` for dark headers)
+- Floating elements (toolbars, popovers, diff cards shown with indented boxes inside the main layout) render as absolutely-positioned or inline-block `<div>` elements with a drop shadow
+- Text labels inside zones are rendered as `<span>` elements in a muted monospace font
+- Button-like items (items in `[brackets]`) render as small `<span class="wf-btn">` pills with border and padding
+- The entire mockup is wrapped in `<div class="wireframe-mockup">` with a border, border-radius, and a "Wireframe" label badge in the top-right corner
+- Max-width: 600px; scale to fit within the doc body column
+
+**ASCII architecture / system diagrams** (code blocks where lines form boxes with labels and connecting arrows, but without box-drawing characters — e.g. using `+--+`, `[Component]`, `->`, `<->`):
+Render as a styled HTML component map. Each `[Label]` or `(Label)` becomes a `<div class="arch-node">` box. Arrows (`->`, `<->`, `-->`) become CSS connectors with labels if present. Group connected nodes into rows. Wrap in `<div class="diagram-wrap arch-diagram">`.
+
+**Plain ASCII art that is not a diagram** (e.g. logo art, decorative separators):
+Leave as `<pre>` with a muted style — no visual conversion needed.
 
 Strip the frontmatter (YAML `---` block at the top) before converting. Strip the first `# [Title]` / status / last-updated header block from each document — the dashboard renders these as section metadata, not as part of the content.
 
